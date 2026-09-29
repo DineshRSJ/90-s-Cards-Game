@@ -630,18 +630,20 @@ const $=id=>document.getElementById(id);
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
 const pi=$('packImg');pi.onerror=()=>fb(pi);pi.src=src0('Sachin Tendulkar');
 
-let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[];
+let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[],revealedStat=-1;
 const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 function startGame(d){
-  mode=d;bat=true;last='you';locked=false;hist=[];hideResult();
+  mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;hideResult();
   const s=shuffle(P).slice(0,50);pd=s.slice(0,25);cd=s.slice(25);
   show('game');renderHist();nextRound();startMusic();
 }
 function nextRound(){
   if(!pd.length||!cd.length)return endGame();
-  you=pd[0];cpu=cd[0];locked=false;
+  you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;
   $('yc').textContent=pd.length;$('cc').textContent=cd.length;$('cL').textContent=pd.length+' CARDS';$('cR').textContent=cd.length+' CARDS';
-  $('hint').textContent=last==='you'?'Higher wins • Bowling Average: lower wins • 0 always loses':'CPU is choosing…';
+  $('hint').textContent=mode==='hard'
+    ? (last==='you'?'Choose a stat to reveal • only that stat will be shown':'CPU is choosing…')
+    : (last==='you'?'Higher wins • Bowling Average: lower wins • 0 always loses':'CPU is choosing…');
   renderCards();renderCalls();
   if(last==='cpu')setTimeout(cpuCall,900);
 }
@@ -651,7 +653,11 @@ function card(t,p,hidden){
   $(t).innerHTML=`<div class="card" id="${t}Box"><div class="country">${p[1]}</div>
   <div class="portrait"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div>
   <div class="identity"><div class="pname">${p[0]}</div><button class="toggle" onclick="toggleStats()">→</button></div>
-  <div class="stats">${vals.map((v,i)=>`<div class="stat ${hidden?'locked':''}" ${hidden?'':`onclick="callStat(${i})"`}><span>${labs[i]}</span><b>${hidden?'?':fmt(v)}</b></div>`).join('')}</div></div>`;
+  <div class="stats">${vals.map((v,i)=>{
+    const hardHidden=mode==='hard' && revealedStat!==i;
+    const isHidden=hidden || hardHidden;
+    return `<div class="stat ${isHidden?'locked':''}" ${(!isHidden && !locked && last==='you')?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${isHidden?'?':fmt(v)}</b></div>`;
+  }).join('')}</div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
 function renderCalls(){
@@ -661,15 +667,23 @@ function renderCalls(){
 function renderHist(){
   $('hist').innerHTML=hist.slice(-5).reverse().map(h=>`<div class="br"><i class="${h.w==='you'?'':h.w==='cpu'?'l':'t'}">${h.w==='you'?'✓':h.w==='cpu'?'×':'='}</i><div><b>${h.w==='you'?'You won':h.w==='cpu'?'You lost':'Tie'}</b><span>${h.s}: ${h.a} vs ${h.b}</span></div></div>`).join('')||'<span style="color:#9fb0c5;font-size:.85cqw">Your battles will appear here.</span>';
 }
-function toggleStats(){if(locked)return;bat=!bat;sFlip();renderCards();renderCalls()}
-function callStat(i){if(locked||last!=='you')return;locked=true;sSel();resolve(i)}
+function toggleStats(){if(locked)return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
+function callStat(i){
+  if(locked||last!=='you')return;
+  locked=true;revealedStat=i;sSel();
+  renderCards();
+  setTimeout(()=>resolve(i),450);
+}
 function cpuCall(){
-  if(locked)return;locked=true;const base=bat?2:8;let best=Math.floor(Math.random()*6);
+  if(locked)return;
+  const base=bat?2:8;let best=Math.floor(Math.random()*6);
   if(mode==='hard'){
     const sc=i=>{const v=Number(cpu[base+i]);if(!v)return -1;return(!bat&&i===1)?1000-v:v/(Math.max(...P.map(p=>Number(p[base+i])))||1)*1000};
     best=[0,1,2,3,4,5].sort((a,b)=>sc(b)-sc(a))[0];
   }
-  resolve(best);
+  locked=true;revealedStat=best;
+  renderCards();sSel();
+  setTimeout(()=>resolve(best),650);
 }
 function resolve(i){
   const base=bat?2:8,a=Number(you[base+i]),b=Number(cpu[base+i]),lowWins=!bat&&i===1;
