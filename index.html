@@ -770,6 +770,117 @@ html,body{width:100%;height:100%;margin:0}
   width:21.25%!important;
 }
 
+
+
+/* =========================================================
+   V4 — PACK PREVIEW FIX
+   The side-pack preview must stay INSIDE the background's
+   portrait placeholder. It must never inherit a full-width
+   rail size or stretch into landscape.
+========================================================= */
+
+/* YOUR PACK: exact compact placeholder proportions */
+#game .rail:first-child .pack-stack{
+  top:39.0%!important;
+  left:22.0%!important;
+  width:63.0%!important;
+  height:25.5%!important;
+}
+#game .rail:first-child .mini-card:nth-child(3){
+  left:0!important;
+  top:0!important;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:1 / 1.02!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+}
+
+/* OPPONENT PACK:
+   right rail = 20vw wide.
+   Place the pack 4.5vw from the right edge of the board,
+   with ~15.5vw total width, matching the red placeholder. */
+#game .rail:last-child .pack-stack{
+  top:39.0%!important;
+  left:-25.0%!important;
+  width:77.5%!important;
+  height:25.5%!important;
+}
+#game .rail:last-child .mini-card:nth-child(3){
+  left:0!important;
+  top:0!important;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:1 / 1.02!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+  transform:none!important;
+  opacity:1!important;
+}
+
+/* The actual player image must fill ONLY the mini-card box.
+   object-fit:cover crops the source, but cannot escape the box. */
+#game .rail .mini-card:nth-child(3) img{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border-radius:7px!important;
+}
+
+/* Keep the name strip inside the same box. */
+#game .rail .mini-card:nth-child(3) .preview-label{
+  left:3%!important;
+  right:3%!important;
+  bottom:3%!important;
+  max-width:94%!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+
+/* =========================================================
+   FINAL MUSIC CONTROL
+========================================================= */
+#game .music-toggle{
+  position:absolute!important;
+  left:1.35%!important;
+  top:2.0%!important;
+  height:5.1%!important;
+  min-width:7.0%!important;
+  padding:0 10px!important;
+  border:1px solid rgba(80,232,255,.55)!important;
+  border-radius:9px!important;
+  background:rgba(3,10,20,.72)!important;
+  color:#fff!important;
+  box-shadow:0 0 14px rgba(80,232,255,.12)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  font-family:'Bebas Neue',sans-serif!important;
+  font-size:clamp(9px,.62vw,12px)!important;
+  letter-spacing:1px!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  z-index:120!important;
+}
+#game .music-toggle:hover{border-color:#ffd45a!important;color:#ffd45a!important;transform:translateY(-1px)}
+#game .music-toggle.muted{border-color:rgba(255,83,100,.55)!important;color:#ff9eaa!important;box-shadow:0 0 14px rgba(255,83,100,.10)!important}
+#game .music-toggle #musicIcon{font-size:12px;line-height:1}
+
 </style>
 <link rel="preload" as="image" href="assets/stadium-bg.png">
 </head>
@@ -790,7 +901,7 @@ html,body{width:100%;height:100%;margin:0}
 <div class="difficulty"><div class="diff" onclick="startGame('easy')"><b>EASY</b><small>CPU chooses a random legal stat. Good for learning the game.</small></div><div class="diff" onclick="startGame('hard')"><b>HARD</b><small>CPU studies its card and chooses a strong stat when it gets the call.</small></div></div></div></section>
 
 <section id="game" class="screen"><div class="game-arena-bg" aria-hidden="true"></div><div class="wrap game-shell">
-<div class="game-top"><button class="back" onclick="if(confirm('Leave this match?')) show('home')">← EXIT</button><div class="score"><div>YOU <strong id="youCount">25</strong></div><div>CPU <strong id="cpuCount">25</strong></div></div></div>
+<div class="game-top"><button class="back" onclick="if(confirm('Leave this match?')){stopMusic();show('home')}">← EXIT</button><button id="musicToggle" class="music-toggle" onclick="toggleMusic()" aria-label="Mute background music" title="Mute background music"><span id="musicIcon">🔊</span><span id="musicText">MUSIC</span></button><div class="score"><div>YOU <strong id="youCount">25</strong></div><div>CPU <strong id="cpuCount">25</strong></div></div></div>
 <h1 class="game-title">20'S LEGENDS • <span id="difficultyLabel">EASY MODE</span></h1>
 <div class="game-layout">
 <aside class="rail"><div class="rail-title">YOUR PACK</div><div class="pack-stack" aria-hidden="true"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div><div class="pack-count">25 CARDS</div></div><div class="rail-panel"><h3>RECENT BATTLES</h3><div id="battleHistory"></div></div></aside>
@@ -925,12 +1036,14 @@ function openDifficulty(){show('difficulty')}
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function startGame(d){
   mode=d; bat=true; lastCaller="you"; locked=false; hideResult(); battleHistory=[];
-  const sachin=P.find(x=>x[0]==="Sachin Tendulkar");
-  const ponting=P.find(x=>x[0]==="Ricky Ponting");
-  const remaining=shuffle(P.filter(x=>x!==sachin&&x!==ponting)).slice(0,48);
-  playerDeck=[sachin,...remaining.slice(0,24)];
-  cpuDeck=[ponting,...remaining.slice(24,48)];
-  $("difficultyLabel").textContent=d.toUpperCase()+" MODE"; show("game"); renderCallButtons(); renderHistory(); nextRound();
+  // Every match gets a fresh random 50-card deal from the full 90-player pool.
+  // No player is permanently reserved for either side.
+  const dealt=shuffle(P).slice(0,50);
+  playerDeck=dealt.slice(0,25);
+  cpuDeck=dealt.slice(25,50);
+  $("difficultyLabel").textContent=d.toUpperCase()+" MODE";
+  show("game"); renderCallButtons(); renderHistory(); nextRound();
+  startMusic();
 }
 function updatePackPreviews(){
   const left=document.querySelector('#game .rail:first-child .mini-card:nth-child(3)');
@@ -1064,6 +1177,70 @@ function playPack(){tone(180,.08,"sine",.03);tone(360,.10,"triangle",.035,.06);t
 function playWin(){tone(660,.11,"triangle",.06);tone(880,.14,"triangle",.06,.10);tone(1040,.20,"triangle",.055,.22);tone(1320,.28,"triangle",.045,.34)}
 function playLose(){tone(260,.12,"sawtooth",.045);tone(190,.16,"sawtooth",.04,.11);tone(120,.26,"sawtooth",.03,.24)}
 function playTie(){tone(420,.12,"sine",.04);tone(500,.15,"sine",.03,.12)}
+
+/* =========================================================
+   PROCEDURAL BACKGROUND MUSIC — no external audio file/API.
+   Starts after the user clicks EASY/HARD, so browser autoplay
+   policies are respected. The mute button affects music only;
+   game SFX continue to work.
+========================================================= */
+let musicGain=null, musicTimer=null, musicStep=0, musicMuted=false;
+const musicNotes=[220,247,277,330,370,330,277,247,196,220,247,294,330,294,247,220];
+function startMusic(){
+  const c=audio();
+  if(!musicGain){
+    musicGain=c.createGain();
+    musicGain.gain.value=musicMuted?0:0.045;
+    musicGain.connect(c.destination);
+  }
+  if(musicTimer) return;
+  musicStep=0;
+  const tick=()=>{
+    if(!musicGain)return;
+    const now=c.currentTime;
+    const root=musicNotes[musicStep%musicNotes.length];
+    const osc=c.createOscillator(), g=c.createGain();
+    osc.type='triangle';
+    osc.frequency.setValueAtTime(root,now);
+    g.gain.setValueAtTime(0.0001,now);
+    g.gain.exponentialRampToValueAtTime(0.11,now+0.025);
+    g.gain.exponentialRampToValueAtTime(0.0001,now+0.28);
+    osc.connect(g).connect(musicGain);
+    osc.start(now); osc.stop(now+0.30);
+    // Soft bass pulse every two beats.
+    if(musicStep%2===0){
+      const bass=c.createOscillator(), bg=c.createGain();
+      bass.type='sine'; bass.frequency.setValueAtTime(root/2,now);
+      bg.gain.setValueAtTime(0.0001,now);
+      bg.gain.exponentialRampToValueAtTime(0.07,now+0.02);
+      bg.gain.exponentialRampToValueAtTime(0.0001,now+0.42);
+      bass.connect(bg).connect(musicGain); bass.start(now); bass.stop(now+0.44);
+    }
+    musicStep++;
+  };
+  tick();
+  musicTimer=setInterval(tick,320);
+  updateMusicButton();
+}
+function stopMusic(){
+  if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
+  musicStep=0;
+}
+function toggleMusic(){
+  musicMuted=!musicMuted;
+  if(!musicGain){startMusic();return}
+  musicGain.gain.setTargetAtTime(musicMuted?0:0.045,audio().currentTime,0.03);
+  updateMusicButton();
+}
+function updateMusicButton(){
+  const btn=$("musicToggle"), icon=$("musicIcon"), text=$("musicText");
+  if(!btn||!icon||!text)return;
+  btn.classList.toggle('muted',musicMuted);
+  icon.textContent=musicMuted?'🔇':'🔊';
+  text.textContent=musicMuted?'MUTED':'MUSIC';
+  btn.title=musicMuted?'Unmute background music':'Mute background music';
+}
+
 // Every important UI interaction gets a click sound, without requiring audio files.
 document.addEventListener("pointerdown",e=>{
   const el=e.target.closest("button,.pack,.diff,.stat");
