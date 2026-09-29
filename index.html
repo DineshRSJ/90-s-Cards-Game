@@ -671,6 +671,46 @@ html,body{width:100%;height:100%;margin:0}
   max-width:38px!important;
 }
 
+
+/* =========================================================
+   FINAL POSITION TUNE V2 — based on the latest visual check
+   - Both main live cards slightly right
+   - Opponent upcoming card moved substantially left
+   - Game Rules live content slightly lower
+   - Six stat controls slightly lower
+========================================================= */
+
+/* MAIN CARDS: move both live cards right without changing
+   their size or the artwork frame. */
+#game .side:first-child{
+  left:23.25%!important;
+}
+#game .side:last-child{
+  left:53.75%!important;
+}
+
+/* OPPONENT PACK: the artwork placeholder is farther left than
+   the previous live-card position. Use the full right rail slot. */
+#game .rail:last-child .pack-stack{
+  left:0!important;
+  width:100%!important;
+}
+#game .rail:last-child .mini-card:nth-child(3){
+  left:0!important;
+  width:100%!important;
+}
+
+/* GAME RULES: move only the live rules content/panel down slightly. */
+#game .rail:last-child .rail-panel{
+  top:69.75%!important;
+}
+
+/* SIX STAT BUTTONS: keep the heading/background untouched and
+   move the live buttons down slightly into the gold boxes. */
+#game .stat-call-grid{
+  top:29.5%!important;
+}
+
 </style>
 <link rel="preload" as="image" href="assets/stadium-bg.png">
 </head>
