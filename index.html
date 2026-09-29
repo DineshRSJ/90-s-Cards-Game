@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>90's Card Game — 20's Legends Pack</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap');
+:root{--bg:#080a12;--panel:#101522;--gold:#ffd45a;--cyan:#50e8ff;--red:#ff5364;--green:#56f39a;--muted:#8f9bb5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#24304e 0,#0b0f1b 38%,#05060b 100%);color:#fff;font-family:Inter,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+button{font:inherit}.screen{display:none;min-height:100vh}.screen.active{display:block}.wrap{width:min(1200px,94vw);margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;padding:24px 0}.brand{font-family:'Bebas Neue';letter-spacing:2px;font-size:34px}.brand span{color:var(--gold)}
+.pill{border:1px solid #ffffff20;background:#ffffff08;padding:9px 14px;border-radius:999px;color:#b9c3da;font-size:12px}
+.hero{text-align:center;padding:40px 0 22px}.eyebrow{color:var(--cyan);letter-spacing:4px;font-weight:800;font-size:12px}.hero h1{font-family:'Bebas Neue';font-size:clamp(60px,10vw,118px);line-height:.82;margin:15px 0 18px;letter-spacing:2px}.hero p{color:#aeb8cf;max-width:650px;margin:auto}
+.pack-row{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin:46px 0}.pack{position:relative;min-height:420px;border-radius:24px;padding:18px;background:linear-gradient(145deg,#171d2e,#0a0d15);border:1px solid #ffffff18;box-shadow:0 25px 60px #0008;transition:.25s;overflow:hidden;cursor:pointer}.pack:hover{transform:translateY(-8px);border-color:#ffffff45}.pack.disabled{cursor:default;opacity:.72}.pack-cover{height:300px;border-radius:16px;overflow:hidden;position:relative;background:#161b28}.pack-cover img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:saturate(1.1) contrast(1.08)}.pack-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,#05060be8)}.pack h2{position:absolute;bottom:62px;left:25px;right:25px;font-family:'Bebas Neue';font-size:29px;letter-spacing:1px;margin:0;z-index:2}.pack .meta{position:absolute;bottom:23px;left:25px;color:#9da8c0;font-size:12px;z-index:2}.soon{height:300px;border:1px dashed #ffffff20;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle,#20283a,#0b0f18)}.soon span{font-family:'Bebas Neue';font-size:35px;letter-spacing:2px;color:#59657e}.footer{text-align:center;color:#566079;font-size:11px;padding:20px 0 35px}
+.choice{text-align:center;padding-top:11vh}.choice h1,.game-title{font-family:'Bebas Neue';font-size:72px;margin:10px 0}.choice p{color:#99a6bf}.difficulty{display:flex;justify-content:center;gap:24px;margin-top:42px}.diff{width:260px;padding:30px;border-radius:24px;border:1px solid #ffffff18;background:linear-gradient(145deg,#171d2e,#0c1019);cursor:pointer;transition:.25s}.diff:hover{transform:translateY(-7px);border-color:var(--gold)}.diff b{font-family:'Bebas Neue';font-size:38px;letter-spacing:1px}.diff small{display:block;color:#8290ab;margin-top:8px;line-height:1.5}
+.back{background:#ffffff0d;color:#fff;border:1px solid #ffffff18;padding:10px 16px;border-radius:12px;cursor:pointer}.game-top{display:flex;align-items:center;justify-content:space-between;padding:18px 0}.score{display:flex;gap:12px}.score div{background:#ffffff0b;border:1px solid #ffffff14;border-radius:13px;padding:9px 14px;font-size:12px}.score strong{color:var(--gold);font-size:16px}.game-title{text-align:center;font-size:54px;margin:0}.arena{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:28px;align-items:center;margin-top:15px}.side{text-align:center}.side .label{font-size:12px;letter-spacing:3px;color:#8e9ab3;font-weight:800}.hand-count{font-family:'Bebas Neue';font-size:31px;margin-top:7px}.card{width:min(330px,100%);aspect-ratio:2/3;position:relative;border-radius:22px;padding:12px;background:linear-gradient(145deg,#d7a632,#5a3510);box-shadow:0 28px 55px #000b;transition:.35s;overflow:hidden}.card:before{content:"";position:absolute;inset:6px;border:1px solid #fff7;border-radius:17px;pointer-events:none}.card-inner{height:100%;border-radius:15px;background:linear-gradient(#121827,#090c13);padding:12px;display:flex;flex-direction:column;position:relative}.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.country{font-size:10px;color:#9eabc3;text-transform:uppercase;letter-spacing:1.5px}.player-name{font-family:'Bebas Neue';font-size:27px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toggle{border:0;background:#ffffff10;color:var(--gold);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px}.portrait{height:46%;margin:8px 0;border-radius:12px;overflow:hidden;background:linear-gradient(145deg,#202a40,#080a10);position:relative}.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(1.12) contrast(1.08);transform:scale(1.03)}.portrait:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#52e8ff18,#ff4f7b12 50%,#ffd45a22);mix-blend-mode:screen}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:auto}.stat{padding:8px 9px;border-radius:9px;background:#ffffff08;border:1px solid #ffffff0d;cursor:pointer;transition:.15s;text-align:left}.stat:hover{background:#ffffff16;transform:scale(1.02)}.stat .sname{display:block;color:#8793aa;font-size:8px;text-transform:uppercase;letter-spacing:.5px}.stat .val{font-weight:800;font-size:16px}.locked .val{color:#67738b}.locked{cursor:not-allowed}.locked:hover{transform:none;background:#ffffff08}.callbar{text-align:center}.callbar .hint{min-height:38px;color:#aab4c8;font-size:13px}.callbar button{background:linear-gradient(135deg,#ffd45a,#ff9c3b);border:0;color:#12100a;padding:13px 20px;border-radius:14px;font-weight:900;cursor:pointer;box-shadow:0 10px 30px #f5ae3a33}.result{position:fixed;inset:0;background:#02030ad9;display:none;place-items:center;z-index:20}.result.show{display:grid}.result-box{text-align:center;padding:40px;border-radius:28px;background:#111725;border:1px solid #ffffff20;box-shadow:0 30px 100px #000}.result-box h2{font-family:'Bebas Neue';font-size:80px;margin:0}.win{color:var(--green)}.lose{color:var(--red)}.draw{color:var(--gold)}.result-box button{margin-top:15px;padding:12px 20px;border:0;border-radius:12px;cursor:pointer}
+.shake{animation:shake .5s}.pulse{animation:pulse .45s}@keyframes shake{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-10px) rotate(-2deg)}40%{transform:translateX(10px) rotate(2deg)}60%{transform:translateX(-7px) rotate(-1deg)}80%{transform:translateX(7px) rotate(1deg)}}@keyframes pulse{50%{transform:scale(1.05)}}@media(max-width:900px){.pack-row{grid-template-columns:1fr 1fr}.arena{grid-template-columns:1fr;gap:12px}.callbar{order:2}.side{display:grid;grid-template-columns:1fr auto;align-items:center;text-align:left}.side .card{margin:auto}.game-title{font-size:42px}.difficulty{flex-direction:column;align-items:center}}@media(max-width:520px){.pack-row{grid-template-columns:1fr}.choice h1{font-size:58px}.card{width:310px}}
+</style>
+</head>
+<body>
+<section id="home" class="screen active"><div class="wrap">
+<div class="top"><div class="brand">90'S <span>CARD GAME</span></div><div class="pill">CLASSIC TRUMP • ODI LEGENDS</div></div>
+<div class="hero"><div class="eyebrow">THE CHILDHOOD GAME, REIMAGINED</div><h1>90'S CARD GAME</h1><p>Pick a pack. Pick a stat. Beat the opponent. Take their card. Keep calling until you lose.</p></div>
+<div class="pack-row">
+<div class="pack" id="mainPack" onclick="openDifficulty()"><div class="pack-cover"><img id="packImg" alt="Sachin Tendulkar"></div><h2>20'S LEGENDS PACK</h2><div class="meta">90 ODI LEGENDS • 50-CARD MATCH • TAP TO OPEN</div></div>
+<div class="pack disabled"><div class="soon"><span>COMING SOON</span></div><h2>90'S ICONS</h2><div class="meta">FUTURE PACK</div></div>
+<div class="pack disabled"><div class="soon"><span>COMING SOON</span></div><h2>WORLD CUP HEROES</h2><div class="meta">FUTURE PACK</div></div>
+<div class="pack disabled"><div class="soon"><span>COMING SOON</span></div><h2>ALL-ROUNDERS</h2><div class="meta">FUTURE PACK</div></div>
+</div><div class="footer">Free to host on GitHub Pages • No backend • No paid APIs required for gameplay</div>
+</div></section>
+
+<section id="difficulty" class="screen"><div class="wrap choice">
+<button class="back" onclick="show('home')">← BACK TO PACKS</button><h1>CHOOSE YOUR DIFFICULTY</h1><p>The opponent's values stay hidden in both modes. Hard mode makes the CPU choose smarter calls.</p>
+<div class="difficulty"><div class="diff" onclick="startGame('easy')"><b>EASY</b><small>CPU chooses a random legal stat. Good for learning the game.</small></div><div class="diff" onclick="startGame('hard')"><b>HARD</b><small>CPU studies its card and chooses a strong stat when it gets the call.</small></div></div></div></section>
+
+<section id="game" class="screen"><div class="wrap">
+<div class="game-top"><button class="back" onclick="if(confirm('Leave this match?')) show('home')">← EXIT</button><div class="score"><div>YOU <strong id="youCount">25</strong></div><div>CPU <strong id="cpuCount">25</strong></div></div></div>
+<h1 class="game-title">20'S LEGENDS • <span id="difficultyLabel">EASY</span></h1>
+<div class="arena">
+<div class="side"><div class="label">YOUR CARD</div><div class="hand-count" id="yourStatus">YOUR CALL</div><div id="yourCard"></div></div>
+<div class="callbar"><div class="hint" id="hint">Choose one of the six visible stats.</div><button onclick="toggleStats()" id="toggleAll">BATTING / BOWLING</button></div>
+<div class="side"><div class="label">OPPONENT CARD</div><div class="hand-count" id="cpuStatus">WAITING</div><div id="cpuCard"></div></div>
+</div></div></section>
+
+<div id="result" class="result"><div class="result-box"><h2 id="resultTitle"></h2><p id="resultText"></p><button onclick="closeResult()">CONTINUE</button></div></div>
+
+<script>
+const NATIONS={Australia:"🇦🇺",India:"🇮🇳",England:"🏴", "South Africa":"🇿🇦",Pakistan:"🇵🇰","Sri Lanka":"🇱🇰","New Zealand":"🇳🇿","West Indies":"🌴",Bangladesh:"🇧🇩",Zimbabwe:"🇿🇼"};
+// ODI career data for the selected World Cup-era legends. Values are kept as numeric game stats.
+const P=[
+["Adam Gilchrist","Australia",287,9619,35.89,96.94,172,16,0,0,0,417,0,33],
+["Matthew Hayden","Australia",161,6133,43.81,78.96,181,17,0,0,0,181,0,36],
+["Ricky Ponting","Australia",375,13704,42.03,80.39,164,30,0,0,0,160,0,82],
+["Andrew Symonds","Australia",198,5088,39.75,92.44,156,6,133,37.25,2,103,0,30],
+["Glenn McGrath","Australia",250,641,7.36,39.41,61,0,381,22.02,7,58,0,0],
+["Sachin Tendulkar","India",463,18426,44.83,86.23,200,49,154,44.48,2,140,0,96],
+["Sourav Ganguly","India",311,11363,41.02,73.70,183,22,100,38.49,2,100,0,72],
+["Rahul Dravid","India",344,10889,39.16,71.24,153,12,4,0,0,196,0,83],
+["Virender Sehwag","India",251,8273,35.05,104.33,219,15,96,40.13,1,136,0,38],
+["Yuvraj Singh","India",304,8701,36.55,87.67,150,14,111,38.68,1,94,0,52],
+["Marcus Trescothick","England",123,4335,37.37,85.22,137,12,0,0,0,74,0,23],
+["Michael Vaughan","England",86,1982,27.15,75.74,130,0,0,0,0,54,0,16],
+["Kevin Pietersen","England",136,4440,40.71,86.58,130,9,7,43.57,0,72,0,25],
+["Andrew Flintoff","England",141,3394,32.01,88.82,88,3,169,32.78,3,69,0,18],
+["Paul Collingwood","England",197,5092,35.36,74.98,112,6,111,38.68,3,109,0,26],
+["Herschelle Gibbs","South Africa",248,8094,36.13,83.26,175,21,14,39.78,0,108,0,37],
+["Jacques Kallis","South Africa",328,11579,44.36,72.89,139,17,273,31.79,2,131,0,79],
+["Graeme Smith","South Africa",197,6989,37.98,80.81,141,10,0,0,0,86,0,0],
+["Mark Boucher","South Africa",295,4686,28.57,84.76,147,1,0,0,0,532,46,26],
+["Shaun Pollock","South Africa",303,3519,26.45,61.78,130,1,393,24.50,5,108,0,20],
+["Inzamam-ul-Haq","Pakistan",378,11739,39.52,74.24,137,10,0,0,0,113,0,83],
+["Mohammad Yousuf","Pakistan",288,9720,41.71,75.10,141,15,0,0,0,117,0,62],
+["Younis Khan","Pakistan",265,7249,31.24,75.29,144,7,3,30.00,0,130,0,49],
+["Shahid Afridi","Pakistan",398,8064,23.57,117.00,124,6,395,34.51,9,127,0,39],
+["Shoaib Akhtar","Pakistan",163,390,8.79,76.02,43,0,247,24.97,6,21,0,0],
+["Sanath Jayasuriya","Sri Lanka",445,13430,32.36,91.20,189,28,323,36.75,4,123,0,68],
+["Kumar Sangakkara","Sri Lanka",404,14234,41.98,78.86,169,25,0,0,0,383,99,93],
+["Mahela Jayawardene","Sri Lanka",448,12650,33.37,78.96,132,19,8,31.12,0,218,0,77],
+["Muttiah Muralitharan","Sri Lanka",350,674,6.12,67.74,33,0,534,23.08,10,130,0,0],
+["Chaminda Vaas","Sri Lanka",322,2025,13.31,61.39,50,0,400,27.53,4,79,0,6],
+["Stephen Fleming","New Zealand",280,8037,32.40,71.49,134,8,0,0,0,133,0,49],
+["Nathan Astle","New Zealand",223,7090,34.92,83.91,145,16,99,37.03,2,103,0,41],
+["Scott Styris","New Zealand",188,4483,32.48,79.08,141,4,137,37.98,2,89,0,29],
+["Daniel Vettori","New Zealand",295,2253,17.33,74.36,83,0,305,31.71,2,123,0,13],
+["Brendon McCullum","New Zealand",260,6083,30.41,96.37,166,5,0,0,0,198,15,32],
+["Brian Lara","West Indies",299,10405,40.48,79.51,169,19,4,46.00,0,117,0,63],
+["Chris Gayle","West Indies",301,10480,37.83,87.19,215,25,167,35.73,2,114,0,54],
+["Shivnarine Chanderpaul","West Indies",268,8778,41.60,70.74,150,11,9,40.11,0,136,0,59],
+["Ramnaresh Sarwan","West Indies",181,5804,42.67,75.74,120,5,0,0,0,67,0,35],
+["Marlon Samuels","West Indies",207,5606,32.27,76.81,89,10,89,46.31,1,102,0,36],
+["Habibul Bashar","Bangladesh",111,2168,30.30,60.11,108,0,0,0,0,23,0,21],
+["Mohammad Ashraful","Bangladesh",175,3468,22.37,67.85,109,3,18,49.50,0,41,1,20],
+["Shakib Al Hasan","Bangladesh",247,7570,37.01,82.75,134,9,317,29.65,2,95,0,56],
+["Mashrafe Mortaza","Bangladesh",220,1787,13.76,78.35,0,0,270,32.93,1,40,0,8],
+["Mohammad Rafique","Bangladesh",125,1024,13.13,61.20,77,0,119,34.13,1,27,0,2],
+["Andy Flower","Zimbabwe",213,6571,33.52,67.00,145,4,0,0,0,151,32,40],
+["Grant Flower","Zimbabwe",221,6571,33.52,67.14,103,6,104,42.17,1,83,0,38],
+["Heath Streak","Zimbabwe",189,2943,28.29,63.30,79,0,239,29.82,7,61,0,13],
+["Tatenda Taibu","Zimbabwe",150,3393,29.46,67.78,111,2,0,0,0,114,25,17],
+["Sean Williams","Zimbabwe",156,4484,35.61,81.92,129,4,83,36.39,1,84,0,30],
+["Michael Bevan","Australia",232,6912,53.58,74.16,108,6,0,0,0,58,0,46],
+["Damien Martyn","Australia",208,5346,40.80,77.73,144,5,0,0,0,94,0,37],
+["Mark Waugh","Australia",244,8500,39.35,76.90,173,18,85,34.01,1,108,0,50],
+["Michael Clarke","Australia",245,7981,44.58,78.98,130,8,57,38.22,0,106,0,58],
+["Shane Watson","Australia",190,5757,40.54,90.44,185,9,168,31.79,3,116,0,33],
+["MS Dhoni","India",350,10773,50.57,87.56,183,10,0,0,0,321,123,73],
+["Suresh Raina","India",226,5615,35.31,93.50,116,5,36,42.03,1,72,0,36],
+["Gautam Gambhir","India",147,5238,39.68,85.25,150,11,0,0,0,50,0,34],
+["Harbhajan Singh","India",234,3170,18.03,80.31,49,0,265,33.35,3,70,0,9],
+["Zaheer Khan","India",200,792,10.21,73.72,34,0,282,29.43,1,46,0,1],
+["Eoin Morgan","England",233,7348,39.71,91.24,148,13,0,0,0,110,0,46],
+["Ian Bell","England",161,5416,37.87,77.16,141,4,0,0,0,70,0,35],
+["Andrew Strauss","England",127,4205,35.63,80.94,158,6,0,0,0,45,0,27],
+["Alec Stewart","England",170,4677,31.60,68.36,116,4,0,0,0,85,14,28],
+["Nasser Hussain","England",88,2332,30.43,60.74,115,0,0,0,0,34,0,16],
+["AB de Villiers","South Africa",228,9577,53.50,101.09,176,25,0,0,0,174,5,53],
+["Hashim Amla","South Africa",181,8113,49.46,88.39,159,27,0,0,0,74,0,39],
+["Gary Kirsten","South Africa",185,6798,40.95,72.04,188,13,0,0,0,63,0,45],
+["Jonty Rhodes","South Africa",245,5935,35.11,80.90,121,2,0,0,0,105,0,33],
+["Lance Klusener","South Africa",171,3576,41.10,89.91,103,2,192,29.95,6,108,0,19],
+["Saeed Anwar","Pakistan",247,8824,39.21,80.67,194,20,0,0,0,42,0,43],
+["Shoaib Malik","Pakistan",287,7534,34.55,81.90,143,9,158,39.23,0,111,0,44],
+["Abdul Razzaq","Pakistan",265,5080,29.70,81.25,112,3,269,29.45,3,102,0,23],
+["Wasim Akram","Pakistan",356,3717,16.52,88.33,86,0,502,23.52,6,88,0,6],
+["Mohammad Hafeez","Pakistan",218,6614,32.90,76.61,140,11,139,38.13,0,110,0,38],
+["Tillakaratne Dilshan","Sri Lanka",330,10290,39.27,86.23,161,22,106,44.70,0,123,0,47],
+["Upul Tharanga","Sri Lanka",235,6951,33.74,75.92,174,15,0,0,0,83,0,37],
+["Marvan Atapattu","Sri Lanka",268,8529,37.57,67.72,132,11,0,0,0,66,0,59],
+["Aravinda de Silva","Sri Lanka",308,9284,34.90,81.13,145,11,106,39.30,2,106,0,64],
+["Russel Arnold","Sri Lanka",180,3950,35.26,72.57,103,1,14,34.64,0,71,0,28],
+["Ross Taylor","New Zealand",228,8376,47.86,83.00,181,20,0,0,0,142,0,50],
+["Martin Guptill","New Zealand",179,6626,42.20,87.34,237,16,0,0,0,91,0,35],
+["Chris Cairns","New Zealand",215,4950,29.46,84.26,115,4,201,32.30,4,110,0,26],
+["Craig McMillan","New Zealand",197,4707,28.18,75.94,117,3,49,32.73,0,100,0,28],
+["Chris Harris","New Zealand",250,4379,29.00,66.51,130,1,203,37.50,1,99,0,16],
+["Desmond Haynes","West Indies",238,8648,41.37,63.09,152,17,0,0,0,90,0,57],
+["Vivian Richards","West Indies",187,6721,47.00,90.20,189,11,118,35.83,1,61,0,45],
+["Wavell Hinds","West Indies",119,2880,28.51,65.55,127,5,31,36.09,0,48,0,14],
+["Dwayne Bravo","West Indies",164,2968,25.36,82.30,112,2,199,30.27,2,76,0,10],
+["Carl Hooper","West Indies",227,5761,35.34,76.63,113,7,193,36.05,4,120,0,29],
+];
+// fields after name/team: matches,runs,avg,sr,high,100s,wickets,bowlAvg,5w,catches,stumpings,50s
+const labels1=["Matches","Runs","Average","Strike Rate","High Score","100's"];
+const labels2=["Wickets","Bowl Average","5W Haul","Catches","Stumping","50's"];
+let mode="easy", bat=true, playerDeck=[], cpuDeck=[], currentYou, currentCpu, lastCaller="you", locked=false;
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+async function playerImage(name){
+  const fallback='https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=700&q=80';
+  try{
+    const u='https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(name.replaceAll(' ','_'));
+    const r=await fetch(u); const j=await r.json(); return j.thumbnail?.source||fallback;
+  }catch(e){return fallback}
+}
+async function loadPack(){ $('packImg').src=await playerImage("Sachin Tendulkar"); }
+loadPack();
+function openDifficulty(){show('difficulty')}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function startGame(d){
+  mode=d; bat=true; lastCaller="you"; locked=false;
+  const pool=shuffle(P.map((x,i)=>({...x,id:i}))).slice(0,50);
+  playerDeck=pool.slice(0,25);cpuDeck=pool.slice(25,50);
+  $("difficultyLabel").textContent=d.toUpperCase(); show("game"); nextRound();
+}
+async function nextRound(){
+  if(!playerDeck.length || !cpuDeck.length){endGame();return}
+  currentYou=playerDeck[0]; currentCpu=cpuDeck[0]; locked=false;
+  $("hint").textContent=lastCaller==="you"?"Choose one of the six visible stats.":"CPU is choosing…";
+  renderCards();
+  updateCounts();
+  if(lastCaller==="cpu"){setTimeout(cpuCall,700)}
+}
+function updateCounts(){$("youCount").textContent=playerDeck.length;$("cpuCount").textContent=cpuDeck.length}
+async function renderCard(target,p,hidden){
+  const img=await playerImage(p[0]);
+  const vals=bat?p.slice(2,8):p.slice(8,14), labs=bat?labels1:labels2;
+  $(target).innerHTML=`<div class="card ${hidden?'opponent':''}" id="${target}Box"><div class="card-inner">
+  <div class="card-head"><div><div class="country">${NATIONS[p[1]]||""} ${p[1]}</div><div class="player-name">${p[0]}</div></div><button class="toggle" onclick="event.stopPropagation();toggleStats()">↕</button></div>
+  <div class="portrait"><img src="${img}" alt="${p[0]}"></div>
+  <div class="stat-grid">${vals.map((v,i)=>`<div class="stat ${hidden?'locked':''}" ${hidden?'':'onclick="callStat('+i+')"'}>
+  <span class="sname">${labs[i]}</span><span class="val">${hidden?'?':format(v)}</span></div>`).join("")}</div>
+  </div></div>`;
+}
+function format(v){return typeof v==="number"&&v%1!==0?v.toFixed(2):v.toLocaleString()}
+async function renderCards(){await Promise.all([renderCard("yourCard",currentYou,false),renderCard("cpuCard",currentCpu,true)])}
+function toggleStats(){bat=!bat;renderCards()}
+function callStat(i){
+  if(locked||lastCaller!=="you")return; locked=true; playClick();
+  resolveRound(i,"you");
+}
+function cpuCall(){
+  if(locked)return; locked=true;
+  const statBase=bat?2:8; const vals=currentCpu.slice(statBase,statBase+6); let candidates=[0,1,2,3,4,5];
+  let best;
+  if(mode==="hard"){
+    best=candidates.reduce((a,b)=>{
+      const va=Number(currentCpu[statBase+b]),vb=Number(currentCpu[statBase+a]);
+      const bowlingAverage = !bat && b===1;
+      const aBowlingAverage = !bat && a===1;
+      if(bowlingAverage && !aBowlingAverage) return va===0 ? a : (vb===0 ? b : (va<vb?b:a));
+      if(aBowlingAverage && !bowlingAverage) return vb===0 ? a : (va===0 ? b : (va<vb?b:a));
+      return va>vb?b:a;
+    },candidates[0]);
+  }else best=candidates[Math.floor(Math.random()*candidates.length)];
+  resolveRound(best,"cpu");
+}
+function resolveRound(i,caller){
+  const base=bat?2:8; const a=Number(currentYou[base+i]),b=Number(currentCpu[base+i]);
+  const lowWins=!bat&&i===1;
+  let winner=a===b?null:(lowWins?(a<b?"you":"cpu"):(a>b?"you":"cpu"));
+  if(a===0&&b>0&&!lowWins)winner="cpu"; if(b===0&&a>0&&!lowWins)winner="you";
+  if(a===0&&b===0)winner=null;
+  animateResult(winner,i,a,b,caller);
+  if(winner==="you"){playerDeck=playerDeck.concat([currentYou,currentCpu]);playerDeck.shift();cpuDeck.shift();lastCaller="you"}
+  else if(winner==="cpu"){cpuDeck=cpuDeck.concat([currentYou,currentCpu]);playerDeck.shift();cpuDeck.shift();lastCaller="cpu"}
+  else {playerDeck.push(playerDeck.shift());cpuDeck.push(cpuDeck.shift())}
+  updateCounts();
+  setTimeout(()=>{hideResult();if(!playerDeck.length||!cpuDeck.length)endGame();else nextRound()},1100);
+}
+function animateResult(winner,i,a,b,caller){
+  const y=$("yourCardBox"),c=$("cpuCardBox"); y?.classList.add("shake");c?.classList.add("shake");
+  if(winner==="you"){ $("resultTitle").textContent="YOU WIN!";$("resultTitle").className="win";$("resultText").textContent=`${(bat?labels1:labels2)[i]}: ${format(a)} beats ${format(b)}`;playWin()}
+  else if(winner==="cpu"){ $("resultTitle").textContent="CPU WINS";$("resultTitle").className="lose";$("resultText").textContent=`${(bat?labels1:labels2)[i]}: ${format(b)} beats ${format(a)}`;playLose()}
+  else {$("resultTitle").textContent="TIE!";$("resultTitle").className="draw";$("resultText").textContent=`Both cards have ${format(a)}. The previous caller keeps the call.`;playTie()}
+  $("result").classList.add("show")
+}
+function hideResult(){$("result").classList.remove("show")}
+function closeResult(){hideResult()}
+function endGame(){
+  $("resultTitle").textContent=playerDeck.length?"CHAMPION!":"GAME OVER";
+  $("resultTitle").className=playerDeck.length?"win":"lose";
+  $("resultText").textContent=playerDeck.length?`You collected the deck. Final cards: ${playerDeck.length}`:`CPU collected the deck.`;
+  $("result").classList.add("show");
+}
+let AC;
+function audio(){AC??=new (window.AudioContext||window.webkitAudioContext)();return AC}
+function tone(f,d,type="sine",g=.05){const c=audio(),o=c.createOscillator(),v=c.createGain();o.type=type;o.frequency.value=f;v.gain.setValueAtTime(g,c.currentTime);v.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(v).connect(c.destination);o.start();o.stop(c.currentTime+d)}
+function playClick(){tone(520,.08,"square",.035)}function playWin(){tone(660,.12,"triangle",.06);setTimeout(()=>tone(880,.18,"triangle",.06),100);setTimeout(()=>tone(1040,.24,"triangle",.05),210)}function playLose(){tone(220,.2,"sawtooth",.045);setTimeout(()=>tone(150,.25,"sawtooth",.035),130)}function playTie(){tone(420,.14,"sine",.04)}
+</script>
+</body></html>
