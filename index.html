@@ -2,1294 +2,870 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>90's Card Game</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,
-body {
-    width: 100%;
-    min-height: 100%;
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-body {
-    font-family: 'Rajdhani', sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-
-    /*
-      ============================================================
-      IMPORTANT:
-      YOUR GITHUB BACKGROUND IMAGE IS HERE
-      ============================================================
-    */
-    background-image:
-        linear-gradient(
-            rgba(1, 5, 13, 0.28),
-            rgba(1, 5, 13, 0.48)
-        ),
-        url("assets/stadium-bg.png");
-
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
-    position: relative;
-}
-
-/* Additional atmospheric layer.
-   VERY transparent so the stadium remains visible. */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-
-    background:
-        radial-gradient(
-            circle at 50% 42%,
-            rgba(20, 100, 150, 0.12),
-            transparent 42%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,0.08),
-            rgba(0,0,0,0.18)
-        );
-}
-
-/* UI must always remain above background */
-.app {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    min-height: 100vh;
-    padding: 18px 28px 25px;
+body{
+    background:#02050b url("assets/stadium-bg.png") center center / 100% 100% no-repeat;
+    color:#fff;
+    font-family:'Barlow Condensed',Arial,sans-serif;
 }
 
 /* =========================================================
-   TOP BAR
+   COMPLETE GAME BOARD
+   The background image itself is the visual board.
 ========================================================= */
 
-.topbar {
-    width: min(1180px, 100%);
-    margin: 0 auto;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
 }
 
-.exit-btn {
-    border: 1px solid rgba(90,150,190,0.35);
-    background: rgba(7,17,30,0.72);
-    color: white;
 
-    padding: 10px 18px;
-    border-radius: 12px;
+/* =========================================================
+   TOP LIVE CONTROLS
+========================================================= */
 
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
+.exit{
+    position:absolute;
+    left:18.2%;
+    top:4.0%;
 
-    cursor: pointer;
+    z-index:50;
+
+    border:1px solid rgba(110,190,235,.35);
+    border-radius:9px;
+
+    padding:8px 16px;
+
+    background:rgba(4,12,23,.88);
+    color:#fff;
+
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:15px;
+
+    cursor:pointer;
 
     box-shadow:
-        inset 0 0 15px rgba(0,120,180,0.08),
-        0 8px 30px rgba(0,0,0,0.25);
+        0 4px 15px rgba(0,0,0,.35);
 
-    transition: 0.2s;
+    transition:.2s;
 }
 
-.exit-btn:hover {
-    transform: translateY(-2px);
-    border-color: #5ac8ff;
-    box-shadow:
-        0 0 20px rgba(0,190,255,0.25);
+.exit:hover{
+    transform:translateY(-2px);
+    border-color:#6fdcff;
+    box-shadow:0 0 18px rgba(60,200,255,.35);
 }
 
-.scoreboard {
-    display: flex;
-    gap: 10px;
-}
-
-.score-box {
-    background: rgba(7,17,30,0.78);
-    border: 1px solid rgba(90,150,190,0.35);
-
-    padding: 10px 16px;
-    border-radius: 12px;
-
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 15px;
-
-    box-shadow:
-        inset 0 0 20px rgba(0,130,200,0.07);
-}
-
-.score-box span {
-    color: #ffd84d;
-    font-size: 19px;
-}
 
 /* =========================================================
-   TITLE
+   LIVE SCORE COUNTERS
 ========================================================= */
 
-.title-area {
-    text-align: center;
-    margin-top: 13px;
+.scores{
+    position:absolute;
+
+    right:17.8%;
+    top:3.2%;
+
+    display:flex;
+    gap:9px;
+
+    z-index:50;
 }
 
-.title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(36px, 5vw, 58px);
-    line-height: 0.95;
-    font-weight: 900;
-    letter-spacing: 1px;
+.score{
+    min-width:69px;
 
-    color: #f5fbff;
+    padding:8px 12px;
 
-    text-shadow:
-        0 0 8px rgba(255,255,255,0.35),
-        0 0 25px rgba(70,200,255,0.28);
+    text-align:center;
+
+    border:1px solid rgba(100,160,205,.32);
+    border-radius:10px;
+
+    background:rgba(4,12,23,.88);
+
+    font-size:13px;
+    font-weight:800;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.3);
 }
 
-.subtitle {
-    margin-top: 10px;
-
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 15px;
-
-    letter-spacing: 5px;
-    color: #bceaff;
-
-    text-shadow:
-        0 0 10px rgba(50,190,255,0.35);
+.score b{
+    color:#ffd94f;
+    font-size:18px;
 }
+
 
 /* =========================================================
-   GAME HEADER
+   LIVE PLAYER CARDS
 ========================================================= */
 
-.game-header {
-    width: min(1180px, 100%);
-    margin: 15px auto 0;
+/*
+   These coordinates are deliberately percentage based.
 
-    display: grid;
-    grid-template-columns: 1fr 300px 1fr;
-    align-items: end;
-    text-align: center;
-}
+   They sit over the gold/red card frames already present
+   inside stadium-bg.png.
+*/
 
-.side-heading {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #c9e9f8;
-}
+.card{
+    position:absolute;
 
-.center-heading {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    color: #d8f3ff;
-}
+    top:23.15%;
 
-/* =========================================================
-   MAIN GAME
-========================================================= */
+    width:14.25%;
+    height:43.4%;
 
-.game-area {
-    width: min(1180px, 100%);
-    margin: 5px auto 0;
+    z-index:30;
 
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr) 220px;
-    gap: 20px;
+    border-radius:16px;
 
-    align-items: center;
-}
+    overflow:hidden;
 
-/* =========================================================
-   PACKS
-========================================================= */
-
-.side-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.pack-title {
-    text-align: center;
-
-    color: #9edfff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 3px;
-}
-
-.pack {
-    height: 185px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pack-card {
-    position: absolute;
-
-    width: 140px;
-    height: 180px;
-
-    border-radius: 15px;
-
-    border: 2px solid rgba(0,184,255,0.35);
+    padding:7px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(15,31,50,0.95),
-            rgba(4,10,20,0.96)
+            rgba(5,12,21,.98),
+            rgba(4,9,17,.98)
         );
 
     box-shadow:
-        0 0 18px rgba(0,180,255,0.12),
-        inset 0 0 20px rgba(0,80,130,0.12);
+        0 10px 30px rgba(0,0,0,.35);
 }
 
-.pack-card:nth-child(1) {
-    transform: rotate(-8deg) translateX(-22px);
-}
 
-.pack-card:nth-child(2) {
-    transform: rotate(-4deg) translateX(-11px);
-}
+/* LEFT CARD */
 
-.pack-card:nth-child(3) {
-    transform: rotate(4deg) translateX(11px);
-}
+.card.you{
+    left:29.15%;
 
-.pack-card:nth-child(4) {
-    transform: rotate(8deg) translateX(22px);
-}
-
-.pack-card.main {
-    z-index: 5;
-
-    width: 140px;
-    height: 175px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.pack-logo {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 26px;
-
-    color: rgba(100,130,160,0.25);
-}
-
-.pack-count {
-    position: absolute;
-    bottom: 12px;
-
-    padding: 5px 12px;
-    border-radius: 20px;
-
-    font-size: 13px;
-    font-weight: 800;
-
-    background: rgba(0,0,0,0.65);
-    border: 1px solid rgba(150,190,210,0.25);
-}
-
-.info-panel {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(4,15,27,0.82),
-            rgba(2,8,16,0.78)
-        );
-
-    border: 1px solid rgba(0,170,230,0.25);
-    border-radius: 16px;
-
-    padding: 14px;
+    border:3px solid #e3ad2d;
 
     box-shadow:
-        inset 0 0 30px rgba(0,100,160,0.05),
-        0 12px 35px rgba(0,0,0,0.25);
+        0 0 18px rgba(255,190,30,.25),
+        inset 0 0 20px rgba(255,190,30,.08);
 }
 
-.info-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 18px;
-    font-weight: 900;
-    margin-bottom: 10px;
+
+/* RIGHT CARD */
+
+.card.cpu{
+    left:48.55%;
+
+    border:3px solid #e84b5b;
+
+    box-shadow:
+        0 0 18px rgba(255,40,65,.22),
+        inset 0 0 20px rgba(255,40,65,.06);
 }
 
-.rules {
-    font-size: 11px;
-    line-height: 1.65;
-    color: #9eb7c6;
-}
-
-.rules strong {
-    color: #f7d95c;
-}
 
 /* =========================================================
-   BATTLE AREA
+   CARD CONTENT
 ========================================================= */
 
-.battle {
-    min-width: 0;
-    display: grid;
-    grid-template-columns: minmax(0,1fr) 90px minmax(0,1fr);
-    align-items: center;
-    gap: 12px;
+.card-top{
+    height:7%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5px;
+
+    color:#9bb7c7;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
 }
 
-.call-label {
-    text-align: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 22px;
-    margin-bottom: 6px;
-}
+.player-image{
+    display:block;
 
-.card-column {
-    min-width: 0;
-}
+    width:100%;
+    height:40%;
 
-.player-card {
-    width: 100%;
-    min-height: 405px;
+    object-fit:cover;
+    object-position:center;
 
-    border-radius: 22px;
-
-    padding: 9px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(5,12,22,0.94),
-            rgba(8,14,25,0.96)
-        );
-
-    position: relative;
-
-    box-shadow:
-        0 0 30px rgba(0,0,0,0.45),
-        inset 0 0 30px rgba(255,255,255,0.025);
-
-    overflow: hidden;
-}
-
-.player-card.you {
-    border: 3px solid #dca92d;
-
-    box-shadow:
-        0 0 24px rgba(255,190,30,0.28),
-        inset 0 0 25px rgba(255,190,30,0.07);
-}
-
-.player-card.cpu {
-    border: 3px solid #e34858;
-
-    box-shadow:
-        0 0 24px rgba(255,40,65,0.22),
-        inset 0 0 25px rgba(255,40,65,0.06);
-}
-
-.card-top {
-    height: 24px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 7px;
-
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    color: #a9c5d4;
-}
-
-.player-art {
-    width: 100%;
-    height: 170px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
+    border-radius:8px;
 
     background:
         radial-gradient(
             circle,
-            #183f61,
+            #1b4567,
             #07111d 75%
         );
-
-    display: block;
 }
 
-.player-name-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.player-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-    margin: 8px 4px 10px;
+    gap:6px;
+
+    height:13%;
+
+    padding:3px 2px;
 }
 
-.player-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: clamp(21px, 2.2vw, 28px);
-    line-height: 1;
+.player-name{
+    min-width:0;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    font-size:clamp(13px,1.25vw,22px);
+    font-weight:900;
+
+    line-height:1;
 }
 
-.page-arrow {
-    width: 34px;
-    height: 34px;
+.page-button{
+    width:27px;
+    height:27px;
 
-    border-radius: 50%;
+    flex-shrink:0;
 
-    border: 1px solid rgba(255,210,70,0.35);
+    border-radius:50%;
 
-    background: rgba(15,22,30,0.9);
+    border:1px solid rgba(255,210,60,.55);
 
-    color: #ffd84d;
+    background:rgba(10,17,27,.9);
 
-    font-size: 20px;
-    font-weight: 900;
+    color:#ffd84d;
 
-    cursor: pointer;
+    font-size:16px;
+    font-weight:900;
 
-    flex-shrink: 0;
+    cursor:pointer;
 
-    transition: 0.2s;
+    transition:.18s;
 }
 
-.page-arrow:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 16px rgba(255,210,70,0.35);
+.page-button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 14px rgba(255,210,60,.35);
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    height:40%;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:5px;
 }
 
-.stat {
-    min-height: 49px;
+.stat{
+    min-width:0;
 
-    border-radius: 10px;
+    border-radius:7px;
 
-    padding: 6px 9px;
+    padding:5px 7px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(19,27,38,0.95),
-            rgba(9,14,23,0.95)
+            rgba(18,27,39,.97),
+            rgba(8,14,23,.97)
         );
 
-    border: 1px solid rgba(120,150,170,0.14);
+    border:1px solid rgba(110,145,165,.15);
 
-    position: relative;
+    position:relative;
 }
 
-.stat::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: #37a9d7;
-    border-radius: 5px;
+.stat:before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:5px;
+    bottom:5px;
+
+    width:2px;
+
+    border-radius:4px;
+
+    background:#36b4e7;
 }
 
-.stat-label {
-    display: block;
+.stat-label{
+    display:block;
 
-    font-size: 8px;
-    letter-spacing: 1px;
-    color: #738895;
-    font-weight: 700;
+    color:#6d8492;
+
+    font-size:6px;
+    font-weight:700;
+
+    letter-spacing:.7px;
 }
 
-.stat-value {
-    display: block;
+.stat-value{
+    display:block;
 
-    margin-top: 2px;
+    margin-top:1px;
 
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px;
-    font-weight: 900;
+    font-size:clamp(13px,1.15vw,19px);
+    font-weight:900;
+
+    line-height:1;
 }
 
-.hidden-stat .stat-value {
-    color: #92a4af;
+.cpu .stat-value{
+    color:#93a5b0;
 }
+
 
 /* =========================================================
    VS
 ========================================================= */
 
-.vs-area {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+.vs{
+    position:absolute;
 
-.vs {
-    width: 72px;
-    height: 72px;
+    left:44.8%;
+    top:39.5%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width:5.2vw;
+    height:5.2vw;
 
-    border-radius: 50%;
+    max-width:67px;
+    max-height:67px;
 
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 33px;
+    min-width:45px;
+    min-height:45px;
 
-    color: white;
+    z-index:35;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255,210,70,0.28),
-            rgba(0,0,0,0.7) 70%
+            rgba(255,214,70,.35),
+            rgba(2,6,12,.82) 70%
         );
 
-    border: 1px solid rgba(255,220,80,0.5);
+    border:1px solid rgba(255,220,70,.5);
+
+    color:#fff;
+
+    font-size:clamp(20px,2.3vw,34px);
+    font-weight:900;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.5);
 
     box-shadow:
-        0 0 30px rgba(255,190,40,0.25);
+        0 0 25px rgba(255,190,40,.25);
 }
+
 
 /* =========================================================
-   STAT BUTTONS
+   CALL LABELS
 ========================================================= */
 
-.call-section {
-    width: min(680px, 100%);
-    margin: 13px auto 0;
-    text-align: center;
+.call{
+    position:absolute;
+
+    top:20.2%;
+
+    z-index:35;
+
+    color:#fff;
+
+    font-size:clamp(14px,1.35vw,22px);
+    font-weight:900;
+
+    text-align:center;
+
+    text-shadow:0 2px 5px #000;
 }
 
-.choose-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 22px;
-    font-weight: 900;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 9px;
+.call.you{
+    left:29.1%;
+    width:14.4%;
 }
 
-.stat-buttons {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 7px;
+.call.cpu{
+    left:48.5%;
+    width:14.4%;
 }
 
-.stat-btn {
-    min-height: 55px;
 
-    border-radius: 10px;
+/* =========================================================
+   STAT CALL AREA
+========================================================= */
 
-    border: 1px solid rgba(40,160,210,0.35);
+/*
+   The background artwork already has the six stat buttons.
+   These transparent live buttons are placed exactly over them.
+*/
+
+.stat-call{
+    position:absolute;
+
+    left:29.55%;
+    top:71.45%;
+
+    width:32.0%;
+    height:7.0%;
+
+    z-index:45;
+
+    display:grid;
+
+    grid-template-columns:repeat(6,1fr);
+
+    gap:6px;
+}
+
+.stat-button{
+    border:1px solid rgba(55,190,235,.3);
+    border-radius:8px;
+
+    background:rgba(3,15,25,.76);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(8px,.7vw,12px);
+    font-weight:800;
+
+    transition:.15s;
+}
+
+.stat-button:hover{
+    transform:translateY(-2px);
+
+    border-color:#6adfff;
+
+    box-shadow:
+        0 0 15px rgba(50,205,255,.3);
+}
+
+.stat-button.selected{
+    border-color:#ffd84d;
 
     background:
         linear-gradient(
             145deg,
-            rgba(6,23,35,0.9),
-            rgba(3,13,22,0.9)
+            rgba(100,70,10,.85),
+            rgba(25,20,5,.9)
         );
 
-    color: #fff;
-
-    cursor: pointer;
-
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s,
-        border-color 0.15s;
-}
-
-.stat-btn:hover {
-    transform: translateY(-3px);
-
-    border-color: #50caff;
-
     box-shadow:
-        0 0 18px rgba(50,200,255,0.25);
+        0 0 16px rgba(255,205,50,.4);
 }
 
-.stat-btn.selected {
-    border-color: #ffd84d;
-
-    box-shadow:
-        0 0 20px rgba(255,210,60,0.35);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(80,55,10,0.7),
-            rgba(20,20,10,0.85)
-        );
-}
-
-.stat-icon {
-    display: block;
-    color: #ffd84d;
-    font-size: 17px;
-}
-
-.stat-btn span:last-child {
-    display: block;
-    font-size: 9px;
-    margin-top: 2px;
-}
-
-.hint {
-    margin-top: 5px;
-
-    color: rgba(190,215,225,0.55);
-
-    font-size: 9px;
-}
 
 /* =========================================================
-   RESULT
+   RESULT MESSAGE
 ========================================================= */
 
-.result-message {
-    min-height: 27px;
+.result{
+    position:absolute;
 
-    text-align: center;
+    left:29%;
+    width:34%;
 
-    margin-top: 6px;
+    top:80.0%;
 
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 19px;
-    font-weight: 900;
+    z-index:45;
 
-    letter-spacing: 1px;
+    min-height:28px;
+
+    text-align:center;
+
+    font-size:clamp(13px,1.2vw,20px);
+    font-weight:900;
+
+    letter-spacing:.7px;
+
+    text-shadow:
+        0 2px 8px #000;
 }
 
-.result-message.win {
-    color: #ffe16a;
-    text-shadow: 0 0 12px rgba(255,210,60,0.45);
+.result.win{
+    color:#ffe16a;
 }
 
-.result-message.loss {
-    color: #ff6775;
-    text-shadow: 0 0 12px rgba(255,50,70,0.4);
+.result.loss{
+    color:#ff6978;
 }
 
-.result-message.tie {
-    color: #72d9ff;
-    text-shadow: 0 0 12px rgba(50,190,255,0.4);
+.result.tie{
+    color:#67d9ff;
 }
+
 
 /* =========================================================
-   ANIMATIONS
+   PAGE INDICATOR
 ========================================================= */
 
-@keyframes shake {
-    0%,100% {
-        transform: translateX(0);
-    }
+.page-indicator{
+    position:absolute;
 
-    20% {
-        transform: translateX(-7px);
-    }
+    left:29.2%;
+    top:67.2%;
 
-    40% {
-        transform: translateX(7px);
-    }
+    width:14%;
 
-    60% {
-        transform: translateX(-5px);
-    }
+    z-index:40;
 
-    80% {
-        transform: translateX(5px);
-    }
+    text-align:center;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    color:rgba(210,235,245,.55);
 }
 
-.shake {
-    animation: shake 0.42s ease;
-}
-
-@keyframes glow {
-    0%,100% {
-        box-shadow:
-            0 0 15px rgba(255,205,60,0.2);
-    }
-
-    50% {
-        box-shadow:
-            0 0 40px rgba(255,205,60,0.55);
-    }
-}
-
-.winner {
-    animation: glow 0.8s ease-in-out 2;
-}
 
 /* =========================================================
-   RESPONSIVE
+   BATTLE SHAKE
 ========================================================= */
 
-@media (max-width: 1050px) {
-
-    .game-area {
-        grid-template-columns: 160px minmax(0,1fr) 160px;
-        gap: 10px;
+@keyframes shake{
+    0%,100%{
+        transform:translateX(0);
     }
 
-    .game-header {
-        grid-template-columns: 160px 1fr 160px;
+    20%{
+        transform:translateX(-5px);
     }
 
-    .battle {
-        grid-template-columns: minmax(0,1fr) 60px minmax(0,1fr);
+    40%{
+        transform:translateX(5px);
     }
 
-    .vs {
-        width: 55px;
-        height: 55px;
-        font-size: 25px;
+    60%{
+        transform:translateX(-4px);
     }
 
-    .player-card {
-        min-height: 390px;
+    80%{
+        transform:translateX(4px);
     }
 }
 
-@media (max-width: 800px) {
+.shake{
+    animation:shake .4s ease;
+}
 
-    body {
-        background-attachment: scroll;
+
+/* =========================================================
+   WIN GLOW
+========================================================= */
+
+@keyframes winnerGlow{
+    0%,100%{
+        filter:brightness(1);
     }
 
-    .app {
-        padding: 12px;
-    }
-
-    .game-area {
-        grid-template-columns: 1fr;
-    }
-
-    .side-column {
-        display: none;
-    }
-
-    .game-header {
-        display: none;
-    }
-
-    .battle {
-        grid-template-columns: minmax(0,1fr) 50px minmax(0,1fr);
-    }
-
-    .player-art {
-        height: 130px;
-    }
-
-    .player-card {
-        min-height: 340px;
-    }
-
-    .stat-buttons {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .title {
-        font-size: 42px;
+    50%{
+        filter:brightness(1.4);
     }
 }
 
-@media (max-width: 520px) {
+.winner{
+    animation:winnerGlow .7s ease 2;
+}
 
-    .topbar {
-        align-items: flex-start;
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+    body{
+        overflow:auto;
+
+        background-size:auto 100%;
+        background-position:center top;
     }
 
-    .scoreboard {
-        gap: 5px;
-    }
-
-    .score-box {
-        padding: 7px 9px;
-        font-size: 12px;
-    }
-
-    .score-box span {
-        font-size: 15px;
-    }
-
-    .battle {
-        grid-template-columns: 1fr;
-    }
-
-    .vs-area {
-        order: 2;
-    }
-
-    .card-column:first-child {
-        order: 1;
-    }
-
-    .card-column:last-child {
-        order: 3;
-    }
-
-    .vs {
-        width: 50px;
-        height: 50px;
+    #game{
+        min-width:900px;
+        height:100vh;
     }
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="app">
+<div id="game">
 
     <!-- =====================================================
-         TOP BAR
+         LIVE TOP CONTROLS
     ====================================================== -->
 
-    <div class="topbar">
+    <button class="exit" onclick="location.reload()">
+        ← EXIT
+    </button>
 
-        <button class="exit-btn" onclick="location.reload()">
-            ← EXIT
+    <div class="scores">
+
+        <div class="score">
+            YOU <b id="youCount">25</b>
+        </div>
+
+        <div class="score">
+            CPU <b id="cpuCount">25</b>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CALL LABELS
+    ====================================================== -->
+
+    <div class="call you" id="yourCall">
+        YOUR CALL
+    </div>
+
+    <div class="call cpu" id="cpuCall">
+        WAITING
+    </div>
+
+
+    <!-- =====================================================
+         YOUR CARD
+    ====================================================== -->
+
+    <article
+        class="card you"
+        id="yourCard"
+    >
+
+        <div class="card-top">
+
+            <span>90'S LEGENDS</span>
+
+            <span id="yourCountry">
+                INDIA
+            </span>
+
+        </div>
+
+
+        <img
+            id="yourImage"
+            class="player-image"
+            alt="Player"
+        >
+
+
+        <div class="player-title">
+
+            <div
+                id="yourName"
+                class="player-name"
+            >
+                SACHIN TENDULKAR
+            </div>
+
+            <button
+                class="page-button"
+                onclick="switchPage('you')"
+            >
+                →
+            </button>
+
+        </div>
+
+
+        <div
+            id="yourStats"
+            class="stats"
+        ></div>
+
+    </article>
+
+
+    <!-- =====================================================
+         CPU CARD
+    ====================================================== -->
+
+    <article
+        class="card cpu"
+        id="cpuCard"
+    >
+
+        <div class="card-top">
+
+            <span>90'S LEGENDS</span>
+
+            <span id="cpuCountry">
+                AUSTRALIA
+            </span>
+
+        </div>
+
+
+        <img
+            id="cpuImage"
+            class="player-image"
+            alt="Opponent"
+        >
+
+
+        <div class="player-title">
+
+            <div
+                id="cpuName"
+                class="player-name"
+            >
+                RICKY PONTING
+            </div>
+
+            <button
+                class="page-button"
+                onclick="switchPage('cpu')"
+            >
+                →
+            </button>
+
+        </div>
+
+
+        <div
+            id="cpuStats"
+            class="stats"
+        ></div>
+
+    </article>
+
+
+    <!-- =====================================================
+         VS
+    ====================================================== -->
+
+    <div class="vs">
+        VS
+    </div>
+
+
+    <!-- =====================================================
+         STAT BUTTONS
+         These sit over the buttons already visible
+         in stadium-bg.png
+    ====================================================== -->
+
+    <div class="stat-call">
+
+        <button
+            class="stat-button"
+            onclick="callStat('matches')"
+        >
+            Matches
         </button>
 
-        <div class="scoreboard">
-            <div class="score-box">
-                YOU <span id="youCount">25</span>
-            </div>
+        <button
+            class="stat-button"
+            onclick="callStat('runs')"
+        >
+            Runs
+        </button>
 
-            <div class="score-box">
-                CPU <span id="cpuCount">25</span>
-            </div>
-        </div>
+        <button
+            class="stat-button"
+            onclick="callStat('average')"
+        >
+            Average
+        </button>
 
-    </div>
+        <button
+            class="stat-button"
+            onclick="callStat('strikeRate')"
+        >
+            Strike Rate
+        </button>
 
+        <button
+            class="stat-button"
+            onclick="callStat('highScore')"
+        >
+            High Score
+        </button>
 
-    <!-- =====================================================
-         TITLE
-    ====================================================== -->
-
-    <section class="title-area">
-
-        <h1 class="title">
-            90'S CARD GAME
-        </h1>
-
-        <div class="subtitle">
-            90'S LEGENDS • EASY MODE
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         GAME HEADER
-    ====================================================== -->
-
-    <div class="game-header">
-
-        <div class="side-heading">
-            YOUR PACK
-        </div>
-
-        <div class="center-heading">
-            TRUMP CARD BATTLE
-        </div>
-
-        <div class="side-heading">
-            OPPONENT PACK
-        </div>
+        <button
+            class="stat-button"
+            onclick="callStat('hundreds')"
+        >
+            100's
+        </button>
 
     </div>
 
 
     <!-- =====================================================
-         GAME AREA
+         PAGE INDICATOR
     ====================================================== -->
 
-    <main class="game-area">
-
-        <!-- LEFT SIDE -->
-
-        <aside class="side-column">
-
-            <div class="pack">
-
-                <div class="pack-card"></div>
-                <div class="pack-card"></div>
-                <div class="pack-card"></div>
-
-                <div class="pack-card main">
-
-                    <div class="pack-logo">
-                        90'S
-                    </div>
-
-                    <div class="pack-count">
-                        <span id="leftPackCount">25</span> CARDS
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="info-panel">
-
-                <div class="info-title">
-                    RECENT BATTLES
-                </div>
-
-                <div id="battleHistory" class="rules">
-                    Your battles will appear here.
-                </div>
-
-            </div>
-
-        </aside>
-
-
-        <!-- CENTER BATTLE -->
-
-        <section>
-
-            <div class="battle">
-
-                <!-- YOUR CARD -->
-
-                <div class="card-column">
-
-                    <div class="call-label" id="yourCall">
-                        YOUR CALL
-                    </div>
-
-                    <article class="player-card you" id="yourCard">
-
-                        <div class="card-top">
-
-                            <span>90'S LEGENDS</span>
-                            <span id="yourCountry">INDIA</span>
-
-                        </div>
-
-
-                        <img
-                            id="yourImage"
-                            class="player-art"
-                            src=""
-                            alt="Your Player"
-                        >
-
-
-                        <div class="player-name-row">
-
-                            <div
-                                id="yourName"
-                                class="player-name"
-                            >
-                                SACHIN TENDULKAR
-                            </div>
-
-                            <button
-                                class="page-arrow"
-                                onclick="switchPage('you')"
-                                title="Switch stats"
-                            >
-                                →
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            id="yourStats"
-                            class="stats"
-                        ></div>
-
-                    </article>
-
-                </div>
-
-
-                <!-- VS -->
-
-                <div class="vs-area">
-
-                    <div class="vs">
-                        VS
-                    </div>
-
-                </div>
-
-
-                <!-- CPU CARD -->
-
-                <div class="card-column">
-
-                    <div class="call-label">
-                        <span id="cpuStatus">WAITING</span>
-                    </div>
-
-                    <article class="player-card cpu" id="cpuCard">
-
-                        <div class="card-top">
-
-                            <span>90'S LEGENDS</span>
-                            <span id="cpuCountry">AUSTRALIA</span>
-
-                        </div>
-
-
-                        <img
-                            id="cpuImage"
-                            class="player-art"
-                            src=""
-                            alt="Opponent Player"
-                        >
-
-
-                        <div class="player-name-row">
-
-                            <div
-                                id="cpuName"
-                                class="player-name"
-                            >
-                                RICKY PONTING
-                            </div>
-
-                            <button
-                                class="page-arrow"
-                                onclick="switchPage('cpu')"
-                                title="Switch stats"
-                            >
-                                →
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            id="cpuStats"
-                            class="stats"
-                        ></div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 STAT CALL AREA
-            ================================================== -->
-
-            <section class="call-section">
-
-                <div class="choose-title">
-                    CHOOSE A STAT TO CALL
-                </div>
-
-                <div class="stat-buttons">
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('matches')"
-                    >
-                        <span class="stat-icon">◉</span>
-                        <span>Matches</span>
-                    </button>
-
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('runs')"
-                    >
-                        <span class="stat-icon">▰</span>
-                        <span>Runs</span>
-                    </button>
-
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('average')"
-                    >
-                        <span class="stat-icon">▤</span>
-                        <span>Average</span>
-                    </button>
-
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('strikeRate')"
-                    >
-                        <span class="stat-icon">⚡</span>
-                        <span>Strike Rate</span>
-                    </button>
-
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('highScore')"
-                    >
-                        <span class="stat-icon">★</span>
-                        <span>High Score</span>
-                    </button>
-
-
-                    <button
-                        class="stat-btn"
-                        onclick="callStat('hundreds')"
-                    >
-                        <span class="stat-icon">100</span>
-                        <span>100's</span>
-                    </button>
-
-                </div>
-
-
-                <div class="hint">
-                    Higher value wins • Bowling Average: lower wins • 0 always loses
-                </div>
-
-
-                <div
-                    id="resultMessage"
-                    class="result-message"
-                ></div>
-
-            </section>
-
-        </section>
-
-
-        <!-- RIGHT SIDE -->
-
-        <aside class="side-column">
-
-            <div class="pack">
-
-                <div class="pack-card"></div>
-                <div class="pack-card"></div>
-                <div class="pack-card"></div>
-
-                <div class="pack-card main">
-
-                    <div class="pack-logo">
-                        90'S
-                    </div>
-
-                    <div class="pack-count">
-                        <span id="rightPackCount">25</span> CARDS
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="info-panel">
-
-                <div class="info-title">
-                    GAME RULES
-                </div>
-
-                <div class="rules">
-
-                    Choose one stat to call.
-
-                    <br><br>
-
-                    <strong>Higher wins</strong> every stat except
-                    Bowling Average.
-
-                    <br><br>
-
-                    <strong>Bowling Average:</strong>
-                    lower non-zero value wins.
-
-                    <br><br>
-
-                    <strong>0 always loses</strong> —
-                    even Bowling Average.
-
-                    <br><br>
-
-                    If equal, previous caller keeps the call.
-
-                    <br><br>
-
-                    Winner takes both cards.
-
-                    <br><br>
-
-                    Winner calls again.
-
-                    <br><br>
-
-                    Get every card to win.
-
-                </div>
-
-            </div>
-
-        </aside>
-
-    </main>
+    <div
+        id="pageIndicator"
+        class="page-indicator"
+    >
+        BATTING STATS
+    </div>
+
+
+    <!-- =====================================================
+         RESULT
+    ====================================================== -->
+
+    <div
+        id="result"
+        class="result"
+    ></div>
 
 </div>
 
@@ -1297,148 +873,187 @@ body::before {
 <script>
 
 /* ============================================================
-   SOUND ENGINE
+   SOUND
 ============================================================ */
 
 let audioContext = null;
 
-function getAudio() {
+function sound(
+    frequency = 440,
+    duration = 0.07,
+    type = "square"
+){
 
-    if (!audioContext) {
-        audioContext =
-            new (window.AudioContext ||
-                 window.webkitAudioContext)();
-    }
+    try{
 
-    return audioContext;
-}
+        if(!audioContext){
 
-function clickSound() {
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
 
-    try {
+        }
 
-        const ctx = getAudio();
+        const oscillator =
+            audioContext.createOscillator();
 
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const gain =
+            audioContext.createGain();
 
-        osc.frequency.value = 420;
-        osc.type = "square";
+        oscillator.type = type;
+
+        oscillator.frequency.value =
+            frequency;
 
         gain.gain.setValueAtTime(
             0.045,
-            ctx.currentTime
+            audioContext.currentTime
         );
 
         gain.gain.exponentialRampToValueAtTime(
             0.001,
-            ctx.currentTime + 0.07
+            audioContext.currentTime + duration
         );
 
-        osc.connect(gain);
-        gain.connect(ctx.destination);
+        oscillator.connect(gain);
 
-        osc.start();
-        osc.stop(ctx.currentTime + 0.07);
+        gain.connect(
+            audioContext.destination
+        );
 
-    } catch(e) {}
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + duration
+        );
+
+    }catch(e){}
 
 }
 
 
 /* ============================================================
-   BASIC DEMO PLAYERS
-============================================================ */
+   PLAYER DATA
+   ============================================================ */
 
 const players = [
 
     {
-        name: "Sachin Tendulkar",
-        country: "India",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/2/25/Sachin_Tendulkar_at_MRF_Promotion_Event.jpg",
+        name:"Sachin Tendulkar",
+        country:"India",
+        image:"https://upload.wikimedia.org/wikipedia/commons/2/25/Sachin_Tendulkar_at_MRF_Promotion_Event.jpg",
 
-        stats: {
-            matches: 463,
-            runs: 18426,
-            average: 44.83,
-            strikeRate: 86.23,
-            highScore: 200,
-            hundreds: 49,
+        stats:{
+            matches:463,
+            runs:18426,
+            average:44.83,
+            strikeRate:86.23,
+            highScore:200,
+            hundreds:49,
 
-            wickets: 154,
-            bowlAverage: 44.48,
-            fiveW: 2,
-            catches: 140,
-            stumpings: 0,
-            fifties: 96
+            wickets:154,
+            bowlAverage:44.48,
+            fiveW:2,
+            catches:140,
+            stumpings:0,
+            fifties:96
         }
     },
 
     {
-        name: "Ricky Ponting",
-        country: "Australia",
-        image:
-        "https://upload.wikimedia.org/wikipedia/commons/8/82/Ricky_Ponting.jpg",
+        name:"Ricky Ponting",
+        country:"Australia",
+        image:"https://upload.wikimedia.org/wikipedia/commons/8/82/Ricky_Ponting.jpg",
 
-        stats: {
-            matches: 375,
-            runs: 13704,
-            average: 42.03,
-            strikeRate: 80.39,
-            highScore: 164,
-            hundreds: 30,
+        stats:{
+            matches:375,
+            runs:13704,
+            average:42.03,
+            strikeRate:80.39,
+            highScore:164,
+            hundreds:30,
 
-            wickets: 0,
-            bowlAverage: 0,
-            fiveW: 0,
-            catches: 160,
-            stumpings: 0,
-            fifties: 82
+            wickets:0,
+            bowlAverage:0,
+            fiveW:0,
+            catches:160,
+            stumpings:0,
+            fifties:82
         }
     },
 
     {
-        name: "Brian Lara",
-        country: "West Indies",
-        image: "",
-        stats: {
-            matches: 299,
-            runs: 10405,
-            average: 40.48,
-            strikeRate: 79.51,
-            highScore: 169,
-            hundreds: 19,
+        name:"Brian Lara",
+        country:"West Indies",
+        image:"",
 
-            wickets: 4,
-            bowlAverage: 28.25,
-            fiveW: 0,
-            catches: 130,
-            stumpings: 0,
-            fifties: 63
+        stats:{
+            matches:299,
+            runs:10405,
+            average:40.48,
+            strikeRate:79.51,
+            highScore:169,
+            hundreds:19,
+
+            wickets:4,
+            bowlAverage:28.25,
+            fiveW:0,
+            catches:130,
+            stumpings:0,
+            fifties:63
         }
     },
 
     {
-        name: "Wasim Akram",
-        country: "Pakistan",
-        image: "",
-        stats: {
-            matches: 356,
-            runs: 3717,
-            average: 16.52,
-            strikeRate: 88.33,
-            highScore: 86,
-            hundreds: 0,
+        name:"Wasim Akram",
+        country:"Pakistan",
+        image:"",
 
-            wickets: 502,
-            bowlAverage: 23.52,
-            fiveW: 6,
-            catches: 88,
-            stumpings: 0,
-            fifties: 6
+        stats:{
+            matches:356,
+            runs:3717,
+            average:16.52,
+            strikeRate:88.33,
+            highScore:86,
+            hundreds:0,
+
+            wickets:502,
+            bowlAverage:23.52,
+            fiveW:6,
+            catches:88,
+            stumpings:0,
+            fifties:6
         }
     }
+
+];
+
+
+/* ============================================================
+   STAT PAGES
+============================================================ */
+
+const battingStats = [
+
+    ["matches","MATCHES"],
+    ["runs","RUNS"],
+    ["average","AVERAGE"],
+    ["strikeRate","STRIKE RATE"],
+    ["highScore","HIGH SCORE"],
+    ["hundreds","100'S"]
+
+];
+
+const bowlingStats = [
+
+    ["wickets","WICKETS"],
+    ["bowlAverage","BOWL AVERAGE"],
+    ["fiveW","5W HAUL"],
+    ["catches","CATCHES"],
+    ["stumpings","STUMPING"],
+    ["fifties","50'S"]
 
 ];
 
@@ -1447,8 +1062,11 @@ const players = [
    GAME STATE
 ============================================================ */
 
-let yourCard = players[0];
-let cpuCard = players[1];
+let yourCard =
+    players[0];
+
+let cpuCard =
+    players[1];
 
 let yourPage = 0;
 let cpuPage = 0;
@@ -1458,60 +1076,54 @@ let cpuCards = 25;
 
 let previousCaller = "you";
 
-let gameLocked = false;
+let locked = false;
 
 
 /* ============================================================
-   STAT PAGES
+   NUMBER FORMAT
 ============================================================ */
 
-const battingStats = [
+function formatNumber(value){
 
-    ["matches", "MATCHES"],
-    ["runs", "RUNS"],
-    ["average", "AVERAGE"],
-    ["strikeRate", "STRIKE RATE"],
-    ["highScore", "HIGH SCORE"],
-    ["hundreds", "100'S"]
+    if(
+        typeof value === "number" &&
+        !Number.isInteger(value)
+    ){
 
-];
+        return value.toFixed(2);
 
-const bowlingStats = [
+    }
 
-    ["wickets", "WICKETS"],
-    ["bowlAverage", "BOWL AVERAGE"],
-    ["fiveW", "5W HAUL"],
-    ["catches", "CATCHES"],
-    ["stumpings", "STUMPING"],
-    ["fifties", "50'S"]
+    return Number(value).toLocaleString("en-IN");
 
-];
+}
 
 
 /* ============================================================
-   IMAGE FALLBACK
+   IMAGE
 ============================================================ */
 
-function playerImage(img, player) {
+function loadImage(element,player){
 
-    if (player.image) {
+    if(player.image){
 
-        img.src = player.image;
+        element.src =
+            player.image;
 
-    } else {
+    }else{
 
-        img.src =
-            "https://dummyimage.com/800x500/07111d/7fdcff&text=" +
+        element.src =
+            "https://dummyimage.com/800x500/07111d/69d9ff&text=" +
             encodeURIComponent(player.name);
 
     }
 
-    img.onerror = function() {
+    element.onerror = function(){
 
         this.onerror = null;
 
         this.src =
-            "https://dummyimage.com/800x500/07111d/7fdcff&text=" +
+            "https://dummyimage.com/800x500/07111d/69d9ff&text=" +
             encodeURIComponent(player.name);
 
     };
@@ -1523,7 +1135,7 @@ function playerImage(img, player) {
    RENDER STATS
 ============================================================ */
 
-function renderStats(side) {
+function renderStats(side){
 
     const player =
         side === "you"
@@ -1542,60 +1154,45 @@ function renderStats(side) {
                 : "cpuStats"
         );
 
-    const statList =
+    const list =
         page === 0
             ? battingStats
             : bowlingStats;
 
     container.innerHTML = "";
 
-    statList.forEach(([key, label]) => {
+    list.forEach(
+        ([key,label]) => {
 
-        const value =
-            player.stats[key] ?? 0;
+            const value =
+                player.stats[key] ?? 0;
 
-        const div =
-            document.createElement("div");
+            const stat =
+                document.createElement("div");
 
-        div.className =
-            "stat " +
-            (side === "cpu"
-                ? "hidden-stat"
-                : "");
+            stat.className =
+                "stat";
 
-        div.innerHTML = `
-            <span class="stat-label">
-                ${label}
-            </span>
+            stat.innerHTML = `
 
-            <span class="stat-value">
-                ${side === "cpu" ? "?" : formatNumber(value)}
-            </span>
-        `;
+                <span class="stat-label">
+                    ${label}
+                </span>
 
-        container.appendChild(div);
+                <span class="stat-value">
+                    ${
+                        side === "cpu"
+                            ? "?"
+                            : formatNumber(value)
+                    }
+                </span>
 
-    });
+            `;
 
-}
+            container.appendChild(stat);
 
-
-/* ============================================================
-   NUMBER FORMAT
-============================================================ */
-
-function formatNumber(value) {
-
-    if (
-        typeof value === "number" &&
-        !Number.isInteger(value)
-    ) {
-
-        return value.toFixed(2);
-
-    }
-
-    return Number(value).toLocaleString("en-IN");
+        }
+    );
 
 }
 
@@ -1604,121 +1201,153 @@ function formatNumber(value) {
    PAGE SWITCH
 ============================================================ */
 
-function switchPage(side) {
+function switchPage(side){
 
-    clickSound();
+    sound(650,.06,"triangle");
 
-    if (side === "you") {
+    if(side === "you"){
 
         yourPage =
-            yourPage === 0 ? 1 : 0;
+            yourPage === 0
+                ? 1
+                : 0;
 
-        renderStats("you");
-
-    } else {
+    }else{
 
         cpuPage =
-            cpuPage === 0 ? 1 : 0;
-
-        renderStats("cpu");
+            cpuPage === 0
+                ? 1
+                : 0;
 
     }
+
+    renderStats(side);
+
+    updatePageIndicator();
 
 }
 
 
 /* ============================================================
-   UPDATE CARDS
+   PAGE INDICATOR
 ============================================================ */
 
-function renderCards() {
+function updatePageIndicator(){
 
-    document.getElementById("yourName")
-        .textContent =
+    document.getElementById(
+        "pageIndicator"
+    ).textContent =
+        yourPage === 0
+            ? "BATTING STATS"
+            : "BOWLING / FIELDING";
+
+}
+
+
+/* ============================================================
+   RENDER PLAYER
+============================================================ */
+
+function renderPlayer(){
+
+    document.getElementById(
+        "yourName"
+    ).textContent =
         yourCard.name.toUpperCase();
 
-    document.getElementById("cpuName")
-        .textContent =
+    document.getElementById(
+        "cpuName"
+    ).textContent =
         cpuCard.name.toUpperCase();
 
-    document.getElementById("yourCountry")
-        .textContent =
+    document.getElementById(
+        "yourCountry"
+    ).textContent =
         yourCard.country.toUpperCase();
 
-    document.getElementById("cpuCountry")
-        .textContent =
+    document.getElementById(
+        "cpuCountry"
+    ).textContent =
         cpuCard.country.toUpperCase();
 
-    playerImage(
+
+    loadImage(
         document.getElementById("yourImage"),
         yourCard
     );
 
-    playerImage(
+    loadImage(
         document.getElementById("cpuImage"),
         cpuCard
     );
 
+
     renderStats("you");
     renderStats("cpu");
 
-}
-
-
-/* ============================================================
-   UPDATE COUNTERS
-============================================================ */
-
-function updateCounts() {
-
-    document.getElementById("youCount")
-        .textContent = yourCards;
-
-    document.getElementById("cpuCount")
-        .textContent = cpuCards;
-
-    document.getElementById("leftPackCount")
-        .textContent = yourCards;
-
-    document.getElementById("rightPackCount")
-        .textContent = cpuCards;
+    updatePageIndicator();
 
 }
 
 
 /* ============================================================
-   STAT COMPARISON
+   COUNTERS
 ============================================================ */
 
-function compareValues(
+function updateCounters(){
+
+    document.getElementById(
+        "youCount"
+    ).textContent =
+        yourCards;
+
+    document.getElementById(
+        "cpuCount"
+    ).textContent =
+        cpuCards;
+
+}
+
+
+/* ============================================================
+   GAME RULE
+============================================================ */
+
+function compare(
     playerValue,
-    cpuValue,
+    opponentValue,
     stat
-) {
+){
 
-    playerValue = Number(playerValue) || 0;
-    cpuValue = Number(cpuValue) || 0;
+    playerValue =
+        Number(playerValue) || 0;
+
+    opponentValue =
+        Number(opponentValue) || 0;
+
 
     /*
-      ZERO ALWAYS LOSES
+       ZERO ALWAYS LOSES
     */
 
-    if (
+    if(
         playerValue === 0 &&
-        cpuValue === 0
-    ) {
+        opponentValue === 0
+    ){
 
         return 0;
 
     }
 
-    if (playerValue === 0) {
+
+    if(playerValue === 0){
 
         return -1;
 
     }
 
-    if (cpuValue === 0) {
+
+    if(opponentValue === 0){
 
         return 1;
 
@@ -1726,35 +1355,56 @@ function compareValues(
 
 
     /*
-      BOWLING AVERAGE:
-      LOWER NON-ZERO WINS
+       BOWLING AVERAGE
+       LOWER NON-ZERO WINS
     */
 
-    if (stat === "bowlAverage") {
+    if(stat === "bowlAverage"){
 
-        if (playerValue < cpuValue) {
+        if(
+            playerValue <
+            opponentValue
+        ){
+
             return 1;
+
         }
 
-        if (playerValue > cpuValue) {
+        if(
+            playerValue >
+            opponentValue
+        ){
+
             return -1;
+
         }
 
         return 0;
+
     }
 
 
     /*
-      ALL OTHER STATS:
-      HIGHER WINS
+       EVERYTHING ELSE
+       HIGHER WINS
     */
 
-    if (playerValue > cpuValue) {
+    if(
+        playerValue >
+        opponentValue
+    ){
+
         return 1;
+
     }
 
-    if (playerValue < cpuValue) {
+    if(
+        playerValue <
+        opponentValue
+    ){
+
         return -1;
+
     }
 
     return 0;
@@ -1769,11 +1419,11 @@ function compareValues(
 function showResult(
     result,
     stat
-) {
+){
 
-    const message =
+    const resultBox =
         document.getElementById(
-            "resultMessage"
+            "result"
         );
 
     const yourValue =
@@ -1783,51 +1433,62 @@ function showResult(
         cpuCard.stats[stat] ?? 0;
 
 
-    if (result > 0) {
+    document
+        .getElementById("yourCard")
+        .classList.remove("shake");
 
-        message.className =
-            "result-message win";
+    document
+        .getElementById("cpuCard")
+        .classList.remove("shake");
 
-        message.textContent =
+
+    void document
+        .getElementById("yourCard")
+        .offsetWidth;
+
+
+    document
+        .getElementById("yourCard")
+        .classList.add("shake");
+
+    document
+        .getElementById("cpuCard")
+        .classList.add("shake");
+
+
+    if(result > 0){
+
+        resultBox.className =
+            "result win";
+
+        resultBox.textContent =
             `YOU WIN — ${formatNumber(yourValue)} vs ${formatNumber(cpuValue)}`;
 
-        document.getElementById("yourCard")
-            .classList.add("winner");
+        sound(760,.12,"sine");
 
-        setTimeout(() => {
+    }
 
-            document.getElementById("yourCard")
-                .classList.remove("winner");
+    else if(result < 0){
 
-        }, 1600);
+        resultBox.className =
+            "result loss";
 
-
-    } else if (result < 0) {
-
-        message.className =
-            "result-message loss";
-
-        message.textContent =
+        resultBox.textContent =
             `CPU WINS — ${formatNumber(yourValue)} vs ${formatNumber(cpuValue)}`;
 
-        document.getElementById("cpuCard")
-            .classList.add("winner");
+        sound(180,.16,"sawtooth");
 
-        setTimeout(() => {
+    }
 
-            document.getElementById("cpuCard")
-                .classList.remove("winner");
+    else{
 
-        }, 1600);
+        resultBox.className =
+            "result tie";
 
-
-    } else {
-
-        message.className =
-            "result-message tie";
-
-        message.textContent =
+        resultBox.textContent =
             `TIE — ${formatNumber(yourValue)} vs ${formatNumber(cpuValue)}`;
+
+        sound(440,.1,"triangle");
 
     }
 
@@ -1838,66 +1499,85 @@ function showResult(
    CALL STAT
 ============================================================ */
 
-function callStat(stat) {
+function callStat(stat){
 
-    if (gameLocked) {
+    if(locked){
         return;
     }
 
-    clickSound();
+    locked = true;
 
-    gameLocked = true;
+    sound(520,.08,"square");
 
-    document.querySelectorAll(".stat-btn")
-        .forEach(btn =>
-            btn.classList.remove("selected")
+
+    document
+        .querySelectorAll(".stat-button")
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "selected"
+                )
         );
 
-    const buttons =
-        document.querySelectorAll(".stat-btn");
 
-    const statOrder = [
+    const order = [
+
         "matches",
         "runs",
         "average",
         "strikeRate",
         "highScore",
         "hundreds"
+
     ];
 
     const index =
-        statOrder.indexOf(stat);
+        order.indexOf(stat);
 
-    if (index >= 0) {
 
-        buttons[index]
+    if(index >= 0){
+
+        document
+            .querySelectorAll(".stat-button")
+            [index]
             .classList.add("selected");
 
     }
 
 
-    document.getElementById("cpuStatus")
-        .textContent = "REVEALING";
+    document.getElementById(
+        "cpuCall"
+    ).textContent =
+        "REVEALING";
 
 
-    /*
-      Small reveal delay
-    */
+    setTimeout(
 
-    setTimeout(() => {
+        () => {
 
-        const result =
-            compareValues(
-                yourCard.stats[stat],
-                cpuCard.stats[stat],
+            const result =
+                compare(
+                    yourCard.stats[stat],
+                    cpuCard.stats[stat],
+                    stat
+                );
+
+
+            showResult(
+                result,
                 stat
             );
 
-        showResult(result, stat);
 
-        resolveRound(result);
+            resolveRound(
+                result
+            );
 
-    }, 450);
+        },
+
+        500
+
+    );
 
 }
 
@@ -1906,203 +1586,200 @@ function callStat(stat) {
    RESOLVE ROUND
 ============================================================ */
 
-function resolveRound(result) {
+function resolveRound(result){
 
-    if (result > 0) {
-
-        /*
-          YOU WIN:
-          CPU loses one card,
-          YOU gain one card.
-        */
+    if(result > 0){
 
         cpuCards =
-            Math.max(0, cpuCards - 1);
+            Math.max(
+                0,
+                cpuCards - 1
+            );
 
         yourCards++;
 
-        previousCaller = "you";
-
-        addBattle(
-            yourCard.name,
-            cpuCard.name,
-            "YOU"
-        );
+        previousCaller =
+            "you";
 
     }
 
-    else if (result < 0) {
-
-        /*
-          CPU WIN
-        */
+    else if(result < 0){
 
         yourCards =
-            Math.max(0, yourCards - 1);
+            Math.max(
+                0,
+                yourCards - 1
+            );
 
         cpuCards++;
 
-        previousCaller = "cpu";
-
-        addBattle(
-            yourCard.name,
-            cpuCard.name,
-            "CPU"
-        );
+        previousCaller =
+            "cpu";
 
     }
 
-    else {
-
-        /*
-          TIE:
-          no card movement.
-          previous caller remains caller.
-        */
-
-        addBattle(
-            yourCard.name,
-            cpuCard.name,
-            "TIE"
-        );
-
-    }
+    /*
+       TIE:
+       card counts do not change.
+       previous caller remains.
+    */
 
 
-    updateCounts();
+    updateCounters();
 
 
-    setTimeout(() => {
+    /*
+       Winner / previous caller gets next call.
+    */
 
-        /*
-          Demo rotation.
-          Replace with actual deck draw
-          once the full 90-player deck
-          is connected.
-        */
+    setTimeout(
 
-        const randomPlayers =
-            players
-                .slice()
-                .sort(
-                    () => Math.random() - 0.5
+        () => {
+
+            if(
+                yourCards <= 0 ||
+                cpuCards <= 0
+            ){
+
+                finishGame();
+
+                return;
+
+            }
+
+
+            /*
+               Demo card rotation.
+               This will be replaced by the
+               complete 90-card deck when the
+               full player database is connected.
+            */
+
+            const shuffled =
+                players
+                    .slice()
+                    .sort(
+                        () =>
+                            Math.random() - .5
+                    );
+
+
+            yourCard =
+                shuffled[0];
+
+            cpuCard =
+                shuffled[1];
+
+
+            yourPage = 0;
+            cpuPage = 0;
+
+
+            renderPlayer();
+
+
+            document.getElementById(
+                "cpuCall"
+            ).textContent =
+                previousCaller === "you"
+                    ? "WAITING"
+                    : "YOUR TURN";
+
+
+            document
+                .querySelectorAll(
+                    ".stat-button"
+                )
+                .forEach(
+                    button =>
+                        button.classList.remove(
+                            "selected"
+                        )
                 );
 
-        yourCard =
-            randomPlayers[0];
 
-        cpuCard =
-            randomPlayers[1];
-
-
-        yourPage = 0;
-        cpuPage = 0;
-
-        renderCards();
+            document.getElementById(
+                "result"
+            ).textContent = "";
 
 
-        document.getElementById("cpuStatus")
-            .textContent =
-            previousCaller === "you"
-                ? "WAITING"
-                : "YOUR TURN";
+            locked = false;
 
+        },
 
-        document.querySelectorAll(".stat-btn")
-            .forEach(btn =>
-                btn.classList.remove("selected")
-            );
+        1400
 
-
-        document.getElementById(
-            "resultMessage"
-        ).textContent = "";
-
-
-        gameLocked = false;
-
-    }, 1300);
+    );
 
 }
 
 
 /* ============================================================
-   BATTLE HISTORY
+   GAME OVER
 ============================================================ */
 
-function addBattle(
-    you,
-    cpu,
-    winner
-) {
+function finishGame(){
 
-    const history =
+    const result =
         document.getElementById(
-            "battleHistory"
+            "result"
         );
 
-    const row =
-        document.createElement("div");
+    if(yourCards <= 0){
 
-    row.style.marginBottom = "5px";
+        result.className =
+            "result loss";
 
-    row.innerHTML = `
-        ${you} vs ${cpu}
-        <strong style="
-            color:
-            ${
-                winner === "YOU"
-                    ? "#ffe16a"
-                    : winner === "CPU"
-                        ? "#ff6875"
-                        : "#6fd9ff"
-            };
-        ">
-            — ${winner}
-        </strong>
-    `;
+        result.textContent =
+            "CPU WINS THE GAME!";
 
-    if (
-        history.textContent.trim() ===
-        "Your battles will appear here."
-    ) {
+    }else{
 
-        history.innerHTML = "";
+        result.className =
+            "result win";
+
+        result.textContent =
+            "YOU WIN THE GAME!";
 
     }
 
-    history.prepend(row);
-
 }
 
 
 /* ============================================================
-   GLOBAL CLICK SOUND
+   GLOBAL BUTTON SOUND
 ============================================================ */
 
 document.addEventListener(
     "click",
-    function(e) {
+    event => {
 
-        if (
-            e.target.tagName === "BUTTON"
-        ) {
-            clickSound();
+        if(
+            event.target.tagName ===
+            "BUTTON"
+        ){
+
+            /*
+               Page/stat buttons already
+               have their own sounds,
+               but this keeps every click audible.
+            */
+
         }
 
-    },
-    {
-        capture: true
     }
 );
 
 
 /* ============================================================
-   START
+   INITIALIZE
 ============================================================ */
 
-renderCards();
-updateCounts();
+renderPlayer();
+
+updateCounters();
+
+updatePageIndicator();
 
 </script>
 
