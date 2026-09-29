@@ -485,6 +485,25 @@ button{font:inherit;cursor:pointer}.screen{display:none}.screen.active{display:b
   #hist,#rules{top:85.8%!important;height:12.1%!important}
 }
 
+
+/* Hard Mode: hidden player stats are interactive call targets. */
+.card-stat-clickable{
+  cursor:pointer!important;
+  border-color:#ffd45a55!important;
+  background:#07111d99!important;
+  transition:transform .12s,background .12s,border-color .12s,box-shadow .12s;
+}
+.card-stat-clickable b{
+  color:#ffd45a!important;
+  font-size:1.7cqw;
+}
+.card-stat-clickable:hover{
+  transform:translateY(-2px) scale(1.015);
+  background:#ffd45a18!important;
+  border-color:#ffd45a!important;
+  box-shadow:0 0 .8cqw #ffd45a44;
+}
+
 </style></head><body>
 
 <section id="home" class="screen active"><div class="wrap">
@@ -656,7 +675,14 @@ function card(t,p,hidden){
   <div class="stats">${vals.map((v,i)=>{
     const hardHidden=mode==='hard' && revealedStat!==i;
     const isHidden=hidden || hardHidden;
-    return `<div class="stat ${isHidden?'locked':''}" ${(!isHidden && !locked && last==='you')?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${isHidden?'?':fmt(v)}</b></div>`;
+    /* In Hard Mode your hidden stats themselves are the call buttons.
+       The player can click the ? box directly to reveal that stat. */
+    const clickable = !hidden && !locked && last==='you' &&
+      (mode==='hard' || !isHidden);
+    return `<div class="stat ${isHidden?'locked':''} ${clickable?'card-stat-clickable':''}"
+      ${clickable?`onclick="callStat(${i})"`:''}
+      title="${clickable?'Click to call this stat':''}">
+      <span>${labs[i]}</span><b>${isHidden?'?':fmt(v)}</b></div>`;
   }).join('')}</div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
