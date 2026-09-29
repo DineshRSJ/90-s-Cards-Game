@@ -569,6 +569,108 @@ html,body{width:100%;height:100%;margin:0}
   #game{min-width:1000px!important}
 }
 
+
+/* =========================================================
+   FINAL MICRO-FIT — LIVE HTML INTO THE UPLOADED BACKGROUND
+   Background headings are artwork; HTML supplies data only.
+========================================================= */
+
+/* The artwork already contains these headings. */
+#game .rail-title,
+#game .rail-panel h3,
+#game .call-title{
+  display:none!important;
+}
+
+/* Main cards: give the live content a little more breathing room
+   while keeping the artwork's gold/red frame fully visible. */
+#game .side{
+  top:19.65%!important;
+  width:22.20%!important;
+  height:48.15%!important;
+}
+#game .side:first-child{left:22.45%!important}
+#game .side:last-child{left:52.95%!important}
+
+#game .card-inner{
+  padding:3.3% 3.8% 3.0%!important;
+}
+#game .country{
+  height:6.5%!important;
+}
+#game .portrait{
+  height:53.5%!important;
+  margin-bottom:1.5%!important;
+}
+#game .identity{
+  height:10.5%!important;
+}
+#game .stat-grid{
+  height:30.0%!important;
+  gap:5px!important;
+}
+
+/* Pack previews: fit only inside the actual empty side rectangles. */
+#game .rail .pack-stack{
+  top:39.0%!important;
+  left:24.5%!important;
+  width:64.0%!important;
+  height:25.2%!important;
+}
+#game .rail .mini-card:nth-child(3){
+  left:0!important;
+  width:100%!important;
+  height:100%!important;
+}
+#game .mini-card img{
+  border-radius:0!important;
+}
+#game .mini-card .preview-label{
+  left:3%!important;
+  right:3%!important;
+  bottom:2%!important;
+  font-size:clamp(6px,.42vw,9px)!important;
+}
+#game .pack-count{
+  bottom:-11%!important;
+}
+
+/* Recent Battles / Game Rules: keep the background heading clean,
+   then begin live content underneath the artwork heading. */
+#game .rail-panel{
+  top:68.65%!important;
+  height:24.9%!important;
+  padding:9.5% 4.5% 2.5%!important;
+}
+#game .battle-row{
+  padding:5px 0!important;
+}
+#game .rules div{
+  padding:3px 0!important;
+}
+
+/* The six stat buttons already match the six gold boxes.
+   Slightly tighten their footprint and center their icons. */
+#game .callbar{
+  left:21.55%!important;
+  top:70.65%!important;
+  width:56.95%!important;
+  height:20.4%!important;
+}
+#game .stat-call-grid{
+  left:.7%!important;
+  right:.7%!important;
+  top:25.5%!important;
+  width:98.6%!important;
+  height:69.5%!important;
+  gap:1.05%!important;
+}
+#game .call-stat .icon{
+  width:28%!important;
+  min-width:24px!important;
+  max-width:38px!important;
+}
+
 </style>
 <link rel="preload" as="image" href="assets/stadium-bg.png">
 </head>
