@@ -67,6 +67,269 @@ button{font:inherit;cursor:pointer}.screen{display:none}.screen.active{display:b
 #rbox{text-align:center;padding:3cqw 5cqw;border-radius:2cqw;background:#111725;border:1px solid #ffffff30}
 #rbox h2{font-family:'Bebas Neue';font-size:7cqw;margin:0}.win{color:var(--green)}.lose{color:var(--red)}.draw{color:var(--gold)}
 #rbox button{margin-top:1.2cqw;padding:.8cqw 2cqw;border:0;border-radius:.8cqw;font-size:1.2cqw}
+
+
+/* =========================================================
+   MOBILE PORTRAIT VERSION
+   Desktop layout above is untouched.
+   This block activates only at <= 700px and creates a
+   dedicated full-screen, no-scroll portrait game board.
+========================================================= */
+@media (max-width:700px){
+  html,body{
+    width:100%;
+    height:100%;
+    min-height:100%;
+    overflow:hidden!important;
+    background:#02050b;
+  }
+
+  /* Home / difficulty stay portrait and full-screen */
+  #home,#difficulty{
+    width:100vw;
+    height:100dvh;
+    min-height:100dvh;
+    overflow:hidden;
+    padding:14px;
+  }
+  #home .wrap,#difficulty .wrap{width:100%;height:100%}
+  .brand{
+    font-size:clamp(42px,13vw,72px);
+    line-height:.9;
+    margin:18px 0 8px;
+  }
+  .sub{font-size:12px;line-height:1.35}
+  .pack-row{
+    grid-template-columns:1fr;
+    gap:12px;
+    margin:20px 0;
+  }
+  .pack-row .pack:not(:first-child){display:none}
+  .pack{
+    min-height:0;
+    height:58vh;
+    padding:10px;
+  }
+  .pack .cover{height:44vh}
+  .pack h2{font-size:25px;margin:9px 4px 2px}
+  .pack small{font-size:10px}
+  .diffs{gap:12px;margin-top:25px}
+  .diff{width:min(300px,88vw);padding:20px}
+  .diff b{font-size:34px}
+
+  /* The game becomes a true portrait board. */
+  #game{
+    position:fixed!important;
+    inset:0!important;
+    left:0!important;
+    top:0!important;
+    transform:none!important;
+    width:100vw!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+    max-width:none!important;
+    background-image:url(assets/stadium-bg.png)!important;
+    background-size:auto 100%!important;
+    background-position:center center!important;
+    background-repeat:no-repeat!important;
+    overflow:hidden!important;
+    container-type:size;
+  }
+
+  /* Dark portrait overlay improves readability over the
+     wide stadium artwork without changing the desktop. */
+  #game::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,#02071440 0%,#02071418 42%,#02071475 100%);
+    pointer-events:none;
+    z-index:0;
+  }
+  #game>*{z-index:1}
+
+  /* Header */
+  #music{
+    left:2.5vw!important;
+    top:1.2dvh!important;
+    width:18vw!important;
+    height:4.5dvh!important;
+    font-size:2.5vw!important;
+    border-radius:7px!important;
+  }
+  #exit{
+    left:23vw!important;
+    top:1.2dvh!important;
+    width:24vw!important;
+    height:4.5dvh!important;
+    font-size:4vw!important;
+  }
+  #score{
+    left:50vw!important;
+    top:1.2dvh!important;
+    width:47.5vw!important;
+    height:4.5dvh!important;
+    gap:1.5vw!important;
+  }
+  #score div{
+    font-size:2.7vw!important;
+    gap:1vw!important;
+  }
+  #score strong{font-size:4vw!important}
+
+  /* Both cards are always visible, side-by-side.
+     This is the key portrait mobile composition. */
+  .slot{
+    top:13.5dvh!important;
+    width:44vw!important;
+    height:48dvh!important;
+  }
+  #yourCard{left:3vw!important}
+  #cpuCard{left:53vw!important}
+
+  #vs{
+    left:45.2vw!important;
+    top:34dvh!important;
+    width:9.6vw!important;
+    height:7dvh!important;
+    font-size:8vw!important;
+    z-index:8!important;
+  }
+
+  .card{
+    padding:4% 4% 3%!important;
+  }
+  .country{
+    height:6%!important;
+    font-size:2.15vw!important;
+    letter-spacing:.22vw!important;
+  }
+  .portrait{
+    height:46%!important;
+    margin-bottom:1.5%!important;
+    border-radius:1.4vw!important;
+  }
+  .identity{
+    height:12%!important;
+    gap:1vw!important;
+  }
+  .pname{
+    font-size:4.3vw!important;
+    line-height:.9!important;
+  }
+  .toggle{
+    flex-basis:4.5vw!important;
+    width:4.5vw!important;
+    height:4.5vw!important;
+    font-size:2.6vw!important;
+  }
+  .stats{
+    height:34%!important;
+    gap:1vw!important;
+  }
+  .stat{
+    padding:1vw 1.2vw!important;
+    border-radius:1vw!important;
+  }
+  .stat span{font-size:1.65vw!important}
+  .stat b{font-size:3.1vw!important}
+
+  /* Packs become small portrait previews tucked beside the cards. */
+  .pk{
+    top:62.3dvh!important;
+    width:17vw!important;
+    height:11dvh!important;
+    font-size:3.8vw!important;
+    border-radius:1.5vw!important;
+  }
+  #pkL{left:2vw!important}
+  #pkR{left:81vw!important}
+  .cnt{
+    top:73.3dvh!important;
+    width:17vw!important;
+    font-size:1.8vw!important;
+  }
+  #cL{left:2vw!important}
+  #cR{left:81vw!important}
+
+  /* History/rules are compact bottom side panels. */
+  #hist,#rules{
+    top:75.5dvh!important;
+    width:22vw!important;
+    height:12.5dvh!important;
+    padding:3.2vw 1.2vw 0!important;
+    font-size:1.55vw!important;
+    line-height:1.25!important;
+  }
+  #hist{left:1.5vw!important}
+  #rules{left:76.5vw!important}
+  #rules div{padding:.7vw 0!important}
+  .br{
+    gap:.7vw!important;
+    padding:.7vw 0!important;
+    font-size:1.55vw!important;
+  }
+  .br i{
+    width:2.5vw!important;
+    height:2.5vw!important;
+    flex:0 0 2.5vw!important;
+  }
+  .br span{font-size:1.25vw!important}
+
+  /* Six stat buttons: 3 x 2, full-width lower section. */
+  #calls{
+    left:24vw!important;
+    top:74.5dvh!important;
+    width:52vw!important;
+    height:20.5dvh!important;
+    grid-template-columns:repeat(3,1fr)!important;
+    grid-template-rows:repeat(2,1fr)!important;
+    gap:1.1vw!important;
+  }
+  .call{
+    font-size:2.05vw!important;
+    gap:.5vw!important;
+    border-radius:1.2vw!important;
+  }
+  .call u{font-size:4.5vw!important}
+
+  #hint{
+    left:23vw!important;
+    top:95.3dvh!important;
+    width:54vw!important;
+    font-size:1.55vw!important;
+    white-space:nowrap!important;
+  }
+
+  /* Result overlay */
+  #rbox{
+    width:78vw!important;
+    padding:7vw 6vw!important;
+    border-radius:4vw!important;
+  }
+  #rbox h2{font-size:12vw!important}
+  #rbox p{font-size:3.2vw!important}
+  #rbox button{
+    margin-top:3vw!important;
+    padding:2.5vw 5vw!important;
+    border-radius:2vw!important;
+    font-size:3.5vw!important;
+  }
+}
+
+/* Very narrow phones: retain the same no-scroll portrait
+   composition while giving the cards a little more height. */
+@media (max-width:380px){
+  .slot{
+    top:13dvh!important;
+    height:49dvh!important;
+  }
+  #calls{
+    top:75dvh!important;
+    height:19.5dvh!important;
+  }
+}
+
 </style></head><body>
 
 <section id="home" class="screen active"><div class="wrap">
