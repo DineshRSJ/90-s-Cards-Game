@@ -881,6 +881,65 @@ html,body{width:100%;height:100%;margin:0}
 #game .music-toggle.muted{border-color:rgba(255,83,100,.55)!important;color:#ff9eaa!important;box-shadow:0 0 14px rgba(255,83,100,.10)!important}
 #game .music-toggle #musicIcon{font-size:12px;line-height:1}
 
+
+
+/* =========================================================
+   FINAL PACK ALIGNMENT
+   Both next-card previews use the same compact portrait
+   geometry and remain completely inside the artwork boxes.
+========================================================= */
+#game .rail:first-child .pack-stack,
+#game .rail:last-child .pack-stack{
+  top:39.0%!important;
+  left:28.0%!important;
+  width:66.0%!important;
+  height:24.0%!important;
+}
+#game .rail:first-child .mini-card:nth-child(3),
+#game .rail:last-child .mini-card:nth-child(3){
+  left:0!important;
+  top:0!important;
+  width:100%!important;
+  height:100%!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+  transform:none!important;
+  opacity:1!important;
+}
+#game .rail .mini-card:nth-child(3) img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  border-radius:7px!important;
+}
+#game .rail .mini-card:nth-child(3) .preview-label{
+  left:3%!important;
+  right:3%!important;
+  bottom:3%!important;
+  max-width:94%!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+/* =========================================================
+   BACKGROUND MUSIC — audible but still subtle.
+   Starts from the EASY/HARD click and therefore satisfies
+   browser user-gesture audio policy.
+========================================================= */
+#game .music-toggle{
+  z-index:150!important;
+}
+
 </style>
 <link rel="preload" as="image" href="assets/stadium-bg.png">
 </head>
@@ -1043,7 +1102,11 @@ function startGame(d){
   cpuDeck=dealt.slice(25,50);
   $("difficultyLabel").textContent=d.toUpperCase()+" MODE";
   show("game"); renderCallButtons(); renderHistory(); nextRound();
-  startMusic();
+  /* Explicitly resume the Web Audio context from the EASY/HARD
+     click before starting the music. This fixes browsers that
+     leave AudioContext suspended even after resume() is called. */
+  const musicContext = audio();
+  musicContext.resume().then(()=>startMusic()).catch(()=>{});
 }
 function updatePackPreviews(){
   const left=document.querySelector('#game .rail:first-child .mini-card:nth-child(3)');
@@ -1190,7 +1253,7 @@ function startMusic(){
   const c=audio();
   if(!musicGain){
     musicGain=c.createGain();
-    musicGain.gain.value=musicMuted?0:0.045;
+    musicGain.gain.value=musicMuted?0:0.085;
     musicGain.connect(c.destination);
   }
   if(musicTimer) return;
@@ -1203,7 +1266,7 @@ function startMusic(){
     osc.type='triangle';
     osc.frequency.setValueAtTime(root,now);
     g.gain.setValueAtTime(0.0001,now);
-    g.gain.exponentialRampToValueAtTime(0.11,now+0.025);
+    g.gain.exponentialRampToValueAtTime(0.18,now+0.025);
     g.gain.exponentialRampToValueAtTime(0.0001,now+0.28);
     osc.connect(g).connect(musicGain);
     osc.start(now); osc.stop(now+0.30);
@@ -1212,7 +1275,7 @@ function startMusic(){
       const bass=c.createOscillator(), bg=c.createGain();
       bass.type='sine'; bass.frequency.setValueAtTime(root/2,now);
       bg.gain.setValueAtTime(0.0001,now);
-      bg.gain.exponentialRampToValueAtTime(0.07,now+0.02);
+      bg.gain.exponentialRampToValueAtTime(0.11,now+0.02);
       bg.gain.exponentialRampToValueAtTime(0.0001,now+0.42);
       bass.connect(bg).connect(musicGain); bass.start(now); bass.stop(now+0.44);
     }
@@ -1229,7 +1292,7 @@ function stopMusic(){
 function toggleMusic(){
   musicMuted=!musicMuted;
   if(!musicGain){startMusic();return}
-  musicGain.gain.setTargetAtTime(musicMuted?0:0.045,audio().currentTime,0.03);
+  musicGain.gain.setTargetAtTime(musicMuted?0:0.085,audio().currentTime,0.03);
   updateMusicButton();
 }
 function updateMusicButton(){
