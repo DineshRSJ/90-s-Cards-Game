@@ -711,6 +711,65 @@ html,body{width:100%;height:100%;margin:0}
   top:29.5%!important;
 }
 
+
+
+/* =========================================================
+   FINAL V3 — FINAL BOARD ALIGNMENT
+   Based on the latest attached game screenshot.
+   1) Opponent pack restored to the same compact portrait
+      treatment as the Your Pack.
+   2) Your Pack slightly reduced/centered.
+   3) Opponent main card slightly narrowed and shifted left
+      so it sits cleanly inside the red frame.
+========================================================= */
+
+/* YOUR PACK — small refinement: slightly smaller and centered */
+#game .rail:first-child .pack-stack{
+  left:7%!important;
+  width:86%!important;
+}
+#game .rail:first-child .mini-card:nth-child(3){
+  left:8%!important;
+  width:84%!important;
+}
+
+/* OPPONENT PACK — use the SAME geometry as the Your Pack.
+   Do not stretch the preview across the whole right rail. */
+#game .rail:last-child .pack-stack{
+  top:39.0%!important;
+  left:7%!important;
+  width:86%!important;
+  height:24.5%!important;
+}
+#game .rail:last-child .mini-card:nth-child(3){
+  left:8%!important;
+  top:0!important;
+  width:84%!important;
+  height:100%!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  opacity:1!important;
+}
+
+/* Keep preview artwork contained in the portrait placeholder. */
+#game .rail:last-child .mini-card img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center top!important;
+  display:block!important;
+}
+
+/* OPPONENT MAIN CARD — a touch narrower and slightly left,
+   preserving the red background frame around it. */
+#game .side:last-child{
+  left:53.40%!important;
+  width:21.25%!important;
+}
+
 </style>
 <link rel="preload" as="image" href="assets/stadium-bg.png">
 </head>
