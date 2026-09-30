@@ -164,6 +164,19 @@ button{font:inherit;cursor:pointer}.screen{display:none}.screen.active{display:b
 .ipl-loading{position:absolute;inset:0;display:none;align-items:center;justify-content:center;z-index:50;background:#03020be8;backdrop-filter:blur(8px)}
 .ipl-loading.show{display:flex}.ipl-loading-box{padding:28px 36px;border:1px solid #ff4fb388;border-radius:18px;background:#10091dcc;box-shadow:0 0 50px #ff4fb333;text-align:center}.ipl-loading-box b{font-family:'Bebas Neue';font-size:34px;letter-spacing:2px;color:#ff70bd}.ipl-loading-box span{display:block;margin-top:8px;color:#c7b7cf;font-size:12px}
 .portrait img{object-fit:cover!important;object-position:center 12%!important}
+
+.att-art{background:radial-gradient(circle at 50% 30%,#ff2a4155,transparent 40%),linear-gradient(150deg,#3b0610,#0d0206 60%,#2a0810);border:1px solid #ff364f66;justify-content:flex-end!important;padding-bottom:12px}
+.att-art .choice-badge{color:#ff8a98;z-index:3}
+.att-imgs{position:absolute;inset:0 0 34% 0;display:flex;justify-content:center;align-items:flex-end;gap:0}
+.att-imgs img{width:38%;height:88%;object-fit:cover;object-position:center 12%;border:2px solid #ffffff44;border-radius:8px;box-shadow:0 8px 24px #000c;background:#1a0a0e}
+.att-imgs img:nth-child(1){transform:rotate(-7deg) translateX(14%);z-index:1}.att-imgs img:nth-child(2){height:100%;z-index:2}.att-imgs img:nth-child(3){transform:rotate(7deg) translateX(-14%);z-index:1}
+.att-title{position:relative;z-index:3;font-size:clamp(22px,2.4vw,36px);font-weight:1000;text-align:center;line-height:.9;letter-spacing:2px;color:#ff4457;text-shadow:0 0 16px #f00,0 3px 8px #000}
+#game.wwe-mode{background:radial-gradient(circle at 50% 40%,#3a0710 0%,#12040a 45%,#020202 100%)}
+#game.wwe-mode .stat-switch{display:none!important}
+#game.wwe-mode .desktop-brand-title span,#game.wwe-mode .mobile-brand-title span{color:#ff4457}
+#game.wwe-mode .stat{border-color:#ff445755;background:linear-gradient(145deg,#360a12cc,#12060acc)}
+#game.wwe-mode .stat:hover{border-color:#ff4457;box-shadow:0 0 18px #ff445766}
+#game.wwe-mode .country{color:#ff9aa6}
 </style><style>@media (max-width:700px){
 html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;background:#050816!important}
 #home,#difficulty{width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;padding:12px!important}
@@ -272,9 +285,9 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
       <div class="pack-art cricket-art"><div class="pack-glow"></div><div class="pack-badge">ODI</div><div class="pack-icon">🏏</div><div class="pack-art-title">CRICKET</div><div class="pack-art-sub">LEGENDS EDITION</div></div>
       <div class="main-pack-name">CRICKET PACK</div><div class="main-pack-meta">20'S LEGENDS • 90 ODI LEGENDS</div>
     </button>
-    <button class="main-pack wwe-pack" disabled>
+    <button class="main-pack wwe-pack" onclick="show('wwePacks')">
       <div class="pack-art wwe-art"><div class="pack-glow"></div><div class="pack-badge">SUPERSTARS</div><div class="pack-icon">★</div><div class="pack-art-title">WWE</div><div class="pack-art-sub">RING EDITION</div></div>
-      <div class="main-pack-name">WWE PACK</div><div class="main-pack-meta">COMING SOON</div>
+      <div class="main-pack-name">WWE PACK</div><div class="main-pack-meta">ATTITUDE ERA • 52 SUPERSTARS</div>
     </button>
     <button class="main-pack soon-pack" disabled>
       <div class="pack-art soon-art"><div class="lock-mark">◆</div><div class="coming-label">COMING SOON</div><div class="soon-lines"></div></div>
@@ -297,6 +310,18 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
     <button class="cricket-choice ipl-choice active-pack" onclick="selectPack('ipl');show('difficulty')"><div class="choice-art"><div class="choice-badge">IPL 2026 • 10 TEAMS</div><div class="choice-ball">🏆</div><div class="choice-name">IPL<br>2026</div><div class="choice-shine"></div></div><h2>IPL 2026</h2><p>150 TOP PLAYERS • T20 STATS</p></button>
     <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 03</b></div><h2>COMING SOON</h2><p>FUTURE CRICKET PACK</p></button>
     <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 04</b></div><h2>COMING SOON</h2><p>FUTURE CRICKET PACK</p></button>
+  </div>
+</div></section>
+
+<section id="wwePacks" class="screen"><div class="cricket-menu">
+  <button class="menu-back" onclick="show('home')">← BACK TO MAIN MENU</button>
+  <div class="section-title">WWE <span>PACKS</span></div>
+  <div class="section-subtitle">CHOOSE YOUR WRESTLING CARD COLLECTION</div>
+  <div class="cricket-pack-grid">
+    <button class="cricket-choice active-pack" onclick="selectPack('wwe');show('difficulty')"><div class="choice-art att-art"><div class="choice-badge">WWF • 1997–2002</div><div class="att-imgs"><img id="attA" alt=""><img id="attB" alt=""><img id="attC" alt=""></div><div class="att-title">ATTITUDE<br>ERA</div><div class="choice-shine"></div></div><h2>ATTITUDE ERA</h2><p>52 SUPERSTARS • RANK, MATCHES, BUILD</p></button>
+    <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 02</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
+    <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 03</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
+    <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 04</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
   </div>
 </div></section>
 
@@ -417,7 +442,7 @@ Tatenda Taibu|Zimbabwe|150,3393,29.46,67.78,111,2,0,0,0,114,25,17
 Sean Williams|Zimbabwe|156,4484,35.61,81.92,129,4,83,36.39,1,84,0,30`;
 const P=RAW.trim().split(/\r?\n/).filter(Boolean).map(l=>{const[a,b,c]=l.split('|');return[a,b,...c.split(',').map(Number)]});
 let selectedPack='legends',ACTIVE_P=P;
-function selectPack(pack){selectedPack=pack;const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • The opponent\'s values stay hidden in both modes.')}
+function selectPack(pack){selectedPack=pack;if(pack==='wwe'){const d=$('difficultyPack');if(d)d.textContent='ATTITUDE ERA • 6 stats • Rank #1 is best • The opponent\'s values stay hidden.';return}const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • The opponent\'s values stay hidden in both modes.')}
 const IPL_TOP15={
  RCB:['Virat Kohli','Rajat Patidar','Phil Salt','Devdutt Padikkal','Jitesh Sharma','Tim David','Krunal Pandya','Bhuvneshwar Kumar','Josh Hazlewood','Suyash Sharma','Romario Shepherd','Jacob Duffy','Jordan Cox','Venkatesh Iyer','Yash Dayal'],
  MI:['Suryakumar Yadav','Rohit Sharma','Tilak Varma','Ryan Rickelton','Hardik Pandya','Naman Dhir','Sherfane Rutherford','Jasprit Bumrah','Trent Boult','Deepak Chahar','Will Jacks','Shardul Thakur','Mayank Markande','Danish Malewar','Robin Minz'],
@@ -479,16 +504,22 @@ const slug=n=>n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const SIL="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0e1a2e"/><circle cx="50" cy="38" r="17" fill="#2c4468"/><path d="M15 100q4-38 35-38t35 38z" fill="#2c4468"/></svg>');
 const src0=n=>ANIME[n]||(typeof IPLIMG!=='undefined'&&IPLIMG[n]&&IPLIMG_BASE+IPLIMG[n])||(typeof _img!=='undefined'&&_img[n])||'assets/players/'+slug(n)+'.jpg';
 const IPLIMG_BASE='https://img.ipl.com/upload/',IPLIMG={"Virat Kohli":"20251222/6a637ab1b55193691878e82292833298.jpg","Rohit Sharma":"20260813/0eb65a50eae9f9772b7c11e7aab0f0f6.png","KL Rahul":"20251220/d993c030d237204a1a86c0d466d07f4c.jpg","Sanju Samson":"20241016/45c430ec258b66b9e13e938a55e62dbb.jpg","MS Dhoni":"20251103/984dfb8acf166f9aadcc6e6ec0593f3d.jpg","Jos Buttler":"20251224/32c1ab6ffa7ae0cb7d20e6445d537eaf.jpg","Shubman Gill":"20251224/fb303c517d95a1331482d0ddeda2d469.jpg","Suryakumar Yadav":"20241017/f2e89afde8aedc9537d3f392000a9eba.png","Shreyas Iyer":"20241022/11bb9e90cb43dcf316a0b624ae0aea59.png","Rishabh Pant":"20260824/b7c1c8c1cd0c5a2bae60fdc5a0f94524.png","Manish Pandey":"20250918/0692398a568b3d8d7ac21b030e82e023.jpg","Ishan Kishan":"20260806/d08d07f8ddd518f92e1454c96d23102d.png","David Miller":"20250811/e787fa6208b297e2e41f5dc3fbfa8197.png","Ravindra Jadeja":"20251222/0c9d20f83897a8dd8dfb6f657f71b22d.jpg","Nitish Rana":"20250124/8c8e63ed6b8e7a26b3a3ad05059f2a83.png","Hardik Pandya":"20251220/4b705f255e22cbe6b47beb8b613296dd.jpg","Ruturaj Gaikwad":"20251224/2e711bdfc9f372595f3081c9f2255d5a.jpg","Yashasvi Jaiswal":"20241017/d3d73abc4b3f4ed3ce0167b0201d375f.jpg","Nicholas Pooran":"20251223/7e8d2b567b51e8b98c875786e1c1b698.jpg","Sai Sudharsan":"20251224/38e79428f92e0f48cd37825812c41987.jpg","Abhishek Sharma":"20241017/f66831a683cd09a86235e230bbbfbbfb.png","Devdutt Padikkal":"20260813/28a3ceca72914ab8657010a4cbc10c29.png","Marcus Stoinis":"20251121/d2001510af0d231a23b497e97693aba1.jpg","Shivam Dube":"20251225/fa585cd974ea490579608c9f249b607c.jpg","Heinrich Klaasen":"20251220/075a41b932d23bdf70ca12be71d2a780.jpg","Axar Patel":"20251220/c2f53ae723cdb614237e9b44f2f3847f.jpg","Krunal Pandya":"20251104/9de7c1fa84cbbb7d7aae649dce1fca06.jpg","Riyan Parag":"20251224/d162ec4cfa9e6547c12e8cce8d137346.jpg","Tilak Varma":"20260806/2d63dae755f1f192b2e6f25e054580dd.png","Sunil Narine":"20250811/a46578c86befc0714d0a431bbd58573f.png","Prabhsimran Singh":"20251107/a54322cc6903ad425d09fd7b38d9b353.jpg","Mitchell Marsh":"20251103/b137ff79044120ed8d39673cc468bc8f.jpg","Karun Nair":"20251106/0ec9ba224ab26f043c00274c16deda77.jpg","Venkatesh Iyer":"20251031/5c936812e5f60dd0a6174e126fc32b00.jpg","Aiden Markram":"20251103/9ad9a45eb9dc5351c8bc6b7285d97c33.jpg","Rajat Patidar":"20251104/04a370389ccd9aabe6da50afe99e4d6e.jpg","Shimron Hetmyer":"20260407/207941cc18d6d4cea4baf87d06519cd3.jpg","Travis Head":"20251105/7f6266b7ced23124db0fc1e2cd74bb77.jpg","Rinku Singh":"20241016/c190c535c9f93ab07287e2206ad4980d.jpg","Rahul Tewatia":"20251108/6e9826ff5d8d3a44b4d71578824d4cc9.jpg","Yuzvendra Chahal":"20251222/9fd327e2be2c5f288262aeb863108070.jpg","Bhuvneshwar Kumar":"20251105/f8bb7f83f1483d5e174c91439b560dd4.jpg","Jasprit Bumrah":"20251104/50db6df08624409d93a30f346bb76523.jpg","Rashid Khan":"20251224/2e6f8dfcd441280f29e02f3b2f26ec4e.jpg","Sandeep Sharma":"20251106/65e8f8ec1b49cde654207c8aa3abf41d.jpg","Harshal Patel":"20251106/7148d75045552eb9db20dc265b77c4e2.jpg","Kagiso Rabada":"20251224/a939c542f94769bd7d9619745385ca61.jpg","Mohammed Shami":"20260818/00551b4259825c20c245142aced25d54.png","Trent Boult":"20251226/5b347ac8211244940b60fdbe04e048d5.jpg","Mohammed Siraj":"20251224/da567e46b18d03cc24357bf10c4ef34e.jpg","Shardul Thakur":"20260720/7cee945a63f208ff92115d26b53185a4.png","Kuldeep Yadav":"20260806/9b270a9bff5f97c454471cb7f978f5a6.png","Arshdeep Singh":"20251223/7ef32ff683739f8ca4bd1a5caa043582.jpg","Varun Chakaravarthy":"20251105/845ab75bbfb5d5319337a22e5e70a5f8.jpg","Jaydev Unadkat":"20251220/6eb42feff1b5953d14661014b537881c.jpg","Deepak Chahar":"20250120/83c455367c93f60b5f8e9ea634d867f2.png","Avesh Khan":"20251223/66b596157ac2d1312c94fcee8b5134a2.jpg","Khaleel Ahmed":"20251103/d06eece33de71202c0d32058ebc29cb0.jpg","Prasidh Krishna":"20251224/a59a1510497c37689aed5691a66e1918.jpg","Pat Cummins":"20251220/5236db69d962a0e8c621e5543344621d.jpg","Ishant Sharma":"20251108/5d3570724312d1702a615d3394da605d.jpg","Jofra Archer":"20260805/a43c15429e764684f8f5de1ee84b141f.png","Ravi Bishnoi":"20241017/4de0874f332bc0d1cefd2f7cbc58bae0.jpg","Rahul Chahar":"20260402/e38ff5a327f9d6cd0d802eae8a7e844a.jpg","T Natarajan":"20251106/0b130719d8776f3f10660dbb1eba70b3.jpg","Josh Hazlewood":"20251219/a8f23e51ca68d8031df0c17240191a8d.jpg","Jason Holder":"20251224/ae5b57d0c538491585a1db697f4de6ea.jpg","Noor Ahmad":"20260206/15a173497cfcfbf63ce12550cb59a909.jpg","Sam Curran":"20241016/531a8769a633446f7bd14f92f35539f0.png","Tushar Deshpande":"20251106/ab38a19603d24d8234ddc84f33bf3013.jpg","Lockie Ferguson":"20251222/e8ac32e594a9328485b06fcda5ace24f.jpg","Vaibhav Arora":"20251105/a31b89a26dc7a7fb3e08fc3d0955bd3c.jpg","Matheesha Pathirana":"20251229/b0a2b01dc30b02e3413f2a379145e1db.jpg","Marco Jansen":"20251223/043b1353ff8287bf78d94b43fc84421c.jpg","Mukesh Kumar":"20251220/6da265f4a0dc7cddcb46cab624269fb4.jpg","Anrich Nortje":"20251223/f18eab7970a9ca81ee35f7bbaea725ef.jpg","Mitchell Starc":"20260116/e94d77a1cf1b244ef7d8b5eac0f5e8dc.jpg"};
+const WWE_DATA=[["Undertaker","THE PHENOM",1,2100,208,136,132,53],["Stone Cold Steve Austin","THE TEXAS RATTLESNAKE",2,1400,188,114,127,50],["The Rock","THE PEOPLE'S CHAMPION",3,1000,196,118,132,51],["Triple H","THE GAME",4,3400,193,116,132,55],["Mankind","THE HARDCORE LEGEND",5,2000,188,130,127,48],["Shawn Michaels","THE HEARTBREAK KID",6,2300,185,102,117,43],["Kane","THE BIG RED MACHINE",7,2600,213,147,142,53],["Kurt Angle","THE OLYMPIC HERO",8,1500,183,108,124,48],["Chris Jericho","Y2J",9,3600,183,103,119,44],["Edge","THE RATED-R SUPERSTAR",10,2400,196,109,122,46],["Big Show","WORLD'S LARGEST ATHLETE",11,2500,213,174,152,56],["Bret Hart","THE HITMAN",12,1800,183,106,119,46],["X-Pac","THE SIXTH MAN",13,1600,180,96,112,41],["Chyna","THE NINTH WONDER",14,500,178,82,107,41],["Rikishi","THE FATU",15,1300,183,159,147,51],["Christian","CAPTAIN CHARISMA",16,1500,188,107,119,44],["Jeff Hardy","THE CHARISMATIC ENIGMA",17,1800,188,102,114,42],["Matt Hardy","MATT HARDY V1",18,1900,188,107,117,43],["Rey Mysterio","MASTER OF THE 619",19,2200,168,79,107,38],["Eddie Guerrero","LATINO HEAT",20,1800,173,100,117,43],["Chris Benoit","THE RABID WOLVERINE",21,1900,178,100,122,46],["Booker T","THE FIVE-TIME",22,2000,190,116,127,48],["Road Dogg","THE ROAD DOGG",23,1400,183,111,117,43],["Billy Gunn","THE ONE",24,1500,190,109,122,46],["Bradshaw","THE APA'S ENFORCER",25,1800,198,132,132,51],["Faarooq","THE DOMINATOR",26,1400,183,118,127,48],["Ken Shamrock","WORLD'S MOST DANGEROUS MAN",27,700,185,107,122,46],["Vader","THE MASTODON",28,1100,196,204,147,53],["Big Boss Man","THE BIG BOSSMAN",29,1500,198,150,137,51],["Owen Hart","THE BLUE BLAZER",30,1400,178,103,117,43],["British Bulldog","THE BRITISH BULLDOG",31,1800,180,118,127,48],["Val Venis","THE BIG VALOWSKI",32,1000,188,107,117,43],["The Godfather","THE PIMP",33,1200,183,136,132,48],["D'Lo Brown","THE ACCLAIMED",34,1300,178,113,127,46],["Mark Henry","WORLD'S STRONGEST MAN",35,2000,185,175,147,56],["Test","THE TEST",36,1100,198,118,127,48],["A-Train","THE BIG MAN",37,1200,198,170,142,51],["Scotty 2 Hotty","THE WORM MASTER",38,1300,183,98,112,41],["Tazz","HUMAN SUPLEX MACHINE",39,1000,175,109,122,46],["Al Snow","HEAD",40,1100,180,107,117,43],["Hardcore Holly","HARDCORE HOLLY",41,1900,183,109,122,46],["Steve Blackman","THE LETHAL WEAPON",42,900,178,107,122,46],["Goldust","THE BIZARRE ONE",43,2000,196,111,122,46],["Dean Malenko","THE ICEMAN",44,1500,175,100,117,43],["Perry Saturn","THE ORACLE",45,1000,185,113,122,46],["Kevin Nash","BIG DADDY COOL",46,1700,208,149,137,51],["Scott Hall","RAZOR RAMON",47,1800,201,130,127,48],["Hulk Hogan","THE HULKSTER",48,2600,201,137,132,61],["Ric Flair","THE NATURE BOY",49,4000,185,110,122,43],["Rob Van Dam","MR. MONDAY NIGHT",50,1500,183,107,117,43],["Diamond Dallas Page","DDP",51,1700,196,113,122,46],["Jeff Jarrett","DOUBLE J",52,2500,190,109,117,43]];
+const WWE_LABELS=["Rank","Matches","Height","Weight","Chest","Biceps"],WWE_IC=['👑','🎟️','📏','⚖️','💪','🦾'];
+const isW=()=>selectedPack==='wwe';
+const fv=(v,i)=>isW()?(i===0?'#'+v:i===1?Number(v).toLocaleString():v+(i===3?' kg':' cm')):fmt(v);
+const WALIAS={'The Rock':'Dwayne Johnson','Stone Cold Steve Austin':'Stone Cold Steve Austin','Mankind':'Mick Foley','Edge':'Edge (wrestler)','Kane':'Kane (wrestler)','Christian':'Christian (wrestler)','Test':'Andrew Martin (wrestler)','Bradshaw':'John Layfield','Faarooq':'Ron Simmons','The Godfather':'Charles Wright (wrestler)','Tazz':'Taz (wrestler)','Vader':'Big Van Vader','British Bulldog':'Davey Boy Smith','Hardcore Holly':'Bob Holly','A-Train':'Matt Bloom','Big Boss Man':'Big Boss Man (wrestler)','Big Show':'Big Show','Undertaker':'The Undertaker','Val Venis':'Val Venis','X-Pac':'Sean Waltman','Road Dogg':'Road Dogg','Al Snow':'Al Snow','Chyna':'Chyna','Goldust':'Goldust','Diamond Dallas Page':'Diamond Dallas Page','Scotty 2 Hotty':'Scotty 2 Hotty'};
 /* Portrait lookup: Wikipedia, cricketer pages only, batched + cached */
 const ALIAS={'Vaibhav Sooryavanshi':'Vaibhav Suryavanshi','T Natarajan':'Thangarasu Natarajan','Varun Chakaravarthy':'Varun Chakravarthy','M Shahrukh Khan':'Shahrukh Khan (cricketer)','Sai Kishore':'Ravisrinivasan Sai Kishore','Mohsin Khan':'Mohsin Khan (cricketer, born 1998)','Prince Yadav':'Prince Yadav (cricketer)','Suryakumar Yadav':'Suryakumar Yadav','Sarfaraz Khan':'Sarfaraz Khan','Abdul Samad':'Abdul Samad (cricketer)','Ashutosh Sharma':'Ashutosh Sharma (cricketer)','Harsh Dubey':'Harsh Dubey','Mayank Yadav':'Mayank Yadav','Nandre Burger':'Nandre Burger','Jitesh Sharma':'Jitesh Sharma','Shivang Kumar':'Shivang Kumar','Kartik Sharma':'Kartik Sharma (cricketer)','Sameer Rizvi':'Sameer Rizvi','Lhuan-dre Pretorius':'Lhuan-dre Pretorius'};
+Object.assign(ALIAS,WALIAS);
 let _img={};try{_img=JSON.parse(localStorage.getItem('iplImg2')||'{}')}catch(e){}
 const _saveImg=()=>{try{localStorage.setItem('iplImg2',JSON.stringify(Object.fromEntries(Object.entries(_img).filter(([k,v])=>v))))}catch(e){}};
 const _pend={};
 async function _wj(u){const c=new AbortController(),t=setTimeout(()=>c.abort(),7000);try{return await(await fetch(u,{signal:c.signal})).json()}finally{clearTimeout(t)}}
-const _isCk=p=>/cricket/i.test(p.description||'');
+const _isCk=p=>/cricket|wrestl/i.test(p.description||'');
 const _API='https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=pageimages|description&piprop=thumbnail&pithumbsize=700';
 async function _resolve(n){
- const q=ALIAS[n]||n,titles=q.includes('(')?[q]:[q+' (cricketer)',q+' (Indian cricketer)',q];
+ const W=isW();const q=ALIAS[n]||n,titles=q.includes('(')?[q]:(W?[q+' (wrestler)',q+' (professional wrestler)',q]:[q+' (cricketer)',q+' (Indian cricketer)',q]);
  try{
   const Q=(await _wj(_API+'&redirects=1&titles='+encodeURIComponent(titles.join('|')))).query||{},m={};
   titles.forEach(t=>m[t]=t);
@@ -498,7 +529,7 @@ async function _resolve(n){
  }catch(e){}
  try{
   const last=q.toLowerCase().replace(/\(.*\)/,'').trim().split(/\s+/).pop();
-  const Q=(await _wj(_API+'&generator=search&gsrlimit=8&gsrsearch='+encodeURIComponent(q.replace(/\(.*\)/,'')+' cricketer'))).query||{};
+  const Q=(await _wj(_API+'&generator=search&gsrlimit=8&gsrsearch='+encodeURIComponent(q.replace(/\(.*\)/,'')+(W?' professional wrestler':' cricketer')))).query||{};
   const pg=(Q.pages||[]).sort((a,b)=>a.index-b.index).find(p=>p.thumbnail&&_isCk(p)&&p.title.toLowerCase().includes(last));
   if(pg)return pg.thumbnail.source;
  }catch(e){}
@@ -520,6 +551,7 @@ async function fb(el){
 }
 const $=id=>document.getElementById(id);
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+['Stone Cold Steve Austin|attA','The Rock|attB','Undertaker|attC'].forEach(x=>{const[n,id]=x.split('|'),el=document.getElementById(id);if(!el)return;selectedPack='wwe';resolveImg(n).then(u=>{if(u)el.src=u;else el.style.display='none'});selectedPack='legends'});
 const pi=$('packImg');if(pi){pi.onerror=()=>fb(pi);pi.src=src0('Sachin Tendulkar');}
 
 let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[],revealedStat=-1;
@@ -527,58 +559,58 @@ const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 async function startGame(d){
   mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;
   const dm=$('desktopMode'),mm=$('mobileMode');if(dm)dm.textContent=d.toUpperCase()+' MODE';if(mm)mm.textContent=d.toUpperCase()+' MODE';
-  const pack=selectedPack==='ipl';const game=$('game');game.classList.toggle('ipl-mode',pack);
-  if($('desktopPack'))$('desktopPack').textContent=pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=pack?'IPL 2026':'20\'S LEGENDS';
+  const pack=selectedPack==='ipl',wwe=selectedPack==='wwe';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
+  if($('desktopPack'))$('desktopPack').textContent=wwe?'ATTITUDE ERA':pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=wwe?'ATTITUDE ERA':pack?'IPL 2026':'20\'S LEGENDS';
   show('game');try{hideResult()}catch(e){}
-  if(pack){$('iplLoading').classList.add('show');$('hint').textContent='Loading full IPL career statistics (2008–2026)…';try{ACTIVE_P=await loadIPL();}catch(e){console.error(e);$('iplLoading').classList.remove('show');alert('IPL 2026 data could not be loaded. Please open the game online and try again.');show('cricketPacks');return}$('iplLoading').classList.remove('show')}else ACTIVE_P=P;
-  const s=shuffle(ACTIVE_P).slice(0,50);pd=s.slice(0,25);cd=s.slice(25);renderHist();nextRound();try{startMusic()}catch(e){console.warn('Music could not start automatically:',e)}
+  if(wwe){$('iplLoading').classList.add('show');const lb=$('iplLoading').querySelector('b');if(lb)lb.textContent='LOADING ATTITUDE ERA';ACTIVE_P=WWE_DATA;await Promise.race([prefetchImgs(WWE_DATA.map(r=>r[0])),new Promise(r=>setTimeout(r,9000))]);$('iplLoading').classList.remove('show')}else if(pack){$('iplLoading').classList.add('show');$('hint').textContent='Loading full IPL career statistics (2008–2026)…';try{ACTIVE_P=await loadIPL();}catch(e){console.error(e);$('iplLoading').classList.remove('show');alert('IPL 2026 data could not be loaded. Please open the game online and try again.');show('cricketPacks');return}$('iplLoading').classList.remove('show')}else ACTIVE_P=P;
+  const s=shuffle(ACTIVE_P).slice(0,50),hf=Math.floor(s.length/2);pd=s.slice(0,hf);cd=s.slice(hf,hf*2);renderHist();nextRound();try{startMusic()}catch(e){console.warn('Music could not start automatically:',e)}
 }
 function nextRound(){
   if(!pd.length||!cd.length)return endGame();
   you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
   $('yc').textContent=pd.length;$('cc').textContent=cd.length;$('cL').textContent=pd.length+' CARDS';$('cR').textContent=cd.length+' CARDS';
-  $('hint').textContent=last==='you'?'Higher wins • Bowling Average: lower wins • 0 always loses':'CPU is choosing…';
+  $('hint').textContent=last==='you'?isW()?'Higher wins • Rank: lower (#1 best) wins':'Higher wins • Bowling Average: lower wins • 0 always loses':'CPU is choosing…';
   renderCards();renderCalls();
   if(last==='cpu')setTimeout(cpuCall,900);
 }
 const fmt=v=>typeof v==='number'&&v%1?v.toFixed(2):v.toLocaleString();
 function card(t,p,hidden){
-  const vals=bat?p.slice(2,8):p.slice(8,14),labs=bat?L1:L2;
+  const vals=bat?p.slice(2,8):p.slice(8,14),labs=isW()?WWE_LABELS:bat?L1:L2;
   const hardHidden=mode==='hard' && revealedStat!==-1;
   const isHidden=hidden || hardHidden;
   $(t).innerHTML=`<div class="card" id="${t}Box"><div class="country">${p[1]}</div>
-  <div class="card-main"><div class="image-column"><div class="portrait" style="--portrait-bg:url('${src0(p[0])}')"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div><div class="identity"><div class="pname">${p[0]}</div><div class="stat-switch" onclick="toggleStats()"><span class="stat-switch-label">${bat?"BOWL STATS":"BAT STATS"}</span><button class="toggle" type="button" aria-label="Switch stats">›</button></div></div></div><div class="stats">${vals.map((v,i)=>{const reveal=mode==='hard'&&revealedStat===i;const showVal=!isHidden||reveal;const clickable=!hidden&&!locked&&last==='you'&&(mode==='hard'||!isHidden);return `<div class="stat ${showVal?'':'locked'} ${clickable?'card-stat-clickable':''}" ${clickable?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${showVal?fmt(v):'?'}</b></div>`}).join('')}</div></div></div>`;
+  <div class="card-main"><div class="image-column"><div class="portrait" style="--portrait-bg:url('${src0(p[0])}')"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div><div class="identity"><div class="pname">${p[0]}</div><div class="stat-switch" onclick="toggleStats()"><span class="stat-switch-label">${bat?"BOWL STATS":"BAT STATS"}</span><button class="toggle" type="button" aria-label="Switch stats">›</button></div></div></div><div class="stats">${vals.map((v,i)=>{const reveal=mode==='hard'&&revealedStat===i;const showVal=!isHidden||reveal;const clickable=!hidden&&!locked&&last==='you'&&(mode==='hard'||!isHidden);return `<div class="stat ${showVal?'':'locked'} ${clickable?'card-stat-clickable':''}" ${clickable?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${showVal?fv(v,i):'?'}</b></div>`}).join('')}</div></div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
 function renderCalls(){
-  const labs=bat?L1:L2,ic=bat?IC1:IC2;
+  const labs=isW()?WWE_LABELS:bat?L1:L2,ic=isW()?WWE_IC:bat?IC1:IC2;
   $('calls').innerHTML=labs.map((l,i)=>`<button class="call" ${last!=='you'||locked?'disabled':''} onclick="callStat(${i})"><u>${ic[i]}</u>${l}</button>`).join('');
 }
 function renderHist(){
   $('hist').innerHTML=hist.slice(-5).reverse().map(h=>`<div class="br"><i class="${h.w==='you'?'':h.w==='cpu'?'l':'t'}">${h.w==='you'?'✓':h.w==='cpu'?'×':'='}</i><div><b>${h.w==='you'?'You won':h.w==='cpu'?'You lost':'Tie'}</b><span>${h.s}: ${h.a} vs ${h.b}</span></div></div>`).join('')||'<span style="color:#9fb0c5;font-size:.85cqw">Your battles will appear here.</span>';
 }
-function toggleStats(){if(locked)return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
+function toggleStats(){if(locked||isW())return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
 function callStat(i){if(locked||last!=='you')return;locked=true;revealedStat=i;sSel();renderCards();setTimeout(()=>resolve(i),450)}
 function cpuCall(){
   if(locked)return;const base=bat?2:8;let best=Math.floor(Math.random()*6);
   if(mode==='hard'){
-    const sc=i=>{const v=Number(cpu[base+i]);if(!v)return -1;return(!bat&&i===1)?1000-v:v/(Math.max(...ACTIVE_P.map(p=>Number(p[base+i])))||1)*1000};
+    const sc=i=>{const v=Number(cpu[base+i]);if(!v)return -1;return isW()&&i===0?1000*(1-(v-1)/ACTIVE_P.length):(!bat&&i===1)?1000-v:v/(Math.max(...ACTIVE_P.map(p=>Number(p[base+i])))||1)*1000};
     best=[0,1,2,3,4,5].sort((a,b)=>sc(b)-sc(a))[0];
   }
   locked=true;revealedStat=best;renderCards();sSel();setTimeout(()=>resolve(best),650);
 }
 function resolve(i){
-  const base=bat?2:8,a=Number(you[base+i]),b=Number(cpu[base+i]),lowWins=!bat&&i===1;
+  const base=bat?2:8,a=Number(you[base+i]),b=Number(cpu[base+i]),lowWins=isW()?i===0:!bat&&i===1;
   let w=null;
   if(a===0&&b===0)w=null;else if(a===0)w='cpu';else if(b===0)w='you';
   else if(a!==b)w=(lowWins?a<b:a>b)?'you':'cpu';
-  const lab=(bat?L1:L2)[i];
-  hist.push({w:w||'tie',s:lab,a:fmt(a),b:fmt(b)});renderHist();
+  const lab=(isW()?WWE_LABELS:bat?L1:L2)[i];
+  hist.push({w:w||'tie',s:lab,a:fv(a,i),b:fv(b,i)});renderHist();
   $('yourCardBox')?.classList.add('shake');$('cpuCardBox')?.classList.add('shake');
   const t=$('rt'),x=$('rx');
   $('yourCard').classList.remove('battle-you','battle-cpu','battle-tie');$('cpuCard').classList.remove('battle-you','battle-cpu','battle-tie');$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
-  if(w==='you'){t.textContent='YOU WIN!';t.className='win';x.textContent=`${lab}: ${fmt(a)} beats ${fmt(b)}`;sWin();$('yourCard').classList.add('battle-you');$('cpuCard').classList.add('battle-cpu');$('vs').classList.add('battle-you')}
-  else if(w==='cpu'){t.textContent='CPU WINS';t.className='lose';x.textContent=`${lab}: ${fmt(b)} beats ${fmt(a)}`;sLose();$('yourCard').classList.add('battle-cpu');$('cpuCard').classList.add('battle-you');$('vs').classList.add('battle-cpu')}
+  if(w==='you'){t.textContent='YOU WIN!';t.className='win';x.textContent=`${lab}: ${fv(a,i)} beats ${fv(b,i)}`;sWin();$('yourCard').classList.add('battle-you');$('cpuCard').classList.add('battle-cpu');$('vs').classList.add('battle-you')}
+  else if(w==='cpu'){t.textContent='CPU WINS';t.className='lose';x.textContent=`${lab}: ${fv(b,i)} beats ${fv(a,i)}`;sLose();$('yourCard').classList.add('battle-cpu');$('cpuCard').classList.add('battle-you');$('vs').classList.add('battle-cpu')}
   else{t.textContent='TIE!';t.className='draw';x.textContent='Equal. The previous caller keeps the call.';sTie();$('yourCard').classList.add('battle-tie');$('cpuCard').classList.add('battle-tie');$('vs').classList.add('battle-tie')}
   $('result').classList.add('show');
   if(w==='you'){pd.push(you,cpu);pd.shift();cd.shift();last='you'}
