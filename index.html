@@ -697,19 +697,27 @@ function tone(f,d,ty='sine',g=.05,w=0){try{const c=audio(),o=c.createOscillator(
 const sSel=()=>{tone(420,.05,'square',.05);tone(620,.07,'triangle',.06,.045)},sFlip=()=>{tone(260,.06,'sine',.05);tone(520,.1,'triangle',.06,.05);tone(760,.08,'triangle',.04,.12)};
 const sWin=()=>[660,880,1040,1320].forEach((f,i)=>tone(f,.2,'triangle',.08,i*.11)),sLose=()=>[260,190,120].forEach((f,i)=>tone(f,.2,'sawtooth',.06,i*.12)),sTie=()=>{tone(420,.12,'sine',.05);tone(500,.15,'sine',.04,.12)};
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('button,.pack.open');if(b&&!b.disabled&&!b.classList.contains('toggle')&&!b.classList.contains('call')&&b.id!=='music')tone(720,.045,'square',.03)});
-/* Background music: 4 MP3 soundtracks loaded from the assets/ folder */
+/* Background music: 4 MP3 soundtracks loaded from the assets/ folder (tries a few filename variants if one is missing) */
 const TRACKS={
- groove:{name:'CARD GAME GROOVE',src:'assets/Card_Game_Groove.mp3'},
- drive:{name:'CHAMPIONSHIP DRIVE',src:'assets/Championship_Drive.mp3'},
- meditate:{name:'MEDITATE',src:'assets/Meditate.mp3'},
- rebellion:{name:'REBELLION',src:'assets/Rebellion.mp3'}
+ groove:{name:'CARD GAME GROOVE',file:'Card_Game_Groove.mp3'},
+ drive:{name:'CHAMPIONSHIP DRIVE',file:'Championship_Drive.mp3'},
+ meditate:{name:'MEDITATE',file:'Meditate.mp3'},
+ rebellion:{name:'REBELLION',file:'Rebellion.mp3'}
 };
-let currentTrack='groove',muted=false,bgm=null;
-function getBgm(){if(!bgm){bgm=new Audio();bgm.loop=true;bgm.preload='auto';bgm.volume=.55;bgm.src=TRACKS[currentTrack].src}return bgm}
-function playBgm(){const a=getBgm();a.muted=muted;const r=a.play();if(r&&r.catch)r.catch(e=>console.warn('Music blocked or file missing:',e))}
-function startMusic(){if(!bgm||bgm.paused)playBgm();musicBtn()}
-function selectTrack(v){if(!TRACKS[v])return;currentTrack=v;const a=getBgm();a.src=TRACKS[v].src;a.currentTime=0;playBgm();musicBtn()}
+const trackSrcs=k=>{const f=TRACKS[k].file,sp=f.replace(/_/g,' '),lo=f.toLowerCase(),lo2=sp.toLowerCase();
+ return [...new Set(['assets/'+f,'assets/'+lo,'assets/'+sp,'assets/'+lo2,'assets/'+f.replace(/_/g,'-'),f,lo,sp])].map(encodeURI)};
+let currentTrack='groove',muted=false,bgm=null,bgmTry=0,bgmToken=0;
+function musicToast(m){let t=document.getElementById('musicToast');if(!t){t=document.createElement('div');t.id='musicToast';t.style.cssText='position:absolute;left:50%;top:14%;transform:translateX(-50%);z-index:30;max-width:90%;padding:8px 14px;border-radius:10px;background:#3a0710ee;border:1px solid #ff5364;color:#fff;font:700 12px sans-serif;text-align:center;pointer-events:none';($('game')).appendChild(t)}t.textContent=m;t.style.display=m?'block':'none';if(m){clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',7000)}}
+function loadTrack(k,n){
+ const list=trackSrcs(k),a=getBgm(),tok=++bgmToken;bgmTry=n||0;
+ const go=()=>{if(tok!==bgmToken)return;a.onerror=()=>{if(tok!==bgmToken)return;if(bgmTry<list.length-1){bgmTry++;go()}else{console.warn('Music file not found. Tried:',list);musicToast('Music file not found: assets/'+TRACKS[k].file+' — check the file name in your repo')}};
+  a.src=list[bgmTry];a.currentTime=0;a.muted=muted;const r=a.play();if(r&&r.catch)r.catch(e=>{if(e&&e.name==='NotAllowedError')console.warn('Autoplay blocked until you tap',e)})};
+ go();
+}
+function getBgm(){if(!bgm){bgm=new Audio();bgm.loop=true;bgm.preload='auto';bgm.volume=.55}return bgm}
+function startMusic(){const a=getBgm();if(!a.src||a.error)loadTrack(currentTrack);else if(a.paused){a.muted=muted;const r=a.play();if(r&&r.catch)r.catch(()=>{})}musicBtn()}
+function selectTrack(v){if(!TRACKS[v])return;currentTrack=v;loadTrack(v);musicBtn()}
 function stopMusic(){if(bgm)bgm.pause()}
-function toggleMusic(){muted=!muted;const a=getBgm();a.muted=muted;if(!muted&&a.paused)playBgm();musicBtn()}
+function toggleMusic(){muted=!muted;const a=getBgm();a.muted=muted;if(!muted&&a.paused){if(!a.src||a.error)loadTrack(currentTrack);else a.play().catch(()=>{})}musicBtn()}
 function musicBtn(){$('music').classList.toggle('muted',muted);$('mi').textContent=muted?'🔇':'🔊';$('mt').textContent=muted?'MUTED':'MUSIC'}
 </script></body></html>
