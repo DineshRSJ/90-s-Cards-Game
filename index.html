@@ -468,6 +468,8 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 <div id="hist"></div>
 <div id="rules"><div>Choose one stat to call.</div><div><b>Higher</b> wins every stat except Bowling Average.</div><div><b>Bowling Average:</b> lower non-zero value wins.</div><div style="color:#ffd45a">0 always loses — even Bowling Average.</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div></div>
 <div id="calls"></div><div id="lifelines"></div><div id="hint"></div>
+<div id="dangerFx"></div><div id="turnFlash"></div>
+<div id="turnBar" class="you"><div class="t-ico"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="#ffffff22" stroke-width="4"/><circle id="tRing" cx="22" cy="22" r="19" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="119.38" stroke-dashoffset="0" transform="rotate(-90 22 22)"/></svg><span id="tEmoji">⏰</span></div><div class="t-txt"><b id="tName">YOUR TURN</b><small id="tSub">Call a stat before time runs out!</small></div><div id="tNum">10</div></div>
 <div id="result"><div id="rbox"><h2 id="rt"></h2><p id="rx"></p><button id="rbtn" onclick="resultBtn()">CONTINUE</button><div id="rcount"></div></div></div>
 <div class="ipl-loading" id="iplLoading"><div class="ipl-loading-box"><b>LOADING IPL 2026</b><span>Loading real season statistics &amp; player data…</span></div></div>
 </section>
@@ -704,10 +706,11 @@ let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[],rev
 let LL={me:5,opp:3,full:1},myRev=false,oppAll=false,oppSet=new Set();
 const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 let gid=0,gameActive=false,gameOver=false,ready=false,pendingCalls={},rn=0,homeTimer=null;
+const TM={t:null,end:0,enforce:false,lastSec:-1,secs:10};const turnSecs=()=>isW()?10:15;
 const later=(f,ms)=>{const g=gid;setTimeout(()=>{if(g===gid&&gameActive)f()},ms)};
 const OPPN=()=>NET.inMatch?'Friend':'CPU';
 async function startGame(d,pvp){
-  gid++;const g=gid;gameActive=true;gameOver=false;ready=false;pendingCalls={};rn=0;clearTimeout(homeTimer);
+  gid++;const g=gid;gameActive=true;gameOver=false;ready=false;pendingCalls={};rn=0;clearTimeout(homeTimer);stopTimer();
   mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;LL={me:5,opp:3,full:1};myRev=false;oppAll=false;oppSet=new Set();
   const dm=$('desktopMode'),mm=$('mobileMode');if(dm)dm.textContent=d.toUpperCase()+' MODE';if(mm)mm.textContent=d.toUpperCase()+' MODE';
   const pack=selectedPack==='ipl',ra=selectedPack==='ra',wwe=selectedPack==='wwe'||ra;const PN=ra?'RUTHLESS AGGRESSION':'ATTITUDE ERA';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
@@ -745,15 +748,21 @@ function nextRound(){
   you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;myRev=false;oppAll=false;oppSet=new Set();$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
   $('yc').textContent=pd.length;$('cc').textContent=cd.length;$('cL').textContent=pd.length+' CARDS';$('cR').textContent=cd.length+' CARDS';
   $('hint').textContent=last==='you'?isW()?'Higher wins • Rank: lower (#1 best) wins':'Higher wins • Bowling Average: lower wins • 0 always loses':OPPN()+' is choosing…';
-  renderCards();renderCalls();renderLifelines();
+  renderCards();renderCalls();renderLifelines();turnUI();
   ready=true;
   if(last==='cpu'){if(NET.inMatch)tryPending();else later(cpuCall,900)}
 }
 const fmt=v=>typeof v==='number'&&v%1?v.toFixed(2):v.toLocaleString();
+const CL={'Strike Rate':'S RATE','High Score':'HIGH SC','Average':'AVG','Bowl Average':'BOWL AVG','5W Haul':'5W','Stumping':'STUMP','Wickets':'WKTS',"100's":'100s',"50's":'50s'};
 function card(t,p,hidden){
-  const vals=bat?p.slice(2,8):p.slice(8,14),labs=isW()?WWE_LABELS:bat?L1:L2;
-  $(t).innerHTML=`<div class="card" id="${t}Box"><div class="country">${p[1]}</div>
-  <div class="card-main"><div class="image-column"><div class="portrait" style="--portrait-bg:url('${src0(p[0])}')"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div><div class="identity"><div class="pname">${p[0]}</div><div class="stat-switch" onclick="toggleStats()"><span class="stat-switch-label">${bat?"BOWL STATS":"BAT STATS"}</span><button class="toggle" type="button" aria-label="Switch stats">›</button></div></div></div><div class="stats">${vals.map((v,i)=>{const showVal=revealedStat===i||(hidden?(oppAll||oppSet.has((bat?'b':'w')+i)):(mode==='easy'||myRev));const clickable=!hidden&&!locked&&last==='you';return `<div class="stat ${showVal?'':'locked'} ${clickable?'card-stat-clickable':''}" ${clickable?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${showVal?fv(v,i):'?'}</b></div>`}).join('')}</div></div></div>`;
+  const vals=bat?p.slice(2,8):p.slice(8,14),labs=isW()?WWE_LABELS:bat?L1:L2,nm=p[0];
+  const fs=nm.length>18?5.8:nm.length>15?6.6:nm.length>12?7.4:8.2;
+  const stats=vals.map((v,i)=>{
+    const called=revealedStat===i,viaLife=hidden?(oppAll||oppSet.has((bat?'b':'w')+i)):(mode==='hard'&&myRev);
+    const showVal=called||viaLife||(hidden?false:mode==='easy'),clk=!hidden&&!locked&&last==='you';
+    const lb=(CL[labs[i]]||labs[i]).toUpperCase();
+    return `<div class="tc-s ${showVal?'':'locked'} ${called?'called':''} ${viaLife&&!called?'life-rev':''} ${clk?'clk':''}" ${clk?`onclick="callStat(${i})"`:''}><span>${lb}</span><i>:</i><b>${showVal?fv(v,i):'?'}</b></div>`}).join('');
+  $(t).innerHTML=`<div class="tc" id="${t}Box"><div class="tc-o"><div class="tc-in"><div class="tc-pic"><img alt="${nm}" src="${src0(nm)}" onerror="fb(this)">${isW()?'':`<div class="tc-set">${bat?'BATTING':'BOWLING'} STATS</div>`}<div class="tc-tag">${p[1]}</div></div><div class="tc-name">${isW()?'':`<button class="tc-ar" type="button" title="Back to batting stats" ${bat?'disabled':''} onclick="goStats(true)">‹</button>`}<span style="font-size:${fs}cqi">${nm}</span>${isW()?'':`<button class="tc-ar" type="button" title="Open bowling stats" ${bat?'':'disabled'} onclick="goStats(false)">›</button>`}</div><div class="tc-stats">${stats}</div></div></div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
 function renderCalls(){
@@ -783,10 +792,11 @@ function useLifeline(k){
   LL[k]--;sFlip();renderCards();renderLifelines();
   llMsg(k==='me'?'Your stats revealed for this round.':k==='opp'?'One opponent stat revealed.':'Opponent card fully revealed.');
 }
+function goStats(toBat){if(locked||isW()||bat===toBat)return;toggleStats()}
 function toggleStats(){if(locked||isW())return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
-function callStat(i){if(locked||last!=='you'||!gameActive)return;locked=true;revealedStat=i;sSel();renderCards();renderLifelines();if(NET.inMatch)netSend({t:'call',rn,i,bat});later(()=>resolve(i),450)}
+function callStat(i){if(locked||last!=='you'||!gameActive)return;locked=true;stopTimer();revealedStat=i;sSel();renderCards();renderLifelines();if(NET.inMatch)netSend({t:'call',rn,i,bat});later(()=>resolve(i),450)}
 function cpuCall(){
-  if(locked||!gameActive)return;const base=bat?2:8;let best=Math.floor(Math.random()*6);
+  if(locked||!gameActive)return;stopTimer();const base=bat?2:8;let best=Math.floor(Math.random()*6);
   if(mode==='hard'){
     const sc=i=>{const v=Number(cpu[base+i]);if(!v)return -1;return isW()&&i===0?1000*(1-(v-1)/ACTIVE_P.length):(!bat&&i===1)?1000-v:v/(Math.max(...ACTIVE_P.map(p=>Number(p[base+i])))||1)*1000};
     best=[0,1,2,3,4,5].sort((a,b)=>sc(b)-sc(a))[0];
@@ -794,7 +804,7 @@ function cpuCall(){
   locked=true;revealedStat=best;renderCards();sSel();later(()=>resolve(best),650);
 }
 function resolve(i){
-  if(!gameActive)return;ready=false;
+  if(!gameActive)return;ready=false;stopTimer();
   const base=bat?2:8,a=Number(you[base+i]),b=Number(cpu[base+i]),lowWins=isW()?i===0:!bat&&i===1;
   let w=null;
   if(a===0&&b===0)w=null;else if(a===0)w='cpu';else if(b===0)w='you';
@@ -804,19 +814,74 @@ function resolve(i){
   $('yourCardBox')?.classList.add('shake');$('cpuCardBox')?.classList.add('shake');
   const t=$('rt'),x=$('rx');
   $('yourCard').classList.remove('battle-you','battle-cpu','battle-tie');$('cpuCard').classList.remove('battle-you','battle-cpu','battle-tie');$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
-  if(w==='you'){t.textContent='YOU WIN!';t.className='win';x.textContent=`${lab}: ${fv(a,i)} beats ${fv(b,i)}`;sWin();$('yourCard').classList.add('battle-you');$('cpuCard').classList.add('battle-cpu');$('vs').classList.add('battle-you')}
-  else if(w==='cpu'){t.textContent=OPPN().toUpperCase()+' WINS';t.className='lose';x.textContent=`${lab}: ${fv(b,i)} beats ${fv(a,i)}`;sLose();$('yourCard').classList.add('battle-cpu');$('cpuCard').classList.add('battle-you');$('vs').classList.add('battle-cpu')}
-  else{t.textContent='TIE!';t.className='draw';x.textContent='Equal. The previous caller keeps the call.';sTie();$('yourCard').classList.add('battle-tie');$('cpuCard').classList.add('battle-tie');$('vs').classList.add('battle-tie')}
+  if(w==='you'){t.textContent='YOU WIN!';t.className='win';setRX(...explain('you',i,a,b));sWin();$('yourCard').classList.add('battle-you');$('cpuCard').classList.add('battle-cpu');$('vs').classList.add('battle-you')}
+  else if(w==='cpu'){t.textContent=OPPN().toUpperCase()+' WINS';t.className='lose';setRX(...explain('cpu',i,a,b));sLose();$('yourCard').classList.add('battle-cpu');$('cpuCard').classList.add('battle-you');$('vs').classList.add('battle-cpu')}
+  else{t.textContent='TIE!';t.className='draw';setRX(...explain(null,i,a,b));sTie();$('yourCard').classList.add('battle-tie');$('cpuCard').classList.add('battle-tie');$('vs').classList.add('battle-tie')}
   $('rbtn').textContent='CONTINUE';$('rcount').textContent='';$('result').classList.add('show');
   if(w==='you'){pd.push(you,cpu);pd.shift();cd.shift();last='you'}
   else if(w==='cpu'){cd.push(cpu,you);pd.shift();cd.shift();last='cpu'}
   else{pd.push(pd.shift());cd.push(cd.shift())}
-  later(()=>{hideResult();nextRound()},1200);
+  later(()=>{hideResult();nextRound()},2800);
+}
+
+/* ===== TURN TIMER + ROUND TEXT ===== */
+const sTick=s=>{tone(s<=2?1250:980,.06,'square',.07);tone(150,.1,'sine',.09,.01)},sBuzz=()=>{[330,247,185,140].forEach((f,i)=>tone(f,.22,'sawtooth',.07,i*.13))};
+function stopTimer(){clearInterval(TM.t);TM.t=null;const g=$('game');if(g)g.classList.remove('timer-danger','timer-crit');const b=$('turnBar');if(b)b.classList.remove('danger')}
+function startTimer(enforce){
+  stopTimer();TM.enforce=enforce;TM.secs=turnSecs();TM.end=Date.now()+TM.secs*1000;TM.lastSec=-1;const g=gid,r=rn;
+  tickTimer();TM.t=setInterval(()=>{if(g!==gid||!gameActive||r!==rn){stopTimer();return}tickTimer()},100);
+}
+function tickTimer(){
+  const ms=Math.max(0,TM.end-Date.now()),sec=Math.ceil(ms/1000),danger=sec<=5&&ms>0;
+  const ring=$('tRing');if(ring)ring.setAttribute('stroke-dashoffset',(119.38*(1-ms/(TM.secs*1000))).toFixed(2));
+  const n=$('tNum');if(n)n.textContent=sec;
+  const gm=$('game'),bar=$('turnBar');
+  if(gm){gm.classList.toggle('timer-danger',danger);gm.classList.toggle('timer-crit',danger&&sec<=2)}
+  if(bar)bar.classList.toggle('danger',danger);
+  if(sec!==TM.lastSec){TM.lastSec=sec;if(danger&&TM.enforce)sTick(sec)}
+  if(ms<=0){clearInterval(TM.t);TM.t=null;if(TM.enforce&&!locked&&last==='you')onMyTimeout();else if(bar)bar.classList.remove('danger')}
+}
+function onMyTimeout(){if(NET.inMatch)netSend({t:'call',rn,i:-1,bat});sBuzz();timeoutRound('you')}
+function turnUI(){
+  const who=last==='you'?'you':NET.inMatch?'friend':'cpu';
+  const bar=$('turnBar');if(!bar)return;
+  bar.className=who;
+  $('tName').textContent=who==='you'?'YOUR TURN':who==='friend'?"FRIEND'S TURN":"CPU'S TURN";
+  $('tEmoji').textContent=who==='you'?'⏰':who==='friend'?'🎮':'🤖';
+  $('tSub').textContent=who==='you'?'Call a stat before time runs out!':who==='friend'?'Waiting for your friend to call…':'CPU is choosing…';
+  const f=$('turnFlash');if(f){f.textContent=$('tName').textContent+(who==='you'?' !':'');f.className=who;void f.offsetWidth;f.className=who+' go'}
+  if(who==='cpu'){stopTimer();$('tRing').setAttribute('stroke-dashoffset','0')}else startTimer(who==='you');
+}
+const PHR={'Matches':['played more matches than','MATCHES'],'Runs':['scored more runs than','RUNS'],'Average':['has a better batting average than','AVG'],'Strike Rate':['has a higher strike rate than','SR'],'High Score':['has a higher top score than','HS'],"100's":['hit more centuries than','100S'],'Wickets':['took more wickets than','WICKETS'],'Bowl Average':['has a better bowling average than','AVG'],'5W Haul':['took more 5-wicket hauls than','5W'],'Catches':['took more catches than','CATCHES'],'Stumping':['made more stumpings than','STUMPINGS'],"50's":['hit more fifties than','50S'],'Rank':['is ranked higher than',''],'Height':['is taller than',''],'Weight':['is heavier than',''],'Chest':['has a bigger chest than',''],'Biceps':['has bigger biceps than','']};
+const escH=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fmtV=(v,i,u)=>isW()?(i===1?fv(v,i)+' MATCHES':fv(v,i)):(fmt(Number(v))+(u?' '+u:''));
+function explain(w,i,a,b){
+  const lab=(isW()?WWE_LABELS:bat?L1:L2)[i],ph=PHR[lab]||['is better at '+lab+' than',lab.toUpperCase()];
+  if(!w)return[you[0]+' and '+cpu[0]+' are level on '+lab,fmtV(a,i,ph[1])+' - '+fmtV(b,i,ph[1])];
+  const Y=w==='you',wn=Y?you[0]:cpu[0],ln=Y?cpu[0]:you[0],wv=Y?a:b,lv=Y?b:a;
+  return[wn+' '+ph[0]+' '+ln,fmtV(wv,i,ph[1])+' - '+fmtV(lv,i,ph[1])];
+}
+function setRX(r1,r2){const x=$('rx');x.innerHTML='<span class="r1">'+escH(r1)+'</span>'+(r2?'<span class="r2">'+escH(r2)+'</span>':'')}
+function timeoutRound(loser){
+  if(!gameActive||locked)return;locked=true;stopTimer();ready=false;
+  const w=loser==='you'?'cpu':'you';
+  hist.push({w,s:'Time out',a:'—',b:'—'});renderHist();
+  renderCalls();renderLifelines();
+  const t=$('rt');
+  ['yourCard','cpuCard','vs'].forEach(id=>$(id).classList.remove('battle-you','battle-cpu','battle-tie'));
+  if(w==='you'){t.className='win';$('yourCard').classList.add('battle-you');$('cpuCard').classList.add('battle-cpu');$('vs').classList.add('battle-you');sWin()}
+  else{t.className='lose';$('yourCard').classList.add('battle-cpu');$('cpuCard').classList.add('battle-you');$('vs').classList.add('battle-cpu');sLose()}
+  t.textContent=loser==='you'?"⏰ TIME'S UP!":'⏰ '+OPPN().toUpperCase()+' RAN OUT OF TIME';
+  setRX(loser==='you'?'You failed to call a stat in time':OPPN()+' failed to call a stat in time',loser==='you'?cpu[0]+' takes the round':'You take the round');
+  $('rbtn').textContent='CONTINUE';$('rcount').textContent='';$('result').classList.add('show');
+  if(w==='you'){pd.push(you,cpu);pd.shift();cd.shift();last='you'}
+  else{cd.push(cpu,you);pd.shift();cd.shift();last='cpu'}
+  later(()=>{hideResult();nextRound()},2800);
 }
 function hideResult(){$('result').classList.remove('show')}
 function resultBtn(){if(gameOver)goHome();else hideResult()}
 function endGame(){
-  gameOver=true;ready=false;
+  gameOver=true;ready=false;stopTimer();
   const w=pd.length>0;$('rt').textContent=w?'CHAMPION!':'GAME OVER';$('rt').className=w?'win':'lose';
   $('rx').textContent=w?'You collected the whole deck.':(NET.inMatch?'Your friend':'CPU')+' collected the whole deck.';
   $('rbtn').textContent='BACK TO HOME';$('result').classList.add('show');
@@ -825,7 +890,7 @@ function endGame(){
 }
 function goHome(){
   clearTimeout(homeTimer);const notify=NET.inMatch&&!gameOver;
-  gameActive=false;ready=false;pendingCalls={};gid++;
+  gameActive=false;ready=false;pendingCalls={};gid++;stopTimer();
   try{hideResult()}catch(e){}
   closeNotice(true);try{stopMusic()}catch(e){}
   netCleanup(notify);gameOver=false;
@@ -833,7 +898,7 @@ function goHome(){
   show('home');
 }
 function exitMatch(){if(confirm(NET.inMatch?'Leave this match? It will also end the game for your friend.':'Leave this match?'))goHome()}
-function abortMatch(msg){gameActive=false;gid++;netCleanup(true);showNotice('MATCH ENDED',msg,goHome)}
+function abortMatch(msg){gameActive=false;gid++;stopTimer();netCleanup(true);showNotice('MATCH ENDED',msg,goHome)}
 /* ===== ONLINE FRIEND MODE (peer-to-peer via PeerJS) ===== */
 const NET={guestReady:false,role:null,peer:null,conn:null,code:null,connected:false,inMatch:false,roomMode:'easy',last:0,hb:null};
 const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',PEER_PREFIX='cardgame90-';
@@ -888,12 +953,13 @@ function onNetMsg(m){
 function tryPending(){const m=pendingCalls[rn];if(m&&ready){delete pendingCalls[rn];handleRemoteCall(m)}}
 function handleRemoteCall(m){
   if(!NET.inMatch||!gameActive||gameOver)return;
-  if(!Number.isInteger(m.i)||m.i<0||m.i>5)return;
+  if(!Number.isInteger(m.i)||m.i<-1||m.i>5)return;
   if(!ready||m.rn>rn){pendingCalls[m.rn]=m;return}
   if(m.rn<rn)return;
   delete pendingCalls[m.rn];
   if(last!=='cpu'||locked){abortMatch('The game got out of sync with your friend, so the match was ended.');return}
-  bat=!!m.bat;locked=true;revealedStat=m.i;renderCards();renderCalls();renderLifelines();sSel();later(()=>resolve(m.i),650);
+  if(m.i===-1){timeoutRound('cpu');return}
+  stopTimer();bat=!!m.bat;locked=true;revealedStat=m.i;renderCards();renderCalls();renderLifelines();sSel();later(()=>resolve(m.i),650);
 }
 /* lobby */
 const newCode=()=>Array.from({length:5},()=>CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)]).join('');
@@ -995,4 +1061,80 @@ function selectTrack(v){if(!TRACKS[v])return;currentTrack=v;loadTrack(v);musicBt
 function stopMusic(){if(bgm)bgm.pause()}
 function toggleMusic(){muted=!muted;const a=getBgm();a.muted=muted;if(!muted&&a.paused){if(!a.src||a.error)loadTrack(currentTrack);else a.play().catch(()=>{})}musicBtn()}
 function musicBtn(){$('music').classList.toggle('muted',muted);$('mi').textContent=muted?'🔇':'🔊';$('mt').textContent=muted?'MUTED':'MUSIC'}
-</script></body></html>
+</script><style>
+/* TURN BANNER + 10s TIMER */
+#turnBar{left:31%;top:8.6%;width:38%;height:13.6%;display:flex;align-items:center;gap:1.5cqw;padding:0 1.8cqw;box-sizing:border-box;border-radius:1.6cqw;border:2px solid currentColor;background:linear-gradient(145deg,#0a1a30f2,#050a15f2);box-shadow:0 0 2cqw var(--tg),inset 0 0 1.4cqw #0009;z-index:7;color:#50e8ff;--tg:#50e8ff44}
+#turnBar.cpu{color:#ff4fb3;--tg:#ff4fb344}#turnBar.friend{color:#b58cff;--tg:#b58cff44}
+#turnBar.danger{color:#ff3b4e;--tg:#ff3b4e88;animation:barShake .32s linear infinite}
+.t-ico{position:relative;width:6.6cqw;height:6.6cqw;flex:none}.t-ico svg{position:absolute;inset:0;width:100%;height:100%}
+#tEmoji{position:absolute;inset:0;display:grid;place-items:center;font-size:3.1cqw;line-height:1}
+#turnBar.danger #tEmoji{animation:clockRing .22s ease-in-out infinite}
+.t-txt{flex:1;min-width:0;text-align:left}
+#tName{display:block;font-family:'Bebas Neue';font-weight:400;font-size:4.2cqw;line-height:.95;letter-spacing:.12cqw;color:#fff;text-shadow:0 0 1.2cqw currentColor,0 3px 6px #000;white-space:nowrap}
+#tSub{display:block;margin-top:.4cqw;font-size:.95cqw;color:#b9c6d6;letter-spacing:.03cqw}
+#tNum{font-family:'Bebas Neue';font-size:5.6cqw;line-height:1;min-width:5.4cqw;text-align:center;color:#fff;text-shadow:0 0 1.2cqw currentColor}
+#turnBar.cpu #tNum{display:none}
+#turnBar.danger #tNum{color:#ff6b78;animation:numPop .5s ease-in-out infinite}
+@keyframes barShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-.25cqw)}75%{transform:translateX(.25cqw)}}
+@keyframes clockRing{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes numPop{0%,100%{transform:scale(1)}50%{transform:scale(1.22)}}
+#dangerFx{inset:0;pointer-events:none;z-index:15;opacity:0;background:radial-gradient(ellipse at center,transparent 42%,#ff1a3a55 74%,#ff1a3add 100%);transition:opacity .3s}
+#game.timer-danger #dangerFx{opacity:1;animation:dangerPulse 1s ease-in-out infinite}
+#game.timer-crit #dangerFx{animation-duration:.42s}
+@keyframes dangerPulse{0%,100%{opacity:.3}50%{opacity:1}}
+#turnFlash{left:0;width:100%;top:36%;text-align:center;pointer-events:none;z-index:18;opacity:0;font-family:'Bebas Neue';font-size:10cqw;letter-spacing:.5cqw;line-height:1;color:#50e8ff;text-shadow:0 0 2cqw currentColor,0 6px 14px #000}
+#turnFlash.cpu{color:#ff4fb3}#turnFlash.friend{color:#b58cff}
+#turnFlash.go{animation:flashTurn 1.15s ease-out both}
+@keyframes flashTurn{0%{opacity:0;transform:scale(.55)}18%{opacity:1;transform:scale(1.12)}32%{transform:scale(1)}78%{opacity:1}100%{opacity:0;transform:scale(1.06)}}
+#rx .r1{display:block;font-weight:800;font-size:1.9cqw;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1.25;max-width:62cqw;margin:0 auto}
+#rx .r2{display:block;margin-top:.8cqw;font-family:'Bebas Neue';font-size:2.8cqw;letter-spacing:.12em;color:#ffd45a}
+@media (max-width:700px){
+#turnBar{left:44%!important;top:8%!important;width:33.5%!important;height:4.5%!important;padding:0 1.2vw!important;gap:1vw!important;border-radius:8px!important;border-width:1px!important}
+.t-ico{width:3.8vw!important;height:3.8vw!important}#tEmoji{font-size:2vw!important}
+#tName{font-size:3.4vw!important;letter-spacing:.2vw!important}#tSub{display:none!important}#tNum{font-size:4.4vw!important;min-width:4.4vw!important}
+#turnFlash{font-size:15vw!important;top:40%!important}
+#rx .r1{font-size:4vw!important;max-width:80vw!important}#rx .r2{font-size:6.4vw!important;margin-top:1.4vw!important}
+}
+</style>
+<style>
+/* ===== TRADING-CARD DESIGN (white border / black frame / photo window / name plate / 2x3 stat boxes) ===== */
+#game .slot,#game.wwe-mode .slot,#game.ipl-mode .slot{top:23.2%!important;width:18.6%!important;height:47%!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;border-radius:0!important}
+#game #yourCard{left:24.6%!important}#game #cpuCard{left:56.8%!important}
+#game .slot:before,#game .slot:after{display:none!important}
+.tc{position:absolute;inset:0;container-type:inline-size}
+.tc-o{position:absolute;inset:0;border-radius:5cqi;background:#f3f3f1;padding:2.4cqi;box-sizing:border-box;--glow:#50e8ff66;box-shadow:0 0 0 .5cqi #0009,0 1.2cqw 2.4cqw #000c,0 0 2.2cqw var(--glow);transition:box-shadow .25s}
+#cpuCard .tc-o{--glow:#ff536477}
+.tc-in{height:100%;box-sizing:border-box;background:#0c0c0f;border-radius:3.6cqi;padding:3.6cqi 3.6cqi 3.2cqi;display:flex;flex-direction:column;gap:2.6cqi}
+.tc-pic{position:relative;flex:1;min-height:0;border-radius:1.8cqi;overflow:hidden;border:.8cqi solid #ececea;background:linear-gradient(160deg,#27508f,#0a1230)}
+#game.wwe-mode .tc-pic{background:linear-gradient(160deg,#6a33b8,#150a2e)}
+#game.ipl-mode .tc-pic{background:linear-gradient(160deg,#8a2f8f,#1a0a35)}
+.tc-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover!important;object-position:center 12%!important;display:block}
+.tc-tag{position:absolute;left:0;right:0;bottom:0;padding:5cqi 2cqi 1.6cqi;font-size:3.4cqi;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-align:center;color:#fff;background:linear-gradient(transparent,#000d);text-shadow:0 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-sw{position:absolute;top:2cqi;right:2cqi;z-index:3;padding:1.3cqi 2.8cqi;border-radius:99cqi;background:#000c;border:.5cqi solid #ffd45a;color:#ffd45a;font:400 3.6cqi 'Bebas Neue',sans-serif;letter-spacing:.08em;cursor:pointer}
+.tc-sw:hover{background:#ffd45a;color:#000}
+.tc-name{height:11.5cqi;flex:none;display:flex;align-items:center;justify-content:center;border-radius:2.6cqi;background:#f3f3f1;color:#111;font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;line-height:1;padding:0 2cqi;white-space:nowrap;overflow:hidden}
+.tc-stats{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:1.8cqi}
+.tc-s{height:10.6cqi;display:flex;align-items:center;gap:1.2cqi;padding:0 2.4cqi;border-radius:2.4cqi;background:#f3f3f1;color:#111;font-family:'Bebas Neue',sans-serif;font-size:5.3cqi;letter-spacing:.04em;line-height:1;white-space:nowrap;overflow:hidden;box-sizing:border-box;transition:background .15s}
+.tc-s span,.tc-s i{flex:none;font-style:normal}.tc-s b{font-weight:400;overflow:hidden;text-overflow:clip}
+.tc-s.locked{background:#d6d6d3}.tc-s.locked b{color:#888}
+.tc-s.called{background:#ffd45a;box-shadow:0 0 2cqi #ffd45a}
+.tc-s.life-rev{background:#fff0c4;box-shadow:inset 0 0 0 .7cqi #ff9a3c}
+.tc-s.clk{cursor:pointer}.tc-s.clk:hover{background:#ffe08a}.tc-s.clk:active{transform:scale(.97)}
+#game .slot.battle-you .tc-o{box-shadow:0 0 0 .5cqi #0009,0 0 3.2cqw #56f39a}
+#game .slot.battle-cpu .tc-o{box-shadow:0 0 0 .5cqi #0009,0 0 3.2cqw #ff5364}
+#game .slot.battle-tie .tc-o{box-shadow:0 0 0 .5cqi #0009,0 0 3.2cqw #ffd45a}
+@media (max-width:700px){
+#game .slot,#game.wwe-mode .slot,#game.ipl-mode .slot{top:18.8%!important;width:45.8%!important;height:36.5%!important}
+#game #yourCard{left:2%!important}#game #cpuCard{left:52.2%!important}
+.tc-o{box-shadow:0 0 0 1px #0009,0 0 14px var(--glow)}
+}
+</style>
+<style>
+.tc-name{justify-content:space-between!important;gap:1.2cqi;padding:0 1.4cqi!important}
+.tc-name>span{flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-ar{flex:none;width:8.6cqi;height:8.6cqi;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(145deg,#ffd45a,#ff9a3c);color:#1b1300;font:400 7.2cqi/1 'Bebas Neue',sans-serif;padding:0 0 .9cqi;cursor:pointer;box-shadow:0 0 2cqi #ffb23c88;transition:transform .15s}
+.tc-ar:hover:not(:disabled){transform:scale(1.14)}.tc-ar:active:not(:disabled){transform:scale(.92)}
+.tc-ar:disabled{background:#c9c9c6;color:#8a8a87;box-shadow:none;cursor:default;opacity:.55}
+.tc-set{position:absolute;top:2cqi;left:2cqi;z-index:3;padding:1.1cqi 2.6cqi;border-radius:99cqi;background:#000c;border:.5cqi solid #50e8ff;color:#50e8ff;font:400 3.3cqi 'Bebas Neue',sans-serif;letter-spacing:.1em}
+</style>
+</body></html>
