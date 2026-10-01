@@ -1137,4 +1137,52 @@ function musicBtn(){$('music').classList.toggle('muted',muted);$('mi').textConte
 .tc-ar:disabled{background:#c9c9c6;color:#8a8a87;box-shadow:none;cursor:default;opacity:.55}
 .tc-set{position:absolute;top:2cqi;left:2cqi;z-index:3;padding:1.1cqi 2.6cqi;border-radius:99cqi;background:#000c;border:.5cqi solid #50e8ff;color:#50e8ff;font:400 3.3cqi 'Bebas Neue',sans-serif;letter-spacing:.1em}
 </style>
+<style>
+/* ===== COMPACT LAYOUT: bottom 6-stat button row removed (the cards themselves are the buttons) ===== */
+#calls{display:none!important}
+/* ---- DESKTOP / WEB (16:9 stage): bigger cards, lifelines moved under them ---- */
+#game #yourCard,#game #cpuCard{top:23.2%!important;width:23.2%!important;height:59%!important}
+#game #yourCard{left:21.4%!important}#game #cpuCard{left:55.4%!important}
+#game #vs{top:48.2%!important}
+#lifelines{left:21.4%;top:83.8%;width:57.2%;height:8%}
+/* ---- MOBILE: stacked top-to-bottom (YOU on top, CPU/FRIEND below) ---- */
+@media (max-width:700px){
+#game{--cw:min(23.8dvh,58vw);--sd:calc((100vw - var(--cw))/2);--col:calc(var(--sd) - 3vw);--rx:calc(50vw + var(--cw)/2 + 1.5vw)}
+#rules{display:none!important}
+#game #yourCard,#game #cpuCard{left:calc(50vw - var(--cw)/2)!important;width:var(--cw)!important;height:calc(var(--cw)/.7)!important}
+#game #yourCard{top:18.6%!important}#game #cpuCard{top:56.6%!important}
+#game #vs{left:calc(50% - 6vw)!important;width:12vw!important;top:52.6%!important;height:4%!important;font-size:5.6vw!important}
+/* left column: your lifelines (beside YOUR card) */
+#lifelines{left:1.5vw!important;top:18.6%!important;width:var(--col)!important;height:34%!important;flex-direction:column!important;gap:1.2%!important}
+#lifelines .ll{flex:1 1 0!important;max-height:32%!important}
+/* right column: YOUR pile (beside your card) */
+.pk#pkL{left:var(--rx)!important;top:21%!important;width:var(--col)!important;height:13%!important}
+#cL{left:var(--rx)!important;top:35%!important;width:var(--col)!important;font-size:2.6vw!important}
+/* left column, lower: recent battles (beside CPU card) */
+#hist{left:1.5vw!important;top:56.6%!important;width:var(--col)!important;height:34%!important;padding:4.6dvh 1.2vw .6vw!important}
+#hist:before{height:3.8dvh!important;padding-left:1.4vw!important;font-size:2.5vw!important;white-space:nowrap}
+#hist .br{font-size:2.5vw!important;gap:1vw!important;padding:.6vw 0!important}
+#hist .br i{width:3.8vw!important;height:3.8vw!important;font-size:2.4vw!important;flex:none}
+#hist .br span{font-size:2vw!important}
+/* right column, lower: CPU pile (beside CPU card) */
+.pk#pkR{left:var(--rx)!important;top:60.6%!important;width:var(--col)!important;height:13%!important}
+#cR{left:var(--rx)!important;top:74.6%!important;width:var(--col)!important;font-size:2.6vw!important}
+#hint{left:2%!important;top:91.6%!important;width:96%!important;font-size:2.7vw!important;white-space:normal!important;line-height:1.25}
+#turnBar{z-index:9}
+}
+</style>
+<style>
+/* ===== NO-SCROLL MENUS ON PHONES: tiles scale with screen height ===== */
+@media (max-width:800px){
+.main-menu,.cricket-menu{padding:48px 14px 14px!important;justify-content:flex-start!important}
+.main-menu{padding-top:2.6dvh!important;justify-content:center!important}
+.main-title{font-size:clamp(28px,9vw,46px)!important;margin-top:0!important}
+.main-packs,.cricket-pack-grid{margin-top:2dvh!important;gap:10px!important}
+.pack-art,.choice-art{height:clamp(96px,18dvh,200px)!important}
+.main-pack-name{margin-top:1dvh!important;font-size:13px!important}
+.main-footer{margin:1.4dvh 0 0!important}
+.section-title{font-size:clamp(28px,8vw,40px)!important;margin-top:4px!important}
+.friend-zone{margin-top:1.4dvh!important}
+}
+</style>
 </body></html>
