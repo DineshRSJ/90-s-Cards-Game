@@ -167,6 +167,8 @@ button{font:inherit;cursor:pointer}.screen{display:none}.screen.active{display:b
 
 .att-art{background:radial-gradient(circle at 50% 30%,#ff2a4155,transparent 40%),linear-gradient(150deg,#3b0610,#0d0206 60%,#2a0810);border:1px solid #ff364f66;justify-content:flex-end!important;padding-bottom:12px}
 .att-art .choice-badge{color:#ff8a98;z-index:3}
+.ra-choice h2{font-size:clamp(11px,1.02vw,16px)!important;white-space:nowrap}
+.ra-art{background:radial-gradient(circle at 50% 30%,#3ab4ff44,transparent 40%),linear-gradient(150deg,#0a2a4d,#050b16 60%,#0d2238)!important;border:1px solid #4db8ff77!important}.ra-art .choice-badge{color:#7fd0ff}.ra-art .att-title{color:#5cc4ff;text-shadow:0 0 16px #1e90ff,0 3px 8px #000;font-size:clamp(17px,1.9vw,28px)}
 .att-imgs{position:absolute;inset:0 0 34% 0;display:flex;justify-content:center;align-items:flex-end;gap:0}
 .att-imgs img{width:38%;height:88%;object-fit:cover;object-position:center 12%;border:2px solid #ffffff44;border-radius:8px;box-shadow:0 8px 24px #000c;background:#1a0a0e}
 .att-imgs img:nth-child(1){transform:rotate(-7deg) translateX(14%);z-index:1}.att-imgs img:nth-child(2){height:100%;z-index:2}.att-imgs img:nth-child(3){transform:rotate(7deg) translateX(-14%);z-index:1}
@@ -288,6 +290,30 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 .pack-art.has-imgs{justify-content:flex-end;padding-bottom:12px}.pack-art.has-imgs .pack-icon{display:none}
 .pack-art.has-imgs .att-imgs{z-index:1}.pack-art.has-imgs .pack-art-title{font-size:clamp(24px,2.6vw,40px)}
 </style>
+<style>
+/* LIFELINES */
+#lifelines{left:22.2%;top:71.3%;width:55.6%;height:7.9%;display:flex;gap:1.1%;z-index:5}
+.ll{position:relative;flex:1;min-width:0;display:flex;align-items:center;gap:.7cqw;padding:0 1cqw;border:1px solid #50e8ff88;border-radius:.7cqw;color:#fff;text-align:left;cursor:pointer;background:linear-gradient(145deg,#0b2a45f0,#040d1af0);box-shadow:0 0 1cqw #50e8ff22,inset 0 0 1.2cqw #0008;transition:.16s;font-family:inherit}
+.ll.opp{border-color:#ff536499;background:linear-gradient(145deg,#3a1120f0,#12050bf0);box-shadow:0 0 1cqw #ff536422,inset 0 0 1.2cqw #0008}
+.ll.full{border-color:#ffd45aaa;background:linear-gradient(145deg,#3a2c0ef0,#120d04f0);box-shadow:0 0 1cqw #ffd45a25,inset 0 0 1.2cqw #0008}
+.ll:not(:disabled):hover{transform:translateY(-3px);filter:brightness(1.25)}
+.ll:not(:disabled):active{transform:scale(.97)}
+.ll:disabled{opacity:.38;cursor:not-allowed;filter:grayscale(.5)}
+.ll u{text-decoration:none;font-size:2cqw;flex:0 0 auto;filter:drop-shadow(0 0 .5cqw #ffffff55)}
+.ll .lt{display:flex;flex-direction:column;min-width:0;line-height:1.1}
+.ll .lt b{font-family:'Bebas Neue',sans-serif;font-size:1.2cqw;letter-spacing:.08cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ll .ls{display:none}.ll .lt small{font-size:.72cqw;color:#9fb8cc;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ll .lc{position:absolute;top:-.6cqw;right:-.4cqw;min-width:1.9cqw;height:1.9cqw;padding:0 .4cqw;box-sizing:border-box;border-radius:999px;display:grid;place-items:center;font-style:normal;font-family:'Bebas Neue',sans-serif;font-size:1.2cqw;background:#50e8ff;color:#021018;box-shadow:0 0 .8cqw #50e8ff99}
+.ll.opp .lc{background:#ff5364;color:#fff;box-shadow:0 0 .8cqw #ff536499}
+.ll.full .lc{background:#ffd45a;color:#1b1300;box-shadow:0 0 .8cqw #ffd45a99}
+.ll:disabled .lc{background:#3a4658;color:#9fb0c5;box-shadow:none}
+@media (max-width:700px){
+#lifelines{left:19.5%!important;top:57.4%!important;width:61%!important;height:8.6%!important;gap:1.4vw!important}
+.ll{flex-direction:column!important;justify-content:center;gap:.6vw!important;padding:0 .8vw!important;border-radius:8px!important;text-align:center}
+.ll u{font-size:4.6vw!important}.ll .lt{align-items:center}.ll .lf{display:none}.ll .ls{display:inline}.ll .lt b{font-size:2.7vw!important;letter-spacing:.05vw}.ll .lt small{display:none}
+.ll .lc{top:-1.6vw!important;right:-1vw!important;min-width:4.6vw!important;height:4.6vw!important;font-size:3vw!important;padding:0 1vw!important}
+}
+</style>
 </head><body>
 
 <section id="home" class="screen active"><div class="main-menu">
@@ -300,7 +326,7 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
     </button>
     <button class="main-pack wwe-pack" onclick="show('wwePacks')">
       <div class="pack-art wwe-art has-imgs"><div class="pack-glow"></div><div class="pack-badge">SUPERSTARS</div><div class="att-imgs"><img id="hwA" alt=""><img id="hwB" alt=""><img id="hwC" alt=""></div><div class="pack-icon">★</div><div class="pack-art-title">WWE</div><div class="pack-art-sub">RING EDITION</div></div>
-      <div class="main-pack-name">WWE PACK</div><div class="main-pack-meta">ATTITUDE ERA • 52 SUPERSTARS</div>
+      <div class="main-pack-name">WWE PACK</div><div class="main-pack-meta">ATTITUDE ERA • RUTHLESS AGGRESSION</div>
     </button>
     <button class="main-pack soon-pack" disabled>
       <div class="pack-art soon-art"><div class="lock-mark">◆</div><div class="coming-label">COMING SOON</div><div class="soon-lines"></div></div>
@@ -332,7 +358,7 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
   <div class="section-subtitle">CHOOSE YOUR WRESTLING CARD COLLECTION</div>
   <div class="cricket-pack-grid">
     <button class="cricket-choice active-pack" onclick="selectPack('wwe');show('difficulty')"><div class="choice-art att-art"><div class="choice-badge">WWF • 1997–2002</div><div class="att-imgs"><img id="attA" alt=""><img id="attB" alt=""><img id="attC" alt=""></div><div class="att-title">ATTITUDE<br>ERA</div><div class="choice-shine"></div></div><h2>ATTITUDE ERA</h2><p>52 SUPERSTARS • RANK, MATCHES, BUILD</p></button>
-    <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 02</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
+    <button class="cricket-choice active-pack ra-choice" onclick="selectPack('ra');show('difficulty')"><div class="choice-art att-art ra-art"><div class="choice-badge">WWE • 2002–2008</div><div class="att-imgs"><img id="raA" alt=""><img id="raB" alt=""><img id="raC" alt=""></div><div class="att-title">RUTHLESS<br>AGGRESSION</div><div class="choice-shine"></div></div><h2>RUTHLESS AGGRESSION</h2><p>52 SUPERSTARS • RANK, MATCHES, BUILD</p></button>
     <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 03</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
     <button class="cricket-choice" disabled><div class="choice-art locked-art"><span>COMING SOON</span><b>PACK 04</b></div><h2>COMING SOON</h2><p>FUTURE WWE PACK</p></button>
   </div>
@@ -340,9 +366,9 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 
 <section id="difficulty" class="screen"><div class="wrap" style="padding-top:8vh">
 <button class="back" onclick="show('home')">← BACK TO PACKS</button>
-<div class="brand" style="font-size:clamp(40px,6vw,72px)">CHOOSE YOUR DIFFICULTY</div><p class="sub" id="difficultyPack">20'S LEGENDS • The opponent's values stay hidden in both modes.</p>
-<div class="diffs"><button class="diff" onclick="startGame('easy')"><b>EASY</b><small>CPU calls a random stat.</small></button>
-<button class="diff" onclick="startGame('hard')"><b>HARD</b><small>CPU calls its strongest stat.</small></button></div></div></section>
+<div class="brand" style="font-size:clamp(40px,6vw,72px)">CHOOSE YOUR DIFFICULTY</div><p class="sub" id="difficultyPack">20'S LEGENDS • Opponent's values stay hidden • Hard hides yours too.</p>
+<div class="diffs"><button class="diff" onclick="startGame('easy')"><b>EASY</b><small>Your stats are visible. CPU calls a random stat.<br><span style="color:#50e8ff">2 LIFELINES</span></small></button>
+<button class="diff" onclick="startGame('hard')"><b>HARD</b><small>Your stats are hidden too. CPU calls its strongest stat.<br><span style="color:#ffd45a">3 LIFELINES</span></small></button></div></div></section>
 
 <section id="game" class="screen">
 <div class="desktop-brand" aria-hidden="true"><div class="desktop-brand-title">90'S <span>CARD GAME</span></div><div class="desktop-brand-sub"><span id="desktopPack">20'S LEGENDS</span> <i>•</i> <span id="desktopMode">EASY MODE</span></div></div>
@@ -350,13 +376,13 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 <div class="mobile-brand" aria-hidden="true"><div class="mobile-brand-title">90'S <span>CARD GAME</span></div><div class="mobile-brand-sub"><span id="mobilePack">20'S LEGENDS</span> <i>•</i> <span id="mobileMode">EASY MODE</span></div></div>
 <button class="ab" id="exit" onclick="if(confirm('Leave this match?')){stopMusic();show('home')}">← EXIT</button>
 <button class="ab" id="music" onclick="toggleMusic()"><span id="mi">🔊</span><span id="mt">MUSIC</span></button>
-<select id="trackSelect" aria-label="Select music track" onchange="selectTrack(this.value)"><option value="arena">ARENA</option><option value="pulse">PULSE</option><option value="retro">RETRO</option></select>
+<select id="trackSelect" aria-label="Select music track" onchange="selectTrack(this.value)"><option value="groove">GROOVE</option><option value="drive">DRIVE</option><option value="meditate">MEDITATE</option><option value="rebellion">REBELLION</option></select>
 <div id="score"><div>YOU <strong id="yc">25</strong></div><div>CPU <strong id="cc">25</strong></div></div>
 <div class="slot" id="yourCard"></div><div class="ab" id="vs">VS</div><div class="slot" id="cpuCard"></div>
 <div class="pk" id="pkL">90'S</div><div class="pk" id="pkR">90'S</div><div class="cnt" id="cL">25 CARDS</div><div class="cnt" id="cR">25 CARDS</div>
 <div id="hist"></div>
 <div id="rules"><div>Choose one stat to call.</div><div><b>Higher</b> wins every stat except Bowling Average.</div><div><b>Bowling Average:</b> lower non-zero value wins.</div><div style="color:#ffd45a">0 always loses — even Bowling Average.</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div></div>
-<div id="calls"></div><div id="hint"></div>
+<div id="calls"></div><div id="lifelines"></div><div id="hint"></div>
 <div id="result"><div id="rbox"><h2 id="rt"></h2><p id="rx"></p><button onclick="hideResult()">CONTINUE</button></div></div>
 <div class="ipl-loading" id="iplLoading"><div class="ipl-loading-box"><b>LOADING IPL 2026</b><span>Loading real season statistics &amp; player data…</span></div></div>
 </section>
@@ -455,7 +481,7 @@ Tatenda Taibu|Zimbabwe|150,3393,29.46,67.78,111,2,0,0,0,114,25,17
 Sean Williams|Zimbabwe|156,4484,35.61,81.92,129,4,83,36.39,1,84,0,30`;
 const P=RAW.trim().split(/\r?\n/).filter(Boolean).map(l=>{const[a,b,c]=l.split('|');return[a,b,...c.split(',').map(Number)]});
 let selectedPack='legends',ACTIVE_P=P;
-function selectPack(pack){selectedPack=pack;if(pack==='wwe'){const d=$('difficultyPack');if(d)d.textContent='ATTITUDE ERA • 6 stats • Rank #1 is best • The opponent\'s values stay hidden.';return}const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • The opponent\'s values stay hidden in both modes.')}
+function selectPack(pack){selectedPack=pack;if(pack==='ra'){const d=$('difficultyPack');if(d)d.textContent='RUTHLESS AGGRESSION ERA • 2002–2008 • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}if(pack==='wwe'){const d=$('difficultyPack');if(d)d.textContent='ATTITUDE ERA • 6 stats • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • Opponent\'s values stay hidden • Hard hides yours too.')}
 const IPL_TOP15={
  RCB:['Virat Kohli','Rajat Patidar','Phil Salt','Devdutt Padikkal','Jitesh Sharma','Tim David','Krunal Pandya','Bhuvneshwar Kumar','Josh Hazlewood','Suyash Sharma','Romario Shepherd','Jacob Duffy','Jordan Cox','Venkatesh Iyer','Yash Dayal'],
  MI:['Suryakumar Yadav','Rohit Sharma','Tilak Varma','Ryan Rickelton','Hardik Pandya','Naman Dhir','Sherfane Rutherford','Jasprit Bumrah','Trent Boult','Deepak Chahar','Will Jacks','Shardul Thakur','Mayank Markande','Danish Malewar','Robin Minz'],
@@ -518,11 +544,12 @@ const SIL="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.or
 const src0=n=>ANIME[n]||(typeof IPLIMG!=='undefined'&&IPLIMG[n]&&IPLIMG_BASE+IPLIMG[n])||(typeof _img!=='undefined'&&_img[n])||'assets/players/'+slug(n)+'.jpg';
 const IPLIMG_BASE='https://img.ipl.com/upload/',IPLIMG={"Virat Kohli":"20251222/6a637ab1b55193691878e82292833298.jpg","Rohit Sharma":"20260813/0eb65a50eae9f9772b7c11e7aab0f0f6.png","KL Rahul":"20251220/d993c030d237204a1a86c0d466d07f4c.jpg","Sanju Samson":"20241016/45c430ec258b66b9e13e938a55e62dbb.jpg","MS Dhoni":"20251103/984dfb8acf166f9aadcc6e6ec0593f3d.jpg","Jos Buttler":"20251224/32c1ab6ffa7ae0cb7d20e6445d537eaf.jpg","Shubman Gill":"20251224/fb303c517d95a1331482d0ddeda2d469.jpg","Suryakumar Yadav":"20241017/f2e89afde8aedc9537d3f392000a9eba.png","Shreyas Iyer":"20241022/11bb9e90cb43dcf316a0b624ae0aea59.png","Rishabh Pant":"20260824/b7c1c8c1cd0c5a2bae60fdc5a0f94524.png","Manish Pandey":"20250918/0692398a568b3d8d7ac21b030e82e023.jpg","Ishan Kishan":"20260806/d08d07f8ddd518f92e1454c96d23102d.png","David Miller":"20250811/e787fa6208b297e2e41f5dc3fbfa8197.png","Ravindra Jadeja":"20251222/0c9d20f83897a8dd8dfb6f657f71b22d.jpg","Nitish Rana":"20250124/8c8e63ed6b8e7a26b3a3ad05059f2a83.png","Hardik Pandya":"20251220/4b705f255e22cbe6b47beb8b613296dd.jpg","Ruturaj Gaikwad":"20251224/2e711bdfc9f372595f3081c9f2255d5a.jpg","Yashasvi Jaiswal":"20241017/d3d73abc4b3f4ed3ce0167b0201d375f.jpg","Nicholas Pooran":"20251223/7e8d2b567b51e8b98c875786e1c1b698.jpg","Sai Sudharsan":"20251224/38e79428f92e0f48cd37825812c41987.jpg","Abhishek Sharma":"20241017/f66831a683cd09a86235e230bbbfbbfb.png","Devdutt Padikkal":"20260813/28a3ceca72914ab8657010a4cbc10c29.png","Marcus Stoinis":"20251121/d2001510af0d231a23b497e97693aba1.jpg","Shivam Dube":"20251225/fa585cd974ea490579608c9f249b607c.jpg","Heinrich Klaasen":"20251220/075a41b932d23bdf70ca12be71d2a780.jpg","Axar Patel":"20251220/c2f53ae723cdb614237e9b44f2f3847f.jpg","Krunal Pandya":"20251104/9de7c1fa84cbbb7d7aae649dce1fca06.jpg","Riyan Parag":"20251224/d162ec4cfa9e6547c12e8cce8d137346.jpg","Tilak Varma":"20260806/2d63dae755f1f192b2e6f25e054580dd.png","Sunil Narine":"20250811/a46578c86befc0714d0a431bbd58573f.png","Prabhsimran Singh":"20251107/a54322cc6903ad425d09fd7b38d9b353.jpg","Mitchell Marsh":"20251103/b137ff79044120ed8d39673cc468bc8f.jpg","Karun Nair":"20251106/0ec9ba224ab26f043c00274c16deda77.jpg","Venkatesh Iyer":"20251031/5c936812e5f60dd0a6174e126fc32b00.jpg","Aiden Markram":"20251103/9ad9a45eb9dc5351c8bc6b7285d97c33.jpg","Rajat Patidar":"20251104/04a370389ccd9aabe6da50afe99e4d6e.jpg","Shimron Hetmyer":"20260407/207941cc18d6d4cea4baf87d06519cd3.jpg","Travis Head":"20251105/7f6266b7ced23124db0fc1e2cd74bb77.jpg","Rinku Singh":"20241016/c190c535c9f93ab07287e2206ad4980d.jpg","Rahul Tewatia":"20251108/6e9826ff5d8d3a44b4d71578824d4cc9.jpg","Yuzvendra Chahal":"20251222/9fd327e2be2c5f288262aeb863108070.jpg","Bhuvneshwar Kumar":"20251105/f8bb7f83f1483d5e174c91439b560dd4.jpg","Jasprit Bumrah":"20251104/50db6df08624409d93a30f346bb76523.jpg","Rashid Khan":"20251224/2e6f8dfcd441280f29e02f3b2f26ec4e.jpg","Sandeep Sharma":"20251106/65e8f8ec1b49cde654207c8aa3abf41d.jpg","Harshal Patel":"20251106/7148d75045552eb9db20dc265b77c4e2.jpg","Kagiso Rabada":"20251224/a939c542f94769bd7d9619745385ca61.jpg","Mohammed Shami":"20260818/00551b4259825c20c245142aced25d54.png","Trent Boult":"20251226/5b347ac8211244940b60fdbe04e048d5.jpg","Mohammed Siraj":"20251224/da567e46b18d03cc24357bf10c4ef34e.jpg","Shardul Thakur":"20260720/7cee945a63f208ff92115d26b53185a4.png","Kuldeep Yadav":"20260806/9b270a9bff5f97c454471cb7f978f5a6.png","Arshdeep Singh":"20251223/7ef32ff683739f8ca4bd1a5caa043582.jpg","Varun Chakaravarthy":"20251105/845ab75bbfb5d5319337a22e5e70a5f8.jpg","Jaydev Unadkat":"20251220/6eb42feff1b5953d14661014b537881c.jpg","Deepak Chahar":"20250120/83c455367c93f60b5f8e9ea634d867f2.png","Avesh Khan":"20251223/66b596157ac2d1312c94fcee8b5134a2.jpg","Khaleel Ahmed":"20251103/d06eece33de71202c0d32058ebc29cb0.jpg","Prasidh Krishna":"20251224/a59a1510497c37689aed5691a66e1918.jpg","Pat Cummins":"20251220/5236db69d962a0e8c621e5543344621d.jpg","Ishant Sharma":"20251108/5d3570724312d1702a615d3394da605d.jpg","Jofra Archer":"20260805/a43c15429e764684f8f5de1ee84b141f.png","Ravi Bishnoi":"20241017/4de0874f332bc0d1cefd2f7cbc58bae0.jpg","Rahul Chahar":"20260402/e38ff5a327f9d6cd0d802eae8a7e844a.jpg","T Natarajan":"20251106/0b130719d8776f3f10660dbb1eba70b3.jpg","Josh Hazlewood":"20251219/a8f23e51ca68d8031df0c17240191a8d.jpg","Jason Holder":"20251224/ae5b57d0c538491585a1db697f4de6ea.jpg","Noor Ahmad":"20260206/15a173497cfcfbf63ce12550cb59a909.jpg","Sam Curran":"20241016/531a8769a633446f7bd14f92f35539f0.png","Tushar Deshpande":"20251106/ab38a19603d24d8234ddc84f33bf3013.jpg","Lockie Ferguson":"20251222/e8ac32e594a9328485b06fcda5ace24f.jpg","Vaibhav Arora":"20251105/a31b89a26dc7a7fb3e08fc3d0955bd3c.jpg","Matheesha Pathirana":"20251229/b0a2b01dc30b02e3413f2a379145e1db.jpg","Marco Jansen":"20251223/043b1353ff8287bf78d94b43fc84421c.jpg","Mukesh Kumar":"20251220/6da265f4a0dc7cddcb46cab624269fb4.jpg","Anrich Nortje":"20251223/f18eab7970a9ca81ee35f7bbaea725ef.jpg","Mitchell Starc":"20260116/e94d77a1cf1b244ef7d8b5eac0f5e8dc.jpg"};
 const WWE_DATA=[["Undertaker","THE PHENOM",1,2100,208,136,132,53],["Stone Cold Steve Austin","THE TEXAS RATTLESNAKE",2,1400,188,114,127,50],["The Rock","THE PEOPLE'S CHAMPION",3,1000,196,118,132,51],["Triple H","THE GAME",4,3400,193,116,132,55],["Mankind","THE HARDCORE LEGEND",5,2000,188,130,127,48],["Shawn Michaels","THE HEARTBREAK KID",6,2300,185,102,117,43],["Kane","THE BIG RED MACHINE",7,2600,213,147,142,53],["Kurt Angle","THE OLYMPIC HERO",8,1500,183,108,124,48],["Chris Jericho","Y2J",9,3600,183,103,119,44],["Edge","THE RATED-R SUPERSTAR",10,2400,196,109,122,46],["Big Show","WORLD'S LARGEST ATHLETE",11,2500,213,174,152,56],["Bret Hart","THE HITMAN",12,1800,183,106,119,46],["X-Pac","THE SIXTH MAN",13,1600,180,96,112,41],["Chyna","THE NINTH WONDER",14,500,178,82,107,41],["Rikishi","THE FATU",15,1300,183,159,147,51],["Christian","CAPTAIN CHARISMA",16,1500,188,107,119,44],["Jeff Hardy","THE CHARISMATIC ENIGMA",17,1800,188,102,114,42],["Matt Hardy","MATT HARDY V1",18,1900,188,107,117,43],["Rey Mysterio","MASTER OF THE 619",19,2200,168,79,107,38],["Eddie Guerrero","LATINO HEAT",20,1800,173,100,117,43],["Chris Benoit","THE RABID WOLVERINE",21,1900,178,100,122,46],["Booker T","THE FIVE-TIME",22,2000,190,116,127,48],["Road Dogg","THE ROAD DOGG",23,1400,183,111,117,43],["Billy Gunn","THE ONE",24,1500,190,109,122,46],["Bradshaw","THE APA'S ENFORCER",25,1800,198,132,132,51],["Faarooq","THE DOMINATOR",26,1400,183,118,127,48],["Ken Shamrock","WORLD'S MOST DANGEROUS MAN",27,700,185,107,122,46],["Vader","THE MASTODON",28,1100,196,204,147,53],["Big Boss Man","THE BIG BOSSMAN",29,1500,198,150,137,51],["Owen Hart","THE BLUE BLAZER",30,1400,178,103,117,43],["British Bulldog","THE BRITISH BULLDOG",31,1800,180,118,127,48],["Val Venis","THE BIG VALOWSKI",32,1000,188,107,117,43],["The Godfather","THE PIMP",33,1200,183,136,132,48],["D'Lo Brown","THE ACCLAIMED",34,1300,178,113,127,46],["Mark Henry","WORLD'S STRONGEST MAN",35,2000,185,175,147,56],["Test","THE TEST",36,1100,198,118,127,48],["A-Train","THE BIG MAN",37,1200,198,170,142,51],["Scotty 2 Hotty","THE WORM MASTER",38,1300,183,98,112,41],["Tazz","HUMAN SUPLEX MACHINE",39,1000,175,109,122,46],["Al Snow","HEAD",40,1100,180,107,117,43],["Hardcore Holly","HARDCORE HOLLY",41,1900,183,109,122,46],["Steve Blackman","THE LETHAL WEAPON",42,900,178,107,122,46],["Goldust","THE BIZARRE ONE",43,2000,196,111,122,46],["Dean Malenko","THE ICEMAN",44,1500,175,100,117,43],["Perry Saturn","THE ORACLE",45,1000,185,113,122,46],["Kevin Nash","BIG DADDY COOL",46,1700,208,149,137,51],["Scott Hall","RAZOR RAMON",47,1800,201,130,127,48],["Hulk Hogan","THE HULKSTER",48,2600,201,137,132,61],["Ric Flair","THE NATURE BOY",49,4000,185,110,122,43],["Rob Van Dam","MR. MONDAY NIGHT",50,1500,183,107,117,43],["Diamond Dallas Page","DDP",51,1700,196,113,122,46],["Jeff Jarrett","DOUBLE J",52,2500,190,109,117,43]];
+const RA_DATA=[["John Cena","THE CHAMP IS HERE",1,2800,185,114,135,52],["Triple H","THE GAME",2,3400,193,116,132,55],["Batista","THE ANIMAL",3,1500,196,131,142,58],["Randy Orton","THE LEGEND KILLER",4,1900,196,105,124,46],["Undertaker","THE PHENOM",5,2100,208,136,132,53],["Edge","THE RATED-R SUPERSTAR",6,2400,196,109,122,46],["Shawn Michaels","MR. WRESTLEMANIA",7,2300,185,102,117,43],["Kurt Angle","THE OLYMPIC HERO",8,1500,183,108,124,48],["Brock Lesnar","THE NEXT BIG THING",9,600,191,130,137,56],["Rey Mysterio","MASTER OF THE 619",10,2200,168,79,107,38],["Eddie Guerrero","LATINO HEAT",11,1800,173,100,117,43],["Chris Jericho","Y2J",12,3600,183,103,119,44],["Big Show","WORLD'S LARGEST ATHLETE",13,2500,213,174,152,56],["Kane","THE BIG RED MACHINE",14,2600,213,147,142,53],["Booker T","THE FIVE-TIME",15,2000,190,116,127,48],["Ric Flair","THE NATURE BOY",16,4000,185,110,122,43],["The Rock","THE PEOPLE'S CHAMPION",17,1000,196,118,132,51],["Stone Cold Steve Austin","THE TEXAS RATTLESNAKE",18,1400,188,114,127,50],["Goldberg","THE UNDEFEATED",19,450,193,129,135,52],["JBL","THE WRESTLING GOD",20,1700,198,125,132,50],["Rob Van Dam","MR. PAY-PER-VIEW",21,1500,183,107,117,43],["Mick Foley","THE HARDCORE LEGEND",22,2000,188,130,127,48],["Christian","CAPTAIN CHARISMA",23,1500,188,107,119,44],["Jeff Hardy","THE CHARISMATIC ENIGMA",24,1800,188,102,114,42],["Matt Hardy","MATT HARDY V1",25,1900,188,107,117,43],["Umaga","THE SAMOAN BULLDOZER",26,700,188,158,147,52],["Mr. Kennedy","MR. KENNEDY KENNEDY",27,600,188,107,122,46],["CM Punk","BEST IN THE WORLD",28,1400,185,92,112,40],["Carlito","THE COOL ONE",29,700,183,98,117,43],["Shelton Benjamin","THE GOLD STANDARD",30,1000,185,111,122,46],["Mark Henry","WORLD'S STRONGEST MAN",31,2000,185,175,147,56],["Great Khali","THE PUNJABI GIANT",32,500,216,190,160,55],["Bobby Lashley","THE ALL MIGHTY",33,900,188,125,132,52],["Chris Masters","THE MASTERLOCK",34,650,196,118,132,50],["John Morrison","THE SHOOTING STAR",35,1000,188,98,117,44],["The Miz","THE AWESOME ONE",36,2100,183,100,119,44],["MVP","THE PLAYER",37,650,188,111,122,46],["Finlay","THE FIGHTING IRISHMAN",38,2000,188,106,125,46],["Chavo Guerrero","THE GUERRERO DYNASTY",39,1100,175,95,112,40],["Kevin Nash","BIG DADDY COOL",40,1700,208,149,137,51],["Hulk Hogan","THE HULKSTER",41,2600,201,137,132,61],["Bubba Ray Dudley","THE DUDLEY BOY",42,2300,190,145,142,50],["D-Von Dudley","THE DUDLEY BOY",43,2200,188,109,124,46],["Test","THE TEST",44,1100,198,118,127,48],["Rikishi","THE FATU",45,1300,183,159,147,51],["Gregory Helms","THE HURRICANE",46,1100,183,98,117,42],["Charlie Haas","THE ALL-AMERICAN",47,700,183,109,122,45],["William Regal","THE BLUE BLOODED",48,2200,183,107,120,44],["Rhyno","THE MAN BEAST",49,1300,180,107,125,46],["Brian Kendrick","THE HIGH-FLYER",50,900,175,79,107,38],["Paul London","HIGH-FLYING TAG CHAMP",51,700,175,82,107,38],["Snitsky","THAT WAS NOT MY FAULT",52,500,201,134,137,52]];
 const WWE_LABELS=["Rank","Matches","Height","Weight","Chest","Biceps"],WWE_IC=['👑','🎟️','📏','⚖️','💪','🦾'];
-const isW=()=>selectedPack==='wwe';
+const isW=()=>selectedPack==='wwe'||selectedPack==='ra';
 const ftIn=cm=>{const t=Math.round(Number(cm)/2.54);return Math.floor(t/12)+'.'+(t%12)};
 const fv=(v,i)=>isW()?(i===0?'#'+v:i===1?Number(v).toLocaleString():i===2?ftIn(v)+' ft':v+(i===3?' kg':' cm')):fmt(v);
-const WALIAS={'The Rock':'Dwayne Johnson','Stone Cold Steve Austin':'Stone Cold Steve Austin','Mankind':'Mick Foley','Edge':'Edge (wrestler)','Kane':'Kane (wrestler)','Christian':'Christian (wrestler)','Test':'Andrew Martin (wrestler)','Bradshaw':'John Layfield','Faarooq':'Ron Simmons','The Godfather':'Charles Wright (wrestler)','Tazz':'Taz (wrestler)','Vader':'Big Van Vader','British Bulldog':'Davey Boy Smith','Hardcore Holly':'Bob Holly','A-Train':'Matt Bloom','Big Boss Man':'Big Boss Man (wrestler)','Big Show':'Big Show','Undertaker':'The Undertaker','Val Venis':'Val Venis','X-Pac':'Sean Waltman','Road Dogg':'Road Dogg','Al Snow':'Al Snow','Chyna':'Chyna','Goldust':'Goldust','Diamond Dallas Page':'Diamond Dallas Page','Scotty 2 Hotty':'Scotty 2 Hotty'};
+const WALIAS={'John Cena':'John Cena','Batista':'Batista (wrestler)','JBL':'John Layfield','Mick Foley':'Mick Foley','Umaga':'Umaga (wrestler)','Mr. Kennedy':'Mr. Anderson','MVP':'Montel Vontavious Porter','Carlito':'Carlito (wrestler)','Great Khali':'The Great Khali','John Morrison':'John Morrison (wrestler)','Finlay':'Fit Finlay','Chavo Guerrero':'Chavo Guerrero Jr.','Bubba Ray Dudley':'Bully Ray','D-Von Dudley':'D-Von Dudley','Rhyno':'Rhyno (wrestler)','Snitsky':'Gene Snitsky','CM Punk':'CM Punk','The Miz':'The Miz','Gregory Helms':'Gregory Helms','Goldberg':'Goldberg (wrestler)','The Rock':'Dwayne Johnson','Stone Cold Steve Austin':'Stone Cold Steve Austin','Mankind':'Mick Foley','Edge':'Edge (wrestler)','Kane':'Kane (wrestler)','Christian':'Christian (wrestler)','Test':'Andrew Martin (wrestler)','Bradshaw':'John Layfield','Faarooq':'Ron Simmons','The Godfather':'Charles Wright (wrestler)','Tazz':'Taz (wrestler)','Vader':'Big Van Vader','British Bulldog':'Davey Boy Smith','Hardcore Holly':'Bob Holly','A-Train':'Matt Bloom','Big Boss Man':'Big Boss Man (wrestler)','Big Show':'Big Show','Undertaker':'The Undertaker','Val Venis':'Val Venis','X-Pac':'Sean Waltman','Road Dogg':'Road Dogg','Al Snow':'Al Snow','Chyna':'Chyna','Goldust':'Goldust','Diamond Dallas Page':'Diamond Dallas Page','Scotty 2 Hotty':'Scotty 2 Hotty'};
 /* Portrait lookup: Wikipedia, cricketer pages only, batched + cached */
 const ALIAS={'Vaibhav Sooryavanshi':'Vaibhav Suryavanshi','T Natarajan':'Thangarasu Natarajan','Varun Chakaravarthy':'Varun Chakravarthy','M Shahrukh Khan':'Shahrukh Khan (cricketer)','Sai Kishore':'Ravisrinivasan Sai Kishore','Mohsin Khan':'Mohsin Khan (cricketer, born 1998)','Prince Yadav':'Prince Yadav (cricketer)','Suryakumar Yadav':'Suryakumar Yadav','Sarfaraz Khan':'Sarfaraz Khan','Abdul Samad':'Abdul Samad (cricketer)','Ashutosh Sharma':'Ashutosh Sharma (cricketer)','Harsh Dubey':'Harsh Dubey','Mayank Yadav':'Mayank Yadav','Nandre Burger':'Nandre Burger','Jitesh Sharma':'Jitesh Sharma','Shivang Kumar':'Shivang Kumar','Kartik Sharma':'Kartik Sharma (cricketer)','Sameer Rizvi':'Sameer Rizvi','Lhuan-dre Pretorius':'Lhuan-dre Pretorius'};
 Object.assign(ALIAS,WALIAS);
@@ -569,7 +596,7 @@ function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.re
 
 /* cover images: name|imgId|wwe? (IPL players use the IPL CDN first, then Wikipedia) */
 [ 'Brian Lara|legA','Sachin Tendulkar|legB','Ricky Ponting|legC','Rohit Sharma|iplA|ipl','Virat Kohli|iplB|ipl','Suryakumar Yadav|iplC|ipl',
-  'Brian Lara|hcA','Sachin Tendulkar|hcB','Virat Kohli|hcC','The Rock|hwA|w','Stone Cold Steve Austin|hwB|w','Undertaker|hwC|w'].forEach(x=>{
+  'John Cena|raA|w','Randy Orton|raB|w','Batista|raC|w','Brian Lara|hcA','Sachin Tendulkar|hcB','Virat Kohli|hcC','The Rock|hwA|w','Stone Cold Steve Austin|hwB|w','Undertaker|hwC|w'].forEach(x=>{
  const[n,id,k]=x.split('|'),el=document.getElementById(id);if(!el)return;
  const wiki=()=>{const keep=selectedPack;selectedPack=k==='w'?'wwe':'legends';const p=resolveImg(n);selectedPack=keep;p.then(u=>{if(u){el.onerror=null;el.src=u}else el.style.display='none'})};
  if(k==='ipl'&&typeof IPLIMG!=='undefined'&&IPLIMG[n]){el.onerror=wiki;el.src=IPLIMG_BASE+IPLIMG[n]}else wiki();
@@ -577,31 +604,30 @@ function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.re
 const pi=$('packImg');if(pi){pi.onerror=()=>fb(pi);pi.src=src0('Sachin Tendulkar');}
 
 let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[],revealedStat=-1;
+let LL={me:5,opp:3,full:1},myRev=false,oppAll=false,oppSet=new Set();
 const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 async function startGame(d){
-  mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;
+  mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;LL={me:5,opp:3,full:1};myRev=false;oppAll=false;oppSet=new Set();
   const dm=$('desktopMode'),mm=$('mobileMode');if(dm)dm.textContent=d.toUpperCase()+' MODE';if(mm)mm.textContent=d.toUpperCase()+' MODE';
-  const pack=selectedPack==='ipl',wwe=selectedPack==='wwe';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
-  if($('desktopPack'))$('desktopPack').textContent=wwe?'ATTITUDE ERA':pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=wwe?'ATTITUDE ERA':pack?'IPL 2026':'20\'S LEGENDS';
+  const pack=selectedPack==='ipl',ra=selectedPack==='ra',wwe=selectedPack==='wwe'||ra;const PN=ra?'RUTHLESS AGGRESSION':'ATTITUDE ERA';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
+  if($('desktopPack'))$('desktopPack').textContent=wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';
   show('game');try{hideResult()}catch(e){}
-  if(wwe){$('iplLoading').classList.add('show');const lb=$('iplLoading').querySelector('b');if(lb)lb.textContent='LOADING ATTITUDE ERA';ACTIVE_P=WWE_DATA;await Promise.race([prefetchImgs(WWE_DATA.map(r=>r[0])),new Promise(r=>setTimeout(r,9000))]);$('iplLoading').classList.remove('show')}else if(pack){$('iplLoading').classList.add('show');$('hint').textContent='Loading full IPL career statistics (2008–2026)…';try{ACTIVE_P=await loadIPL();}catch(e){console.error(e);$('iplLoading').classList.remove('show');alert('IPL 2026 data could not be loaded. Please open the game online and try again.');show('cricketPacks');return}$('iplLoading').classList.remove('show')}else ACTIVE_P=P;
+  if(wwe){$('iplLoading').classList.add('show');const lb=$('iplLoading').querySelector('b');if(lb)lb.textContent='LOADING '+PN;ACTIVE_P=ra?RA_DATA:WWE_DATA;await Promise.race([prefetchImgs(ACTIVE_P.map(r=>r[0])),new Promise(r=>setTimeout(r,9000))]);$('iplLoading').classList.remove('show')}else if(pack){$('iplLoading').classList.add('show');$('hint').textContent='Loading full IPL career statistics (2008–2026)…';try{ACTIVE_P=await loadIPL();}catch(e){console.error(e);$('iplLoading').classList.remove('show');alert('IPL 2026 data could not be loaded. Please open the game online and try again.');show('cricketPacks');return}$('iplLoading').classList.remove('show')}else ACTIVE_P=P;
   const s=shuffle(ACTIVE_P).slice(0,50),hf=Math.floor(s.length/2);pd=s.slice(0,hf);cd=s.slice(hf,hf*2);renderHist();nextRound();try{startMusic()}catch(e){console.warn('Music could not start automatically:',e)}
 }
 function nextRound(){
   if(!pd.length||!cd.length)return endGame();
-  you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
+  you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;myRev=false;oppAll=false;oppSet=new Set();$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
   $('yc').textContent=pd.length;$('cc').textContent=cd.length;$('cL').textContent=pd.length+' CARDS';$('cR').textContent=cd.length+' CARDS';
   $('hint').textContent=last==='you'?isW()?'Higher wins • Rank: lower (#1 best) wins':'Higher wins • Bowling Average: lower wins • 0 always loses':'CPU is choosing…';
-  renderCards();renderCalls();
+  renderCards();renderCalls();renderLifelines();
   if(last==='cpu')setTimeout(cpuCall,900);
 }
 const fmt=v=>typeof v==='number'&&v%1?v.toFixed(2):v.toLocaleString();
 function card(t,p,hidden){
   const vals=bat?p.slice(2,8):p.slice(8,14),labs=isW()?WWE_LABELS:bat?L1:L2;
-  const hardHidden=mode==='hard' && revealedStat!==-1;
-  const isHidden=hidden || hardHidden;
   $(t).innerHTML=`<div class="card" id="${t}Box"><div class="country">${p[1]}</div>
-  <div class="card-main"><div class="image-column"><div class="portrait" style="--portrait-bg:url('${src0(p[0])}')"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div><div class="identity"><div class="pname">${p[0]}</div><div class="stat-switch" onclick="toggleStats()"><span class="stat-switch-label">${bat?"BOWL STATS":"BAT STATS"}</span><button class="toggle" type="button" aria-label="Switch stats">›</button></div></div></div><div class="stats">${vals.map((v,i)=>{const reveal=mode==='hard'&&revealedStat===i;const showVal=!isHidden||reveal;const clickable=!hidden&&!locked&&last==='you'&&(mode==='hard'||!isHidden);return `<div class="stat ${showVal?'':'locked'} ${clickable?'card-stat-clickable':''}" ${clickable?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${showVal?fv(v,i):'?'}</b></div>`}).join('')}</div></div></div>`;
+  <div class="card-main"><div class="image-column"><div class="portrait" style="--portrait-bg:url('${src0(p[0])}')"><img alt="${p[0]}" src="${src0(p[0])}" onerror="fb(this)"></div><div class="identity"><div class="pname">${p[0]}</div><div class="stat-switch" onclick="toggleStats()"><span class="stat-switch-label">${bat?"BOWL STATS":"BAT STATS"}</span><button class="toggle" type="button" aria-label="Switch stats">›</button></div></div></div><div class="stats">${vals.map((v,i)=>{const showVal=revealedStat===i||(hidden?(oppAll||oppSet.has((bat?'b':'w')+i)):(mode==='easy'||myRev));const clickable=!hidden&&!locked&&last==='you';return `<div class="stat ${showVal?'':'locked'} ${clickable?'card-stat-clickable':''}" ${clickable?`onclick="callStat(${i})"`:''}><span>${labs[i]}</span><b>${showVal?fv(v,i):'?'}</b></div>`}).join('')}</div></div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
 function renderCalls(){
@@ -611,8 +637,28 @@ function renderCalls(){
 function renderHist(){
   $('hist').innerHTML=hist.slice(-5).reverse().map(h=>`<div class="br"><i class="${h.w==='you'?'':h.w==='cpu'?'l':'t'}">${h.w==='you'?'✓':h.w==='cpu'?'×':'='}</i><div><b>${h.w==='you'?'You won':h.w==='cpu'?'You lost':'Tie'}</b><span>${h.s}: ${h.a} vs ${h.b}</span></div></div>`).join('')||'<span style="color:#9fb0c5;font-size:.85cqw">Your battles will appear here.</span>';
 }
+const LLDEF={me:{ic:'👁️',t:'REVEAL MY STATS',sh:'MY STATS',s:'Show all your stats',c:'me'},opp:{ic:'🎯',t:'OPPONENT STAT',sh:'OPP STAT',s:'Reveal 1 random stat',c:'opp'},full:{ic:'🃏',t:'OPPONENT CARD',sh:'OPP CARD',s:'Reveal whole card',c:'full'}};
+function renderLifelines(){
+  const el=$('lifelines');if(!el)return;
+  const keys=mode==='hard'?['me','opp','full']:['opp','full'];
+  el.innerHTML=keys.map(k=>{const d=LLDEF[k],off=locked||last!=='you'||LL[k]<=0;
+    return `<button class="ll ${d.c}" ${off?'disabled':''} onclick="useLifeline('${k}')" title="${d.t} (${LL[k]} left)"><u>${d.ic}</u><span class="lt"><b><span class="lf">${d.t}</span><span class="ls">${d.sh}</span></b><small>${d.s}</small></span><i class="lc">${LL[k]}</i></button>`}).join('');
+}
+function llMsg(m){const h=$('hint');if(h)h.textContent=m}
+function useLifeline(k){
+  if(locked||last!=='you'||LL[k]<=0)return;
+  if(k==='me'){if(mode!=='hard'||myRev)return llMsg('Your stats are already visible.');myRev=true}
+  else if(k==='opp'){
+    if(oppAll)return llMsg('Opponent card is already fully revealed.');
+    const pre=bat?'b':'w',left=[0,1,2,3,4,5].filter(i=>!oppSet.has(pre+i));
+    if(!left.length)return llMsg('All opponent stats on this side are already revealed.');
+    oppSet.add(pre+left[Math.floor(Math.random()*left.length)]);
+  }else{if(oppAll)return;oppAll=true}
+  LL[k]--;sFlip();renderCards();renderLifelines();
+  llMsg(k==='me'?'Your stats revealed for this round.':k==='opp'?'One opponent stat revealed.':'Opponent card fully revealed.');
+}
 function toggleStats(){if(locked||isW())return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
-function callStat(i){if(locked||last!=='you')return;locked=true;revealedStat=i;sSel();renderCards();setTimeout(()=>resolve(i),450)}
+function callStat(i){if(locked||last!=='you')return;locked=true;revealedStat=i;sSel();renderCards();renderLifelines();setTimeout(()=>resolve(i),450)}
 function cpuCall(){
   if(locked)return;const base=bat?2:8;let best=Math.floor(Math.random()*6);
   if(mode==='hard'){
@@ -651,43 +697,19 @@ function tone(f,d,ty='sine',g=.05,w=0){try{const c=audio(),o=c.createOscillator(
 const sSel=()=>{tone(420,.05,'square',.05);tone(620,.07,'triangle',.06,.045)},sFlip=()=>{tone(260,.06,'sine',.05);tone(520,.1,'triangle',.06,.05);tone(760,.08,'triangle',.04,.12)};
 const sWin=()=>[660,880,1040,1320].forEach((f,i)=>tone(f,.2,'triangle',.08,i*.11)),sLose=()=>[260,190,120].forEach((f,i)=>tone(f,.2,'sawtooth',.06,i*.12)),sTie=()=>{tone(420,.12,'sine',.05);tone(500,.15,'sine',.04,.12)};
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('button,.pack.open');if(b&&!b.disabled&&!b.classList.contains('toggle')&&!b.classList.contains('call')&&b.id!=='music')tone(720,.045,'square',.03)});
-/* Background music: three genuinely different procedural tracks. */
-let mGain=null,mTimer=null,nextT=0,mStep=0,muted=false,currentTrack='arena';
+/* Background music: 4 MP3 soundtracks loaded from the assets/ folder */
 const TRACKS={
- arena:{bpm:124,prog:[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],wave:'arena'},
- pulse:{bpm:138,prog:[[60,64,67],[58,62,65],[53,57,60],[55,59,62]],wave:'pulse'},
- retro:{bpm:108,prog:[[52,55,59],[48,52,55],[55,58,62],[50,54,57]],wave:'retro'}
+ groove:{name:'CARD GAME GROOVE',src:'assets/Card_Game_Groove.mp3'},
+ drive:{name:'CHAMPIONSHIP DRIVE',src:'assets/Championship_Drive.mp3'},
+ meditate:{name:'MEDITATE',src:'assets/Meditate.mp3'},
+ rebellion:{name:'REBELLION',src:'assets/Rebellion.mp3'}
 };
-let PROG=TRACKS.arena.prog;
-const mtof=m=>440*Math.pow(2,(m-69)/12);
-function mNote(ty,f,t,d,v,cut){const c=audio(),o=c.createOscillator(),g=c.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);let n=o;if(cut){const l=c.createBiquadFilter();l.type='lowpass';l.frequency.value=cut;o.connect(l);n=l}n.connect(g);g.connect(mGain);o.start(t);o.stop(t+d+.05)}
-function mKick(t){const c=audio(),o=c.createOscillator(),g=c.createGain();const f=currentTrack==='retro'?125:currentTrack==='pulse'?165:150;o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(42,t+.13);g.gain.setValueAtTime(.8,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(g);g.connect(mGain);o.start(t);o.stop(t+.25)}
-function mSnare(t,v=.55){mNoise(t,v,1400,.13)}
-function mNoise(t,v,hp,d){const c=audio(),b=c.createBuffer(1,Math.floor(c.sampleRate*d),c.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=Math.random()*2-1;const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;f.type='highpass';f.frequency.value=hp;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);s.connect(f);f.connect(g);g.connect(mGain);s.start(t)}
-function mLead(t,ch,s,spb){
-  if(currentTrack==='arena'){
-    const seq=[ch[2]+24,ch[1]+24,ch[0]+24,ch[1]+24];
-    if(s%4===0)mNote('square',mtof(seq[(s/4)%4|0]),t,spb*1.2,.065,2200);
-  }else if(currentTrack==='pulse'){
-    const seq=[ch[0]+24,ch[1]+24,ch[2]+24,ch[1]+24,ch[0]+36,ch[2]+24,ch[1]+24,ch[0]+24];
-    mNote('triangle',mtof(seq[s%8]),t,spb*.72,.055,3200);
-  }else{
-    const seq=[ch[2]+12,ch[1]+12,ch[0]+12,ch[1]+12,ch[2]+12,ch[2]+12,ch[1]+12,ch[0]+12];
-    if(s%2===0)mNote('sine',mtof(seq[(s/2)%8|0]),t,spb*1.4,.07,1800);
-  }
-}
-function mSchedule(){const c=audio(),spb=60/TRACKS[currentTrack].bpm/4;PROG=TRACKS[currentTrack].prog;while(nextT<c.currentTime+.4){const s=mStep%16,ch=PROG[Math.floor(mStep/16)%4];
-  if(s%4===0)mKick(nextT);
-  if(currentTrack==='arena'){if(s===4||s===12)mSnare(nextT,.48);if(s%2===1)mNoise(nextT,.12,6500,.035);if(s%2===0)mNote('sawtooth',mtof(ch[0]-24),nextT,spb*1.7,.22,650)}
-  if(currentTrack==='pulse'){if(s===4||s===12)mSnare(nextT,.7);if(s%2===1)mNoise(nextT,.2,7500,.045);if(s%2===0)mNote('triangle',mtof(ch[s%4]-12),nextT,spb*.75,.2,1800)}
-  if(currentTrack==='retro'){if(s===8)mSnare(nextT,.35);if(s%4===2)mNoise(nextT,.08,5200,.06);if(s===0||s===8)mNote('sine',mtof(ch[0]-12),nextT,spb*3,.18,900)}
-  mLead(nextT,ch,s,spb);nextT+=spb;mStep++}}
-function ensureGain(){const c=audio();if(!mGain){const comp=c.createDynamicsCompressor();mGain=c.createGain();mGain.gain.value=muted?0:.55;mGain.connect(comp);comp.connect(c.destination)}return c}
-function startProcedural(){const c=ensureGain();if(!mTimer){mStep=0;nextT=c.currentTime+.1;mTimer=setInterval(mSchedule,70)}}
-function stopProcedural(){if(mTimer){clearInterval(mTimer);mTimer=null}}
-function startMusic(){startProcedural();musicBtn()}
-function selectTrack(v){currentTrack=v;stopProcedural();startProcedural();musicBtn()}
-function stopMusic(){stopProcedural()}
-function toggleMusic(){muted=!muted;if(!mGain)startProcedural();else mGain.gain.setTargetAtTime(muted?0:.55,audio().currentTime,.03);musicBtn()}
+let currentTrack='groove',muted=false,bgm=null;
+function getBgm(){if(!bgm){bgm=new Audio();bgm.loop=true;bgm.preload='auto';bgm.volume=.55;bgm.src=TRACKS[currentTrack].src}return bgm}
+function playBgm(){const a=getBgm();a.muted=muted;const r=a.play();if(r&&r.catch)r.catch(e=>console.warn('Music blocked or file missing:',e))}
+function startMusic(){if(!bgm||bgm.paused)playBgm();musicBtn()}
+function selectTrack(v){if(!TRACKS[v])return;currentTrack=v;const a=getBgm();a.src=TRACKS[v].src;a.currentTime=0;playBgm();musicBtn()}
+function stopMusic(){if(bgm)bgm.pause()}
+function toggleMusic(){muted=!muted;const a=getBgm();a.muted=muted;if(!muted&&a.paused)playBgm();musicBtn()}
 function musicBtn(){$('music').classList.toggle('muted',muted);$('mi').textContent=muted?'🔇':'🔊';$('mt').textContent=muted?'MUTED':'MUSIC'}
 </script></body></html>
