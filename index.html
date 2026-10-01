@@ -376,7 +376,7 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 <div class="mobile-brand" aria-hidden="true"><div class="mobile-brand-title">90'S <span>CARD GAME</span></div><div class="mobile-brand-sub"><span id="mobilePack">20'S LEGENDS</span> <i>•</i> <span id="mobileMode">EASY MODE</span></div></div>
 <button class="ab" id="exit" onclick="if(confirm('Leave this match?')){stopMusic();show('home')}">← EXIT</button>
 <button class="ab" id="music" onclick="toggleMusic()"><span id="mi">🔊</span><span id="mt">MUSIC</span></button>
-<select id="trackSelect" aria-label="Select music track" onchange="selectTrack(this.value)"><option value="groove">GROOVE</option><option value="drive">DRIVE</option><option value="meditate">MEDITATE</option><option value="rebellion">REBELLION</option></select>
+<select id="trackSelect" aria-label="Select music track" onchange="selectTrack(this.value)"><option value="groove">GROOVE</option><option value="meditate">MEDITATE</option><option value="rebellion">REBELLION</option></select>
 <div id="score"><div>YOU <strong id="yc">25</strong></div><div>CPU <strong id="cc">25</strong></div></div>
 <div class="slot" id="yourCard"></div><div class="ab" id="vs">VS</div><div class="slot" id="cpuCard"></div>
 <div class="pk" id="pkL">90'S</div><div class="pk" id="pkR">90'S</div><div class="cnt" id="cL">25 CARDS</div><div class="cnt" id="cR">25 CARDS</div>
@@ -699,18 +699,16 @@ const sWin=()=>[660,880,1040,1320].forEach((f,i)=>tone(f,.2,'triangle',.08,i*.11
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('button,.pack.open');if(b&&!b.disabled&&!b.classList.contains('toggle')&&!b.classList.contains('call')&&b.id!=='music')tone(720,.045,'square',.03)});
 /* Background music: 4 MP3 soundtracks loaded from the assets/ folder (tries a few filename variants if one is missing) */
 const TRACKS={
- groove:{name:'CARD GAME GROOVE',file:'Card_Game_Groove.mp3'},
- drive:{name:'CHAMPIONSHIP DRIVE',file:'Championship_Drive.mp3'},
- meditate:{name:'MEDITATE',file:'Meditate.mp3'},
- rebellion:{name:'REBELLION',file:'Rebellion.mp3'}
+ groove:{name:'CARD GAME GROOVE',files:['Card Game Groove.mp3','Card_Game_Groove.mp3']},
+ meditate:{name:'MEDITATE',files:['Meditate.mp3','meditate.mp3']},
+ rebellion:{name:'REBELLION',files:['Rebellion.mp3','rebellion.mp3']}
 };
-const trackSrcs=k=>{const f=TRACKS[k].file,sp=f.replace(/_/g,' '),lo=f.toLowerCase(),lo2=sp.toLowerCase();
- return [...new Set(['assets/'+f,'assets/'+lo,'assets/'+sp,'assets/'+lo2,'assets/'+f.replace(/_/g,'-'),f,lo,sp])].map(encodeURI)};
+const trackSrcs=k=>[...new Set(TRACKS[k].files.flatMap(f=>['assets/'+f,f]))].map(encodeURI);
 let currentTrack='groove',muted=false,bgm=null,bgmTry=0,bgmToken=0;
 function musicToast(m){let t=document.getElementById('musicToast');if(!t){t=document.createElement('div');t.id='musicToast';t.style.cssText='position:absolute;left:50%;top:14%;transform:translateX(-50%);z-index:30;max-width:90%;padding:8px 14px;border-radius:10px;background:#3a0710ee;border:1px solid #ff5364;color:#fff;font:700 12px sans-serif;text-align:center;pointer-events:none';($('game')).appendChild(t)}t.textContent=m;t.style.display=m?'block':'none';if(m){clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',7000)}}
 function loadTrack(k,n){
  const list=trackSrcs(k),a=getBgm(),tok=++bgmToken;bgmTry=n||0;
- const go=()=>{if(tok!==bgmToken)return;a.onerror=()=>{if(tok!==bgmToken)return;if(bgmTry<list.length-1){bgmTry++;go()}else{console.warn('Music file not found. Tried:',list);musicToast('Music file not found: assets/'+TRACKS[k].file+' — check the file name in your repo')}};
+ const go=()=>{if(tok!==bgmToken)return;a.onerror=()=>{if(tok!==bgmToken)return;if(bgmTry<list.length-1){bgmTry++;go()}else{console.warn('Music file not found. Tried:',list);musicToast('Music file not found: assets/'+TRACKS[k].files[0]+' — check the file name in your repo')}};
   a.src=list[bgmTry];a.currentTime=0;a.muted=muted;const r=a.play();if(r&&r.catch)r.catch(e=>{if(e&&e.name==='NotAllowedError')console.warn('Autoplay blocked until you tap',e)})};
  go();
 }
