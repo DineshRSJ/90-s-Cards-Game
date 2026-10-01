@@ -360,6 +360,101 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 .chips button.on{background:#50e8ff;color:#021018;border-color:#50e8ff;box-shadow:0 0 16px #50e8ff55}
 @media (max-width:700px){.friend-zone{width:100%;margin-top:22px}.friend-toggle{padding:12px 18px;font-size:12px}.friend-opts{width:100%}.friend-opts button{width:100%}}
 </style>
+
+<style id="marvel-css">
+/* ===== MARVEL: HOME PACK ===== */
+.marvel-art{background:radial-gradient(circle at 50% 38%,#ff3b4a66,transparent 46%),linear-gradient(150deg,#5b0710,#14040c 55%,#3a0a1c)!important;border:1px solid #ff4a5a88!important;justify-content:flex-end!important;padding-bottom:12px;animation:mvPackGlow 2.6s ease-in-out infinite}
+@keyframes mvPackGlow{0%,100%{box-shadow:inset 0 0 50px #ff2a4a22,0 0 16px #ff2a4a33}50%{box-shadow:inset 0 0 60px #ff2a4a44,0 0 34px #ff3b4a88}}
+.mv-burst{position:absolute;inset:-30%;background:repeating-conic-gradient(from 0deg at 50% 46%,#ff3b4a33 0 6deg,transparent 6deg 16deg);animation:mvSpin 40s linear infinite;pointer-events:none;-webkit-mask:radial-gradient(circle at 50% 46%,#000 0,transparent 62%);mask:radial-gradient(circle at 50% 46%,#000 0,transparent 62%)}
+@keyframes mvSpin{to{transform:rotate(360deg)}}
+.mv-dots{position:absolute;inset:0;background:radial-gradient(#ffffff18 1px,transparent 1.4px) 0 0/9px 9px;pointer-events:none;opacity:.55}
+.mv-star{position:absolute;left:50%;top:30%;transform:translate(-50%,-50%);font-size:clamp(90px,10vw,150px);line-height:1;color:#ffd45a;opacity:.16;text-shadow:0 0 30px #ffd45a;pointer-events:none}
+.mv-bolt{position:absolute;width:20px;height:20px;border-color:#ffd45a;border-style:solid;filter:drop-shadow(0 0 6px #ffd45a);pointer-events:none;z-index:4}
+.mv-bolt.tl{top:8px;left:8px;border-width:3px 0 0 3px}.mv-bolt.tr{top:8px;right:8px;border-width:3px 3px 0 0}
+.mv-bolt.bl{bottom:8px;left:8px;border-width:0 0 3px 3px}.mv-bolt.br{bottom:8px;right:8px;border-width:0 3px 3px 0}
+.marvel-art .pack-glow{background:rgba(255,59,74,.28)}
+.marvel-art .pack-badge{color:#ff9aa6;border-color:#ff4a5a88;z-index:5}
+.marvel-art .pack-art-title{color:#fff;text-shadow:0 0 18px #ff2a4a,0 3px 8px #000;font-style:italic;z-index:3}
+.marvel-art .pack-art-sub{color:#ffd45a;z-index:3}
+.marvel-pack:hover:not(:disabled){border-color:#ff4a5a!important;box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 34px rgba(255,59,74,.4)!important}
+/* choice cards inside the Marvel screen */
+.mv-choice .choice-art{background:radial-gradient(circle at 50% 35%,#ff3b4a55,transparent 45%),linear-gradient(150deg,#5b0710,#12040b 60%,#2f0a1a)!important;border:1px solid #ff4a5a99!important;animation:mvPackGlow 2.6s ease-in-out infinite}
+.mv-choice .choice-badge{color:#ffb0b9!important;z-index:5}
+.mv-choice .att-title{color:#fff!important;font-style:italic;text-shadow:0 0 16px #ff2a4a,0 3px 8px #000!important;font-size:clamp(26px,2.8vw,42px)!important}
+.mv-choice:hover:not(:disabled){border-color:#ff4a5a!important}
+.doom-art{background:radial-gradient(circle at 50% 40%,#2bff7a33,transparent 48%),linear-gradient(150deg,#06200f,#050a08 60%,#0b2a14)!important;border:1px solid #2bff7a55!important;justify-content:center!important;gap:6px;opacity:.9}
+.doom-mask{position:relative;z-index:2;font-size:clamp(54px,6vw,84px);line-height:1;filter:drop-shadow(0 0 16px #2bff7a) grayscale(.2);opacity:.85}
+.doom-title{position:relative;z-index:2;font-size:clamp(24px,2.6vw,38px);font-weight:1000;letter-spacing:4px;color:#7dffae;text-shadow:0 0 16px #1fe068,0 3px 8px #000}
+.doom-soon{position:relative;z-index:2;margin-top:8px;padding:6px 14px;border:1px solid #7dffae88;border-radius:99px;font-size:clamp(11px,1vw,14px);font-weight:1000;letter-spacing:3px;color:#7dffae;background:#00000088}
+.doom-art:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 14px,#00000033 14px 16px);pointer-events:none}
+.doom-art .mv-dots{opacity:.35}
+.empty-art{border:1px dashed #536577}
+
+/* ===== MARVEL COVER CAST ===== */
+.mv-cast{position:absolute;inset:7% 3% 27% 3%;z-index:2;pointer-events:none}
+.mv-fig{position:absolute;bottom:0;display:block}
+.mv-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 6px 8px #000d);z-index:2}
+.mv-fig svg{position:absolute;left:8%;bottom:4%;width:84%;height:88%;opacity:.92;filter:drop-shadow(0 0 5px #000a)}
+.mv-fig.ok svg{display:none}
+.f-thanos{left:27%;width:46%;height:104%;z-index:1;filter:drop-shadow(0 0 10px #9b4dff77)}
+.f-iron{left:-4%;width:40%;height:90%;z-index:2;filter:drop-shadow(0 0 8px #ff2a3a55)}
+.f-thor{right:-4%;width:40%;height:90%;z-index:2;filter:drop-shadow(0 0 8px #4da6ff66)}
+.f-hulk{left:30%;width:42%;height:64%;z-index:3;filter:drop-shadow(0 0 8px #3cff5a55)}
+.marvel-art .pack-art-sub{font-size:clamp(7px,.62vw,10px);letter-spacing:1.5px;text-align:center}
+
+/* ===== MARVEL 4-CARD FAN (matches Cricket / WWE covers) ===== */
+.att-imgs.mv4{gap:0;align-items:flex-end;padding:0 4%}
+.att-imgs.mv4 img{width:29%;height:80%;margin-left:-5%;object-fit:cover;object-position:center 8%;border:2px solid #ffffff55;border-radius:8px;box-shadow:0 8px 24px #000c;background:linear-gradient(160deg,#5b0710,#14061f);transform:none}
+.att-imgs.mv4 img:nth-child(1){margin-left:0;transform:rotate(-9deg) translateY(4%);z-index:1}
+.att-imgs.mv4 img:nth-child(2){height:96%;transform:rotate(-3deg);z-index:3}
+.att-imgs.mv4 img:nth-child(3){height:96%;transform:rotate(3deg);z-index:4}
+.att-imgs.mv4 img:nth-child(4){transform:rotate(9deg) translateY(4%);z-index:2}
+.marvel-art .pack-art-sub{font-size:10px;letter-spacing:3px}
+/* ===== MARVEL: IN-GAME ===== */
+#game.marvel-mode{background:radial-gradient(circle at 50% 40%,#1a070d 0%,#080812 46%,#020208 100%)}
+#game.marvel-mode .stat-switch{display:none!important}
+#game.marvel-mode .desktop-brand-title span,#game.marvel-mode .mobile-brand-title span{color:#ff4457}
+#game.marvel-mode .desktop-brand-sub,#game.marvel-mode .mobile-brand-sub{border-color:#ff445788;color:#ffd45a}
+#game.marvel-mode .stat{border-color:#ff445755;background:linear-gradient(145deg,#3a0a14cc,#10060acc)}
+#game.marvel-mode .stat:hover{border-color:#ff4457;box-shadow:0 0 18px #ff445766}
+#game.marvel-mode .country{color:#ff9aa6}
+#game.marvel-mode:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(#ffffff08 1px,transparent 1.5px) 0 0/10px 10px,repeating-conic-gradient(from 0deg at 50% 52%,#ff2a4a08 0 5deg,transparent 5deg 14deg);-webkit-mask:radial-gradient(circle at 50% 52%,#000 0,transparent 60%);mask:radial-gradient(circle at 50% 52%,#000 0,transparent 60%)}
+/* The card: no plain square — chamfered hero-plate with a living neon edge */
+@property --mvA{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes mvEdge{to{--mvA:360deg}}
+@keyframes mvPulse{0%,100%{filter:drop-shadow(0 0 .25cqw var(--mg))}50%{filter:drop-shadow(0 0 .45cqw var(--mg))}}
+#game.marvel-mode .tc{--mg:#2fa8ff66;animation:mvPulse 2.4s ease-in-out infinite}
+#game.marvel-mode #cpuCard .tc{--mg:#ff3b4a66}
+#game.marvel-mode .slot.battle-you .tc{--mg:#56f39a99}
+#game.marvel-mode .slot.battle-cpu .tc{--mg:#ff3b4a99}
+#game.marvel-mode .slot.battle-tie .tc{--mg:#ffd45a99}
+#game.marvel-mode .slot .tc-o,#game.marvel-mode .slot.battle-you .tc-o,#game.marvel-mode .slot.battle-cpu .tc-o,#game.marvel-mode .slot.battle-tie .tc-o{box-shadow:none!important}
+#game.marvel-mode .tc-o{border-radius:0;padding:1.5cqi;box-shadow:none;
+ background:conic-gradient(from var(--mvA),#1f7fd0 0deg,#8fc4e8 40deg,#d9b24a 90deg,#1f7fd0 150deg,#5b44c4 215deg,#8fc4e8 270deg,#1f7fd0 360deg);animation:mvEdge 3.4s linear infinite;
+ clip-path:polygon(9cqi 0,calc(100% - 9cqi) 0,100% 9cqi,100% calc(100% - 9cqi),calc(100% - 9cqi) 100%,9cqi 100%,0 calc(100% - 9cqi),0 9cqi)}
+#game.marvel-mode #cpuCard .tc-o{background:conic-gradient(from var(--mvA),#c4283a 0deg,#e8a3a8 40deg,#d9b24a 90deg,#c4283a 150deg,#d4601f 215deg,#e8a3a8 270deg,#c4283a 360deg)}
+#game.marvel-mode .tc-o:before,#game.marvel-mode .tc-o:after{content:"";position:absolute;width:9cqi;height:9cqi;z-index:6;pointer-events:none}
+#game.marvel-mode .tc-o:before{top:0;left:0;background:linear-gradient(135deg,#ffd45a 0 36%,transparent 37%)}
+#game.marvel-mode .tc-o:after{bottom:0;right:0;background:linear-gradient(-45deg,#ffd45a 0 36%,transparent 37%)}
+#game.marvel-mode .tc-in{border-radius:0;background:linear-gradient(180deg,#0b0c16,#07070d);position:relative;
+ clip-path:polygon(8cqi 0,calc(100% - 8cqi) 0,100% 8cqi,100% calc(100% - 8cqi),calc(100% - 8cqi) 100%,8cqi 100%,0 calc(100% - 8cqi),0 8cqi)}
+#game.marvel-mode .tc-pic{border:.7cqi solid #ffffffcc;border-radius:0;background:linear-gradient(160deg,#c3141f,#1a0a3a);
+ clip-path:polygon(0 0,calc(100% - 7cqi) 0,100% 7cqi,100% 100%,7cqi 100%,0 calc(100% - 7cqi))}
+#game.marvel-mode .tc-pic:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(#00000030 1px,transparent 1.5px) 0 0/2.2cqi 2.2cqi;mix-blend-mode:multiply;opacity:.55}
+#game.marvel-mode .tc-tag{z-index:3;color:#ffd45a;letter-spacing:.14em}
+.mv-badge{position:absolute;top:1.6cqi;left:1.6cqi;z-index:4;padding:.8cqi 2.6cqi;background:linear-gradient(90deg,#e62429,#9b0f18);color:#fff;font:400 3.5cqi 'Bebas Neue',sans-serif;letter-spacing:.14em;clip-path:polygon(0 0,100% 0,calc(100% - 2cqi) 100%,0 100%);text-shadow:0 1px 2px #000}
+.mv-star-m{position:absolute;top:1.2cqi;right:2cqi;z-index:4;color:#ffd45a;font-size:6cqi;line-height:1;text-shadow:0 0 2cqi #ffd45a}
+#game.marvel-mode .tc-name{border-radius:0;background:linear-gradient(90deg,#8e0c16,#e62429 50%,#8e0c16);color:#fff;text-shadow:0 1px 3px #000;border-top:.5cqi solid #ffd45a;border-bottom:.5cqi solid #ffd45a;clip-path:polygon(2.4cqi 0,calc(100% - 2.4cqi) 0,100% 50%,calc(100% - 2.4cqi) 100%,2.4cqi 100%,0 50%)}
+#game.marvel-mode .tc-s{border-radius:0;background:linear-gradient(180deg,#1a1d2e,#0f111c);color:#fff;border-left:.9cqi solid #e62429;clip-path:polygon(0 0,calc(100% - 2.2cqi) 0,100% 2.2cqi,100% 100%,2.2cqi 100%,0 calc(100% - 2.2cqi))}
+#game.marvel-mode .tc-s b{color:#ffd45a}
+#game.marvel-mode .tc-s.locked{background:linear-gradient(180deg,#23263a,#171a28);border-left-color:#5a5f78}
+#game.marvel-mode .tc-s.locked b{color:#8a90ad}
+#game.marvel-mode .tc-s.called{background:linear-gradient(180deg,#ffe08a,#ffc12e);color:#1b1300;box-shadow:0 0 2cqi #ffd45a;border-left-color:#e62429}
+#game.marvel-mode .tc-s.called b{color:#7a0a12}
+#game.marvel-mode .tc-s.life-rev{background:linear-gradient(180deg,#3a2a14,#241a0c);box-shadow:inset 0 0 0 .6cqi #ff9a3c}
+#game.marvel-mode .tc-s.clk:hover{background:linear-gradient(180deg,#3a1218,#24090e);border-left-color:#ffd45a}
+@media (prefers-reduced-motion:reduce){#game.marvel-mode .tc,#game.marvel-mode .tc-o,.mv-burst,.marvel-art,.mv-choice .choice-art{animation:none!important}}
+</style>
 </head><body>
 
 <section id="home" class="screen active"><div class="main-menu">
@@ -374,9 +469,9 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
       <div class="pack-art wwe-art has-imgs"><div class="pack-glow"></div><div class="pack-badge">SUPERSTARS</div><div class="att-imgs"><img id="hwA" alt=""><img id="hwB" alt=""><img id="hwC" alt=""></div><div class="pack-icon">★</div><div class="pack-art-title">WWE</div><div class="pack-art-sub">RING EDITION</div></div>
       <div class="main-pack-name">WWE PACK</div><div class="main-pack-meta">ATTITUDE ERA • RUTHLESS AGGRESSION</div>
     </button>
-    <button class="main-pack soon-pack" disabled>
-      <div class="pack-art soon-art"><div class="lock-mark">◆</div><div class="coming-label">COMING SOON</div><div class="soon-lines"></div></div>
-      <div class="main-pack-name">MYSTERY PACK</div><div class="main-pack-meta">FUTURE EDITION</div>
+    <button class="main-pack marvel-pack" onclick="show('marvelPacks')">
+      <div class="pack-art marvel-art has-imgs"><div class="pack-glow"></div><div class="pack-badge">INFINITY SAGA</div><div class="att-imgs mv4"><img id="hmI" alt=""><img id="hmN" alt=""><img id="hmH" alt=""><img id="hmT" alt=""></div><div class="pack-icon">★</div><div class="pack-art-title">MARVEL</div><div class="pack-art-sub">AVENGERS EDITION</div></div>
+      <div class="main-pack-name">MARVEL COMICS</div><div class="main-pack-meta">ENDGAME • DOOMSDAY COMING SOON</div>
     </button>
     <button class="main-pack soon-pack" disabled>
       <div class="pack-art soon-art"><div class="lock-mark">◆</div><div class="coming-label">COMING SOON</div><div class="soon-lines"></div></div>
@@ -414,6 +509,21 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
     <div class="friend-opts"><button onclick="openCreate('wwePacks')"><b>🏠 CREATE ROOM</b><small>Pick a pack • get a code</small></button><button onclick="openJoin('wwePacks')"><b>🔑 JOIN A FRIEND</b><small>Enter your friend's code</small></button></div></div>
 </div></section>
 
+
+<section id="marvelPacks" class="screen"><div class="cricket-menu">
+  <button class="menu-back" onclick="show('home')">← BACK TO MAIN MENU</button>
+  <div class="section-title">MARVEL <span>PACKS</span></div>
+  <div class="section-subtitle">CHOOSE YOUR SUPER HERO CARD COLLECTION</div>
+  <div class="cricket-pack-grid">
+    <button class="cricket-choice active-pack mv-choice" onclick="selectPack('endgame');show('difficulty')"><div class="choice-art att-art"><div class="choice-badge">INFINITY SAGA • MCU</div><div class="att-imgs mv4"><img id="mgI" alt=""><img id="mgN" alt=""><img id="mgH" alt=""><img id="mgT" alt=""></div><div class="att-title">ENDGAME</div><div class="choice-shine"></div></div><h2>ENDGAME</h2><p>86 HEROES &amp; VILLAINS • POWER, BRAINS, BRAWN</p></button>
+    <button class="cricket-choice mv-choice" disabled><div class="choice-art doom-art"><div class="mv-dots"></div><i class="mv-bolt tl" style="border-color:#7dffae"></i><i class="mv-bolt tr" style="border-color:#7dffae"></i><i class="mv-bolt bl" style="border-color:#7dffae"></i><i class="mv-bolt br" style="border-color:#7dffae"></i><div class="doom-mask">☠</div><div class="doom-title">DOOMSDAY</div><div class="doom-soon">COMING SOON</div></div><h2>DOOMSDAY</h2><p>COMING SOON</p></button>
+    <button class="cricket-choice" disabled><div class="choice-art locked-art empty-art"><span>EMPTY SLOT</span><b>PACK 03</b></div><h2>EMPTY</h2><p>FUTURE MARVEL PACK</p></button>
+    <button class="cricket-choice" disabled><div class="choice-art locked-art empty-art"><span>EMPTY SLOT</span><b>PACK 04</b></div><h2>EMPTY</h2><p>FUTURE MARVEL PACK</p></button>
+  </div>
+  <div class="friend-zone"><button class="friend-toggle" onclick="toggleFriend(this)"><span>👥 PLAY WITH FRIEND</span><i>▾</i></button>
+    <div class="friend-opts"><button onclick="openCreate('marvelPacks')"><b>🏠 CREATE ROOM</b><small>Pick a pack • get a code</small></button><button onclick="openJoin('marvelPacks')"><b>🔑 JOIN A FRIEND</b><small>Enter your friend's code</small></button></div></div>
+</div></section>
+
 <section id="difficulty" class="screen"><div class="wrap" style="padding-top:8vh">
 <button class="back" onclick="show(PACKMENU)">← BACK TO PACKS</button>
 <div class="brand" style="font-size:clamp(40px,6vw,72px)">CHOOSE YOUR DIFFICULTY</div><p class="sub" id="difficultyPack">20'S LEGENDS • Opponent's values stay hidden • Hard hides yours too.</p>
@@ -425,7 +535,7 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 <div class="brand sm">CREATE A ROOM</div><p class="sub">Choose the pack and difficulty, then share the code with your friend.</p>
 <div class="lobby-card">
 <div class="lobby-label">CHOOSE THE PACK</div>
-<div class="chip-group"><div class="chip-title">🏏 CRICKET</div><div class="chips" id="chipsCricket"></div><div class="chip-title">★ WWE</div><div class="chips" id="chipsWwe"></div></div>
+<div class="chip-group"><div class="chip-title">🏏 CRICKET</div><div class="chips" id="chipsCricket"></div><div class="chip-title">★ WWE</div><div class="chips" id="chipsWwe"></div><div class="chip-title">🦸 MARVEL</div><div class="chips" id="chipsMarvel"></div></div>
 <div class="lobby-label" style="margin-top:20px">DIFFICULTY (BOTH PLAYERS)</div>
 <div class="seg"><button id="segEasy" class="on" onclick="setCreateMode('easy')">EASY</button><button id="segHard" onclick="setCreateMode('hard')">HARD</button></div>
 <div class="lobby-hint" id="segHint"></div>
@@ -579,8 +689,8 @@ Tatenda Taibu|Zimbabwe|150,3393,29.46,67.78,111,2,0,0,0,114,25,17
 Sean Williams|Zimbabwe|156,4484,35.61,81.92,129,4,83,36.39,1,84,0,30`;
 const P=RAW.trim().split(/\r?\n/).filter(Boolean).map(l=>{const[a,b,c]=l.split('|');return[a,b,...c.split(',').map(Number)]});
 let selectedPack='legends',ACTIVE_P=P;
-const PACKNAMES={legends:"20'S LEGENDS",ipl:'IPL 2026',wwe:'ATTITUDE ERA',ra:'RUTHLESS AGGRESSION'};let PACKMENU='cricketPacks';
-function selectPack(pack){selectedPack=pack;PACKMENU=(pack==='ipl'||pack==='legends')?'cricketPacks':'wwePacks';if(pack==='ra'){const d=$('difficultyPack');if(d)d.textContent='RUTHLESS AGGRESSION ERA • 2002–2008 • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}if(pack==='wwe'){const d=$('difficultyPack');if(d)d.textContent='ATTITUDE ERA • 6 stats • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • Opponent\'s values stay hidden • Hard hides yours too.')}
+const PACKNAMES={legends:"20'S LEGENDS",ipl:'IPL 2026',wwe:'ATTITUDE ERA',ra:'RUTHLESS AGGRESSION',endgame:'MARVEL • ENDGAME'};let PACKMENU='cricketPacks';
+function selectPack(pack){selectedPack=pack;if(pack==='endgame'){PACKMENU='marvelPacks';const d=$('difficultyPack');if(d)d.textContent='MARVEL • ENDGAME • 6 power stats • Higher wins • Opponent\'s values stay hidden • Hard hides yours too.';return}PACKMENU=(pack==='ipl'||pack==='legends')?'cricketPacks':'wwePacks';if(pack==='ra'){const d=$('difficultyPack');if(d)d.textContent='RUTHLESS AGGRESSION ERA • 2002–2008 • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}if(pack==='wwe'){const d=$('difficultyPack');if(d)d.textContent='ATTITUDE ERA • 6 stats • Rank #1 is best • Opponent\'s values stay hidden • Hard hides yours too.';return}const d=$('difficultyPack');if(d)d.textContent=(pack==='ipl'?'IPL 2026 • 150 players • IPL CAREER STATS':'20\'S LEGENDS • Opponent\'s values stay hidden • Hard hides yours too.')}
 const IPL_TOP15={
  RCB:['Virat Kohli','Rajat Patidar','Phil Salt','Devdutt Padikkal','Jitesh Sharma','Tim David','Krunal Pandya','Bhuvneshwar Kumar','Josh Hazlewood','Suyash Sharma','Romario Shepherd','Jacob Duffy','Jordan Cox','Venkatesh Iyer','Yash Dayal'],
  MI:['Suryakumar Yadav','Rohit Sharma','Tilak Varma','Ryan Rickelton','Hardik Pandya','Naman Dhir','Sherfane Rutherford','Jasprit Bumrah','Trent Boult','Deepak Chahar','Will Jacks','Shardul Thakur','Mayank Markande','Danish Malewar','Robin Minz'],
@@ -646,8 +756,40 @@ const WWE_DATA=[["Undertaker","THE PHENOM",1,2100,208,136,132,53],["Stone Cold S
 const RA_DATA=[["John Cena","THE CHAMP IS HERE",1,2800,185,114,135,52],["Triple H","THE GAME",2,3400,193,116,132,55],["Batista","THE ANIMAL",3,1500,196,131,142,58],["Randy Orton","THE LEGEND KILLER",4,1900,196,105,124,46],["Undertaker","THE PHENOM",5,2100,208,136,132,53],["Edge","THE RATED-R SUPERSTAR",6,2400,196,109,122,46],["Shawn Michaels","MR. WRESTLEMANIA",7,2300,185,102,117,43],["Kurt Angle","THE OLYMPIC HERO",8,1500,183,108,124,48],["Brock Lesnar","THE NEXT BIG THING",9,600,191,130,137,56],["Rey Mysterio","MASTER OF THE 619",10,2200,168,79,107,38],["Eddie Guerrero","LATINO HEAT",11,1800,173,100,117,43],["Chris Jericho","Y2J",12,3600,183,103,119,44],["Big Show","WORLD'S LARGEST ATHLETE",13,2500,213,174,152,56],["Kane","THE BIG RED MACHINE",14,2600,213,147,142,53],["Booker T","THE FIVE-TIME",15,2000,190,116,127,48],["Ric Flair","THE NATURE BOY",16,4000,185,110,122,43],["The Rock","THE PEOPLE'S CHAMPION",17,1000,196,118,132,51],["Stone Cold Steve Austin","THE TEXAS RATTLESNAKE",18,1400,188,114,127,50],["Goldberg","THE UNDEFEATED",19,450,193,129,135,52],["JBL","THE WRESTLING GOD",20,1700,198,125,132,50],["Rob Van Dam","MR. PAY-PER-VIEW",21,1500,183,107,117,43],["Mick Foley","THE HARDCORE LEGEND",22,2000,188,130,127,48],["Christian","CAPTAIN CHARISMA",23,1500,188,107,119,44],["Jeff Hardy","THE CHARISMATIC ENIGMA",24,1800,188,102,114,42],["Matt Hardy","MATT HARDY V1",25,1900,188,107,117,43],["Umaga","THE SAMOAN BULLDOZER",26,700,188,158,147,52],["Mr. Kennedy","MR. KENNEDY KENNEDY",27,600,188,107,122,46],["CM Punk","BEST IN THE WORLD",28,1400,185,92,112,40],["Carlito","THE COOL ONE",29,700,183,98,117,43],["Shelton Benjamin","THE GOLD STANDARD",30,1000,185,111,122,46],["Mark Henry","WORLD'S STRONGEST MAN",31,2000,185,175,147,56],["Great Khali","THE PUNJABI GIANT",32,500,216,190,160,55],["Bobby Lashley","THE ALL MIGHTY",33,900,188,125,132,52],["Chris Masters","THE MASTERLOCK",34,650,196,118,132,50],["John Morrison","THE SHOOTING STAR",35,1000,188,98,117,44],["The Miz","THE AWESOME ONE",36,2100,183,100,119,44],["MVP","THE PLAYER",37,650,188,111,122,46],["Finlay","THE FIGHTING IRISHMAN",38,2000,188,106,125,46],["Chavo Guerrero","THE GUERRERO DYNASTY",39,1100,175,95,112,40],["Kevin Nash","BIG DADDY COOL",40,1700,208,149,137,51],["Hulk Hogan","THE HULKSTER",41,2600,201,137,132,61],["Bubba Ray Dudley","THE DUDLEY BOY",42,2300,190,145,142,50],["D-Von Dudley","THE DUDLEY BOY",43,2200,188,109,124,46],["Test","THE TEST",44,1100,198,118,127,48],["Rikishi","THE FATU",45,1300,183,159,147,51],["Gregory Helms","THE HURRICANE",46,1100,183,98,117,42],["Charlie Haas","THE ALL-AMERICAN",47,700,183,109,122,45],["William Regal","THE BLUE BLOODED",48,2200,183,107,120,44],["Rhyno","THE MAN BEAST",49,1300,180,107,125,46],["Brian Kendrick","THE HIGH-FLYER",50,900,175,79,107,38],["Paul London","HIGH-FLYING TAG CHAMP",51,700,175,82,107,38],["Snitsky","THAT WAS NOT MY FAULT",52,500,201,134,137,52]];
 const WWE_LABELS=["Rank","Matches","Height","Weight","Chest","Biceps"],WWE_IC=['👑','🎟️','📏','⚖️','💪','🦾'];
 const isW=()=>selectedPack==='wwe'||selectedPack==='ra';
+const isM=()=>selectedPack==='endgame';
+const MV_DATA=[["Thanos", "THE MAD TITAN", 100, 95, 100, 70, 100, 90], ["Iron Man", "TONY STARK", 90, 100, 60, 70, 80, 85], ["Captain America", "STEVE ROGERS", 60, 80, 45, 40, 50, 96], ["Thor", "GOD OF THUNDER", 98, 70, 98, 85, 95, 92], ["Hulk", "BRUCE BANNER", 90, 65, 100, 55, 100, 80], ["Black Widow", "NATASHA ROMANOFF", 35, 80, 25, 35, 35, 95], ["Hawkeye", "CLINT BARTON", 30, 60, 25, 35, 30, 88], ["War Machine", "JAMES RHODES", 75, 70, 55, 60, 75, 85], ["Falcon", "SAM WILSON", 50, 65, 35, 75, 40, 80], ["Vision", "THE SYNTHEZOID", 92, 100, 85, 80, 95, 70], ["Scarlet Witch", "WANDA MAXIMOFF", 98, 70, 40, 65, 70, 65], ["Quicksilver", "PIETRO MAXIMOFF", 40, 55, 35, 100, 45, 60], ["Ant-Man", "SCOTT LANG", 55, 70, 60, 40, 50, 70], ["Wasp", "HOPE VAN DYNE", 55, 75, 35, 70, 50, 85], ["Spider-Man", "PETER PARKER", 70, 92, 70, 85, 60, 86], ["Black Panther", "T'CHALLA", 65, 92, 60, 75, 70, 98], ["Doctor Strange", "STEPHEN STRANGE", 98, 95, 30, 50, 55, 70], ["Captain Marvel", "CAROL DANVERS", 98, 70, 98, 90, 98, 88], ["Winter Soldier", "BUCKY BARNES", 40, 50, 55, 50, 50, 90], ["Nebula", "CYBORG ASSASSIN", 50, 65, 60, 45, 55, 90], ["Okoye", "DORA MILAJE GENERAL", 40, 65, 50, 45, 50, 92], ["Valkyrie", "ASGARDIAN WARRIOR", 60, 55, 80, 55, 75, 92], ["Rocket", "ROCKET RACCOON", 45, 92, 25, 50, 40, 70], ["Groot", "FLORA COLOSSUS", 70, 45, 85, 40, 85, 60], ["Star-Lord", "PETER QUILL", 45, 60, 40, 45, 45, 75], ["Gamora", "DEADLIEST WOMAN", 55, 65, 70, 60, 65, 95], ["Drax", "THE DESTROYER", 55, 40, 85, 45, 80, 82], ["Mantis", "THE EMPATH", 45, 55, 30, 40, 35, 70], ["Wong", "SORCERER SUPREME", 85, 85, 30, 45, 50, 65], ["Shuri", "PRINCESS OF WAKANDA", 55, 98, 25, 40, 30, 50], ["M'Baku", "JABARI CHIEFTAIN", 35, 55, 70, 40, 70, 82], ["Nick Fury", "S.H.I.E.L.D. DIRECTOR", 30, 95, 20, 30, 25, 85], ["Maria Hill", "S.H.I.E.L.D. AGENT", 20, 75, 20, 25, 25, 75], ["Phil Coulson", "AGENT COULSON", 15, 80, 18, 25, 20, 65], ["Pepper Potts", "RESCUE", 35, 85, 15, 30, 25, 25], ["Peggy Carter", "AGENT CARTER", 20, 85, 20, 30, 25, 80], ["Killmonger", "ERIK STEVENS", 60, 85, 60, 70, 70, 95], ["Loki", "GOD OF MISCHIEF", 85, 92, 65, 60, 80, 70], ["Heimdall", "ALL-SEEING GUARDIAN", 65, 70, 80, 50, 85, 90], ["Odin", "THE ALL-FATHER", 100, 95, 90, 60, 100, 85], ["Frigga", "QUEEN OF ASGARD", 85, 85, 50, 40, 60, 70], ["Hela", "GODDESS OF DEATH", 98, 75, 92, 70, 95, 92], ["Sif", "ASGARDIAN WARRIOR", 60, 60, 80, 50, 80, 92], ["Korg", "KRONAN WARRIOR", 35, 50, 90, 25, 80, 70], ["Ebony Maw", "BLACK ORDER", 85, 90, 30, 40, 50, 50], ["Proxima Midnight", "BLACK ORDER", 75, 60, 80, 70, 75, 88], ["Corvus Glaive", "BLACK ORDER", 70, 60, 70, 65, 70, 88], ["Cull Obsidian", "BLACK ORDER", 55, 40, 95, 35, 95, 70], ["Ultron", "AGE OF ULTRON", 88, 100, 88, 75, 90, 80], ["Red Skull", "THE STONEKEEPER", 50, 85, 55, 40, 55, 70], ["Ronan", "THE ACCUSER", 82, 60, 85, 50, 85, 75], ["The Collector", "TANELEER TIVAN", 65, 90, 45, 30, 60, 30], ["The Ancient One", "MASTER OF MYSTIC ARTS", 95, 98, 30, 50, 60, 80], ["Yondu", "RAVAGER CAPTAIN", 35, 60, 35, 45, 40, 80], ["Ego", "THE LIVING PLANET", 100, 90, 100, 40, 100, 60], ["Baron Mordo", "MASTER OF DARK ARTS", 75, 80, 30, 45, 50, 65], ["Dormammu", "DARK DIMENSION LORD", 100, 80, 95, 50, 100, 60], ["Vulture", "ADRIAN TOOMES", 40, 75, 45, 60, 40, 55], ["Abomination", "EMIL BLONSKY", 65, 55, 92, 50, 95, 78], ["Whiplash", "IVAN VANKO", 45, 80, 40, 40, 45, 60], ["Iron Monger", "OBADIAH STANE", 55, 85, 60, 45, 70, 55], ["Mandarin", "THE TEN RINGS", 70, 90, 50, 40, 60, 70], ["Malekith", "DARK ELF LORD", 78, 80, 70, 55, 75, 82], ["Surtur", "LORD OF MUSPELHEIM", 98, 60, 95, 40, 95, 70], ["Crossbones", "BROCK RUMLOW", 30, 55, 45, 40, 40, 85], ["Baron Zemo", "HELMUT ZEMO", 15, 90, 15, 25, 18, 70], ["Talos", "SKRULL LEADER", 50, 75, 50, 45, 50, 75], ["Black Bolt", "KING OF THE INHUMANS", 92, 80, 45, 55, 70, 60], ["Daredevil", "MATT MURDOCK", 35, 80, 35, 55, 45, 92], ["Jessica Jones", "ALIAS INVESTIGATIONS", 55, 70, 80, 40, 60, 60], ["Luke Cage", "POWER MAN", 60, 55, 88, 45, 100, 78], ["Iron Fist", "DANNY RAND", 75, 60, 60, 60, 60, 98], ["The Punisher", "FRANK CASTLE", 20, 80, 25, 30, 35, 90], ["Kingpin", "WILSON FISK", 40, 90, 80, 20, 80, 80], ["Elektra", "ELEKTRA NATCHIOS", 35, 75, 30, 60, 40, 94], ["Kilgrave", "THE PURPLE MAN", 80, 80, 15, 25, 20, 20], ["Quake", "DAISY JOHNSON", 85, 75, 45, 45, 70, 78], ["Melinda May", "THE CAVALRY", 20, 75, 25, 30, 30, 95], ["Leo Fitz", "S.H.I.E.L.D. ENGINEER", 15, 95, 15, 25, 18, 35], ["Jemma Simmons", "S.H.I.E.L.D. BIOCHEMIST", 15, 96, 15, 25, 18, 35], ["Grant Ward", "HYDRA AGENT", 20, 65, 45, 35, 40, 85], ["Ghost Rider", "ROBBIE REYES", 90, 55, 85, 70, 95, 85], ["Hank Pym", "THE ORIGINAL ANT-MAN", 45, 95, 35, 35, 40, 70], ["Happy Hogan", "STARK SECURITY", 10, 40, 35, 30, 30, 60], ["Howard Stark", "STARK INDUSTRIES", 10, 95, 12, 15, 12, 25], ["Sharon Carter", "AGENT 13", 20, 70, 22, 30, 25, 80]];
+const MV_WIKI={"Thanos": ["Thanos"], "Iron Man": ["Iron Man", "Tony Stark"], "Captain America": ["Captain America"], "Thor": ["Thor (Marvel Comics)", "Thor (Marvel Cinematic Universe)"], "Hulk": ["Hulk", "Hulk (comics)"], "Black Widow": ["Black Widow (Natasha Romanoff)", "Black Widow (Marvel Comics character)"], "Hawkeye": ["Hawkeye (Clint Barton)", "Hawkeye (comics)"], "War Machine": ["War Machine", "James Rhodes"], "Falcon": ["Falcon (comics)", "Falcon (Marvel Comics)"], "Vision": ["Vision (Marvel Comics)", "Vision (comics)"], "Scarlet Witch": ["Scarlet Witch"], "Quicksilver": ["Quicksilver (Marvel Comics)", "Quicksilver (comics)"], "Ant-Man": ["Ant-Man (Scott Lang)", "Ant-Man"], "Wasp": ["Wasp (Marvel Comics)", "Hope van Dyne"], "Spider-Man": ["Spider-Man"], "Black Panther": ["Black Panther (Marvel Comics)", "Black Panther (comics)"], "Doctor Strange": ["Doctor Strange"], "Captain Marvel": ["Carol Danvers", "Captain Marvel (Carol Danvers)"], "Winter Soldier": ["Bucky Barnes", "Winter Soldier"], "Nebula": ["Nebula (Marvel Comics)", "Nebula (comics)"], "Okoye": ["Okoye (Marvel Comics)", "Okoye"], "Valkyrie": ["Valkyrie (Marvel Comics)", "Valkyrie (comics)"], "Rocket": ["Rocket Raccoon"], "Groot": ["Groot"], "Star-Lord": ["Star-Lord", "Peter Quill"], "Gamora": ["Gamora"], "Drax": ["Drax the Destroyer", "Drax"], "Mantis": ["Mantis (Marvel Comics)", "Mantis (comics)"], "Wong": ["Wong (comics)", "Wong (Marvel Comics)"], "Shuri": ["Shuri (comics)", "Shuri (Marvel Comics)"], "M'Baku": ["M'Baku"], "Nick Fury": ["Nick Fury"], "Maria Hill": ["Maria Hill"], "Phil Coulson": ["Phil Coulson"], "Pepper Potts": ["Pepper Potts"], "Peggy Carter": ["Peggy Carter"], "Killmonger": ["Erik Killmonger", "Killmonger"], "Loki": ["Loki (Marvel Comics)", "Loki (comics)"], "Heimdall": ["Heimdall (comics)", "Heimdall (Marvel Comics)"], "Odin": ["Odin (Marvel Comics)", "Odin (comics)"], "Frigga": ["Frigga (comics)", "Frigga (Marvel Comics)"], "Hela": ["Hela (comics)", "Hela (Marvel Comics)"], "Sif": ["Sif (comics)", "Sif (Marvel Comics)"], "Korg": ["Korg (comics)", "Korg (Marvel Comics)"], "Ebony Maw": ["Ebony Maw", "Black Order"], "Proxima Midnight": ["Proxima Midnight", "Black Order"], "Corvus Glaive": ["Corvus Glaive", "Black Order"], "Cull Obsidian": ["Cull Obsidian", "Black Order"], "Ultron": ["Ultron"], "Red Skull": ["Red Skull"], "Ronan": ["Ronan the Accuser", "Ronan (Marvel Comics)"], "The Collector": ["Collector (comics)", "Collector (Marvel Comics)"], "The Ancient One": ["Ancient One (comics)", "Ancient One"], "Yondu": ["Yondu"], "Ego": ["Ego the Living Planet", "Ego (comics)"], "Baron Mordo": ["Baron Mordo", "Mordo"], "Dormammu": ["Dormammu"], "Vulture": ["Vulture (Marvel Comics)", "Vulture (comics)"], "Abomination": ["Abomination (comics)", "Abomination (Marvel Comics)"], "Whiplash": ["Whiplash (Marvel Comics)", "Whiplash (comics)"], "Iron Monger": ["Iron Monger", "Obadiah Stane"], "Mandarin": ["Mandarin (comics)", "Mandarin (Marvel Comics)"], "Malekith": ["Malekith the Accursed", "Malekith"], "Surtur": ["Surtur"], "Crossbones": ["Crossbones"], "Baron Zemo": ["Helmut Zemo", "Baron Zemo"], "Talos": ["Talos (comics)", "Talos (Marvel Comics)"], "Black Bolt": ["Black Bolt"], "Daredevil": ["Daredevil (Marvel Comics character)", "Daredevil (character)", "Daredevil"], "Jessica Jones": ["Jessica Jones"], "Luke Cage": ["Luke Cage"], "Iron Fist": ["Iron Fist (character)", "Iron Fist (Marvel Comics)", "Danny Rand"], "The Punisher": ["Punisher", "The Punisher"], "Kingpin": ["Kingpin (character)", "Kingpin (Marvel Comics)", "Kingpin (comics)"], "Elektra": ["Elektra (comics)", "Elektra (Marvel Comics)"], "Kilgrave": ["Kilgrave", "Purple Man"], "Quake": ["Daisy Johnson", "Quake (comics)"], "Melinda May": ["Melinda May"], "Leo Fitz": ["Leo Fitz", "Fitz-Simmons"], "Jemma Simmons": ["Jemma Simmons", "Fitz-Simmons"], "Grant Ward": ["Grant Ward"], "Ghost Rider": ["Ghost Rider (Robbie Reyes)", "Ghost Rider"], "Hank Pym": ["Hank Pym"], "Happy Hogan": ["Happy Hogan"], "Howard Stark": ["Howard Stark"], "Sharon Carter": ["Sharon Carter"]};
+const MV_LABELS=["Power","Intelligence","Strength","Speed","Durability","Combat"],MV_IC=['⚡','🧠','💪','💨','🛡️','🥊'];
+const MV_FAN={"Iron Man": ["Iron_Man", "Tony_Stark"], "Captain America": ["Captain_America", "Steve_Rogers"], "Hulk": ["Hulk", "Bruce_Banner"], "Black Widow": ["Black_Widow", "Natasha_Romanoff"], "Hawkeye": ["Hawkeye", "Clint_Barton"], "War Machine": ["War_Machine", "James_Rhodes"], "Falcon": ["Falcon", "Sam_Wilson"], "Scarlet Witch": ["Scarlet_Witch", "Wanda_Maximoff"], "Quicksilver": ["Quicksilver", "Pietro_Maximoff"], "Ant-Man": ["Ant-Man", "Scott_Lang"], "Wasp": ["Wasp", "Hope_van_Dyne"], "Spider-Man": ["Spider-Man", "Peter_Parker"], "Black Panther": ["Black_Panther", "T'Challa"], "Doctor Strange": ["Doctor_Strange", "Stephen_Strange"], "Captain Marvel": ["Captain_Marvel", "Carol_Danvers"], "Winter Soldier": ["Winter_Soldier", "Bucky_Barnes"], "Rocket": ["Rocket", "Rocket_Raccoon"], "Star-Lord": ["Star-Lord", "Peter_Quill"], "Drax": ["Drax", "Drax_the_Destroyer"], "Killmonger": ["Erik_Killmonger", "Killmonger"], "Ronan": ["Ronan_the_Accuser", "Ronan"], "The Collector": ["Collector", "Taneleer_Tivan"], "The Ancient One": ["The_Ancient_One", "Ancient_One"], "Baron Mordo": ["Karl_Mordo", "Baron_Mordo"], "Vulture": ["Vulture", "Adrian_Toomes"], "Abomination": ["Abomination", "Emil_Blonsky"], "Whiplash": ["Whiplash", "Ivan_Vanko"], "Iron Monger": ["Iron_Monger", "Obadiah_Stane"], "Crossbones": ["Crossbones", "Brock_Rumlow"], "Baron Zemo": ["Helmut_Zemo", "Baron_Zemo"], "Daredevil": ["Daredevil", "Matt_Murdock"], "Iron Fist": ["Iron_Fist", "Danny_Rand"], "The Punisher": ["Punisher", "Frank_Castle"], "Kingpin": ["Kingpin", "Wilson_Fisk"], "Elektra": ["Elektra", "Elektra_Natchios"], "Quake": ["Quake", "Daisy_Johnson"], "Ghost Rider": ["Ghost_Rider", "Robbie_Reyes"], "Vision": ["Vision"], "Mandarin": ["Mandarin", "Trevor_Slattery"]};
+const _FAN_BASES=['https://marvelcinematicuniverse.fandom.com','https://marvel.fandom.com'];
+const _FQ='/api.php?action=query&format=json&formatversion=2&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=600&redirects=1';
+const _okImg=u=>u&&!/\.svg(\?|$)/i.test(u)&&!/Site-logo|Wiki-wordmark|Placeholder/i.test(u);
+async function _fanTitles(base,titles){
+ const Q=(await _wj(base+_FQ+'&titles='+encodeURIComponent(titles.join('|')))).query||{},m={};
+ titles.forEach(t=>m[t]=t.replace(/_/g,' '));
+ for(const arr of [Q.normalized||[],Q.redirects||[]])arr.forEach(x=>{for(const k in m)if(m[k]===x.from)m[k]=x.to});
+ const by={};(Q.pages||[]).forEach(p=>by[p.title]=p);
+ for(const t of titles){const p=by[m[t]];if(p&&!p.missing&&p.thumbnail&&_okImg(p.thumbnail.source))return p.thumbnail.source}
+ return null;
+}
+async function _fanSearch(base,q){
+ const Q=(await _wj(base+_FQ+'&generator=search&gsrlimit=6&gsrnamespace=0&gsrsearch='+encodeURIComponent(q))).query||{};
+ const last=q.toLowerCase().split(/\s+/).pop();
+ const pg=(Q.pages||[]).sort((a,b)=>a.index-b.index).find(p=>p.thumbnail&&_okImg(p.thumbnail.source)&&p.title.toLowerCase().includes(last));
+ return pg?pg.thumbnail.source:null;
+}
+async function _resolveM(n){
+ const t=MV_FAN[n]||[n.replace(/ /g,'_')];
+ try{const u=await _fanTitles(_FAN_BASES[0],t);if(u)return u}catch(e){}
+ try{const u=await _fanSearch(_FAN_BASES[0],n);if(u)return u}catch(e){}
+ try{const u=await _fanSearch(_FAN_BASES[1],n+' Earth-616');if(u)return u}catch(e){}
+ const c=MV_WIKI[n]||[n];
+ try{const Q=(await _wj(_API+'&redirects=1&titles='+encodeURIComponent(c.join('|')))).query||{},m={};c.forEach(x=>m[x]=x);for(const arr of [Q.normalized||[],Q.redirects||[]])arr.forEach(x=>{for(const k in m)if(m[k]===x.from)m[k]=x.to});const by={};(Q.pages||[]).forEach(p=>by[p.title]=p);for(const x of c){const p=by[m[x]];if(p&&!p.missing&&p.thumbnail&&/fictional|character|superhero|comic|marvel/i.test(p.description||''))return p.thumbnail.source}}catch(e){}
+ return null;
+}
+const mvPH=n=>{const i=n.split(/[\s-]+/).filter(w=>/^[A-Za-z]/.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('');return 'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8101e"/><stop offset="1" stop-color="#1a0a3a"/></linearGradient></defs><rect width="100" height="100" fill="url(#g)"/><text x="50" y="12" font-size="14" text-anchor="middle" fill="#ffd45a">★</text><text x="50" y="66" font-size="40" font-weight="800" font-family="Impact,Arial Black,sans-serif" text-anchor="middle" fill="#fff" stroke="#000" stroke-width="1.5">'+i+'</text></svg>')};
 const ftIn=cm=>{const t=Math.round(Number(cm)/2.54);return Math.floor(t/12)+'.'+(t%12)};
-const fv=(v,i)=>isW()?(i===0?'#'+v:i===1?Number(v).toLocaleString():i===2?ftIn(v)+' ft':v+(i===3?' kg':' cm')):fmt(v);
+const fv=(v,i)=>isM()?String(v):isW()?(i===0?'#'+v:i===1?Number(v).toLocaleString():i===2?ftIn(v)+' ft':v+(i===3?' kg':' cm')):fmt(v);
 const WALIAS={'John Cena':'John Cena','Batista':'Batista (wrestler)','JBL':'John Layfield','Mick Foley':'Mick Foley','Umaga':'Umaga (wrestler)','Mr. Kennedy':'Mr. Anderson','MVP':'Montel Vontavious Porter','Carlito':'Carlito (wrestler)','Great Khali':'The Great Khali','John Morrison':'John Morrison (wrestler)','Finlay':'Fit Finlay','Chavo Guerrero':'Chavo Guerrero Jr.','Bubba Ray Dudley':'Bully Ray','D-Von Dudley':'D-Von Dudley','Rhyno':'Rhyno (wrestler)','Snitsky':'Gene Snitsky','CM Punk':'CM Punk','The Miz':'The Miz','Gregory Helms':'Gregory Helms','Goldberg':'Goldberg (wrestler)','The Rock':'Dwayne Johnson','Stone Cold Steve Austin':'Stone Cold Steve Austin','Mankind':'Mick Foley','Edge':'Edge (wrestler)','Kane':'Kane (wrestler)','Christian':'Christian (wrestler)','Test':'Andrew Martin (wrestler)','Bradshaw':'John Layfield','Faarooq':'Ron Simmons','The Godfather':'Charles Wright (wrestler)','Tazz':'Taz (wrestler)','Vader':'Big Van Vader','British Bulldog':'Davey Boy Smith','Hardcore Holly':'Bob Holly','A-Train':'Matt Bloom','Big Boss Man':'Big Boss Man (wrestler)','Big Show':'Big Show','Undertaker':'The Undertaker','Val Venis':'Val Venis','X-Pac':'Sean Waltman','Road Dogg':'Road Dogg','Al Snow':'Al Snow','Chyna':'Chyna','Goldust':'Goldust','Diamond Dallas Page':'Diamond Dallas Page','Scotty 2 Hotty':'Scotty 2 Hotty'};
 /* Portrait lookup: Wikipedia, cricketer pages only, batched + cached */
 const ALIAS={'Vaibhav Sooryavanshi':'Vaibhav Suryavanshi','T Natarajan':'Thangarasu Natarajan','Varun Chakaravarthy':'Varun Chakravarthy','M Shahrukh Khan':'Shahrukh Khan (cricketer)','Sai Kishore':'Ravisrinivasan Sai Kishore','Mohsin Khan':'Mohsin Khan (cricketer, born 1998)','Prince Yadav':'Prince Yadav (cricketer)','Suryakumar Yadav':'Suryakumar Yadav','Sarfaraz Khan':'Sarfaraz Khan','Abdul Samad':'Abdul Samad (cricketer)','Ashutosh Sharma':'Ashutosh Sharma (cricketer)','Harsh Dubey':'Harsh Dubey','Mayank Yadav':'Mayank Yadav','Nandre Burger':'Nandre Burger','Jitesh Sharma':'Jitesh Sharma','Shivang Kumar':'Shivang Kumar','Kartik Sharma':'Kartik Sharma (cricketer)','Sameer Rizvi':'Sameer Rizvi','Lhuan-dre Pretorius':'Lhuan-dre Pretorius'};
@@ -659,6 +801,7 @@ async function _wj(u){const c=new AbortController(),t=setTimeout(()=>c.abort(),7
 const _isCk=p=>/cricket|wrestl/i.test(p.description||'');
 const _API='https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=pageimages|description&piprop=thumbnail&pithumbsize=700';
 async function _resolve(n){
+ if(isM())return _resolveM(n);
  const W=isW();const q=ALIAS[n]||n,titles=q.includes('(')?[q]:(W?[q+' (wrestler)',q+' (professional wrestler)',q]:[q+' (cricketer)',q+' (Indian cricketer)',q]);
  try{
   const Q=(await _wj(_API+'&redirects=1&titles='+encodeURIComponent(titles.join('|')))).query||{},m={};
@@ -676,17 +819,18 @@ async function _resolve(n){
  return null;
 }
 function resolveImg(n){
- if(_img[n])return Promise.resolve(_img[n]);
- return _pend[n]??=_resolve(n).then(u=>{_img[n]=u||'';if(u)_saveImg();return u});
+ const k=isM()?'mv2:'+n:n;
+ if(_img[k])return Promise.resolve(_img[k]);
+ return _pend[k]??=_resolve(n).then(u=>{_img[k]=u||'';if(u)_saveImg();return u});
 }
 async function prefetchImgs(names,conc=8){
  const q=names.slice();await Promise.all(Array.from({length:conc},async()=>{while(q.length)await resolveImg(q.shift())}));
 }
 async function fb(el){
- if(el.dataset.f==='1'){el.onerror=null;el.src=SIL;return}
+ if(el.dataset.f==='1'){el.onerror=null;el.src=isM()?mvPH(el.alt):SIL;return}
  el.dataset.f='1';
  const u=await resolveImg(el.alt);
- el.src=u||SIL;
+ el.src=u||(isM()?mvPH(el.alt):SIL);
  if(u)el.parentElement?.style.setProperty('--portrait-bg',"url('"+u+"')");
 }
 const $=id=>document.getElementById(id);
@@ -695,9 +839,9 @@ function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.re
 
 /* cover images: name|imgId|wwe? (IPL players use the IPL CDN first, then Wikipedia) */
 [ 'Brian Lara|legA','Sachin Tendulkar|legB','Ricky Ponting|legC','Rohit Sharma|iplA|ipl','Virat Kohli|iplB|ipl','Suryakumar Yadav|iplC|ipl',
-  'John Cena|raA|w','Randy Orton|raB|w','Batista|raC|w','Brian Lara|hcA','Sachin Tendulkar|hcB','Virat Kohli|hcC','The Rock|hwA|w','Stone Cold Steve Austin|hwB|w','Undertaker|hwC|w'].forEach(x=>{
+  'John Cena|raA|w','Randy Orton|raB|w','Batista|raC|w','Brian Lara|hcA','Sachin Tendulkar|hcB','Virat Kohli|hcC','The Rock|hwA|w','Stone Cold Steve Austin|hwB|w','Undertaker|hwC|w','Thanos|hmN|m','Iron Man|hmI|m','Thor|hmT|m','Hulk|hmH|m','Thanos|mgN|m','Iron Man|mgI|m','Thor|mgT|m','Hulk|mgH|m'].forEach(x=>{
  const[n,id,k]=x.split('|'),el=document.getElementById(id);if(!el)return;
- const wiki=()=>{const keep=selectedPack;selectedPack=k==='w'?'wwe':'legends';const p=resolveImg(n);selectedPack=keep;p.then(u=>{if(u){el.onerror=null;el.src=u}else el.style.display='none'})};
+ const wiki=()=>{if(k==='m')el.onload=()=>el.parentElement.classList.add('ok');const keep=selectedPack;selectedPack=k==='m'?'endgame':k==='w'?'wwe':'legends';const p=resolveImg(n);selectedPack=keep;p.then(u=>{if(u){el.onerror=null;el.src=u}else el.style.display='none'})};
  if(k==='ipl'&&typeof IPLIMG!=='undefined'&&IPLIMG[n]){el.onerror=wiki;el.src=IPLIMG_BASE+IPLIMG[n]}else wiki();
 });
 const pi=$('packImg');if(pi){pi.onerror=()=>fb(pi);pi.src=src0('Sachin Tendulkar');}
@@ -706,15 +850,15 @@ let mode='easy',bat=true,pd=[],cd=[],you,cpu,last='you',locked=false,hist=[],rev
 let LL={me:5,opp:3,full:1},myRev=false,oppAll=false,oppSet=new Set();
 const shuffle=a=>a.slice().sort(()=>Math.random()-.5);
 let gid=0,gameActive=false,gameOver=false,ready=false,pendingCalls={},rn=0,homeTimer=null;
-const TM={t:null,end:0,enforce:false,lastSec:-1,secs:10};const turnSecs=()=>isW()?10:15;
+const TM={t:null,end:0,enforce:false,lastSec:-1,secs:10};const turnSecs=()=>(isW()||isM())?10:15;
 const later=(f,ms)=>{const g=gid;setTimeout(()=>{if(g===gid&&gameActive)f()},ms)};
 const OPPN=()=>NET.inMatch?'Friend':'CPU';
 async function startGame(d,pvp){
   gid++;const g=gid;gameActive=true;gameOver=false;ready=false;pendingCalls={};rn=0;clearTimeout(homeTimer);stopTimer();
   mode=d;bat=true;last='you';locked=false;hist=[];revealedStat=-1;LL={me:5,opp:3,full:1};myRev=false;oppAll=false;oppSet=new Set();
   const dm=$('desktopMode'),mm=$('mobileMode');if(dm)dm.textContent=d.toUpperCase()+' MODE';if(mm)mm.textContent=d.toUpperCase()+' MODE';
-  const pack=selectedPack==='ipl',ra=selectedPack==='ra',wwe=selectedPack==='wwe'||ra;const PN=ra?'RUTHLESS AGGRESSION':'ATTITUDE ERA';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
-  if($('desktopPack'))$('desktopPack').textContent=wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';
+  const pack=selectedPack==='ipl',ra=selectedPack==='ra',wwe=selectedPack==='wwe'||ra;const PN=ra?'RUTHLESS AGGRESSION':'ATTITUDE ERA';const game=$('game');game.classList.toggle('ipl-mode',pack);game.classList.toggle('wwe-mode',wwe);const mv=selectedPack==='endgame';game.classList.toggle('marvel-mode',mv);const rl=$('rules');if(rl){rl._o??=rl.innerHTML;rl.innerHTML=mv?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Power, Intelligence, Strength, Speed, Durability and Combat.</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Collect every hero to win.</div>":wwe?"<div>Choose one stat to call.</div><div><b>Higher</b> wins Matches, Height, Weight, Chest and Biceps.</div><div><b>Rank:</b> lower number wins (#1 is the best).</div><div>If equal, the previous caller keeps the call.</div><div>Winner takes both cards and calls again.</div><div>Get every card to win.</div>":rl._o}
+  if($('desktopPack'))$('desktopPack').textContent=mv?'MARVEL • ENDGAME':wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';if($('mobilePack'))$('mobilePack').textContent=mv?'MARVEL • ENDGAME':wwe?PN:pack?'IPL 2026':'20\'S LEGENDS';
   const ol=$('oppLbl');if(ol)ol.textContent=pvp?'FRIEND':'CPU';
   show('game');try{hideResult()}catch(e){}
   const deal=()=>{
@@ -729,6 +873,7 @@ async function startGame(d,pvp){
   };
   let ok=true;
   if(wwe){$('iplLoading').classList.add('show');const lb=$('iplLoading').querySelector('b');if(lb)lb.textContent='LOADING '+PN;ACTIVE_P=ra?RA_DATA:WWE_DATA;ok=deal();if(ok)await Promise.race([prefetchImgs(ACTIVE_P.map(r=>r[0])),new Promise(r=>setTimeout(r,9000))]);$('iplLoading').classList.remove('show')}
+  else if(mv){$('iplLoading').classList.add('show');const lb=$('iplLoading').querySelector('b');if(lb)lb.textContent='LOADING MARVEL • ENDGAME';ACTIVE_P=MV_DATA;ok=deal();if(ok)await Promise.race([prefetchImgs(ACTIVE_P.map(r=>r[0])),new Promise(r=>setTimeout(r,9000))]);$('iplLoading').classList.remove('show')}
   else if(pack){$('iplLoading').classList.add('show');$('hint').textContent='Loading full IPL career statistics (2008–2026)…';try{ACTIVE_P=await loadIPL();}catch(e){console.error(e);$('iplLoading').classList.remove('show');if(pvp){abortMatch('IPL 2026 data could not be loaded. Please try again.')}else{gameActive=false;alert('IPL 2026 data could not be loaded. Please open the game online and try again.');show('cricketPacks')}return}ok=deal();$('iplLoading').classList.remove('show')}
   else{ACTIVE_P=P;ok=deal()}
   if(g!==gid||!gameActive)return;
@@ -747,26 +892,26 @@ function nextRound(){
   rn++;
   you=pd[0];cpu=cd[0];locked=false;revealedStat=-1;myRev=false;oppAll=false;oppSet=new Set();$('vs').classList.remove('battle-you','battle-cpu','battle-tie');
   $('yc').textContent=pd.length;$('cc').textContent=cd.length;$('cL').textContent=pd.length+' CARDS';$('cR').textContent=cd.length+' CARDS';
-  $('hint').textContent=last==='you'?isW()?'Higher wins • Rank: lower (#1 best) wins':'Higher wins • Bowling Average: lower wins • 0 always loses':OPPN()+' is choosing…';
+  $('hint').textContent=last==='you'?isM()?'Higher wins on every stat • Call your strongest':isW()?'Higher wins • Rank: lower (#1 best) wins':'Higher wins • Bowling Average: lower wins • 0 always loses':OPPN()+' is choosing…';
   renderCards();renderCalls();renderLifelines();turnUI();
   ready=true;
   if(last==='cpu'){if(NET.inMatch)tryPending();else later(cpuCall,900)}
 }
 const fmt=v=>typeof v==='number'&&v%1?v.toFixed(2):v.toLocaleString();
-const CL={'Strike Rate':'S RATE','High Score':'HIGH SC','Average':'AVG','Bowl Average':'BOWL AVG','5W Haul':'5W','Stumping':'STUMP','Wickets':'WKTS',"100's":'100s',"50's":'50s'};
+const CL={'Intelligence':'INTEL','Durability':'DURA','Strength':'STR','Strike Rate':'S RATE','High Score':'HIGH SC','Average':'AVG','Bowl Average':'BOWL AVG','5W Haul':'5W','Stumping':'STUMP','Wickets':'WKTS',"100's":'100s',"50's":'50s'};
 function card(t,p,hidden){
-  const vals=bat?p.slice(2,8):p.slice(8,14),labs=isW()?WWE_LABELS:bat?L1:L2,nm=p[0];
+  const vals=bat?p.slice(2,8):p.slice(8,14),labs=isM()?MV_LABELS:isW()?WWE_LABELS:bat?L1:L2,nm=p[0];
   const fs=nm.length>18?5.8:nm.length>15?6.6:nm.length>12?7.4:8.2;
   const stats=vals.map((v,i)=>{
     const called=revealedStat===i,viaLife=hidden?(oppAll||oppSet.has((bat?'b':'w')+i)):(mode==='hard'&&myRev);
     const showVal=called||viaLife||(hidden?false:mode==='easy'),clk=!hidden&&!locked&&last==='you';
     const lb=(CL[labs[i]]||labs[i]).toUpperCase();
     return `<div class="tc-s ${showVal?'':'locked'} ${called?'called':''} ${viaLife&&!called?'life-rev':''} ${clk?'clk':''}" ${clk?`onclick="callStat(${i})"`:''}><span>${lb}</span><i>:</i><b>${showVal?fv(v,i):'?'}</b></div>`}).join('');
-  $(t).innerHTML=`<div class="tc" id="${t}Box"><div class="tc-o"><div class="tc-in"><div class="tc-pic"><img alt="${nm}" src="${src0(nm)}" onerror="fb(this)">${isW()?'':`<div class="tc-set">${bat?'BATTING':'BOWLING'} STATS</div>`}<div class="tc-tag">${p[1]}</div></div><div class="tc-name">${isW()?'':`<button class="tc-ar" type="button" title="Back to batting stats" ${bat?'disabled':''} onclick="goStats(true)">‹</button>`}<span style="font-size:${fs}cqi">${nm}</span>${isW()?'':`<button class="tc-ar" type="button" title="Open bowling stats" ${bat?'':'disabled'} onclick="goStats(false)">›</button>`}</div><div class="tc-stats">${stats}</div></div></div></div>`;
+  $(t).innerHTML=`<div class="tc" id="${t}Box"><div class="tc-o"><div class="tc-in"><div class="tc-pic">${isM()?'<div class="mv-badge">ENDGAME</div><div class="mv-star-m">★</div>':''}<img alt="${nm}" src="${src0(nm)}" onerror="fb(this)">${isW()||isM()?'':`<div class="tc-set">${bat?'BATTING':'BOWLING'} STATS</div>`}<div class="tc-tag">${p[1]}</div></div><div class="tc-name">${isW()||isM()?'':`<button class="tc-ar" type="button" title="Back to batting stats" ${bat?'disabled':''} onclick="goStats(true)">‹</button>`}<span style="font-size:${fs}cqi">${nm}</span>${isW()||isM()?'':`<button class="tc-ar" type="button" title="Open bowling stats" ${bat?'':'disabled'} onclick="goStats(false)">›</button>`}</div><div class="tc-stats">${stats}</div></div></div></div>`;
 }
 function renderCards(){card('yourCard',you,false);card('cpuCard',cpu,true)}
 function renderCalls(){
-  const labs=isW()?WWE_LABELS:bat?L1:L2,ic=isW()?WWE_IC:bat?IC1:IC2;
+  const labs=isM()?MV_LABELS:isW()?WWE_LABELS:bat?L1:L2,ic=isM()?MV_IC:isW()?WWE_IC:bat?IC1:IC2;
   $('calls').innerHTML=labs.map((l,i)=>`<button class="call" ${last!=='you'||locked?'disabled':''} onclick="callStat(${i})"><u>${ic[i]}</u>${l}</button>`).join('');
 }
 function renderHist(){
@@ -792,8 +937,8 @@ function useLifeline(k){
   LL[k]--;sFlip();renderCards();renderLifelines();
   llMsg(k==='me'?'Your stats revealed for this round.':k==='opp'?'One opponent stat revealed.':'Opponent card fully revealed.');
 }
-function goStats(toBat){if(locked||isW()||bat===toBat)return;toggleStats()}
-function toggleStats(){if(locked||isW())return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
+function goStats(toBat){if(locked||isW()||isM()||bat===toBat)return;toggleStats()}
+function toggleStats(){if(locked||isW()||isM())return;bat=!bat;revealedStat=-1;sFlip();renderCards();renderCalls()}
 function callStat(i){if(locked||last!=='you'||!gameActive)return;locked=true;stopTimer();revealedStat=i;sSel();renderCards();renderLifelines();if(NET.inMatch)netSend({t:'call',rn,i,bat});later(()=>resolve(i),450)}
 function cpuCall(){
   if(locked||!gameActive)return;stopTimer();const base=bat?2:8;let best=Math.floor(Math.random()*6);
@@ -809,7 +954,7 @@ function resolve(i){
   let w=null;
   if(a===0&&b===0)w=null;else if(a===0)w='cpu';else if(b===0)w='you';
   else if(a!==b)w=(lowWins?a<b:a>b)?'you':'cpu';
-  const lab=(isW()?WWE_LABELS:bat?L1:L2)[i];
+  const lab=(isM()?MV_LABELS:isW()?WWE_LABELS:bat?L1:L2)[i];
   hist.push({w:w||'tie',s:lab,a:fv(a,i),b:fv(b,i)});renderHist();
   $('yourCardBox')?.classList.add('shake');$('cpuCardBox')?.classList.add('shake');
   const t=$('rt'),x=$('rx');
@@ -852,11 +997,11 @@ function turnUI(){
   const f=$('turnFlash');if(f){f.textContent=$('tName').textContent+(who==='you'?' !':'');f.className=who;void f.offsetWidth;f.className=who+' go'}
   if(who==='cpu'){stopTimer();$('tRing').setAttribute('stroke-dashoffset','0')}else startTimer(who==='you');
 }
-const PHR={'Matches':['played more matches than','MATCHES'],'Runs':['scored more runs than','RUNS'],'Average':['has a better batting average than','AVG'],'Strike Rate':['has a higher strike rate than','SR'],'High Score':['has a higher top score than','HS'],"100's":['hit more centuries than','100S'],'Wickets':['took more wickets than','WICKETS'],'Bowl Average':['has a better bowling average than','AVG'],'5W Haul':['took more 5-wicket hauls than','5W'],'Catches':['took more catches than','CATCHES'],'Stumping':['made more stumpings than','STUMPINGS'],"50's":['hit more fifties than','50S'],'Rank':['is ranked higher than',''],'Height':['is taller than',''],'Weight':['is heavier than',''],'Chest':['has a bigger chest than',''],'Biceps':['has bigger biceps than','']};
+const PHR={'Matches':['played more matches than','MATCHES'],'Runs':['scored more runs than','RUNS'],'Average':['has a better batting average than','AVG'],'Strike Rate':['has a higher strike rate than','SR'],'High Score':['has a higher top score than','HS'],"100's":['hit more centuries than','100S'],'Wickets':['took more wickets than','WICKETS'],'Bowl Average':['has a better bowling average than','AVG'],'5W Haul':['took more 5-wicket hauls than','5W'],'Catches':['took more catches than','CATCHES'],'Stumping':['made more stumpings than','STUMPINGS'],"50's":['hit more fifties than','50S'],'Rank':['is ranked higher than',''],'Height':['is taller than',''],'Weight':['is heavier than',''],'Chest':['has a bigger chest than',''],'Biceps':['has bigger biceps than',''],'Power':['has more power than',''],'Intelligence':['is smarter than',''],'Strength':['is stronger than',''],'Speed':['is faster than',''],'Durability':['is tougher than',''],'Combat':['is a better fighter than','']};
 const escH=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const fmtV=(v,i,u)=>isW()?(i===1?fv(v,i)+' MATCHES':fv(v,i)):(fmt(Number(v))+(u?' '+u:''));
 function explain(w,i,a,b){
-  const lab=(isW()?WWE_LABELS:bat?L1:L2)[i],ph=PHR[lab]||['is better at '+lab+' than',lab.toUpperCase()];
+  const lab=(isM()?MV_LABELS:isW()?WWE_LABELS:bat?L1:L2)[i],ph=PHR[lab]||['is better at '+lab+' than',lab.toUpperCase()];
   if(!w)return[you[0]+' and '+cpu[0]+' are level on '+lab,fmtV(a,i,ph[1])+' - '+fmtV(b,i,ph[1])];
   const Y=w==='you',wn=Y?you[0]:cpu[0],ln=Y?cpu[0]:you[0],wv=Y?a:b,lv=Y?b:a;
   return[wn+' '+ph[0]+' '+ln,fmtV(wv,i,ph[1])+' - '+fmtV(lv,i,ph[1])];
@@ -965,13 +1110,13 @@ function handleRemoteCall(m){
 const newCode=()=>Array.from({length:5},()=>CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)]).join('');
 let FRIEND_FROM='cricketPacks',CREATE_PACK='legends';
 function toggleFriend(btn){const z=btn.closest('.friend-zone'),o=!z.classList.contains('open');document.querySelectorAll('.friend-zone').forEach(x=>x.classList.remove('open'));if(o)z.classList.add('open')}
-const CHIP_PACKS={chipsCricket:['legends','ipl'],chipsWwe:['wwe','ra']};
+const CHIP_PACKS={chipsCricket:['legends','ipl'],chipsWwe:['wwe','ra'],chipsMarvel:['endgame']};
 function renderChips(){for(const [id,list] of Object.entries(CHIP_PACKS))$(id).innerHTML=list.map(k=>`<button class="${CREATE_PACK===k?'on':''}" onclick="pickCreatePack('${k}')">${PACKNAMES[k]}</button>`).join('')}
 function pickCreatePack(k){CREATE_PACK=k;renderChips()}
 function setCreateMode(m){NET.roomMode=m;$('segEasy').classList.toggle('on',m==='easy');$('segHard').classList.toggle('on',m==='hard');$('segHint').textContent=m==='easy'?'Your stats are visible • 2 lifelines each':'Your stats are hidden too • 3 lifelines each'}
 function openCreate(from){
   netCleanup(false);FRIEND_FROM=from;
-  CREATE_PACK=from==='wwePacks'?(CREATE_PACK==='wwe'||CREATE_PACK==='ra'?CREATE_PACK:'wwe'):(CREATE_PACK==='legends'||CREATE_PACK==='ipl'?CREATE_PACK:'legends');
+  CREATE_PACK=from==='marvelPacks'?'endgame':from==='wwePacks'?(CREATE_PACK==='wwe'||CREATE_PACK==='ra'?CREATE_PACK:'wwe'):(CREATE_PACK==='legends'||CREATE_PACK==='ipl'?CREATE_PACK:'legends');
   renderChips();setCreateMode('easy');show('roomSetup');
 }
 function createRoom(){
