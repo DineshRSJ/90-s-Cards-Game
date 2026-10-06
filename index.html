@@ -457,7 +457,7 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;backg
 </style>
 </head><body>
 
-<section id="home" class="screen active"><div class="main-menu">
+<section id="home" class="screen"><div class="main-menu">
   <div class="main-title">90'S <span>CLASSIC CARD GAME</span></div>
   <div class="main-subtitle">LEGENDS • RIVALS • ONE WINNER</div>
   <div class="main-packs">
@@ -1632,5 +1632,270 @@ o.innerHTML=`<div class="tb"><div class="th">ACCOUNT</div><h3>${u?'☁ CLOUD BAC
 const q=i=>o.querySelector('#'+i),er=e=>{q('aM').textContent=(e.message||'Error').replace('Firebase: ','').replace(/\s*\(auth.*$/,'')},A=()=>firebase.auth(),cr=()=>[q('aE').value.trim(),q('aP').value];
 q('aX').onclick=()=>o.remove();if(q('aL')){q('aL').onclick=()=>A().signInWithEmailAndPassword(...cr()).then(()=>o.remove()).catch(er);q('aS').onclick=()=>A().createUserWithEmailAndPassword(...cr()).then(()=>o.remove()).catch(er);q('aR').onclick=()=>A().sendPasswordResetEmail(q('aE').value.trim()).then(()=>{q('aM').style.color='#9fe9a0';q('aM').textContent='Reset email sent'}).catch(er)}
 if(q('aO'))q('aO').onclick=()=>A().signOut().then(()=>o.remove())}
+})();
+</script><style>@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&display=swap');
+#landing{position:fixed;inset:0;overflow:hidden;background:#06030a;z-index:5}#landing.active{display:block}
+.lbg{position:absolute;inset:-25% -15%;display:flex;gap:2vw;transform:rotate(-10deg) scale(1.2);opacity:.6;filter:saturate(1.5) contrast(1.1)}
+.lcol{flex:1;display:flex;flex-direction:column;gap:2vw;animation:lup 50s linear infinite}.lcol:nth-child(even){animation-direction:reverse;animation-duration:65s}
+@keyframes lup{to{transform:translateY(-50%)}}
+.cv{aspect-ratio:5/7;border-radius:14px;position:relative;overflow:hidden;border:2px solid #ffffff77;box-shadow:0 10px 24px #000b;display:grid;place-items:center;flex:0 0 auto}
+.cv i{font-style:normal;font-size:clamp(28px,5vw,64px);filter:drop-shadow(0 3px 6px #000a);position:relative;z-index:2}
+.cv b{position:absolute;bottom:8%;left:0;right:0;text-align:center;font:clamp(9px,1.2vw,15px) 'Bebas Neue',Impact;letter-spacing:3px;color:#fff;text-shadow:0 2px 4px #000;z-index:2}
+.cv:before{content:"";position:absolute;inset:7%;border:2px solid #ffffff66;border-radius:9px;z-index:1}
+.beam{position:absolute;left:50%;top:-30%;width:140vmax;height:140vmax;margin-left:-70vmax;background:conic-gradient(from 0deg,#0000 0 40deg,#ffffff30 46deg,#0000 54deg 130deg,#ff2a3a40 138deg,#0000 146deg 220deg,#50e8ff30 226deg,#0000 234deg);animation:bm 14s linear infinite;mix-blend-mode:screen;pointer-events:none}
+.beam.b2{animation-duration:23s;animation-direction:reverse;opacity:.8}@keyframes bm{to{transform:rotate(360deg)}}
+.lshade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,#ff1d2ecc 0,#9a0a1a66 30%,#0000 62%),radial-gradient(ellipse at 50% 45%,#000000b0 0,#00000060 45%,#000000d0 100%)}
+#lcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.lfront{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4vh;padding:20px;text-align:center}
+.zlt{font:700 clamp(70px,15vw,200px)/.82 'Bebas Neue',Impact,sans-serif;letter-spacing:3px;transform:skewX(-8deg);background:linear-gradient(#fff 0,#e8ecf5 38%,#6b7586 50%,#cfd6e6 52%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px #ff2a3acc) drop-shadow(0 5px 0 #000);animation:lpulse 3s ease-in-out infinite}
+@keyframes lpulse{50%{filter:drop-shadow(0 0 40px #ff5a3a) drop-shadow(0 5px 0 #000)}}
+.lt2{font:700 clamp(26px,5.6vw,72px)/1 'Bebas Neue',Impact,sans-serif;letter-spacing:.35em;color:#fff;background:linear-gradient(90deg,#8a0010,#e8111f 30%,#e8111f 70%,#8a0010);padding:.05em .7em .05em .95em;transform:skewX(-14deg);box-shadow:0 0 30px #ff1d2e99,0 0 0 2px #ffd45a inset;margin-top:-.8vh}
+.lt2 span{display:inline-block;transform:skewX(14deg)}
+.zls{color:#ffe9a8;letter-spacing:.5em;font-size:clamp(10px,1.4vw,16px);font-weight:800;text-shadow:0 0 12px #ff8a00}
+.lbtns{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:2vh}
+.zlb{position:relative;width:min(330px,82vw);padding:18px 30px 16px;color:#fff;border:0;font:700 clamp(32px,4.4vw,52px)/1 'Bebas Neue',Impact,sans-serif;letter-spacing:4px;clip-path:polygon(8% 0,100% 0,92% 100%,0 100%);transition:.2s;text-shadow:0 3px 0 #0008}
+.zlb small{display:block;font:800 11px Inter;letter-spacing:3px;opacity:.9;margin-top:5px}
+.zlb:hover{transform:translateY(-8px) scale(1.07);filter:brightness(1.25) drop-shadow(0 0 20px #fff)}.zlb:active{transform:scale(.96)}
+.zlb.c{background:linear-gradient(180deg,#5aa0ff,#1647c8 55%,#0a1f6a);box-shadow:inset 0 0 0 3px #ffffff55}
+.zlb.s{background:linear-gradient(180deg,#ffe27a,#ff9d00 40%,#d4151f 100%);color:#fff;animation:fire 1.6s ease-in-out infinite}
+@keyframes fire{50%{filter:brightness(1.3) drop-shadow(0 0 26px #ff7a00)}}
+.zlb:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#0000 35%,#fffb 50%,#0000 65%) 160% 0/260% 100%;animation:shn 3s infinite}
+.lhw{position:absolute;top:-16px;right:6%;background:#ff7a00;color:#1a0020;font:900 11px Inter;letter-spacing:1px;padding:5px 10px;transform:rotate(6deg);clip-path:none;border-radius:6px;z-index:3;box-shadow:0 0 14px #ff7a00}
+.lbwrap{position:relative}
+.ltop{position:absolute;top:14px;right:16px;z-index:6}
+.lacc{font:700 22px 'Bebas Neue',Impact;letter-spacing:3px;color:#fff;border:0;padding:10px 24px;background:linear-gradient(#333a4a,#0e1118);clip-path:polygon(10% 0,100% 0,90% 100%,0 100%);box-shadow:inset 0 0 0 2px #ffffff44}.lacc:hover{background:linear-gradient(#e8111f,#8a0010)}
+.ltick{position:absolute;left:0;right:0;bottom:0;background:#e8111f;color:#fff;font:700 18px 'Bebas Neue',Impact;letter-spacing:4px;overflow:hidden;white-space:nowrap;padding:6px 0;border-top:2px solid #ffd45a}.ltick div{display:inline-block;animation:tk 28s linear infinite}@keyframes tk{to{transform:translateX(-50%)}}
+#sb{min-height:100vh;overflow-y:auto;background:radial-gradient(circle at 50% -10%,#3a1a5a,#05030a 60%);padding:18px 14px 60px}
+.sbw{max-width:1150px;margin:auto;text-align:center}.sbw h1{font:clamp(40px,7vw,76px) 'Bebas Neue',Impact;letter-spacing:3px;margin:6px 0}.sbw h1 span{color:var(--gold)}
+.sbtop{display:flex;justify-content:space-between;align-items:center}
+.sbtabs{display:flex;gap:8px;justify-content:center;margin:12px 0}.sbbtn{padding:10px 20px;border-radius:12px;background:#ffffff14;border:1px solid #ffffff33;color:#fff;font-weight:900;letter-spacing:1px}
+.sbmodes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.sbmode{padding:22px;border-radius:18px;border:1px solid #ffffff30;background:linear-gradient(145deg,#1a2238,#0a0e18);color:#fff;transition:.2s;font:30px 'Bebas Neue',Impact;letter-spacing:2px}.sbmode small{display:block;font:700 11px Inter;color:#9fb0d0;letter-spacing:1px;margin-top:4px}.sbmode:hover{transform:translateY(-6px);border-color:var(--gold)}.sbmode.off{opacity:.4;pointer-events:none}
+.sbstat{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.sbstat div{padding:8px 20px;border-radius:12px;background:#ffffff12;border:1px solid #d4a01755}.sbstat b{display:block;font-size:26px;color:#ffd86b}.sbstat span{font-size:10px;letter-spacing:2px;opacity:.7}
+.sbgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:14px 0}
+/* ===== CARD (em based) ===== */
+.sc{font-size:var(--f,10px);width:15em;height:21.5em;position:relative;border-radius:1em;padding:.28em;cursor:pointer;color:#fff;text-align:left;font-family:Inter,sans-serif;flex:0 0 auto;user-select:none;transition:transform .15s;
+ --e1:#f2f5fa;--e2:#7f8998;--bg:radial-gradient(circle at 50% 18%,#5d6a7c,#262e3b 58%,#0f131a);--hi:#7dff3a;background:linear-gradient(135deg,var(--e1),var(--e2) 45%,var(--e1) 60%,var(--e2))}
+.sc:hover{transform:translateY(-.4em)}
+.sc.t-g{--e1:#b6ffd6;--e2:#0e9a52;--bg:radial-gradient(circle at 50% 18%,#2fc47a,#0c5a34 55%,#04200f);--hi:#fff35a}
+.sc.t-o{--e1:#fff6c2;--e2:#d89a10;--bg:radial-gradient(circle at 50% 18%,#ffd862,#9a6200 52%,#2a1700);--hi:#fff;box-shadow:0 0 1.6em #ffc83acc;animation:gl 2.4s ease-in-out infinite}
+@keyframes gl{50%{box-shadow:0 0 2.8em #ffe27a}}
+.sc.t-h{--e1:#ffb347;--e2:#7a22c4;--bg:radial-gradient(circle at 50% 14%,#5a1496,#240a42 52%,#07010f);--hi:#ff9a1a;box-shadow:0 0 1.5em #ff7a00aa;animation:hw 2s ease-in-out infinite}
+@keyframes hw{50%{box-shadow:0 0 2.6em #ff7a00,0 0 1em #b45bff}}
+.sc .in{position:absolute;inset:.28em;border-radius:.8em;background:var(--bg);overflow:hidden}
+.sc .in:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,#ffffff0b 0 .5em,#0000 0 1.1em);z-index:0}
+.sc.t-o .in:after,.sc.t-g .in:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#fff0 35%,#fffb 50%,#fff0 65%) 160% 0/260% 100%;animation:shn 3.2s infinite;pointer-events:none;z-index:6}
+.sc.t-o .in:after{animation-duration:2.2s}
+.sc.t-h .in:after{content:"🦇";position:absolute;right:.5em;bottom:.4em;font-size:1.3em;opacity:.7;z-index:6;animation:bt 3s ease-in-out infinite}@keyframes bt{50%{transform:translate(-.6em,-.5em) rotate(-10deg)}}
+.sc .hp{position:absolute;left:.3em;bottom:.5em;font-size:1.4em;z-index:6;filter:drop-shadow(0 0 .3em #ff7a00)}
+.sc .xrt{position:absolute;left:.3em;top:.5em;width:3.4em;text-align:center;line-height:1;z-index:3;text-shadow:0 .1em .25em #000}
+.sc .xrt b{display:block;font:700 2.7em/1 'Bebas Neue',Impact,sans-serif}.sc .xrt i{display:block;font-style:normal;font-size:.62em;letter-spacing:.12em;color:var(--e1);font-weight:800;margin-top:.1em}.sc .xrt u{display:block;text-decoration:none;font-size:1.3em;margin-top:.35em}
+.sc .ph{position:absolute;left:3.8em;right:.5em;top:.5em;height:10.4em;border-radius:.7em;overflow:hidden;background:#0a1220;z-index:2;border:.1em solid #ffffff44;box-shadow:inset 0 0 1em #000a}
+.sc .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 14%;display:block}
+.sc .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(#0000 60%,#000a);pointer-events:none}
+.sc .nm{position:absolute;left:.5em;right:.5em;top:11.05em;text-align:center;white-space:nowrap;z-index:3;overflow:hidden;line-height:1.5em}.sc .nm span{font:700 1.45em/1.15 'Bebas Neue',Impact,sans-serif;letter-spacing:.06em;text-shadow:0 .08em .2em #000}
+.sc .al{position:absolute;left:.5em;right:.5em;top:12.8em;text-align:center;color:var(--e1);z-index:3;border-top:.12em solid var(--e1);padding-top:.35em;white-space:nowrap}.sc .al span{font:800 .62em Inter;letter-spacing:.2em}
+.sc .ss{position:absolute;left:.6em;right:.6em;top:14.2em;display:grid;grid-template-columns:repeat(3,1fr);gap:.3em;text-align:center;z-index:3}
+.sc .ss div{padding:.2em 0 .25em;border-radius:.45em;background:#0007;border:.07em solid #ffffff1f}.sc .ss b{display:block;font:700 1.5em/1.05 'Bebas Neue',Impact,sans-serif}.sc .ss span{display:block;font-size:.5em;letter-spacing:.1em;color:var(--e1);font-weight:800}
+.sc .ss .zbs{background:#ffffff1a;box-shadow:inset 0 0 .6em var(--hi);border-color:var(--hi)}.sc .ss .zbs b{color:var(--hi);text-shadow:0 0 .5em var(--hi)}
+.sc.zsel{outline:.3em solid #56f39a;box-shadow:0 0 1.5em #56f39a99}.sc.zsel:before{content:"✔";position:absolute;right:-.6em;top:-.6em;background:#56f39a;color:#003;border-radius:50%;width:2em;height:2em;display:grid;place-items:center;font-weight:900;z-index:9}
+.sc.big{--f:clamp(10px,min(1.9vw,2.5vh),19px);cursor:default}.sc.big:hover{transform:none}
+.sc .ss div.zpk{cursor:pointer;border-color:#fff8;animation:pkp 1.2s infinite}@keyframes pkp{50%{background:#ffd45a55}}.sc .ss div.zpk:hover{background:#ffd45a99;transform:scale(1.06)}
+.sc.zwin{outline:.35em solid #56f39a;box-shadow:0 0 3em #56f39a}.sc.zlose{filter:grayscale(.7) brightness(.65)}
+.sc.hid{--bg:repeating-linear-gradient(45deg,#c8101e 0 .8em,#8a0010 .8em 1.6em)}.sc.hid .in>*{display:none}.sc.hid .in:after{display:none}
+.cb{--f:clamp(10px,min(1.9vw,2.5vh),19px);font-size:var(--f);width:15em;height:21.5em;border-radius:1em;border:.3em solid #ffd45a;background:radial-gradient(circle at 50% 50%,#ff3a2a,#8a0010 55%,#2a0008),repeating-linear-gradient(45deg,#ffffff18 0 .8em,#0000 .8em 1.6em);background-blend-mode:screen;box-shadow:0 0 2.5em #ff3a2acc,inset 0 0 2em #000a;display:grid;place-items:center;color:#ffe27a;text-align:center;text-shadow:0 .05em .1em #000;cursor:pointer;position:relative;overflow:hidden;animation:cbIn .9s cubic-bezier(.2,1.4,.4,1) both,cbF 2.4s 1s ease-in-out infinite}
+.cb b{display:block;font:700 4em/.9 'Bebas Neue',Impact}.cb small{display:block;font:800 .9em Inter;letter-spacing:.3em;color:#fff;margin-top:.8em}.cb:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#0000 35%,#fff9 50%,#0000 65%) 160% 0/260% 100%;animation:shn 2.4s infinite}
+@keyframes cbIn{from{transform:translateY(-120vh) rotate(25deg) scale(.6);opacity:0}}@keyframes cbF{50%{transform:translateY(-.8em) rotate(1.5deg)}}
+.pkstage #pkb{position:sticky;top:12px}.pkstage{display:flex;gap:30px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-top:10px}
+.slots{display:grid;grid-template-columns:repeat(5,auto);gap:6px;justify-content:center;align-content:start}
+.zslot{--f:clamp(4px,1.1vw,6.2px);width:15em;height:21.5em;font-size:var(--f);border:.25em dashed #ffffff33;border-radius:1em;display:grid;place-items:center;color:#ffffff33}.zslot span{font:700 4em 'Bebas Neue',Impact}
+.zslot .sc{--f:clamp(4px,1.1vw,6.2px);margin:-.28em}.zslot .sc:hover{transform:none}
+.fly{position:fixed;z-index:200;perspective:1200px;transition:transform .85s cubic-bezier(.5,0,.2,1);transform-origin:0 0}
+.fly .xfi{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.9,.3,1);transform:rotateY(180deg)}.fly.fl .xfi{transform:rotateY(0)}
+.fly .ff,.fly .fk{position:absolute;inset:0;backface-visibility:hidden}.fly .fk{transform:rotateY(180deg)}.fly .cb{animation:none;width:100%;height:100%}.fly .sc{width:100%;height:100%;font-size:var(--f)}
+.flash{position:fixed;inset:0;z-index:190;pointer-events:none;background:radial-gradient(circle,#fff8c0,#ffb800aa 40%,#0000 70%);animation:fh 1s forwards}@keyframes fh{from{opacity:1}to{opacity:0}}
+.sbtool{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center;margin:12px 0}.sbtool select{padding:9px;border-radius:10px;background:#0b1524;color:#fff;border:1px solid #ffffff44;font-weight:800}
+.zcnt{font:34px 'Bebas Neue',Impact;letter-spacing:2px}.zcnt.ok{color:#56f39a}.zcnt.no{color:#ff7a88}
+.lg{display:flex;gap:14px;justify-content:center;font:800 11px Inter;letter-spacing:1px;margin:6px 0}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+#sbm{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 40%,#1a1038,#02040a);display:none;flex-direction:column;align-items:center;padding:10px;overflow:auto;color:#fff}#sbm.on{display:flex}
+.mh{width:min(1000px,100%);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;font:20px 'Bebas Neue',Impact;letter-spacing:2px}
+.mclock{font:54px 'Bebas Neue',Impact;color:var(--gold);line-height:1}.mclock.lo{color:#ff5364;animation:cbF 1s infinite}
+.mcards{display:flex;gap:min(5vw,50px);align-items:center;justify-content:center;margin:8px 0}.mvs{font:60px 'Bebas Neue',Impact;text-shadow:0 0 20px #ff4c6a}
+.mmsg{font:26px 'Bebas Neue',Impact;letter-spacing:2px;min-height:34px;text-align:center}.mbar{width:min(500px,90%);height:8px;background:#ffffff22;border-radius:6px;overflow:hidden;margin:4px 0}.mbar i{display:block;height:100%;background:linear-gradient(90deg,#56f39a,#ffd45a,#ff5364);transition:width .25s linear}
+.mres{position:fixed;inset:0;background:#000d;display:grid;place-items:center;z-index:5;overflow:auto}.mres>div{text-align:center;padding:20px}.mres h2{font:100px 'Bebas Neue',Impact;margin:0;letter-spacing:4px}
+.flip{animation:fl .7s both}@keyframes fl{from{transform:rotateY(90deg) scale(.5);opacity:0}}
+.sc.hid .in:before{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:700 9em 'Bebas Neue',Impact;color:#ffffffaa;background:none}
+
+.sbw .ab,.mres .ab,#sbov .ab{position:static;display:inline-flex;margin:8px auto}
+</style><script>(()=>{
+const $=id=>document.getElementById(id),STAT=['STRENGTH','KNOWLEDGE','SPEED','STAMINA','AURA','RATINGS'],AB=['STR','KNO','SPD','STA','AUR','RAT'];
+const rnd=n=>Math.random()*n|0,shuf=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const tn=(f,d,t,g,w)=>{try{tone(f,d,t,g,w)}catch(e){}};
+/* ===== 6-STAT ENGINE from real numbers ===== */
+const DEF={cricket:[[[4,1],[5,1],[3,1],[1,.5]],[[2,1],[7,.7,1],[9,.5],[6,.5]],[[3,1.5],[10,.5],[9,.5]],[[0,1],[1,1],[6,.5]],[[1,1],[6,1],[5,.8],[8,.8],[11,.5]],[[1,1],[2,1],[6,1],[7,.5,1],[0,.5]]],
+ wwe:[[[5,1],[4,1],[3,.8]],[[1,1],[0,1,1]],[[3,1,1],[2,.3,1]],[[1,1],[4,.6],[3,.4]],[[0,2,1],[1,.5]],[[0,1.5,1],[1,.8],[5,.4]]]};
+const ROWS={cricket:P.map(r=>({n:r[0],v:r.slice(2,14)})),wwe:WWE_DATA.map(r=>({n:r[0],v:r.slice(2,8)}))};
+const BASE={};
+for(const c in ROWS){const R=ROWS[c];BASE[c]={};const pc=(i,row,low)=>{const x=row.v[i];if(c==='cricket'&&i===7&&!x)return 0;const a=R.filter(r=>!(c==='cricket'&&i===7&&!r.v[i])).map(r=>r.v[i]);let b=0;a.forEach(y=>{if(low?y>x:y<x)b++});return b/Math.max(1,a.length-1)};
+ R.forEach(row=>BASE[c][row.n]=DEF[c].map(d=>{let s=0,w=0;d.forEach(([i,wt,low])=>{s+=pc(i,row,low)*wt;w+=wt});return Math.min(99,Math.round(38+64*Math.pow(s/w,.9)))}))}
+const st=c=>(BASE[c.cat][c.n]||[60,60,60,60,60,60]).map((v,i)=>i===c.k?Math.min(99,v+c.b):v);
+const ovr=s=>Math.round(s.reduce((a,b)=>a+b,0)/6),pw=c=>ovr(st(c));
+const tier=c=>c.k>=0?'h':pw(c)>85?'o':pw(c)>=75?'g':'s';
+const baseCard=(cat,n)=>({id:'b|'+cat+'|'+n,cat,n,k:-1,b:0});
+/* Halloween exclusive pool: top players with spooky editions */
+const ALIAS=['REAPER','VAMPIRE LORD','PUMPKIN KING','WEREWOLF','PHANTOM','GRAVEDIGGER','NIGHTMARE','ZOMBIE KING','BANSHEE','SKULL KNIGHT','WITCH HUNTER','DRACULA','SPECTER','HEADLESS HORSEMAN','MUMMY','GHOUL'];
+const HW=[];['cricket','wwe'].forEach((c,ci)=>Object.keys(BASE[c]).sort((a,b)=>pw(baseCard(c,b))-pw(baseCard(c,a))).slice(0,ci?12:16).forEach((n,i)=>HW.push({cat:c,n,al:ALIAS[(i*3+ci*5)%ALIAS.length]})));
+const special=()=>{const h=HW[rnd(HW.length)];return{id:'h'+Date.now().toString(36)+rnd(1e6),cat:h.cat,n:h.n,al:h.al,k:rnd(6),b:10+rnd(6)}};
+/* ===== image fitting + fallback ===== */
+window.sbfb=el=>{if(el.dataset.f){el.onerror=null;el.src=SIL;return}el.dataset.f=1;const sp=selectedPack;selectedPack=el.dataset.c==='wwe'?'wwe':'legends';let p;try{p=resolveImg(el.alt)}catch(e){}selectedPack=sp;if(p)p.then(u=>{el.src=u||SIL}).catch(()=>{el.src=SIL});else el.src=SIL};
+/* ===== CARD ===== */
+const TL={s:'SILVER',g:'GREEN',o:'GOLD',h:'HALLOWEEN'};
+function card(c,o={}){const s=st(c),t=tier(c),L=c.n.length;return`<div class="sc t-${t} ${o.big?'big':''} ${o.cls||''}" data-id="${c.id}"><div class="in"><div class="xrt"><b>${ovr(s)}</b><i>${c.cat==='wwe'?'WWE':'CRICKET'}</i><u>${c.cat==='wwe'?'🤼':'🏏'}</u></div><div class="ph"><img src="${src0(c.n)}" alt="${c.n}" data-c="${c.cat}" onerror="sbfb(this)" referrerpolicy="no-referrer"></div><div class="nm"><span style="font-size:${L>17?1:L>14?1.12:L>11?1.3:1.45}em">${c.n.toUpperCase()}</span></div><div class="al"><span>${t==='h'?'🎃 '+c.al+' EDITION':TL[t]+' CARD'}</span></div><div class="ss">${s.map((v,i)=>`<div class="${i===c.k||i===o.hl?'zbs':''} ${o.pk?'zpk':''}" data-k="${i}"><b>${v}</b><span>${o.big?STAT[i]:AB[i]}</span></div>`).join('')}</div>${t==='h'?'<div class="hp">🎃</div>':''}</div></div>`}
+const hidCard=()=>`<div class="sc big hid t-h"><div class="in"></div></div>`;
+/* ===== STATE + FIREBASE LOGIN ===== */
+const FB={ok:0,u:null};let GUEST=0,S={},cat='all',view='hub',sortK='ovr',filt='all';
+const LSK=()=>'sbv3_'+(FB.u?FB.u.uid:'guest');
+const loadLocal=()=>{try{return JSON.parse(localStorage.getItem(LSK()))||{}}catch(e){return{}}};
+const db=()=>firebase.firestore().collection('users').doc(FB.u.uid);
+function save(){try{localStorage.setItem(LSK(),JSON.stringify(S))}catch(e){}if(FB.u){clearTimeout(save.t);save.t=setTimeout(()=>db().set({sb3:JSON.stringify(S),sbu:Date.now()},{merge:true}).catch(()=>{}),700)}}
+async function pull(){try{const d=await db().get();if(d.exists&&d.data().sb3){const r=JSON.parse(d.data().sb3);if((r.own||[]).length>=(S.own||[]).length){S=r;try{localStorage.setItem(LSK(),JSON.stringify(S))}catch(e){}}else save()}else if(S.opened)save()}catch(e){}
+ const sb=$('sb');if(sb&&sb.classList.contains('active')&&view!=='reveal'){view=S.opened?'hub':'pack';V()}}
+const jl=s=>new Promise((r,j)=>{const e=document.createElement('script');e.src=s;e.onload=r;e.onerror=j;document.head.appendChild(e)});
+function accLabel(){const b=$('lacc');if(b)b.textContent=FB.u?'👤 '+(FB.u.email||'PLAYER').split('@')[0].toUpperCase():'🔑 LOGIN'}
+FB.ready=jl('firebase-config.js').catch(()=>{}).then(async()=>{const c=window.FIREBASE_CONFIG;if(!c||!c.apiKey)return;const b='https://www.gstatic.com/firebasejs/10.12.2/firebase-';await jl(b+'app-compat.js');await Promise.all([jl(b+'auth-compat.js'),jl(b+'firestore-compat.js')]);try{firebase.initializeApp(c)}catch(e){}FB.ok=1;
+ await new Promise(res=>{let f=0;firebase.auth().onAuthStateChanged(u=>{FB.u=u;S=u?loadLocal():(GUEST?loadLocal():{});accLabel();if(u)pull();if(!f){f=1;res()}})})}).catch(()=>{});
+/* ===== landing ===== */
+(()=>{const PAL=[['#ff3d6e','#5a0020'],['#2b7bff','#021a55'],['#ffd45a','#7a4a00'],['#56f39a','#04512a'],['#b46bff','#2c0a66'],['#ff8a3d','#6a2200'],['#50e8ff','#04485a'],['#ff5364','#3a0008'],['#e8e8f0','#40485a'],['#ff6bd5','#55064a'],['#9dff3a','#2f5200'],['#3dffd0','#005a46']],
+PAT=[()=>`repeating-linear-gradient(45deg,#ffffff26 0 10px,#0000 10px 22px)`,()=>`radial-gradient(#ffffff40 2px,#0000 3px) 0 0/16px 16px`,()=>`repeating-conic-gradient(#ffffff22 0 10deg,#0000 10deg 20deg)`,()=>`repeating-radial-gradient(circle at 50% 40%,#ffffff2a 0 6px,#0000 6px 16px)`,()=>`conic-gradient(#ffffff22 25%,#0000 0 50%,#ffffff22 0 75%,#0000 0) 0 0/28px 28px`,()=>`linear-gradient(135deg,#ffffff24 25%,#0000 25% 50%,#ffffff24 50% 75%,#0000 75%) 0 0/24px 24px`,()=>`repeating-linear-gradient(0deg,#ffffff1c 0 4px,#0000 4px 14px),repeating-linear-gradient(90deg,#ffffff1c 0 4px,#0000 4px 14px)`],
+EMB=['🏏','★','⚡','♠','🎃','🃏','♦','🔥','👑','💎','🥊','🏆','🦇','☄️','⚔','💀'],TT=['LEGEND','ELITE','RARE','SUPREME','CLASSIC','HERO','ICON','TITAN','CHAMP','ROYAL','BLAZE','APEX'];
+const mk=n=>{const p=PAL[n%12],a=PAT[(n*5+(n/12|0))%7](),e=EMB[n%16];return`<div class="cv" style="background:${a},radial-gradient(circle at 50% 35%,${p[0]},${p[1]} 75%)"><i>${e}</i><b>${TT[(n*7)%12]}</b></div>`};
+let h='';for(let c=0;c<8;c++){let x='';for(let r=0;r<6;r++)x+=mk(c*6+r);h+=`<div class="lcol">${x}${x}</div>`}
+const tk='🎃 HALLOWEEN EVENT LIVE • EXCLUSIVE SPOOKY CARDS • WIN TO UNLOCK • LEGENDS • RIVALS • ONE WINNER • ';
+const L=document.createElement('section');L.id='landing';L.className='screen active';
+L.innerHTML=`<div class="lbg">${h}</div><div class="beam"></div><div class="beam b2"></div><div class="lshade"></div><canvas id="lcv"></canvas><div class="ltop"><button class="lacc" id="lacc">🔑 LOGIN</button></div>
+<div class="lfront"><div class="zlt">90'S CLASSIC</div><div class="lt2"><span>CARD GAME</span></div><div class="zls">LEGENDS • RIVALS • ONE WINNER</div><div class="lbtns"><div class="lbwrap"><button class="zlb c" id="lbC">CLASSIC<small>PACKS • UNO • MARVEL</small></button></div><div class="lbwrap"><div class="lhw">🎃 HALLOWEEN</div><button class="zlb s" id="lbS">SQUAD BATTLE<small>BUILD 20 • 3 MIN DUELS</small></button></div></div></div><div class="ltick"><div>${tk.repeat(8)}</div></div>`;
+document.body.prepend(L);
+const mm=document.querySelector('#home .main-menu');mm.insertAdjacentHTML('afterbegin','<button class="back" onclick="show(\'landing\')" style="position:absolute;left:14px;top:14px;z-index:3">← START</button>');
+const sqt=document.querySelector('.squad-pack');if(sqt)sqt.remove();
+$('lbC').onclick=()=>{tn(520,.12,'triangle',.06);show('home')};$('lbS').onclick=()=>{tn(700,.12,'triangle',.06);enter()};$('lacc').onclick=()=>accUI();
+/* embers */
+const cv=$('lcv'),cx=cv.getContext('2d');let W,H,pt=[];const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
+const mkp=()=>({x:Math.random()*W,y:H+10,r:1+Math.random()*3,v:.6+Math.random()*2.2,d:(Math.random()-.5)*.8,c:['#ff7a00','#ffd45a','#ff2a3a','#fff'][rnd(4)]});for(let i=0;i<90;i++){const p=mkp();p.y=Math.random()*H;pt.push(p)}
+(function lp(){if($('landing').classList.contains('active')){cx.clearRect(0,0,W,H);pt.forEach((p,i)=>{p.y-=p.v;p.x+=p.d+Math.sin(p.y/40)*.4;if(p.y<-10)pt[i]=mkp();cx.globalAlpha=Math.min(1,p.y/H+.2);cx.fillStyle=p.c;cx.shadowColor=p.c;cx.shadowBlur=10;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fill()})}requestAnimationFrame(lp)})();
+})();
+/* ===== login UI ===== */
+function ov(html,onx,nox){let o=$('sbov');if(o)o.remove();o=document.createElement('div');o.id='sbov';o.style.cssText='position:fixed;inset:0;z-index:300;background:#000d;display:grid;place-items:center;color:#fff;text-align:center;overflow:auto';o.innerHTML=`<div style="background:#101828;border:1px solid #ffffff33;border-radius:20px;padding:26px;width:min(420px,92vw)">${html}${nox?'':'<div style="margin-top:14px"><button class="sbbtn" id="ovx">CANCEL</button></div>'}</div>`;document.body.appendChild(o);if(!nox)$('ovx').onclick=()=>{o.remove();onx&&onx()};return o}
+const setOv=t=>{const e=$('ovm');if(e)e.innerHTML=t};
+const IN='style="width:100%;padding:11px;margin:5px 0;border-radius:10px;border:1px solid #ffffff44;background:#0008;color:#fff;font-size:15px;box-sizing:border-box"';
+async function enter(){await Promise.race([FB.ready,new Promise(r=>setTimeout(r,4500))]);if(FB.ok&&!FB.u)return accUI(openSB,1);if(!FB.ok&&!GUEST){const o=ov(`<h2 style="font:34px 'Bebas Neue',Impact;margin:0 0 8px">LOGIN REQUIRED</h2><p style="color:#9fb0d0;font-size:14px">Cloud login is not switched on for this copy (firebase-config.js not found), so cards can't be saved to your account.</p><button class="ab" id="gB">PLAY ON THIS DEVICE ONLY</button>`);$('gB').onclick=()=>{GUEST=1;S=loadLocal();o.remove();openSB()};return}openSB()}
+function accUI(cb,must){const u=FB.u;if(!FB.ok){return ov(`<h3>Login not available</h3><p style="color:#9fb0d0;font-size:14px">Add firebase-config.js next to this file to switch on cloud login.</p>`)}
+ const o=ov(u?`<h2 style="font:34px 'Bebas Neue',Impact;margin:0 0 8px">☁ CLOUD SAVE ON</h2><p style="color:#9fb0d0">Signed in as<br><b style="color:#fff">${u.email}</b><br>Your cards sync automatically.</p><button class="ab" id="aO">LOG OUT</button>`:`<h2 style="font:34px 'Bebas Neue',Impact;margin:0 0 4px">${must?'LOGIN TO PLAY':'LOGIN / SIGN UP'}</h2><p style="color:#9fb0d0;font-size:13px;margin:0 0 8px">Only logged-in players can play Squad Battle, so your cards are always saved.</p><input id="aE" type="email" placeholder="Email" ${IN}><input id="aP" type="password" placeholder="Password (6+ characters)" ${IN}><div id="aM" style="min-height:20px;color:#ff9a9a;font-size:13px"></div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="ab" id="aL">LOG IN</button><button class="sbbtn" id="aS">SIGN UP</button><button class="sbbtn" id="aR">FORGOT?</button></div>`);
+ if(u){$('aO').onclick=()=>firebase.auth().signOut().then(()=>{S={};o.remove();show('landing')});return}
+ const er=e=>{$('aM').style.color='#ff9a9a';$('aM').textContent=(e.message||'Error').replace('Firebase: ','').replace(/\s*\(auth.*$/,'')},A=()=>firebase.auth(),cr=()=>[$('aE').value.trim(),$('aP').value],done=()=>{o.remove();cb&&cb()};
+ $('aL').onclick=()=>A().signInWithEmailAndPassword(...cr()).then(done).catch(er);$('aS').onclick=()=>A().createUserWithEmailAndPassword(...cr()).then(done).catch(er);
+ $('aR').onclick=()=>A().sendPasswordResetEmail($('aE').value.trim()).then(()=>{$('aM').style.color='#9fe9a0';$('aM').textContent='Reset email sent'}).catch(er)}
+/* ===== squad battle screens ===== */
+const sec=document.createElement('section');sec.id='sb';sec.className='screen';sec.innerHTML='<div class="sbw" id="sbBody"></div>';document.body.appendChild(sec);
+const mt=document.createElement('div');mt.id='sbm';document.body.appendChild(mt);
+const own=()=>S.own||[],sqIds=()=>S.sq||[],squad=()=>own().filter(x=>sqIds().includes(x.id));
+function openSB(){S=loadLocal();show('sb');view=S.opened?'hub':'pack';V();if(FB.u)pull()}
+const SORTS={ovr:(a,b)=>pw(b)-pw(a),sp:(a,b)=>(b.k>=0)-(a.k>=0)||pw(b)-pw(a),name:(a,b)=>a.n.localeCompare(b.n)};STAT.forEach((s,i)=>SORTS['s'+i]=(a,b)=>st(b)[i]-st(a)[i]||pw(b)-pw(a));
+const sorted=l=>l.slice().sort(SORTS[sortK]);
+const LEG='<div class="lg"><span><i style="background:#aab4c4"></i>SILVER &lt;75</span><span><i style="background:#2fc47a"></i>GREEN 75-85</span><span><i style="background:#ffd45a"></i>GOLD 85+</span><span><i style="background:#ff7a00"></i>HALLOWEEN</span></div>';
+function V(){const B=$('sbBody');
+ if(view==='pack'){packUI();return}
+ const sq=squad(),ok=sq.length===20,sp=own().filter(x=>x.k>=0).length;
+ if(view==='hub'){B.innerHTML=`<div class="sbtop"><button class="back" data-a="land">← START</button><button class="back" data-a="acc">${FB.u?'☁ '+FB.u.email.split('@')[0]:'DEVICE ONLY'}</button></div><h1>SQUAD <span>BATTLE</span></h1><div class="sbstat"><div><b>${sq.length?Math.round(sq.reduce((a,x)=>a+pw(x),0)/sq.length):0}</b><span>SQUAD OVR</span></div><div><b style="${ok?'':'color:#ff7a88'}">${sq.length}/20</b><span>IN SQUAD</span></div><div><b>${own().length}</b><span>COLLECTION</span></div><div><b>${sp}</b><span>🎃 HALLOWEEN</span></div></div>
+  <div class="sbmodes"><button class="sbmode ${ok?'':'off'}" data-a="cpu">VS CPU<small>WIN TO UNLOCK 🎃 HALLOWEEN CARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="friend">VS FRIEND<small>ROOM CODE • NO REWARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="real">VS REAL PLAYERS<small>FIND AN OPPONENT • EARN CARDS</small></button></div>
+  ${ok?'':'<div style="color:#ff9a9a;font-weight:800">PICK EXACTLY 20 CARDS TO PLAY</div>'}<button class="ab" data-a="build" style="margin:10px auto">⚙ BUILD / SORT SQUAD</button>${LEG}<div class="sbgrid">${sorted(sq).map(x=>card(x)).join('')}</div>`;return}
+ if(view==='build'){let l=own();if(filt==='cricket'||filt==='wwe')l=l.filter(x=>x.cat===filt);if(filt==='hw')l=l.filter(x=>x.k>=0);if(filt==='ba')l=l.filter(x=>x.k<0);if(filt==='o'||filt==='g'||filt==='s')l=l.filter(x=>tier(x)===filt);
+  const op=(v,t)=>`<option value="${v}" ${sortK==v?'selected':''}>${t}</option>`,fo=(v,t)=>`<option value="${v}" ${filt==v?'selected':''}>${t}</option>`;
+  B.innerHTML=`<div class="sbtop"><button class="back" data-a="hub">← DONE</button></div><h1>BUILD <span>SQUAD</span></h1><div class="zcnt ${sq.length===20?'ok':'no'}">${sq.length} / 20 SELECTED</div><div class="sbtool"><select id="sbS">${op('ovr','Sort: Power (Overall)')}${op('sp','Sort: Halloween first')}${STAT.map((s,i)=>op('s'+i,'Sort: '+s)).join('')}${op('name','Sort: Name A-Z')}</select><select id="sbF">${fo('all','Show: All')}${fo('cricket','Cricket only')}${fo('wwe','WWE only')}${fo('hw','Halloween')}${fo('o','Gold')}${fo('g','Green')}${fo('s','Silver')}</select><button class="sbbtn" data-a="auto">⚡ AUTO BEST 20</button><button class="sbbtn" data-a="clear">CLEAR</button></div>${LEG}<div class="sbgrid">${sorted(l).map(x=>card(x,{cls:sqIds().includes(x.id)?'zsel':''})).join('')}</div>`;
+  $('sbS').onchange=e=>{sortK=e.target.value;V()};$('sbF').onchange=e=>{filt=e.target.value;V()}}}
+$('sbBody').onclick=e=>{const t=e.target.closest('[data-a],.sc');if(!t)return;const a=t.dataset.a;
+ if(a==='land')show('landing');else if(a==='acc')accUI();else if(a==='hub'){view='hub';V()}else if(a==='build'){view='build';V()}
+ else if(a==='auto'){S.sq=own().slice().sort(SORTS.ovr).slice(0,20).map(x=>x.id);save();V()}else if(a==='clear'){S.sq=[];save();V()}
+ else if(a==='cpu')start({mode:'cpu'});else if(a==='friend')friendUI();else if(a==='real')realUI();
+ else if(view==='build'&&t.classList.contains('sc')){const s=S.sq,i=s.indexOf(t.dataset.id);if(i>=0)s.splice(i,1);else if(s.length<20)s.push(t.dataset.id);else{tn(200,.2,'square',.05);return}save();const y=scrollY;V();scrollTo(0,y)}};
+/* ===== STARTER PACK: tap card back -> reveal -> fly into slot ===== */
+function packUI(){const B=$('sbBody');let pool=[...shuf(Object.keys(BASE.cricket)).slice(0,10).map(n=>baseCard('cricket',n)),...shuf(Object.keys(BASE.wwe)).slice(0,10).map(n=>baseCard('wwe',n))];
+ if(!pool.some(c=>pw(c)>85)){const g=[...Object.keys(BASE.cricket).map(n=>baseCard('cricket',n)),...Object.keys(BASE.wwe).map(n=>baseCard('wwe',n))].filter(c=>pw(c)>85);if(g.length)pool[rnd(20)]=g[rnd(g.length)]}
+ pool=shuf(pool);let n=0,busy=0;
+ B.innerHTML=`<div class="sbtop"><button class="back" data-a="land">← BACK</button></div><h1>OPEN YOUR <span>STARTER PACK</span></h1><div class="zls" id="pkc" style="color:#c9d4ee;letter-spacing:4px;font-weight:800">TAP THE CARD • 0 / 20</div>${LEG}<div class="pkstage"><div id="pkb"><div class="cb" id="cbk"><div><b>90'S<br>CLASSIC</b><small>TAP TO REVEAL</small></div></div></div><div class="slots" id="slots">${pool.map((c,i)=>`<div class="zslot" id="sl${i}"><span>${i+1}</span></div>`).join('')}</div></div>`;
+ const reveal=()=>{if(busy||n>=20)return;busy=1;const bk=$('cbk'),r=bk.getBoundingClientRect(),c=pool[n],t=tier(c),f=document.createElement('div');f.className='fly';f.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;--f:${getComputedStyle(bk).fontSize}`;
+  f.innerHTML=`<div class="xfi"><div class="ff">${card(c)}</div><div class="fk"><div class="cb"><div><b>90'S<br>CLASSIC</b></div></div></div></div>`;document.body.appendChild(f);bk.style.visibility='hidden';tn(500,.2,'triangle',.06);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>f.classList.add('fl')));
+  setTimeout(()=>{if(t==='o'||t==='h'){const fl=document.createElement('div');fl.className='flash';document.body.appendChild(fl);setTimeout(()=>fl.remove(),1000);[784,988,1319].forEach((q,i)=>tn(q,.3,'triangle',.08,i*.1))}else if(t==='g')tn(784,.3,'triangle',.06)},700);
+  setTimeout(()=>{const sl=$('sl'+n),s=sl.getBoundingClientRect(),k=s.width/r.width;
+   setTimeout(()=>{const s2=sl.getBoundingClientRect();f.style.transform=`translate(${s2.left-r.left}px,${s2.top-r.top}px) scale(${s2.width/r.width})`},250);
+   setTimeout(()=>{sl.innerHTML=card(c);f.remove();n++;$('pkc').textContent=`TAP THE CARD • ${n} / 20`;tn(300,.1,'square',.04);busy=0;
+    if(n>=20){S={opened:1,own:pool,sq:pool.map(x=>x.id)};save();$('pkb').innerHTML='<button class="ab" data-a="hub" style="margin:40px">ENTER SQUAD BATTLE →</button>';$('pkc').textContent='YOUR 20 BASE CARDS ARE READY';}
+    else{bk.style.visibility='';bk.style.animation='none';bk.offsetWidth;bk.style.animation='';}},1250)},t==='o'||t==='h'?2000:1500)};
+ $('cbk').onclick=reveal;$('pkb').onclick=e=>{if(e.target.closest('#cbk'))reveal()}}
+/* ===== networking ===== */
+let NETX=null;
+function netClean(){if(NETX){NETX.dead=1;try{NETX.conn&&NETX.conn.close()}catch(e){}try{NETX.peer&&NETX.peer.destroy()}catch(e){}clearTimeout(NETX.tm)}NETX=null}
+const mkPeer=id=>{try{return id?new (PeerCls())(id,peerOpts()):new (PeerCls())(peerOpts())}catch(e){return null}};
+const code=()=>Array.from({length:5},()=>'ABCDEFGHJKLMNPQRSTUVWXYZ'[rnd(24)]).join('');
+function friendUI(){netClean();ov(`<h2 style="font:36px 'Bebas Neue',Impact;letter-spacing:2px;margin:0 0 10px">VS FRIEND</h2><div id="ovm" style="min-height:60px">Create a room and share the code, or join your friend's room.</div><div style="display:flex;gap:8px;justify-content:center;margin-top:10px"><button class="ab" id="fC">CREATE ROOM</button></div><div style="margin-top:12px"><input id="fJ" maxlength="5" placeholder="ENTER CODE" style="padding:11px;border-radius:10px;border:1px solid #fff4;background:#0008;color:#fff;text-align:center;width:130px;text-transform:uppercase;font-weight:800"> <button class="ab" id="fG">JOIN</button></div>`,netClean);
+ $('fC').onclick=()=>{const c=code();hostRoom(c,{rw:0,msg:`ROOM CODE<div style="font:64px 'Bebas Neue',Impact;letter-spacing:8px;color:#ffd45a">${c}</div>Waiting for your friend…`})};
+ $('fG').onclick=()=>{const c=$('fJ').value.trim().toUpperCase();if(c.length===5)joinRoom('sbv3-'+c,0)}}
+function hostRoom(c,o){netClean();const p=mkPeer('sbv3-'+c);if(!p)return setOv('Online play could not load.');const N=NETX={peer:p,rw:o.rw};
+ p.on('open',()=>setOv(o.msg||'Waiting for opponent…'));p.on('error',e=>{if(N.dead)return;setOv(e.type==='unavailable-id'?'Code in use, try again.':'Connection problem ('+e.type+')')});
+ p.on('connection',cn=>{if(N.conn){cn.on('open',()=>{try{cn.send({t:'full'})}catch(e){}});return}N.conn=cn;
+  cn.on('open',()=>{setOv('Opponent found! Getting ready…');cn.send({t:'hi',rw:N.rw})});
+  cn.on('data',m=>{if(m.t==='no'){setOv('Opponent has no full 20-card squad.');return}
+   if(m.t==='deck'){const d=(m.cards||[]).slice(0,20).filter(x=>x&&x.cat&&BASE[x.cat]&&BASE[x.cat][x.n]).map(x=>({id:String(x.id).slice(0,40),cat:x.cat,n:x.n,al:String(x.al||'').slice(0,20),k:x.k>=0&&x.k<6?x.k|0:-1,b:x.k>=0?Math.min(15,Math.max(0,x.b|0)):0}));
+    if(d.length<20)return setOv('Opponent squad is not ready.');const o2=$('sbov');if(o2)o2.remove();cn.send({t:'go'});start({mode:'net',opp:d,conn:cn,rw:N.rw})}
+   if(m.t==='pick'&&G)choose(1,m.k|0)});
+  cn.on('close',()=>{if(G&&G.net&&!G.over){G.left=1;finish()}})})}
+function joinRoom(id,rw,tries=0){netClean();const p=mkPeer();if(!p)return setOv('Online play could not load.');const N=NETX={peer:p};setOv('Connecting…');
+ p.on('error',e=>{if(N.dead)return;if(tries<7)N.tm=setTimeout(()=>joinRoom(id,rw,tries+1),900);else setOv('Could not find that room.')});
+ p.on('open',()=>{const cn=p.connect(id,{reliable:true});N.conn=cn;let got=0;
+  cn.on('open',()=>{got=1;setOv('Connected! Waiting for host…')});
+  cn.on('data',m=>{if(m.t==='full')return setOv('Room is full.');
+   if(m.t==='hi'){const sq=squad();if(sq.length!==20){cn.send({t:'no'});return setOv('You need a full 20-card squad.')}cn.send({t:'deck',cards:sq})}
+   if(m.t==='go'){const o2=$('sbov');if(o2)o2.remove();guestStart()}
+   if(m.t==='v')R(m.v)});
+  cn.on('close',()=>{if(!R.done)mt.innerHTML+=`<div class="mres"><div><h2>OPPONENT LEFT</h2><button class="ab" onclick="SBX.exit()">EXIT</button></div></div>`});
+  N.tm=setTimeout(()=>{if(!got&&!N.dead){tries<7?joinRoom(id,rw,tries+1):setOv('Could not find that room.')}},3500)})}
+function realUI(){netClean();ov(`<h2 style="font:36px 'Bebas Neue',Impact;letter-spacing:2px;margin:0 0 10px">VS REAL PLAYERS</h2><div id="ovm" style="min-height:60px">Searching for an opponent…</div><div id="ovf"></div>`,netClean);
+ const tok={};NETX={tok};setTimeout(()=>{const f=$('ovf');if(f&&NETX&&NETX.tok===tok){f.innerHTML='<div style="color:#9fb0d0;font-size:13px;margin:8px">Nobody around yet?</div><button class="ab" id="ovc">PLAY vs CPU INSTEAD</button>';$('ovc').onclick=()=>{netClean();$('sbov').remove();start({mode:'cpu'})}}},15000);qLoop(tok,0)}
+function qLoop(tok,n){if(!NETX||NETX.tok!==tok)return;const qid='sbv3-queue',p=mkPeer(qid);if(!p)return setOv('Online play could not load.');NETX.peer=p;
+ p.on('open',()=>{if(!NETX||NETX.tok!==tok)return;setOv('Waiting for an opponent…')});
+ p.on('connection',cn=>{cn.on('open',()=>{const r=code()+code();cn.send({t:'room',id:r});setTimeout(()=>{if(!NETX||NETX.tok!==tok)return;try{p.destroy()}catch(e){}hostRoom(r,{rw:1,msg:'Opponent found! Setting up…'})},500)})});
+ p.on('error',e=>{if(!NETX||NETX.tok!==tok)return;try{p.destroy()}catch(x){}
+  if(e.type==='unavailable-id'){const g=mkPeer();if(!g)return;NETX.peer=g;let done=0;g.on('open',()=>{const cn=g.connect(qid);cn.on('data',m=>{if(m.t==='room'&&!done){done=1;try{g.destroy()}catch(x){}setOv('Opponent found! Connecting…');setTimeout(()=>joinRoom('sbv3-'+m.id,1),400)}});setTimeout(()=>{if(!done&&NETX&&NETX.tok===tok){try{g.destroy()}catch(x){}qLoop(tok,n+1)}},4000)});g.on('error',()=>{if(!done&&NETX&&NETX.tok===tok){done=1;setTimeout(()=>qLoop(tok,n+1),2500)}})}
+  else setTimeout(()=>qLoop(tok,n+1),3000)})}
+/* ===== MATCH ENGINE ===== */
+let G=null,TI=null;
+const deck=c=>shuf(c.map(x=>({...x})));
+function cpuDeck(){const all=[...Object.keys(BASE.cricket).map(n=>baseCard('cricket',n)),...Object.keys(BASE.wwe).map(n=>baseCard('wwe',n))],pick=shuf(all).slice(0,20),sp=new Set(shuf([...Array(20).keys()]).slice(0,5));return pick.map((c,i)=>sp.has(i)?{...c,id:'c'+i,al:ALIAS[rnd(ALIAS.length)],k:rnd(6),b:10+rnd(6)}:{...c,id:'c'+i})}
+function start(o){const me=squad();if(me.length!==20)return;const opp=o.mode==='cpu'?cpuDeck():o.opp,now=Date.now();
+ G={mode:o.mode,cpu:o.mode==='cpu',net:o.conn||null,rw:o.mode==='cpu'?1:o.rw,p:[deck(me),deck(opp)],caller:rnd(2),phase:'pick',stat:-1,res:-1,endAt:now+180000,pickEnd:now+10000,over:false,winner:-1};
+ mt.classList.add('on');R.done=0;R.sig='';mt.innerHTML='';clearInterval(TI);TI=setInterval(tick,200);tn(660,.15,'triangle',.06);tick()}
+function guestStart(){G=null;mt.classList.add('on');R.done=0;R.sig='';mt.innerHTML='<div style="margin:auto">Starting…</div>';NETX.guest=1}
+function choose(side,k){if(!G||G.over||G.phase!=='pick'||side!==G.caller||!(k>=0&&k<6))return;const a=st(G.p[0][0])[k],b=st(G.p[1][0])[k];G.stat=k;G.res=a>b?0:b>a?1:-1;G.phase='reveal';G.revEnd=Date.now()+2600;tn(G.res<0?300:G.res===0?880:220,.3,'triangle',.07);sync()}
+function cpuPick(){const s=st(G.p[1][0]);return Math.random()<.8?s.indexOf(Math.max(...s)):rnd(6)}
+function nextRound(){const a=G.p[0].shift(),b=G.p[1].shift();if(G.res===0)G.p[0].push(a,b);else if(G.res===1)G.p[1].push(b,a);else{G.p[0].push(a);G.p[1].push(b)}if(G.res>=0)G.caller=G.res;G.phase='pick';G.stat=-1;G.pickEnd=Date.now()+10000;G.cpuAt=0;if(!G.p[0].length||!G.p[1].length||Date.now()>=G.endAt)finish()}
+function finish(){if(G.over)return;G.over=true;const n0=G.p[0].length,n1=G.p[1].length,s0=G.p[0].reduce((a,x)=>a+pw(x),0),s1=G.p[1].reduce((a,x)=>a+pw(x),0);G.winner=G.left?0:n0>n1?0:n1>n0?1:s0>s1?0:s1>s0?1:-1;clearInterval(TI);sync()}
+function tick(){if(!G||G.over)return;const t=Date.now();
+ if(G.phase==='pick'){if(t>=G.endAt)return finish();if(G.cpu&&G.caller===1){if(!G.cpuAt)G.cpuAt=t+1200+rnd(2200);if(t>=G.cpuAt)return choose(1,cpuPick())}if(t>=G.pickEnd)return choose(G.caller,rnd(6))}
+ else if(t>=G.revEnd)return nextRound();sync()}
+function viewOf(s){const t=Date.now(),rv=G.phase==='reveal';return{rw:G.rw,me:G.p[s][0]||null,op:(rv||G.over)?(G.p[1-s][0]||null):null,mn:G.p[s].length,on:G.p[1-s].length,call:G.caller===s,ph:G.phase,st:G.stat,res:G.res<0?-1:G.res===s?1:0,left:Math.max(0,G.endAt-t),pl:Math.max(0,G.pickEnd-t),over:G.over,w:G.over?(G.winner<0?-1:G.winner===s?1:0):-2,opn:G.cpu?'CPU':'OPPONENT'}}
+function sync(){R(viewOf(0));if(G.net&&G.net.open){try{G.net.send({t:'v',v:viewOf(1)})}catch(e){}}}
+const mss=ms=>{const s=Math.ceil(ms/1000);return(s/60|0)+':'+String(s%60).padStart(2,'0')};
+function R(v){if(!v)return;const sig=JSON.stringify([v.me&&v.me.id,v.op&&v.op.id,v.ph,v.st,v.mn,v.on,v.call,v.over,v.w]);
+ if(sig!==R.sig){R.sig=sig;const pk=v.call&&v.ph==='pick'&&!v.over,hl=v.ph==='reveal'||v.over?v.st:-1;
+  const msg=v.over?'':v.ph==='reveal'?(v.res<0?'🤝 TIE — CARDS RETURN':v.res?'✅ YOU WIN THE ROUND! +1 CARD':'❌ '+v.opn+' WINS THE ROUND'):v.call?'🎯 YOUR CALL — PICK A STAT':'⏳ '+v.opn+' IS CALLING…';
+  const ra=v.ph==='reveal'&&v.res>=0&&!v.over;
+  mt.innerHTML=`<div class="mh"><div>🧑 YOU • ${v.mn} CARDS</div><div class="mclock" id="mck"></div><div style="text-align:right">${v.opn} • ${v.on} CARDS</div></div><div class="mbar"><i id="mpb"></i></div><div class="mmsg">${msg}</div>
+  <div class="mcards">${v.me?card(v.me,{big:1,pk,hl,cls:ra?(v.res?'zwin':'zlose'):''}):''}<div class="mvs">VS</div>${v.op?card(v.op,{big:1,hl,cls:ra?(v.res?'zlose':'zwin'):''}):hidCard()}</div><button class="back" id="mxit" style="margin:6px">← EXIT MATCH</button>`;
+  $('mxit').onclick=()=>{if(confirm('Leave this match?'))SBX.exit()};
+  if(v.over&&!R.done){R.done=1;let rc='';if(v.w===1&&v.rw){const c=special();S.own=S.own||[];S.own.push(c);save();rc=`<div style="margin:10px 0;color:#ff9a1a;letter-spacing:3px;font-weight:900">🎃 HALLOWEEN EXCLUSIVE UNLOCKED 🎃</div><div style="display:flex;justify-content:center">${card(c,{big:1})}</div>`;tn(1047,.4,'triangle',.08)}
+   const mr=document.createElement('div');mr.className='mres';mr.innerHTML=`<div><h2 style="color:${v.w===1?'#56f39a':v.w===0?'#ff5364':'#ffd45a'}">${v.w===1?'YOU WIN!':v.w===0?'YOU LOSE':'DRAW'}</h2><div style="letter-spacing:3px;font-weight:800">${v.mn} — ${v.on} CARDS</div>${rc}<div style="margin-top:14px;display:flex;gap:10px;justify-content:center">${NETX&&NETX.guest||(G&&G.mode!=='cpu')?'':'<button class="ab" onclick="SBX.again()">PLAY AGAIN</button>'}<button class="ab" onclick="SBX.exit()">EXIT</button></div></div>`;mt.appendChild(mr)}}
+ const ck=$('mck'),pb=$('mpb');if(ck){ck.textContent=mss(v.left);ck.className='mclock'+(v.left<20000?' lo':'')}if(pb)pb.style.width=(v.ph==='pick'&&!v.over?v.pl/100:0)+'%'}
+mt.onclick=e=>{const d=e.target.closest('.zpk');if(!d)return;const k=+d.dataset.k;if(G)choose(0,k);else if(NETX&&NETX.conn)try{NETX.conn.send({t:'pick',k})}catch(x){}};
+window.SBX={exit(){clearInterval(TI);G=null;netClean();mt.classList.remove('on');mt.innerHTML='';view='hub';V();show('sb')},again(){mt.innerHTML='';start({mode:'cpu'})}};
 })();
 </script></body></html>
