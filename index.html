@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>90's Classic Card Game</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;800&display=swap');
@@ -1520,7 +1520,7 @@ o.innerHTML=`<div class="tb"><div class="th">PLAYER PROFILE</div><h3>📊 STATS 
 o.querySelector('.go').onclick=()=>{ls('cgcb',o.querySelector('#oCb').checked?'1':'0');ls('cglt',o.querySelector('#oLt').checked?'1':'0');ap();o.remove()}};
 document.querySelector('.main-footer').insertAdjacentHTML('beforebegin','<div style="text-align:center;margin:10px"><button class="cgb" onclick="CGS()">📊 STATS &amp; ACHIEVEMENTS</button></div>');
 document.head.insertAdjacentHTML('beforeend','<meta name="theme-color" content="#03050b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">');
-try{const mf={name:"90's Card Game",short_name:'Card Game',display:'standalone',background_color:'#03050b',theme_color:'#03050b',start_url:location.pathname,icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#0a0e1a"/><text x="50" y="68" font-size="60" text-anchor="middle">🃏</text></svg>'),sizes:'any',type:'image/svg+xml'}]},l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));document.head.appendChild(l)}catch(e){}
+
 })();
 </script><script>(()=>{
 const $=id=>document.getElementById(id),st=document.createElement('style');
@@ -1555,4 +1555,82 @@ $('cgK').onclick=()=>{const k=Object.keys(TRACKS),n=k[(k.indexOf(currentTrack)+1
 .g-red{background:radial-gradient(circle at 50% 28%,#ff6a6a55,transparent 42%),linear-gradient(145deg,#7a0010,#1d0309 60%,#7a0010)!important}.g-blue{background:radial-gradient(circle at 50% 28%,#5aa8ff55,transparent 42%),linear-gradient(145deg,#0a3a8a,#030e24 60%,#0a3a8a)!important}.g-green{background:radial-gradient(circle at 50% 28%,#4fe08a55,transparent 42%),linear-gradient(145deg,#0c6a34,#03180c 60%,#0c6a34)!important}.g-gold{background:radial-gradient(circle at 50% 28%,#ffd34d55,transparent 42%),linear-gradient(145deg,#8a6200,#241800 60%,#8a6200)!important}.g-dark{background:radial-gradient(circle at 50% 28%,#ff4a5a55,transparent 42%),linear-gradient(145deg,#2a0a10,#000 60%,#2a0a10)!important}.g-felt{background:radial-gradient(circle at 50% 28%,#2ee07e55,transparent 42%),linear-gradient(145deg,#0b5a34,#031c10 60%,#0b5a34)!important}.g-maroon{background:radial-gradient(circle at 50% 28%,#ff4fb355,transparent 42%),linear-gradient(145deg,#5a0a2a,#1a0410 60%,#5a0a2a)!important}.g-navy{background:radial-gradient(circle at 50% 28%,#5aa8ff55,transparent 42%),linear-gradient(145deg,#0a3a8a,#030e24 60%,#0a3a8a)!important}
 @media(min-width:900px){.cricket-pack-grid.g5{grid-template-columns:repeat(5,1fr)}}.cardfan>:nth-child(1){transform:rotate(-7deg) translateX(20%)!important}.cardfan>:nth-child(3){transform:rotate(7deg) translateX(-20%)!important}.cardfan>*{width:36%!important}.cardfan>:nth-child(2){width:38%!important}
 .cricket-pack-grid .choice-badge{z-index:6}.cricket-pack-grid .cricket-choice{justify-content:flex-start!important}.cricket-pack-grid.g5 .cricket-choice h2{font-size:clamp(13px,1.15vw,18px);white-space:nowrap}
-.cardfan .uc b{font-size:clamp(22px,2.6vw,46px)}.att-art:has(.cardfan) .choice-badge{display:none}</style></body></html>
+.cardfan .uc b{font-size:clamp(22px,2.6vw,46px)}.att-art:has(.cardfan) .choice-badge{display:none}</style><script>(()=>{
+const $=id=>document.getElementById(id),T=(f,d,t,g,w)=>{try{if(typeof muted!=='undefined'&&muted)return;tone(f,d,t||'sine',g||.05,w||0)}catch(e){}};
+const S={tick:w=>T(500+Math.random()*100,.04,'square',.03,w),deal:()=>{for(let i=0;i<7;i++)S.tick(i*.07)},play:()=>{T(170,.12,'triangle',.1);T(90,.15,'sine',.09,.02)},draw:()=>{T(380,.05,'square',.04);T(300,.06,'square',.04,.06)},
+flip:()=>[300,420,620].forEach((f,i)=>T(f,.07,'triangle',.05,i*.05)),uno:()=>[659,880,659,880,1047].forEach((f,i)=>T(f,.12,'square',.05,i*.09)),tdeal:()=>{T(220,.08,'triangle',.06);T(330,.1,'triangle',.06,.07)},
+hit:()=>[523,784,1047].forEach((f,i)=>T(f,.1,'triangle',.06,i*.07)),miss:()=>T(200,.22,'sawtooth',.05)};
+let tp='',nm=0,nb=0,lm='';
+new MutationObserver(()=>{const top=$('cgmid').querySelector('.hd>:last-child'),th=top?top.outerHTML.replace(/ style="[^"]*"/,''):'',me=$('cgme').querySelectorAll('.pc,.uc').length,bk=$('cgo').querySelectorAll('.pc.bk').length,m=$('cgmsg').textContent;
+if(th&&tp&&th!==tp)S.play();tp=th;if(nm>0&&me>nm)S.draw();nm=me;if(nb>0&&bk<nb)S.flip();nb=bk;if(/UNO!/.test(m)&&m!==lm)S.uno();lm=m}).observe($('cg'),{childList:true,subtree:true});
+const sh=window.show;window.show=function(id){sh.apply(this,arguments);if(id==='cg'){tp='';nm=0;nb=0;lm='';S.deal()}};
+const nr=window.nextRound;if(nr)window.nextRound=function(){const r=nr.apply(this,arguments);S.tdeal();return r};
+const rs=window.resolve;if(rs)window.resolve=function(){let n=0;try{n=hist.length}catch(e){}const r=rs.apply(this,arguments);try{if(hist.length>n){S.flip();setTimeout(()=>hist[hist.length-1].w=='you'?S.hit():hist[hist.length-1].w=='cpu'?S.miss():0,350)}}catch(e){}return r};
+if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script><script>(()=>{
+const $=id=>document.getElementById(id),SQ=window.SQ={cat:null},LS='sqv1',sm=a=>a.reduce((x,y)=>x+y,0);
+const D={cricket:{rows:P.map(r=>({n:r[0],v:r.slice(2,14)})),low:[9],lab:[['MAT','RUN','AVG','SR','HS','100'],['WKT','BAVG','5W','CTC','STP','50']],ic:'🏏',pk:'legends'},wwe:{rows:WWE_DATA.map(r=>({n:r[0],v:r.slice(2,8)})),low:[0],lab:[['RNK','MAT','HGT','WGT','CHT','BIC']],ic:'🤼',pk:'wwe'}};
+for(const c in D){const d=D[c],L=d.rows[0].v.length;d.mn=[];d.mx=[];for(let i=0;i<L;i++){const a=d.rows.map(r=>+r.v[i]||0);d.mn[i]=Math.min(...a);d.mx[i]=Math.max(...a)}}
+const pct=(d,i,x)=>{const r=d.mx[i]-d.mn[i]||1,p=(x-d.mn[i])/r;return Math.min(1,Math.max(0,d.low.includes(i)?1-p:p))};
+const fmt=x=>x>=1e4?(x/1e3).toFixed(1)+'k':Number.isInteger(x)?x:+x.toFixed(1);
+function info(c){const d=D[c.cat],row=d.rows.find(r=>r.n==c.n);if(!row)return null;const b=c.b||0,k=c.k??-1,v=row.v.slice();if(k>=0)v[k]=d.low.includes(k)?Math.max(1,v[k]*(1-b/100)):v[k]*(1+b/100);
+const sd=i=>sm([0,1,2,3,4,5].map(j=>pct(d,i*6+j,row.v[i*6+j]))),s=c.cat=='cricket'?(k>=0?(k<6?0:1):(sd(0)>=sd(1)?0:1)):0,ix=[0,1,2,3,4,5].map(j=>j+s*6),avg=sm(ix.map(i=>pct(d,i,v[i])))/6;
+return{d,v,s,ix,k,b,ovr:Math.round(58+40*Math.sqrt(avg))}}
+function fut(c,o={}){const f=info(c);if(!f)return'';const t=o.base?'base':c.cat=='wwe'?'ww sup':'cr sup',nm=c.n.toUpperCase();
+return`<div class="futw"><div class="fut ${t}" style="--fs:${o.fs||15}px"><div class="fb"></div><div class="fr"><b>${f.ovr}</b><i>${c.cat=='wwe'?'WWE':f.s?'BOWL':'BAT'}</i></div><img class="fi" src="${src0(c.n)}" onerror="this.onerror=null;this.src=SIL" loading="lazy"><div class="fn"><span style="font-size:${nm.length>17?.85:nm.length>13?1.05:1.25}em">${nm}</span></div><div class="fs">${f.ix.map(i=>`<div class="${i==f.k?'bs':''}"><b>${fmt(f.v[i])}</b><span>${f.d.lab[f.s][i%6]}</span></div>`).join('')}</div>${f.k>=0?`<div class="ft">▲ +${f.b}% ${f.d.lab[f.s][f.k%6]}</div>`:''}</div></div>`}
+let S;const key=()=>{try{return JSON.parse(localStorage.getItem(LS))}catch(e){return null}};S=key()||{};
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}push()};
+function sq(cat){if(!S[cat]){const n=D[cat].rows.map(r=>r.n).sort(()=>Math.random()-.5).slice(0,20);S[cat]={base:n,sup:[]};save()}return S[cat]}
+const all=cat=>[...sq(cat).base.map(n=>({cat,n})),...sq(cat).sup.map(s=>({...s,cat}))];
+function award(cat){const d=D[cat],s=sq(cat),hard=typeof mode!=='undefined'&&mode==='hard',n=d.rows[Math.random()*d.rows.length|0].n,c={n,k:Math.random()*d.rows[0].v.length|0,b:(hard?12:6)+Math.random()*(hard?13:8)|0,t:Date.now()};s.sup.push(c);save();return{...c,cat}}
+function reveal(c){const o=document.createElement('div');o.id='sqrev';o.innerHTML=`<div class="rv"><div class="rt">⭐ SUPER CARD UNLOCKED ⭐</div><div class="rc"><div class="rays"></div>${fut(c,{fs:19})}</div><button class="ab">ADD TO SQUAD</button></div>`;document.body.appendChild(o);o.querySelector('button').onclick=()=>o.remove();try{[523,659,784,1047,1319].forEach((f,i)=>tone(f,.3,'triangle',.07,i*.1))}catch(e){}}
+let cur='cricket';
+function render(){const a=all(cur).map(c=>({c,o:info(c).ovr})).sort((x,y)=>y.o-x.o),top=a.slice(0,20),sup=sq(cur).sup.map(s=>({...s,cat:cur})).sort((x,y)=>info(y).ovr-info(x).ovr);
+$('sqSum').innerHTML=`<div class="sqs"><div><b>${Math.round(sm(top.map(x=>x.o))/top.length)}</b><span>SQUAD OVR</span></div><div><b>${sup.length}</b><span>SUPER CARDS</span></div><div><b>${sq(cur).base.length}</b><span>BASE CARDS</span></div></div>`;
+$('sqSup').innerHTML=sup.length?sup.map(c=>fut(c,{fs:15})).join(''):'<div class="sqe">Win a challenge vs CPU to earn your first Super Card!</div>';
+$('sqBase').innerHTML=sq(cur).base.map(n=>fut({cat:cur,n},{base:1,fs:11})).join('');
+document.querySelectorAll('.sqt').forEach(b=>b.classList.toggle('on',b.dataset.c==cur))}
+const css=document.createElement('style');css.textContent=`.futw{display:inline-block;filter:drop-shadow(0 6px 10px #000a);margin:6px}
+.fut{--e1:#9fe9ff;--e2:#2b7bff;--bg:radial-gradient(circle at 50% 22%,#35a7ff,#0b2a66 48%,#050f2b);position:relative;width:12em;height:17.4em;font-size:var(--fs);color:#fff;font-family:Impact,'Arial Narrow',system-ui,sans-serif;background:linear-gradient(135deg,var(--e1),var(--e2) 45%,var(--e1) 55%,var(--e2));clip-path:polygon(50% 0,88% 4%,100% 10%,100% 91%,50% 100%,0 91%,0 10%,12% 4%);overflow:hidden}
+.fut.ww{--e1:#ffe08a;--e2:#c81e2d;--bg:radial-gradient(circle at 50% 22%,#ff4455,#6a0712 48%,#1a0308)}.fut.base{--e1:#eef2f6;--e2:#7d8896;--bg:radial-gradient(circle at 50% 22%,#5a6676,#262d38 55%,#10141a)}
+.fut .fb{position:absolute;inset:.22em;clip-path:inherit;background:repeating-linear-gradient(115deg,#ffffff0d 0 .5em,#0000 0 1.1em),var(--bg)}
+.fut.sup::after,.fut.base::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,#fff0 35%,#fffa 50%,#fff0 65%) 160% 0/260% 100%;animation:shn 4s infinite;pointer-events:none}
+.fut .fr{position:absolute;left:1.2em;top:1.7em;text-align:center;line-height:1;text-shadow:0 .1em .2em #000}.fut .fr b{display:block;font-size:2.7em}.fut .fr i{font-style:normal;font-size:.8em;letter-spacing:.12em;color:var(--e1)}
+.fut .fi{position:absolute;right:.3em;top:1.2em;width:6.9em;height:7.1em;object-fit:cover;object-position:center 10%;-webkit-mask-image:linear-gradient(#000 68%,#0000);mask-image:linear-gradient(#000 68%,#0000)}
+.fut .fn{position:absolute;left:0;right:0;top:8.5em;text-align:center;letter-spacing:.06em;text-shadow:0 .1em .2em #000;white-space:nowrap;margin:0 1.2em;padding:0 0 .15em;border-bottom:.08em solid var(--e1)}.fut .fn span{display:inline-block;line-height:1.2}
+.fut .fs{position:absolute;left:1.5em;right:1.5em;top:10.6em;display:grid;grid-template-columns:repeat(3,1fr);gap:.35em;text-align:center}.fut .fs div{padding:.15em 0;border-radius:.4em;font-size:.8em}.fut .fs b{display:block;font-size:1.35em;line-height:1.05}.fut .fs span{font-size:.75em;color:var(--e1);letter-spacing:.08em}
+.fut .fs .bs{background:#7dff3a24;box-shadow:inset 0 0 .8em #7dff3a88,0 0 .7em #7dff3a66}.fut .fs .bs b{color:#7dff3a;text-shadow:0 0 .5em #7dff3a}.fut .fs .bs span{color:#caff9f}
+.fut .ft{position:absolute;left:0;right:0;bottom:1.4em;text-align:center;font-size:.8em;letter-spacing:.1em;color:#7dff3a;text-shadow:0 0 .6em #7dff3a}
+#squad{overflow-y:auto}#squad .cricket-menu{min-height:100dvh}.sqbar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}.sqt{padding:10px 20px;border-radius:12px;background:#ffffff14;border:1px solid #ffffff33;color:#fff;font-weight:900;letter-spacing:1px}.sqt.on{background:linear-gradient(#fff2a8,#e0a82e);color:#2a1800}
+.sqs{display:flex;gap:12px;justify-content:center}.sqs div{padding:10px 22px;border-radius:14px;background:#ffffff12;border:1px solid #d4a01755}.sqs b{display:block;font-size:30px;color:#ffd86b}.sqs span{font-size:10px;letter-spacing:2px;opacity:.7}
+.sqplay{text-align:center;margin:14px}.sqh{text-align:center;letter-spacing:3px;color:#ffd86b;margin:20px 0 4px}.sqg{display:flex;flex-wrap:wrap;justify-content:center;max-width:1100px;margin:0 auto}.sqe{opacity:.7;padding:18px}
+#sqrev{position:fixed;inset:0;z-index:100001;background:radial-gradient(circle,#1d2848ee,#000f);display:grid;place-items:center;text-align:center;color:#fff}.rt{font:900 22px system-ui;letter-spacing:3px;color:#ffd86b;margin-bottom:14px;animation:land .6s .9s both}.rc{position:relative;display:inline-block;animation:rvI 1.6s cubic-bezier(.2,.9,.3,1) both}
+.rays{position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1;translate:-50% -50%;background:repeating-conic-gradient(#ffd86b44 0 6deg,#0000 0 18deg);border-radius:50%;animation:spn 8s linear infinite;-webkit-mask-image:radial-gradient(#000 20%,#0000 68%);mask-image:radial-gradient(#000 20%,#0000 68%);z-index:-1}
+@keyframes rvI{0%{transform:perspective(900px) rotateY(900deg) scale(.2);opacity:0}70%{transform:perspective(900px) rotateY(-12deg) scale(1.1);opacity:1}100%{transform:perspective(900px) rotateY(0)}}@keyframes spn{to{rotate:360deg}}
+#sqrev .rv{display:flex;flex-direction:column;align-items:center}#sqrev .ab{margin-top:18px;animation:land .6s 1.4s both}`;document.head.appendChild(css);
+document.body.insertAdjacentHTML('beforeend',`<section id="squad" class="screen"><div class="cricket-menu"><button class="menu-back" onclick="show('home')">← BACK TO MAIN MENU</button><div class="section-title">SQUAD <span>BATTLE</span></div><div class="section-subtitle">WIN CHALLENGES vs CPU • EARN BOOSTED SUPER CARDS</div><div class="sqbar"><button class="sqt" data-c="cricket">🏏 CRICKET</button><button class="sqt" data-c="wwe">🤼 WWE</button><button class="cgb" id="sqAcc">👤 LOGIN / BACKUP</button></div><div id="sqSum"></div><div class="sqplay"><button class="ab" id="sqGo">⚔ PLAY CHALLENGE vs CPU</button></div><h3 class="sqh">⭐ SUPER CARDS</h3><div id="sqSup" class="sqg"></div><h3 class="sqh">BASE SQUAD</h3><div id="sqBase" class="sqg"></div></div></section>`);
+document.querySelectorAll('.sqt').forEach(b=>b.onclick=()=>{cur=b.dataset.c;render()});
+$('sqGo').onclick=()=>{SQ.cat=cur;selectPack(D[cur].pk);try{PACKMENU='squad'}catch(e){}show('difficulty')};$('sqAcc').onclick=()=>acc();
+const mk=(c,i)=>({cat:c,n:D[c].rows[i].n,k:i%6,b:18});
+const tile=document.createElement('button');tile.className='main-pack squad-pack';tile.onclick=()=>show('squad');
+tile.innerHTML=`<div class="pack-art squad-art has-imgs"><div class="pack-glow"></div><div class="sqfan">${fut(mk('cricket',3),{fs:9})}${fut(mk('wwe',1),{fs:10.5})}${fut(mk('cricket',7),{fs:9})}</div><div class="pack-art-title">SQUAD</div><div class="pack-art-sub">BATTLE EDITION</div></div><div class="main-pack-name">SQUAD BATTLE</div><div class="main-pack-meta">WIN CPU CHALLENGES • EARN SUPER CARDS</div>`;
+document.querySelector('.main-packs').appendChild(tile);
+const c2=document.createElement('style');c2.textContent=`.squad-art{background:radial-gradient(circle at 50% 30%,#ffd34d66,transparent 45%),linear-gradient(145deg,#4a3500,#120d02 60%,#2a1d00)!important;border:1px solid #ffd34d88!important;justify-content:flex-end!important;padding-bottom:12px}.squad-art .pack-glow{background:rgba(255,211,77,.3)}.sqfan{position:absolute;inset:0 0 34% 0;display:flex;justify-content:center;align-items:flex-end}.sqfan .futw{margin:0 -14px;position:relative}.sqfan .futw:nth-child(1){transform:rotate(-9deg)}.sqfan .futw:nth-child(3){transform:rotate(9deg)}.sqfan .futw:nth-child(2){z-index:2}.squad-art .pack-art-title{font-style:italic;text-shadow:0 0 18px #ffb800,0 3px 8px #000;z-index:3}.squad-art .pack-art-sub{z-index:3}.squad-pack:hover:not(:disabled){border-color:#ffd34d!important;box-shadow:0 24px 60px #000b,0 0 34px #ffd34d66!important}`;document.head.appendChild(c2);
+const sh=window.show;window.show=function(id){sh.apply(this,arguments);if(id==='squad')render();if(!['difficulty','game','squad'].includes(id))SQ.cat=null};
+const eg=window.endGame;window.endGame=function(){let w=false;try{w=pd.length>0&&!NET.inMatch}catch(e){}const r=eg.apply(this,arguments);if(w&&SQ.cat){const c=award(SQ.cat);setTimeout(()=>reveal(c),900)}SQ.cat=null;return r};
+window.SQ.award=award;window.SQ.reveal=reveal;window.SQ.fut=fut;
+/* ---- Firebase email login + cloud backup ---- */
+const FB={ok:0,u:null},jl=s=>new Promise((r,j)=>{const e=document.createElement('script');e.src=s;e.onload=r;e.onerror=j;document.head.appendChild(e)});
+const cnt=x=>sm(['cricket','wwe'].map(c=>(x&&x[c]?x[c].sup.length:0)));
+const db=()=>firebase.firestore().collection('users').doc(FB.u.uid);
+async function pull(){try{const d=await db().get();if(d.exists){const r=JSON.parse(d.data().s);if(cnt(r)>=cnt(S)){S=r;try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}if($('squad').classList.contains('active'))render();return}}push()}catch(e){}}
+function push(){if(!FB.u)return;clearTimeout(push.t);push.t=setTimeout(()=>db().set({s:JSON.stringify(S),u:Date.now()}).catch(()=>{}),800)}
+jl('firebase-config.js').catch(()=>{}).then(async()=>{const c=window.FIREBASE_CONFIG;if(!c||!c.apiKey)return;const b='https://www.gstatic.com/firebasejs/10.12.2/firebase-';await jl(b+'app-compat.js');await Promise.all([jl(b+'auth-compat.js'),jl(b+'firestore-compat.js')]);firebase.initializeApp(c);FB.ok=1;firebase.auth().onAuthStateChanged(u=>{FB.u=u;$('sqAcc').textContent=u?'☁ '+u.email.split('@')[0]:'👤 LOGIN / BACKUP';if(u)pull()})}).catch(()=>{});
+function acc(){const o=document.createElement('div'),u=FB.u,I='style="width:100%;padding:11px;margin:5px 0;border-radius:10px;border:1px solid #ffffff44;background:#0008;color:#fff;font-size:15px;box-sizing:border-box"';o.id='tut';
+o.innerHTML=`<div class="tb"><div class="th">ACCOUNT</div><h3>${u?'☁ CLOUD BACKUP ON':'LOGIN / SIGN UP'}</h3>${!FB.ok?'<p style="min-height:0">Cloud backup is not switched on yet. Your squads are saved on this device.</p>':u?`<p style="min-height:0">Signed in as<br><b>${u.email}</b><br>Your squads sync automatically.</p>`:`<input id="aE" type="email" placeholder="Email" ${I}><input id="aP" type="password" placeholder="Password (6+ characters)" ${I}><div id="aM" style="min-height:20px;color:#ff9a9a;font-size:13px"></div>`}<div class="tr" style="margin-top:10px;flex-wrap:wrap">${FB.ok&&!u?'<button class="go" id="aL">LOG IN</button><button class="bk" id="aS">SIGN UP</button><button class="sk" id="aR">Forgot?</button>':''}${u?'<button class="bk" id="aO">LOG OUT</button>':''}<button class="${u||!FB.ok?'go':'sk'}" id="aX">CLOSE</button></div></div>`;document.body.appendChild(o);
+const q=i=>o.querySelector('#'+i),er=e=>{q('aM').textContent=(e.message||'Error').replace('Firebase: ','').replace(/\s*\(auth.*$/,'')},A=()=>firebase.auth(),cr=()=>[q('aE').value.trim(),q('aP').value];
+q('aX').onclick=()=>o.remove();if(q('aL')){q('aL').onclick=()=>A().signInWithEmailAndPassword(...cr()).then(()=>o.remove()).catch(er);q('aS').onclick=()=>A().createUserWithEmailAndPassword(...cr()).then(()=>o.remove()).catch(er);q('aR').onclick=()=>A().sendPasswordResetEmail(q('aE').value.trim()).then(()=>{q('aM').style.color='#9fe9a0';q('aM').textContent='Reset email sent'}).catch(er)}
+if(q('aO'))q('aO').onclick=()=>A().signOut().then(()=>o.remove())}
+})();
+</script></body></html>
