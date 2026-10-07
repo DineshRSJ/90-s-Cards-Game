@@ -1728,24 +1728,25 @@ if(q('aO'))q('aO').onclick=()=>A().signOut().then(()=>o.remove())}
 
 .sbw .ab,.mres .ab,#sbov .ab{position:static;display:inline-flex;margin:8px auto}
 </style><script>(()=>{
-const $=id=>document.getElementById(id),STAT=['STRENGTH','KNOWLEDGE','SPEED','STAMINA','AURA','RATINGS'],AB=['STR','KNO','SPD','STA','AUR','RAT'];
+const $=id=>document.getElementById(id),STAT=['POWER','KNOWLEDGE','SPEED','STAMINA','AURA','RATINGS'],AB=['POW','KNO','SPD','STA','AUR','RAT'];
 const rnd=n=>Math.random()*n|0,shuf=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
 const tn=(f,d,t,g,w)=>{try{tone(f,d,t,g,w)}catch(e){}};
 /* ===== 6-STAT ENGINE from real numbers ===== */
 const DEF={cricket:[[[4,1],[5,1],[3,1],[1,.5]],[[2,1],[7,.7,1],[9,.5],[6,.5]],[[3,1.5],[10,.5],[9,.5]],[[0,1],[1,1],[6,.5]],[[1,1],[6,1],[5,.8],[8,.8],[11,.5]],[[1,1],[2,1],[6,1],[7,.5,1],[0,.5]]],
  wwe:[[[5,1],[4,1],[3,.8]],[[1,1],[0,1,1]],[[3,1,1],[2,.3,1]],[[1,1],[4,.6],[3,.4]],[[0,2,1],[1,.5]],[[0,1.5,1],[1,.8],[5,.4]]]};
 const ROWS={cricket:P.map(r=>({n:r[0],v:r.slice(2,14)})),wwe:WWE_DATA.map(r=>({n:r[0],v:r.slice(2,8)}))};
-const BASE={};
+const fix5=a=>{a=a.slice();a[5]=Math.round((a[0]+a[1]+a[2]+a[3]+a[4])/5);return a};const BASE={};
 for(const c in ROWS){const R=ROWS[c];BASE[c]={};const pc=(i,row,low)=>{const x=row.v[i];if(c==='cricket'&&i===7&&!x)return 0;const a=R.filter(r=>!(c==='cricket'&&i===7&&!r.v[i])).map(r=>r.v[i]);let b=0;a.forEach(y=>{if(low?y>x:y<x)b++});return b/Math.max(1,a.length-1)};
- R.forEach(row=>BASE[c][row.n]=DEF[c].map(d=>{let s=0,w=0;d.forEach(([i,wt,low])=>{s+=pc(i,row,low)*wt;w+=wt});return Math.min(99,Math.round(38+64*Math.pow(s/w,.9)))}))}
-const st=c=>(BASE[c.cat][c.n]||[60,60,60,60,60,60]).map((v,i)=>i===c.k?Math.min(99,v+c.b):v);
-const ovr=s=>Math.round(s.reduce((a,b)=>a+b,0)/6),pw=c=>ovr(st(c));
-const tier=c=>c.k>=0?'h':pw(c)>85?'o':pw(c)>=75?'g':'s';
+ R.forEach(row=>BASE[c][row.n]=fix5(DEF[c].map(d=>{let s=0,w=0;d.forEach(([i,wt,low])=>{s+=pc(i,row,low)*wt;w+=wt});return Math.min(99,Math.round(43+62*Math.pow(s/w,.85)))})))}
+const ICON=/Tendulkar|Kohli|Dhoni|Lara|Ponting|Kallis|Kapil|Ganguly|Dravid|Warne|Muralitharan|Akram|Waqar|McGrath|Richards|Gilchrist|Sangakkara|Rock|Austin|Undertaker|Triple H|Cena|Hogan|Michaels|Kane|Mankind|Flair|Bret Hart|Orton|Batista|Lesnar/;for(const c in BASE)for(const n in BASE[c])if(ICON.test(n)){const v=BASE[c][n].slice();v[4]=Math.min(99,v[4]+8);v[1]=Math.min(99,v[1]+5);v[0]=Math.min(99,v[0]+3);BASE[c][n]=fix5(v)}
+const st=c=>{const v=(BASE[c.cat][c.n]||[60,60,60,60,60,60]).slice();if(c.k>=0&&c.k<5)v[c.k]=Math.min(99,v[c.k]+c.b);return fix5(v)};
+const ovr=s=>s[5],pw=c=>ovr(st(c));
+const tier=c=>c.k>=0?'h':pw(c)>=85?'o':pw(c)>=75?'g':'s';
 const baseCard=(cat,n)=>({id:'b|'+cat+'|'+n,cat,n,k:-1,b:0});
 /* Halloween exclusive pool: top players with spooky editions */
 const ALIAS=['REAPER','VAMPIRE LORD','PUMPKIN KING','WEREWOLF','PHANTOM','GRAVEDIGGER','NIGHTMARE','ZOMBIE KING','BANSHEE','SKULL KNIGHT','WITCH HUNTER','DRACULA','SPECTER','HEADLESS HORSEMAN','MUMMY','GHOUL'];
 const HW=[];['cricket','wwe'].forEach((c,ci)=>Object.keys(BASE[c]).sort((a,b)=>pw(baseCard(c,b))-pw(baseCard(c,a))).slice(0,ci?12:16).forEach((n,i)=>HW.push({cat:c,n,al:ALIAS[(i*3+ci*5)%ALIAS.length]})));
-const special=()=>{const h=HW[rnd(HW.length)];return{id:'h'+Date.now().toString(36)+rnd(1e6),cat:h.cat,n:h.n,al:h.al,k:rnd(6),b:10+rnd(6)}};
+const special=cat=>{const hs=cat?HW.filter(h=>h.cat===cat):HW,h=hs[rnd(hs.length)];return{id:'h'+Date.now().toString(36)+rnd(1e6),cat:h.cat,n:h.n,al:h.al,k:rnd(5),b:10+rnd(6)}};
 /* ===== image fitting + fallback ===== */
 window.sbfb=el=>{if(el.dataset.f){el.onerror=null;el.src=SIL;return}el.dataset.f=1;const sp=selectedPack;selectedPack=el.dataset.c==='wwe'?'wwe':'legends';let p;try{p=resolveImg(el.alt)}catch(e){}selectedPack=sp;if(p)p.then(u=>{el.src=u||SIL}).catch(()=>{el.src=SIL});else el.src=SIL};
 /* ===== CARD ===== */
@@ -1773,7 +1774,7 @@ let h='';for(let c=0;c<8;c++){let x='';for(let r=0;r<6;r++)x+=mk(c*6+r);h+=`<div
 const tk='🎃 HALLOWEEN EVENT LIVE • EXCLUSIVE SPOOKY CARDS • WIN TO UNLOCK • LEGENDS • RIVALS • ONE WINNER • ';
 const L=document.createElement('section');L.id='landing';L.className='screen active';
 L.innerHTML=`<div class="lbg">${h}</div><div class="beam"></div><div class="beam b2"></div><div class="lshade"></div><canvas id="lcv"></canvas><div class="ltop"><button class="lacc" id="lacc">🔑 LOGIN</button></div>
-<div class="lfront"><div class="zlt">90'S CLASSIC</div><div class="lt2"><span>CARD GAME</span></div><div class="zls">LEGENDS • RIVALS • ONE WINNER</div><div class="lbtns"><div class="lbwrap"><button class="zlb c" id="lbC">CLASSIC<small>PACKS • UNO • MARVEL</small></button></div><div class="lbwrap"><div class="lhw">🎃 HALLOWEEN</div><button class="zlb s" id="lbS">SQUAD BATTLE<small>BUILD 20 • 3 MIN DUELS</small></button></div></div></div><div class="ltick"><div>${tk.repeat(8)}</div></div>`;
+<div class="lfront"><div class="zlt">90'S CLASSIC</div><div class="lt2"><span>CARD GAME</span></div><div class="zls">LEGENDS • RIVALS • ONE WINNER</div><div class="lbtns"><div class="lbwrap"><button class="zlb c" id="lbC">CLASSIC<small>PACKS • UNO • MARVEL</small></button></div><div class="lbwrap"><div class="lhw">🎃 HALLOWEEN</div><button class="zlb s" id="lbS">SQUAD BATTLE<small>BUILD 10 • 3 MIN DUELS</small></button></div></div></div><div class="ltick"><div>${tk.repeat(8)}</div></div>`;
 document.body.prepend(L);
 const mm=document.querySelector('#home .main-menu');mm.insertAdjacentHTML('afterbegin','<button class="back" onclick="show(\'landing\')" style="position:absolute;left:14px;top:14px;z-index:3">← START</button>');
 const sqt=document.querySelector('.squad-pack');if(sqt)sqt.remove();
@@ -1797,29 +1798,32 @@ function accUI(cb,must){const u=FB.u;if(!FB.ok){return ov(`<h3>Login not availab
 /* ===== squad battle screens ===== */
 const sec=document.createElement('section');sec.id='sb';sec.className='screen';sec.innerHTML='<div class="sbw" id="sbBody"></div>';document.body.appendChild(sec);
 const mt=document.createElement('div');mt.id='sbm';document.body.appendChild(mt);
-const own=()=>S.own||[],sqIds=()=>S.sq||[],squad=()=>own().filter(x=>sqIds().includes(x.id));
+const own=()=>S.own||[],sqIds=()=>(S.sqs||{})[S.cat+S.size]||[],squad=()=>own().filter(x=>sqIds().includes(x.id));
 function openSB(){S=loadLocal();show('sb');view=S.opened?'hub':'pack';V();if(FB.u)pull()}
 const SORTS={ovr:(a,b)=>pw(b)-pw(a),sp:(a,b)=>(b.k>=0)-(a.k>=0)||pw(b)-pw(a),name:(a,b)=>a.n.localeCompare(b.n)};STAT.forEach((s,i)=>SORTS['s'+i]=(a,b)=>st(b)[i]-st(a)[i]||pw(b)-pw(a));
 const sorted=l=>l.slice().sort(SORTS[sortK]);
 const LEG='<div class="lg"><span><i style="background:#aab4c4"></i>SILVER &lt;75</span><span><i style="background:#2fc47a"></i>GREEN 75-85</span><span><i style="background:#ffd45a"></i>GOLD 85+</span><span><i style="background:#ff7a00"></i>HALLOWEEN</span></div>';
+const cnt=c=>own().filter(x=>x.cat===c).length;
+function autoPick(){if(!S.sqs)S.sqs={};S.sqs[S.cat+S.size]=own().filter(x=>x.cat===S.cat).sort((a,b)=>pw(b)-pw(a)).slice(0,S.size).map(x=>x.id)}
+const SEL=()=>`<div class="sbsel">${['cricket','wwe'].map(c=>`<button class="sbc ${S.cat===c?'on':''}" data-a="cat:${c}">${c==='wwe'?'🤼 WWE':'🏏 CRICKET'} <small>${cnt(c)}</small></button>`).join('')}</div><div class="sbsel">${[10,20].map(z=>{const lk=cnt(S.cat)<z;return`<button class="sbc ${S.size===z?'on':''} ${lk?'lk':''}" data-a="size:${z}">${lk?'🔒 ':''}${z} vs ${z}</button>`}).join('')}</div>${cnt(S.cat)<20?`<div class="sbnote">20 vs 20 unlocks when you own 20 ${S.cat.toUpperCase()} cards — win matches to earn more</div>`:''}`;
 function V(){const B=$('sbBody');
  if(view==='pack'){packUI();return}
- const sq=squad(),ok=sq.length===20,sp=own().filter(x=>x.k>=0).length;
+ if(!S.sqs)S.sqs={};if(!S.cat)S.cat='cricket';if(!S.size)S.size=10;if(!sqIds().length)autoPick();const sq=squad(),ok=sq.length===S.size,sp=own().filter(x=>x.k>=0).length;
  if(view==='hub'){B.innerHTML=`<div class="sbtop"><button class="back" data-a="land">← START</button><button class="back" data-a="acc">${FB.u?'☁ '+FB.u.email.split('@')[0]:'DEVICE ONLY'}</button></div><h1>SQUAD <span>BATTLE</span></h1><div class="sbstat"><div><b>${sq.length?Math.round(sq.reduce((a,x)=>a+pw(x),0)/sq.length):0}</b><span>SQUAD OVR</span></div><div><b style="${ok?'':'color:#ff7a88'}">${sq.length}/20</b><span>IN SQUAD</span></div><div><b>${own().length}</b><span>COLLECTION</span></div><div><b>${sp}</b><span>🎃 HALLOWEEN</span></div></div>
-  <div class="sbmodes"><button class="sbmode ${ok?'':'off'}" data-a="cpu">VS CPU<small>WIN TO UNLOCK 🎃 HALLOWEEN CARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="friend">VS FRIEND<small>ROOM CODE • NO REWARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="real">VS REAL PLAYERS<small>FIND AN OPPONENT • EARN CARDS</small></button></div>
-  ${ok?'':'<div style="color:#ff9a9a;font-weight:800">PICK EXACTLY 20 CARDS TO PLAY</div>'}<button class="ab" data-a="build" style="margin:10px auto">⚙ BUILD / SORT SQUAD</button>${LEG}<div class="sbgrid">${sorted(sq).map(x=>card(x)).join('')}</div>`;return}
- if(view==='build'){let l=own();if(filt==='cricket'||filt==='wwe')l=l.filter(x=>x.cat===filt);if(filt==='hw')l=l.filter(x=>x.k>=0);if(filt==='ba')l=l.filter(x=>x.k<0);if(filt==='o'||filt==='g'||filt==='s')l=l.filter(x=>tier(x)===filt);
+  ${SEL()}<div class="sbmodes"><button class="sbmode ${ok?'':'off'}" data-a="cpu">VS CPU<small>WIN TO UNLOCK 🎃 HALLOWEEN CARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="friend">VS FRIEND<small>ROOM CODE • NO REWARDS</small></button><button class="sbmode ${ok?'':'off'}" data-a="real">VS REAL PLAYERS<small>FIND AN OPPONENT • EARN CARDS</small></button></div>
+  ${ok?'':'<div style="color:#ff9a9a;font-weight:800">PICK EXACTLY ${S.size} ${S.cat.toUpperCase()} CARDS TO PLAY</div>'}<button class="ab" data-a="build" style="margin:10px auto">⚙ BUILD / SORT SQUAD</button>${LEG}<div class="sbgrid">${sorted(sq).map(x=>card(x)).join('')}</div>`;return}
+ if(view==='build'){let l=own().filter(x=>x.cat===S.cat);if(filt==='cricket'||filt==='wwe')l=l.filter(x=>x.cat===filt);if(filt==='hw')l=l.filter(x=>x.k>=0);if(filt==='ba')l=l.filter(x=>x.k<0);if(filt==='o'||filt==='g'||filt==='s')l=l.filter(x=>tier(x)===filt);
   const op=(v,t)=>`<option value="${v}" ${sortK==v?'selected':''}>${t}</option>`,fo=(v,t)=>`<option value="${v}" ${filt==v?'selected':''}>${t}</option>`;
-  B.innerHTML=`<div class="sbtop"><button class="back" data-a="hub">← DONE</button></div><h1>BUILD <span>SQUAD</span></h1><div class="zcnt ${sq.length===20?'ok':'no'}">${sq.length} / 20 SELECTED</div><div class="sbtool"><select id="sbS">${op('ovr','Sort: Power (Overall)')}${op('sp','Sort: Halloween first')}${STAT.map((s,i)=>op('s'+i,'Sort: '+s)).join('')}${op('name','Sort: Name A-Z')}</select><select id="sbF">${fo('all','Show: All')}${fo('cricket','Cricket only')}${fo('wwe','WWE only')}${fo('hw','Halloween')}${fo('o','Gold')}${fo('g','Green')}${fo('s','Silver')}</select><button class="sbbtn" data-a="auto">⚡ AUTO BEST 20</button><button class="sbbtn" data-a="clear">CLEAR</button></div>${LEG}<div class="sbgrid">${sorted(l).map(x=>card(x,{cls:sqIds().includes(x.id)?'zsel':''})).join('')}</div>`;
+  B.innerHTML=`<div class="sbtop"><button class="back" data-a="hub">← DONE</button></div><h1>BUILD <span>SQUAD</span></h1><div class="zcnt ${sq.length===S.size?'ok':'no'}">${sq.length} / ${S.size} SELECTED</div><div class="sbtool"><select id="sbS">${op('ovr','Sort: Power (Overall)')}${op('sp','Sort: Halloween first')}${STAT.map((s,i)=>op('s'+i,'Sort: '+s)).join('')}${op('name','Sort: Name A-Z')}</select><select id="sbF">${fo('all','Show: All')}${fo('cricket','Cricket only')}${fo('wwe','WWE only')}${fo('hw','Halloween')}${fo('o','Gold')}${fo('g','Green')}${fo('s','Silver')}</select><button class="sbbtn" data-a="auto">⚡ AUTO BEST ${S.size}</button><button class="sbbtn" data-a="clear">CLEAR</button></div>${LEG}<div class="sbgrid">${sorted(l).map(x=>card(x,{cls:sqIds().includes(x.id)?'zsel':''})).join('')}</div>`;
   $('sbS').onchange=e=>{sortK=e.target.value;V()};$('sbF').onchange=e=>{filt=e.target.value;V()}}}
-$('sbBody').onclick=e=>{const t=e.target.closest('[data-a],.sc');if(!t)return;const a=t.dataset.a;
+$('sbBody').onclick=e=>{const t=e.target.closest('[data-a],.sc');if(!t)return;const a=t.dataset.a;if(a&&a.startsWith('cat:')){S.cat=a.slice(4);if(!sqIds().length)autoPick();save();V();return}if(a&&a.startsWith('size:')){const z=+a.slice(5);if(cnt(S.cat)<z){tn(200,.2,'square',.05);return}S.size=z;if(!sqIds().length)autoPick();save();V();return}
  if(a==='land')show('landing');else if(a==='acc')accUI();else if(a==='hub'){view='hub';V()}else if(a==='build'){view='build';V()}
- else if(a==='auto'){S.sq=own().slice().sort(SORTS.ovr).slice(0,20).map(x=>x.id);save();V()}else if(a==='clear'){S.sq=[];save();V()}
+ else if(a==='auto'){autoPick();save();V()}else if(a==='clear'){S.sqs[S.cat+S.size]=[];save();V()}
  else if(a==='cpu')start({mode:'cpu'});else if(a==='friend')friendUI();else if(a==='real')realUI();
- else if(view==='build'&&t.classList.contains('sc')){const s=S.sq,i=s.indexOf(t.dataset.id);if(i>=0)s.splice(i,1);else if(s.length<20)s.push(t.dataset.id);else{tn(200,.2,'square',.05);return}save();const y=scrollY;V();scrollTo(0,y)}};
+ else if(view==='build'&&t.classList.contains('sc')){const s=(S.sqs[S.cat+S.size]=S.sqs[S.cat+S.size]||[]),i=s.indexOf(t.dataset.id);if(i>=0)s.splice(i,1);else if(s.length<S.size)s.push(t.dataset.id);else{tn(200,.2,'square',.05);return}save();const y=scrollY;V();scrollTo(0,y)}};
 /* ===== STARTER PACK: tap card back -> reveal -> fly into slot ===== */
 function packUI(){const B=$('sbBody');let pool=[...shuf(Object.keys(BASE.cricket)).slice(0,10).map(n=>baseCard('cricket',n)),...shuf(Object.keys(BASE.wwe)).slice(0,10).map(n=>baseCard('wwe',n))];
- if(!pool.some(c=>pw(c)>85)){const g=[...Object.keys(BASE.cricket).map(n=>baseCard('cricket',n)),...Object.keys(BASE.wwe).map(n=>baseCard('wwe',n))].filter(c=>pw(c)>85);if(g.length)pool[rnd(20)]=g[rnd(g.length)]}
+ if(!pool.some(c=>pw(c)>=85)){const x=rnd(20),cat=x<10?'cricket':'wwe',g=Object.keys(BASE[cat]).map(n=>baseCard(cat,n)).filter(c=>pw(c)>=85&&!pool.some(p=>p.id===c.id));if(g.length)pool[x]=g[rnd(g.length)]}
  pool=shuf(pool);let n=0,busy=0;
  B.innerHTML=`<div class="sbtop"><button class="back" data-a="land">← BACK</button></div><h1>OPEN YOUR <span>STARTER PACK</span></h1><div class="zls" id="pkc" style="color:#c9d4ee;letter-spacing:4px;font-weight:800">TAP THE CARD • 0 / 20</div>${LEG}<div class="pkstage"><div id="pkb"><div class="cb" id="cbk"><div><b>90'S<br>CLASSIC</b><small>TAP TO REVEAL</small></div></div></div><div class="slots" id="slots">${pool.map((c,i)=>`<div class="zslot" id="sl${i}"><span>${i+1}</span></div>`).join('')}</div></div>`;
  const reveal=()=>{if(busy||n>=20)return;busy=1;const bk=$('cbk'),r=bk.getBoundingClientRect(),c=pool[n],t=tier(c),f=document.createElement('div');f.className='fly';f.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;--f:${getComputedStyle(bk).fontSize}`;
@@ -1829,7 +1833,7 @@ function packUI(){const B=$('sbBody');let pool=[...shuf(Object.keys(BASE.cricket
   setTimeout(()=>{const sl=$('sl'+n),s=sl.getBoundingClientRect(),k=s.width/r.width;
    setTimeout(()=>{const s2=sl.getBoundingClientRect();f.style.transform=`translate(${s2.left-r.left}px,${s2.top-r.top}px) scale(${s2.width/r.width})`},250);
    setTimeout(()=>{sl.innerHTML=card(c);f.remove();n++;$('pkc').textContent=`TAP THE CARD • ${n} / 20`;tn(300,.1,'square',.04);busy=0;
-    if(n>=20){S={opened:1,own:pool,sq:pool.map(x=>x.id)};save();$('pkb').innerHTML='<button class="ab" data-a="hub" style="margin:40px">ENTER SQUAD BATTLE →</button>';$('pkc').textContent='YOUR 20 BASE CARDS ARE READY';}
+    if(n>=20){S={opened:1,own:pool,cat:'cricket',size:10,sqs:{}};['cricket','wwe'].forEach(c=>{S.cat=c;autoPick()});S.cat='cricket';save();$('pkb').innerHTML='<button class="ab" data-a="hub" style="margin:40px">ENTER SQUAD BATTLE →</button>';$('pkc').textContent='YOUR 20 BASE CARDS ARE READY';}
     else{bk.style.visibility='';bk.style.animation='none';bk.offsetWidth;bk.style.animation='';}},1250)},t==='o'||t==='h'?2000:1500)};
  $('cbk').onclick=reveal;$('pkb').onclick=e=>{if(e.target.closest('#cbk'))reveal()}}
 /* ===== networking ===== */
@@ -1861,7 +1865,7 @@ function joinRoom(id,rw,tries=0){netClean();const p=mkPeer();if(!p)return setOv(
   N.tm=setTimeout(()=>{if(!got&&!N.dead){tries<7?joinRoom(id,rw,tries+1):setOv('Could not find that room.')}},3500)})}
 function realUI(){netClean();ov(`<h2 style="font:36px 'Bebas Neue',Impact;letter-spacing:2px;margin:0 0 10px">VS REAL PLAYERS</h2><div id="ovm" style="min-height:60px">Searching for an opponent…</div><div id="ovf"></div>`,netClean);
  const tok={};NETX={tok};setTimeout(()=>{const f=$('ovf');if(f&&NETX&&NETX.tok===tok){f.innerHTML='<div style="color:#9fb0d0;font-size:13px;margin:8px">Nobody around yet?</div><button class="ab" id="ovc">PLAY vs CPU INSTEAD</button>';$('ovc').onclick=()=>{netClean();$('sbov').remove();start({mode:'cpu'})}}},15000);qLoop(tok,0)}
-function qLoop(tok,n){if(!NETX||NETX.tok!==tok)return;const qid='sbv3-queue',p=mkPeer(qid);if(!p)return setOv('Online play could not load.');NETX.peer=p;
+function qLoop(tok,n){if(!NETX||NETX.tok!==tok)return;const qid='sbv3-queue-'+S.cat+S.size,p=mkPeer(qid);if(!p)return setOv('Online play could not load.');NETX.peer=p;
  p.on('open',()=>{if(!NETX||NETX.tok!==tok)return;setOv('Waiting for an opponent…')});
  p.on('connection',cn=>{cn.on('open',()=>{const r=code()+code();cn.send({t:'room',id:r});setTimeout(()=>{if(!NETX||NETX.tok!==tok)return;try{p.destroy()}catch(e){}hostRoom(r,{rw:1,msg:'Opponent found! Setting up…'})},500)})});
  p.on('error',e=>{if(!NETX||NETX.tok!==tok)return;try{p.destroy()}catch(x){}
@@ -1870,8 +1874,11 @@ function qLoop(tok,n){if(!NETX||NETX.tok!==tok)return;const qid='sbv3-queue',p=m
 /* ===== MATCH ENGINE ===== */
 let G=null,TI=null;
 const deck=c=>shuf(c.map(x=>({...x})));
-function cpuDeck(){const all=[...Object.keys(BASE.cricket).map(n=>baseCard('cricket',n)),...Object.keys(BASE.wwe).map(n=>baseCard('wwe',n))],pick=shuf(all).slice(0,20),sp=new Set(shuf([...Array(20).keys()]).slice(0,5));return pick.map((c,i)=>sp.has(i)?{...c,id:'c'+i,al:ALIAS[rnd(ALIAS.length)],k:rnd(6),b:10+rnd(6)}:{...c,id:'c'+i})}
-function start(o){const me=squad();if(me.length!==20)return;const opp=o.mode==='cpu'?cpuDeck():o.opp,now=Date.now();
+function reward(win){const cat=S.cat||'cricket',ns=Object.keys(BASE[cat]),id=()=>'r'+Date.now().toString(36)+rnd(1e6);if(win&&Math.random()<.06)return special(cat);
+if(win){const god=Math.random()<.3;for(let t=0;t<400;t++){const c={id:id(),cat,n:ns[rnd(ns.length)],k:rnd(5),b:10+rnd(6)},p=pw(c);if(god?p>=85:p>=75&&p<85)return c}return special(cat)}
+for(let t=0;t<400;t++){const c={id:id(),cat,n:ns[rnd(ns.length)],k:-1,b:0};if(pw(c)<75)return c}return{id:id(),cat,n:ns[0],k:-1,b:0}}
+function cpuDeck(me){const cat=me[0].cat,z=me.length,tg=me.reduce((a,x)=>a+pw(x),0)/z,mine=new Set(me.map(x=>x.n)),all=Object.keys(BASE[cat]).filter(n=>!mine.has(n)).map(n=>baseCard(cat,n)).map(c=>({c,s:Math.abs(pw(c)-tg)+Math.random()*9})).sort((a,b)=>a.s-b.s).slice(0,z).map(x=>x.c),sp=new Set(shuf([...Array(z).keys()]).slice(0,Math.max(1,Math.round(z/5))));return all.map((c,i)=>sp.has(i)?{...c,id:'c'+i,al:ALIAS[rnd(ALIAS.length)],k:rnd(5),b:10+rnd(6)}:{...c,id:'c'+i})}
+function start(o){const me=squad();if(me.length!==S.size)return;if(o.mode!=='cpu'&&(!o.opp||o.opp.length!==me.length||o.opp.some(x=>x.cat!==S.cat))){try{setOv('Both players must pick the same category and squad size.')}catch(e){}return}const opp=o.mode==='cpu'?cpuDeck(me):o.opp,now=Date.now();
  G={mode:o.mode,cpu:o.mode==='cpu',net:o.conn||null,rw:o.mode==='cpu'?1:o.rw,p:[deck(me),deck(opp)],caller:rnd(2),phase:'pick',stat:-1,res:-1,endAt:now+180000,pickEnd:now+10000,over:false,winner:-1};
  mt.classList.add('on');R.done=0;R.sig='';mt.innerHTML='';clearInterval(TI);TI=setInterval(tick,200);tn(660,.15,'triangle',.06);tick()}
 function guestStart(){G=null;mt.classList.add('on');R.done=0;R.sig='';mt.innerHTML='<div style="margin:auto">Starting…</div>';NETX.guest=1}
@@ -1892,10 +1899,26 @@ function R(v){if(!v)return;const sig=JSON.stringify([v.me&&v.me.id,v.op&&v.op.id
   mt.innerHTML=`<div class="mh"><div>🧑 YOU • ${v.mn} CARDS</div><div class="mclock" id="mck"></div><div style="text-align:right">${v.opn} • ${v.on} CARDS</div></div><div class="mbar"><i id="mpb"></i></div><div class="mmsg">${msg}</div>
   <div class="mcards">${v.me?card(v.me,{big:1,pk,hl,cls:ra?(v.res?'zwin':'zlose'):''}):''}<div class="mvs">VS</div>${v.op?card(v.op,{big:1,hl,cls:ra?(v.res?'zlose':'zwin'):''}):hidCard()}</div><button class="back" id="mxit" style="margin:6px">← EXIT MATCH</button>`;
   $('mxit').onclick=()=>{if(confirm('Leave this match?'))SBX.exit()};
-  if(v.over&&!R.done){R.done=1;let rc='';if(v.w===1&&v.rw){const c=special();S.own=S.own||[];S.own.push(c);save();rc=`<div style="margin:10px 0;color:#ff9a1a;letter-spacing:3px;font-weight:900">🎃 HALLOWEEN EXCLUSIVE UNLOCKED 🎃</div><div style="display:flex;justify-content:center">${card(c,{big:1})}</div>`;tn(1047,.4,'triangle',.08)}
+  if(v.over&&!R.done){R.done=1;let rc='';if(v.rw&&(v.w===1||v.w===0)){const c=reward(v.w===1);S.own=S.own||[];S.own.push(c);save();const T={h:'🎃 RARE HALLOWEEN CARD UNLOCKED 🎃',o:'🏆 GOLD CARD UNLOCKED',g:'🟢 GREEN CARD UNLOCKED',s:'⚪ SILVER CARD — BETTER LUCK NEXT TIME'}[tier(c)];rc=`<div style="margin:10px 0;color:${tier(c)==='h'?'#ff9a1a':'#ffd45a'};letter-spacing:3px;font-weight:900">${T}</div><div style="display:flex;justify-content:center">${card(c,{big:1})}</div>`;tn(1047,.4,'triangle',.08)}
    const mr=document.createElement('div');mr.className='mres';mr.innerHTML=`<div><h2 style="color:${v.w===1?'#56f39a':v.w===0?'#ff5364':'#ffd45a'}">${v.w===1?'YOU WIN!':v.w===0?'YOU LOSE':'DRAW'}</h2><div style="letter-spacing:3px;font-weight:800">${v.mn} — ${v.on} CARDS</div>${rc}<div style="margin-top:14px;display:flex;gap:10px;justify-content:center">${NETX&&NETX.guest||(G&&G.mode!=='cpu')?'':'<button class="ab" onclick="SBX.again()">PLAY AGAIN</button>'}<button class="ab" onclick="SBX.exit()">EXIT</button></div></div>`;mt.appendChild(mr)}}
  const ck=$('mck'),pb=$('mpb');if(ck){ck.textContent=mss(v.left);ck.className='mclock'+(v.left<20000?' lo':'')}if(pb)pb.style.width=(v.ph==='pick'&&!v.over?v.pl/100:0)+'%'}
 mt.onclick=e=>{const d=e.target.closest('.zpk');if(!d)return;const k=+d.dataset.k;if(G)choose(0,k);else if(NETX&&NETX.conn)try{NETX.conn.send({t:'pick',k})}catch(x){}};
 window.SBX={exit(){clearInterval(TI);G=null;netClean();mt.classList.remove('on');mt.innerHTML='';view='hub';V();show('sb')},again(){mt.innerHTML='';start({mode:'cpu'})}};
+})();
+</script><style>.sc .ph{overflow:hidden}.sc .ph img{width:100%!important;height:100%!important;object-fit:cover;object-position:50% 14%}
+.sbsel{display:flex;gap:8px;justify-content:center;margin:8px 0}.sbc{padding:10px 18px;border-radius:12px;border:1px solid #ffffff44;background:#ffffff14;color:#fff;font-weight:900;letter-spacing:1px}.sbc.on{background:linear-gradient(#fff2a8,#e0a82e);color:#2a1800}.sbc.lk{opacity:.5}.sbc small{opacity:.8}.sbnote{text-align:center;font-size:12px;color:#ffd86b;letter-spacing:1px;margin:4px 0 10px}
+#bgmB{position:fixed;left:14px;bottom:14px;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid #ffd86b88;background:#000a;color:#fff;font-size:20px;display:none}body[data-scr=landing] #bgmB,body[data-scr=sb] #bgmB{display:block}</style><script>(()=>{let ac,mg,nb,tm,step=0,nxt=0,on=0,mute=false;try{mute=localStorage.getItem('bgmM')=='1'}catch(e){}
+const N=m=>440*Math.pow(2,(m-69)/12),CH=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],RT=[33,29,36,31],spb=60/138/4;
+function init(){if(ac)return;ac=new(window.AudioContext||window.webkitAudioContext)();const c=ac.createDynamicsCompressor();mg=ac.createGain();mg.gain.value=mute?0:.2;mg.connect(c);c.connect(ac.destination);nb=ac.createBuffer(1,ac.sampleRate,ac.sampleRate);const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+const osc=(t,f,ty,du,g,f2)=>{const o=ac.createOscillator(),a=ac.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+du);a.gain.setValueAtTime(g,t);a.gain.exponentialRampToValueAtTime(.001,t+du);o.connect(a);a.connect(mg);o.start(t);o.stop(t+du+.03)};
+const nz=(t,du,g,hp)=>{const s=ac.createBufferSource(),f=ac.createBiquadFilter(),a=ac.createGain();s.buffer=nb;f.type='highpass';f.frequency.value=hp;a.gain.setValueAtTime(g,t);a.gain.exponentialRampToValueAtTime(.001,t+du);s.connect(f);f.connect(a);a.connect(mg);s.start(t);s.stop(t+du)};
+function sc(n,t){const s=n%16,b=(n>>4)%4,ch=CH[b];if(s%4==0)osc(t,170,'sine',.28,.95,38);if(s==4||s==12){nz(t,.16,.45,1800);osc(t,200,'triangle',.1,.25)}if(s%2==0)nz(t,s%4==2?.1:.04,s%4==2?.2:.15,7000);
+if(s%2==0)osc(t,N(RT[b]+(s%8==6?12:0)),'sawtooth',.22,.26);const nt=ch[[0,1,2,1][s%4]]+12*(1+((s>>2)%2))+((n>>6)%2?12:0);osc(t,N(nt),'square',.11,.06);if(s==0)ch.forEach(x=>osc(t,N(x+12),'triangle',1.4,.05))}
+function start(){init();ac.resume();if(on)return;on=1;nxt=ac.currentTime+.06;step=0;tm=setInterval(()=>{while(nxt<ac.currentTime+.18){sc(step++,nxt);nxt+=spb}},40)}
+function stop(){on=0;clearInterval(tm)}
+const act=()=>{const a=document.querySelector('.screen.active');return a&&a.id},want=id=>id==='landing'||id==='sb',btn=document.createElement('button');btn.id='bgmB';btn.textContent=mute?'🔇':'🔊';document.body.appendChild(btn);
+btn.onclick=()=>{init();mute=!mute;mg.gain.value=mute?0:.2;btn.textContent=mute?'🔇':'🔊';try{localStorage.setItem('bgmM',mute?'1':'0')}catch(e){}if(!mute&&want(act()))start()};
+const sh=window.show;window.show=function(id){sh.apply(this,arguments);document.body.dataset.scr=id;if(want(id)){if(ac)start()}else stop()};document.body.dataset.scr=act();
+addEventListener('pointerdown',()=>{if(want(act())&&!mute)start()},{capture:true});document.addEventListener('visibilitychange',()=>{if(!ac)return;document.hidden?ac.suspend():ac.resume()});
 })();
 </script></body></html>
