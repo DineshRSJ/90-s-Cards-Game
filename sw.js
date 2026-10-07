@@ -1,4 +1,4 @@
-const C='cg90-v6',OK=/(^|\.)(fonts\.googleapis\.com|fonts\.gstatic\.com|www\.gstatic\.com|cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com|githubusercontent\.com)$/;
+const C='cg90-v7',OK=/(^|\.)(fonts\.googleapis\.com|fonts\.gstatic\.com|www\.gstatic\.com|cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com|githubusercontent\.com)$/;
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);
