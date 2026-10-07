@@ -1727,25 +1727,26 @@ if(q('aO'))q('aO').onclick=()=>A().signOut().then(()=>o.remove())}
 .sc.hid .in:before{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:700 9em 'Bebas Neue',Impact;color:#ffffffaa;background:none}
 
 .sbw .ab,.mres .ab,#sbov .ab{position:static;display:inline-flex;margin:8px auto}
-</style><script>(()=>{
+</style><script src="players-extra.js"></script><script>(()=>{
 const $=id=>document.getElementById(id),STAT=['POWER','KNOWLEDGE','SPEED','STAMINA','AURA','RATINGS'],AB=['POW','KNO','SPD','STA','AUR','RAT'];
 const rnd=n=>Math.random()*n|0,shuf=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
 const tn=(f,d,t,g,w)=>{try{tone(f,d,t,g,w)}catch(e){}};
 /* ===== 6-STAT ENGINE from real numbers ===== */
 const DEF={cricket:[[[4,1],[5,1],[3,1],[1,.5]],[[2,1],[7,.7,1],[9,.5],[6,.5]],[[3,1.5],[10,.5],[9,.5]],[[0,1],[1,1],[6,.5]],[[1,1],[6,1],[5,.8],[8,.8],[11,.5]],[[1,1],[2,1],[6,1],[7,.5,1],[0,.5]]],
  wwe:[[[5,1],[4,1],[3,.8]],[[1,1],[0,1,1]],[[3,1,1],[2,.3,1]],[[1,1],[4,.6],[3,.4]],[[0,2,1],[1,.5]],[[0,1.5,1],[1,.8],[5,.4]]]};
-const ROWS={cricket:P.map(r=>({n:r[0],v:r.slice(2,14)})),wwe:WWE_DATA.map(r=>({n:r[0],v:r.slice(2,8)}))};
+const X=window.SQ_EXTRA||{cricket:[],wwe:[],famous:{cricket:'ZZZ',wwe:'ZZZ'}},ext=(b,x)=>{const s=new Set(b.map(r=>r[0]));return[...b,...x.filter(r=>!s.has(r[0]))]},FAM=new RegExp(X.famous.cricket+'|'+X.famous.wwe);
+const ROWS={cricket:ext(P,X.cricket).map(r=>({n:r[0],v:r.slice(2,14)})),wwe:ext(WWE_DATA,X.wwe).map(r=>({n:r[0],v:r.slice(2,8)}))};
 const fix5=a=>{a=a.slice();a[5]=Math.round((a[0]+a[1]+a[2]+a[3]+a[4])/5);return a};const BASE={};
 for(const c in ROWS){const R=ROWS[c];BASE[c]={};const pc=(i,row,low)=>{const x=row.v[i];if(c==='cricket'&&i===7&&!x)return 0;const a=R.filter(r=>!(c==='cricket'&&i===7&&!r.v[i])).map(r=>r.v[i]);let b=0;a.forEach(y=>{if(low?y>x:y<x)b++});return b/Math.max(1,a.length-1)};
  R.forEach(row=>BASE[c][row.n]=fix5(DEF[c].map(d=>{let s=0,w=0;d.forEach(([i,wt,low])=>{s+=pc(i,row,low)*wt;w+=wt});return Math.min(99,Math.round(43+62*Math.pow(s/w,.85)))})))}
-const ICON=/Tendulkar|Kohli|Dhoni|Lara|Ponting|Kallis|Kapil|Ganguly|Dravid|Warne|Muralitharan|Akram|Waqar|McGrath|Richards|Gilchrist|Sangakkara|Rock|Austin|Undertaker|Triple H|Cena|Hogan|Michaels|Kane|Mankind|Flair|Bret Hart|Orton|Batista|Lesnar/;for(const c in BASE)for(const n in BASE[c])if(ICON.test(n)){const v=BASE[c][n].slice();v[4]=Math.min(99,v[4]+8);v[1]=Math.min(99,v[1]+5);v[0]=Math.min(99,v[0]+3);BASE[c][n]=fix5(v)}
+const ICON=/Tendulkar|Kohli|Dhoni|Lara|Ponting|Kallis|Kapil|Ganguly|Dravid|Warne|Muralitharan|Akram|Waqar|McGrath|Richards|Gilchrist|Sangakkara|Rock|Austin|Undertaker|Triple H|Cena|Hogan|Michaels|Kane|Mankind|Flair|Bret Hart|Orton|Batista|Lesnar|Rohit|Bumrah|Babar|Williamson|Steve Smith|Cummins|Rashid Khan|Reigns|Cody Rhodes|Rollins|Punk|Gunther/;for(const c in BASE)for(const n in BASE[c])if(ICON.test(n)){const v=BASE[c][n].slice();v[4]=Math.min(99,v[4]+8);v[1]=Math.min(99,v[1]+5);v[0]=Math.min(99,v[0]+3);BASE[c][n]=fix5(v)}
 const st=c=>{const v=(BASE[c.cat][c.n]||[60,60,60,60,60,60]).slice();if(c.k>=0&&c.k<5)v[c.k]=Math.min(99,v[c.k]+c.b);return fix5(v)};
 const ovr=s=>s[5],pw=c=>ovr(st(c));
 const tier=c=>c.k>=0?'h':pw(c)>=85?'o':pw(c)>=75?'g':'s';
 const baseCard=(cat,n)=>({id:'b|'+cat+'|'+n,cat,n,k:-1,b:0});
 /* Halloween exclusive pool: top players with spooky editions */
 const ALIAS=['REAPER','VAMPIRE LORD','PUMPKIN KING','WEREWOLF','PHANTOM','GRAVEDIGGER','NIGHTMARE','ZOMBIE KING','BANSHEE','SKULL KNIGHT','WITCH HUNTER','DRACULA','SPECTER','HEADLESS HORSEMAN','MUMMY','GHOUL'];
-const HW=[];['cricket','wwe'].forEach((c,ci)=>Object.keys(BASE[c]).sort((a,b)=>pw(baseCard(c,b))-pw(baseCard(c,a))).slice(0,ci?12:16).forEach((n,i)=>HW.push({cat:c,n,al:ALIAS[(i*3+ci*5)%ALIAS.length]})));
+const HW=[];['cricket','wwe'].forEach((c,ci)=>Object.keys(BASE[c]).filter(n=>FAM.test(n)).sort((a,b)=>pw(baseCard(c,b))-pw(baseCard(c,a))).slice(0,ci?14:20).forEach((n,i)=>HW.push({cat:c,n,al:ALIAS[(i*3+ci*5)%ALIAS.length]})));
 const special=cat=>{const hs=cat?HW.filter(h=>h.cat===cat):HW,h=hs[rnd(hs.length)];return{id:'h'+Date.now().toString(36)+rnd(1e6),cat:h.cat,n:h.n,al:h.al,k:rnd(5),b:10+rnd(6)}};
 /* ===== image fitting + fallback ===== */
 window.sbfb=el=>{if(el.dataset.f){el.onerror=null;el.src=SIL;return}el.dataset.f=1;const sp=selectedPack;selectedPack=el.dataset.c==='wwe'?'wwe':'legends';let p;try{p=resolveImg(el.alt)}catch(e){}selectedPack=sp;if(p)p.then(u=>{el.src=u||SIL}).catch(()=>{el.src=SIL});else el.src=SIL};
@@ -1874,10 +1875,10 @@ function qLoop(tok,n){if(!NETX||NETX.tok!==tok)return;const qid='sbv3-queue-'+S.
 /* ===== MATCH ENGINE ===== */
 let G=null,TI=null;
 const deck=c=>shuf(c.map(x=>({...x})));
-function reward(win){const cat=S.cat||'cricket',ns=Object.keys(BASE[cat]),id=()=>'r'+Date.now().toString(36)+rnd(1e6);if(win&&Math.random()<.06)return special(cat);
+function reward(win){const cat=S.cat||'cricket',all=Object.keys(BASE[cat]),fm=all.filter(n=>FAM.test(n)),ns=win&&fm.length>3?fm:all,id=()=>'r'+Date.now().toString(36)+rnd(1e6);if(win&&Math.random()<.06)return special(cat);
 if(win){const god=Math.random()<.3;for(let t=0;t<400;t++){const c={id:id(),cat,n:ns[rnd(ns.length)],k:rnd(5),b:10+rnd(6)},p=pw(c);if(god?p>=85:p>=75&&p<85)return c}return special(cat)}
 for(let t=0;t<400;t++){const c={id:id(),cat,n:ns[rnd(ns.length)],k:-1,b:0};if(pw(c)<75)return c}return{id:id(),cat,n:ns[0],k:-1,b:0}}
-function cpuDeck(me){const cat=me[0].cat,z=me.length,tg=me.reduce((a,x)=>a+pw(x),0)/z,mine=new Set(me.map(x=>x.n)),all=Object.keys(BASE[cat]).filter(n=>!mine.has(n)).map(n=>baseCard(cat,n)).map(c=>({c,s:Math.abs(pw(c)-tg)+Math.random()*9})).sort((a,b)=>a.s-b.s).slice(0,z).map(x=>x.c),sp=new Set(shuf([...Array(z).keys()]).slice(0,Math.max(1,Math.round(z/5))));return all.map((c,i)=>sp.has(i)?{...c,id:'c'+i,al:ALIAS[rnd(ALIAS.length)],k:rnd(5),b:10+rnd(6)}:{...c,id:'c'+i})}
+function cpuDeck(me){const cat=me[0].cat,z=me.length,tg=me.reduce((a,x)=>a+pw(x),0)/z,mine=new Set(me.map(x=>x.n)),all=Object.keys(BASE[cat]).filter(n=>!mine.has(n)).map(n=>baseCard(cat,n)).map(c=>({c,s:Math.abs(pw(c)-tg)+Math.random()*9})).sort((a,b)=>a.s-b.s).slice(0,z).map(x=>x.c),sp=new Set(shuf([...Array(z).keys()]).slice(0,Math.max(1,Math.round(z/5))));return all.map((c,i)=>sp.has(i)&&FAM.test(c.n)?{...c,id:'c'+i,al:ALIAS[rnd(ALIAS.length)],k:rnd(5),b:10+rnd(6)}:{...c,id:'c'+i})}
 function start(o){const me=squad();if(me.length!==S.size)return;if(o.mode!=='cpu'&&(!o.opp||o.opp.length!==me.length||o.opp.some(x=>x.cat!==S.cat))){try{setOv('Both players must pick the same category and squad size.')}catch(e){}return}const opp=o.mode==='cpu'?cpuDeck(me):o.opp,now=Date.now();
  G={mode:o.mode,cpu:o.mode==='cpu',net:o.conn||null,rw:o.mode==='cpu'?1:o.rw,p:[deck(me),deck(opp)],caller:rnd(2),phase:'pick',stat:-1,res:-1,endAt:now+180000,pickEnd:now+10000,over:false,winner:-1};
  mt.classList.add('on');R.done=0;R.sig='';mt.innerHTML='';clearInterval(TI);TI=setInterval(tick,200);tn(660,.15,'triangle',.06);tick()}
